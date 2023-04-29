@@ -1,6 +1,28 @@
-import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import { Provider as ReduxProvider } from 'react-redux'
+import Head from 'next/head'
+
+import { store } from '@/lib/redux/store'
+import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    return (
+        <>
+            <Head>
+                <title>Barrese Bookkeeping LLC</title>
+                <meta
+                    name="description"
+                    content="Barrese Bookkeeping Homepage"
+                />
+                <meta
+                    name="viewport"
+                    content="width=device-widthm initial-scale=1"
+                />
+                {/* <link rel="icon" href={Logo.src} /> */}
+            </Head>
+            <ReduxProvider store={store}>
+                <Component {...pageProps} />
+            </ReduxProvider>
+        </>
+    )
 }
