@@ -2,8 +2,10 @@ import { signInWithPopup, signOut } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 
 import { setUser } from '@/lib/redux/slices/user'
+import { setAbout } from '@/lib/redux/slices/aboutPage'
 import { auth, googleProvider } from '@/lib/db/config'
-import getValidatedUser from '@/lib/db/users/getValidatedUser'
+import { getValidatedUser } from '@/lib/db/auth/users'
+import { getAboutPageData } from '@/lib/db/cms/about-page'
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -22,7 +24,8 @@ const Login = () => {
             if (authorized) {
                 dispatch(setUser(user))
 
-                // query for cms content
+                const [aboutData] = await Promise.all([getAboutPageData()])
+                dispatch(setAbout(aboutData))
             } else {
                 onSignOutClick()
             }

@@ -1,7 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '@/lib/db/config'
+import { db } from '../config'
 
-export default async function getValidatedUser(email: string | null) {
+export const getValidatedUser = async (email: string | null) => {
     if (!email) {
         throw new Error('User email is required.')
     }

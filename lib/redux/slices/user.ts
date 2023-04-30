@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { UserProps } from '@/utils/types/userTypes'
+import { UserProps } from '@/utils/types/redux'
 
 const initialState: UserProps = {
     email: '',

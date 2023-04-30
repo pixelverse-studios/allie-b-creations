@@ -9,11 +9,8 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <title>Barrese Bookkeeping LLC</title>
-                <meta
-                    name="description"
-                    content="Barrese Bookkeeping Homepage"
-                />
+                <title>Allie B Creations</title>
+                <meta name="description" content="Allie B Creations" />
                 <meta
                     name="viewport"
                     content="width=device-widthm initial-scale=1"
