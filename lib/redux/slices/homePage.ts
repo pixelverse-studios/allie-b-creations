@@ -10,15 +10,15 @@ export const homePageSlice = createSlice({
     name: 'homePage',
     initialState,
     reducers: {
-        setAbout: (state, { payload }) => {
+        setHomePage: (state, { payload }) => {
             state.header = payload.header
             state.heroImg = payload.heroImg
             state.secondaryHeroImg = payload.secondaryHeroImg
         },
-        updateAbout: (state, { payload: { label, value } }) => {
+        updateHomePage: (state, { payload: { label, value } }) => {
             state[label] = value
         }
     }
 })
-export const { setAbout, updateAbout } = homePageSlice.actions
+export const { setHomePage, updateHomePage } = homePageSlice.actions
 export default homePageSlice.reducer

@@ -1,24 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ContactLinkProps } from '@/utils/types/redux'
 
-const initialState: ContactLinkProps = {
-    icon: '',
-    label: '',
-    link: ''
-}
 export const contactLinks = createSlice({
     name: 'contactLinks',
-    initialState,
+    initialState: [{ icon: '', label: '', link: '' } as ContactLinkProps],
     reducers: {
-        setContactLinks: (state: ContactLinkProps, { payload }) => {
-            state.icon = payload.icon
-            state.label = payload.label
-            state.link = payload.link
-        },
-        updateContactLinks: (state, { payload: { label, value } }) => {
-            state[label] = value
+        setContactLinks: (state, { payload }) => {
+            state = payload
         }
     }
 })
-export const { setContactLinks, updateContactLinks } = contactLinks.actions
+export const { setContactLinks } = contactLinks.actions
 export default contactLinks.reducer
