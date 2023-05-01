@@ -2,11 +2,6 @@ import { signInWithPopup, signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setUser } from '@/lib/redux/slices/user'
-import { setAbout } from '@/lib/redux/slices/aboutPage'
-import { setContactLinks } from '@/lib/redux/slices/contactLinks'
-import { setHomePage } from '@/lib/redux/slices/homePage'
-import { setServices } from '@/lib/redux/slices/services'
-import { setCallToAction } from '@/lib/redux/slices/callToAction'
 import { setLoading } from '@/lib/redux/slices/user'
 import { auth, googleProvider } from '@/lib/db/config'
 import { getValidatedUser } from '@/lib/db/auth/users'
@@ -29,21 +24,8 @@ const Login = () => {
             const { user: gUser } = await signInWithPopup(auth, googleProvider)
             const { authorized, user } = await getValidatedUser(gUser.email)
             if (authorized) {
-                const {
-                    aboutPage,
-                    contactLinks,
-                    homePage,
-                    services,
-                    callToAction
-                } = await getAllCmsData()
-
+                await getAllCmsData(dispatch)
                 dispatch(setUser(user))
-                dispatch(setAbout(aboutPage))
-                dispatch(setContactLinks(contactLinks))
-                dispatch(setHomePage(homePage))
-                dispatch(setServices(services))
-                dispatch(setCallToAction(callToAction))
-
                 dispatch(setLoading(false))
             } else {
                 onSignOutClick()
