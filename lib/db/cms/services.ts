@@ -1,7 +1,8 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config'
+import { ServicesProps } from '@/utils/types/redux'
 
-const getServices = async () => {
+const getServices = async (): Promise<ServicesProps> => {
     try {
         const servicePageRef = collection(db, 'services')
         const data = await getDocs(servicePageRef)

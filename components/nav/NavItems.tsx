@@ -1,17 +1,17 @@
-import { MouseEventHandler } from 'react'
+import Link from 'next/link'
 import { IconButton } from '@mui/material'
 import { Login, Logout, Dashboard } from '@mui/icons-material'
 
-export const BaseNavItems = () => {
+export const BaseNavItems = ({ onClick }: { onClick: Function }) => {
     return (
         <>
-            <li>
+            <li onClick={() => onClick('/about')}>
                 <p>About</p>
             </li>
-            <li>
+            <li onClick={() => onClick('/services')}>
                 <p>Services</p>
             </li>
-            <li>
+            <li onClick={() => onClick('/contact')}>
                 <p>Contact Me</p>
             </li>
         </>
@@ -43,7 +43,7 @@ export const AuthNavItems = ({
             ) : (
                 <li>
                     <IconButton onClick={onLogin}>
-                        <Login />
+                        <Logout />
                     </IconButton>
                 </li>
             )}

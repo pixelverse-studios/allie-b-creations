@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getAllCmsData } from '@/lib/db/methods'
 import { auth } from '@/lib/db/config'
+import Nav from '../nav'
 import StyledAuthWrapper from './StyledAuthWrapper'
 
 const AuthWrapper = ({ children }: { children: any }) => {
@@ -18,7 +19,7 @@ const AuthWrapper = ({ children }: { children: any }) => {
 
     return (
         <StyledAuthWrapper>
-            <nav>placeholder nav</nav>
+            <Nav />
             <main>{children}</main>
             <footer>placeholder footer</footer>
         </StyledAuthWrapper>

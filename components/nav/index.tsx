@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react'
 
-const Nav = () => {
-    useEffect(() => {}, [])
+import useBreakpoint from '@/utils/hooks/useWindowWidth'
 
-    return
+const Nav = () => {
+    const { isMobile } = useBreakpoint()
+    // useEffect(() => {}, [])
+
+    if (isMobile) {
+        return <nav>mobile nav goes here</nav>
+    }
+
+    return <nav>regular nav goes here</nav>
 }
+
+export default Nav
