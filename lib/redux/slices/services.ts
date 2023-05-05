@@ -14,6 +14,7 @@ export const servicesSlice = createSlice({
     initialState,
     reducers: {
         setServices: (state, { payload }: { payload: ServicesProps }) => {
+            state.id = payload.id
             state.description = payload.description
             state.offerings = payload.offerings
             state.pageHeader = payload.pageHeader

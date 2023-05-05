@@ -1,21 +1,38 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
+import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import { auth } from '@/lib/db/config'
 import Nav from '../nav'
 import StyledAuthWrapper from './StyledAuthWrapper'
+import { setUser } from '@/lib/redux/slices/user'
 
 const AuthWrapper = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
     const { email } = useSelector((state: any) => state.user)
-    const { currentUser } = auth
-
+    const auth = getAuth()
     useEffect(() => {
-        if (currentUser != null && !email) {
-            getAllCmsData(dispatch).catch(error => console.error(error))
-        }
-    }, [auth, email, currentUser])
+        const listen = onAuthStateChanged(auth, async user => {
+            if (user) {
+                const { authorized, user: validated } = await getValidatedUser(
+                    user?.email
+                )
+                if (authorized) {
+                    dispatch(setUser(validated))
+                    await getAllCmsData(dispatch).catch(error =>
+                        console.error(error)
+                    )
+                } else {
+                    // TODO: log the bitch ass out
+                }
+            } else {
+                // do nothing
+            }
+        })
+
+        return () => listen()
+    }, [])
 
     return (
         <StyledAuthWrapper>

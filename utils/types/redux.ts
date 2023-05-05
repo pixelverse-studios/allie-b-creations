@@ -1,10 +1,11 @@
 export interface UserProps {
+    id: string
     email: string
     firstName: string
     lastName: string
-    loading: boolean
 }
 export interface AboutPageProps {
+    id: string
     backgroundInfo: string[]
     header: string
     profileImg: string

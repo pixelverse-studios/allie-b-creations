@@ -4,7 +4,7 @@ import { GalleryProps } from '@/utils/types/redux'
 
 const getGalleryContent = async (): Promise<GalleryProps[]> => {
     try {
-        const galleryRef = collection(db, 'contact-links')
+        const galleryRef = collection(db, 'gallery')
         const data = await getDocs(galleryRef)
         return data.docs.map(doc => {
             const { img, tag } = doc.data()

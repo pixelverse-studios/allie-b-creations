@@ -2,7 +2,7 @@ import { signInWithPopup, signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setUser } from '@/lib/redux/slices/user'
-import { setLoading } from '@/lib/redux/slices/user'
+import { setLoading } from '@/lib/redux/slices/loading'
 import { auth, googleProvider } from '@/lib/db/config'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'

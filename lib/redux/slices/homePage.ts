@@ -13,6 +13,7 @@ export const homePageSlice = createSlice({
     initialState,
     reducers: {
         setHomePage: (state, { payload }: { payload: HomePageProps }) => {
+            state.id = payload.id
             state.header = payload.header
             state.heroImg = payload.heroImg
             state.secondaryHeroImg = payload.secondaryHeroImg

@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { GalleryProps } from '@/utils/types/redux'
 
-const initialState: GalleryProps[] | [] = []
+const initialState = {
+    items: [] as GalleryProps[]
+}
 export const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
         setGallery: (state, { payload }: { payload: GalleryProps[] }) => {
-            state = payload
+            state.items = payload
         }
     }
 })
