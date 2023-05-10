@@ -10,7 +10,9 @@ export const StyledMobileNav = styled.nav`
 
     .brand {
         flex-grow: 1;
+
         img {
+            cursor: pointer;
             height: 4rem;
             width: auto;
         }

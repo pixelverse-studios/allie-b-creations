@@ -28,6 +28,10 @@ const MobileNav = () => {
         [router.pathname]
     )
 
+    const onHomeClick = () => {
+        if (showMenu) setShowMenu(false)
+        router.push('/')
+    }
     const onNavItemClick = (path: string) => {
         setShowMenu(!showMenu)
         router.push(path)
@@ -82,7 +86,7 @@ const MobileNav = () => {
 
     return (
         <StyledMobileNav className={showMenu ? 'open' : ''}>
-            <div className="brand">
+            <div className="brand" onClick={onHomeClick}>
                 <img src={Logo.src} alt="Logo" />
             </div>
             <Hamburger showing={showMenu} onClick={onBurgerClick} />
