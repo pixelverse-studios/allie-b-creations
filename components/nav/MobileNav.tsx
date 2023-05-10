@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Drawer } from '@mui/material'
 import { signInWithPopup, signOut, getAuth } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
+import { enqueueSnackbar } from 'notistack'
 
 import { googleProvider } from '@/lib/db/config'
 import { setUser, removeUser } from '@/lib/redux/slices/user'
@@ -55,6 +56,9 @@ const MobileNav = () => {
             if (authorized) {
                 await getAllCmsData(dispatch)
                 dispatch(setUser(user))
+                enqueueSnackbar('Logged in successfully', {
+                    variant: 'success'
+                })
                 dispatch(setLoading(false))
             } else {
                 onLogOut()
@@ -68,9 +72,11 @@ const MobileNav = () => {
         try {
             await signOut(auth)
             dispatch(removeUser())
+            enqueueSnackbar('Logged out successfully', { variant: 'success' })
         } catch (error) {
-            // banner
-            console.error(error)
+            enqueueSnackbar('There was an issue logging you out', {
+                variant: 'error'
+            })
         }
     }
 

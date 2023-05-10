@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { Provider as ReduxProvider } from 'react-redux'
 import Head from 'next/head'
+import { SnackbarProvider } from 'notistack'
 
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <ReduxProvider store={store}>
                 <AuthWrapper>
                     <Component {...pageProps} />
+                    <SnackbarProvider />
                 </AuthWrapper>
             </ReduxProvider>
         </>
