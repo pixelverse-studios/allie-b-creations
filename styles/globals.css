@@ -1,45 +1,22 @@
+@import './overrides.css';
+
 :root {
     --max-width: 1100px;
     --border-radius: 12px;
     --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
         'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
         'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-}
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+    --brand-color-1: #e5ede9;
+    --brand-color-2: #fae8e6;
+    --brand-color-3: #faf2e7;
+    --accent-color-1: #554348;
+    --accent-color-2: #2a2d34;
+    --accent-color-3: #ff7f11;
 
-        --primary-glow: radial-gradient(
-            rgba(1, 65, 255, 0.4),
-            rgba(1, 65, 255, 0)
-        );
-        --secondary-glow: linear-gradient(
-            to bottom right,
-            rgba(1, 65, 255, 0),
-            rgba(1, 65, 255, 0),
-            rgba(1, 65, 255, 0.3)
-        );
+    --mobile-nav-height: 6rem;
 
-        --tile-start-rgb: 2, 13, 46;
-        --tile-end-rgb: 2, 5, 19;
-        --tile-border: conic-gradient(
-            #ffffff80,
-            #ffffff40,
-            #ffffff30,
-            #ffffff20,
-            #ffffff10,
-            #ffffff10,
-            #ffffff80
-        );
-
-        --callout-rgb: 20, 20, 20;
-        --callout-border-rgb: 108, 108, 108;
-        --card-rgb: 100, 100, 100;
-        --card-border-rgb: 200, 200, 200;
-    }
+    --hover-transition: 0.25s ease-in-out;
 }
 
 * {
@@ -75,8 +52,6 @@ a {
     text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
+ul {
+    list-style: none;
 }

@@ -18,7 +18,10 @@ export const userSlice = createSlice({
             state.lastName = lastName
         },
         removeUser: state => {
-            state = initialState
+            state.id = initialState.id
+            state.email = initialState.email
+            state.firstName = initialState.firstName
+            state.lastName = initialState.lastName
         }
     }
 })

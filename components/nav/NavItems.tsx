@@ -1,50 +1,84 @@
-import Link from 'next/link'
-import { IconButton } from '@mui/material'
+import { MouseEventHandler } from 'react'
 import { Login, Logout, Dashboard } from '@mui/icons-material'
 
-export const BaseNavItems = ({ onClick }: { onClick: Function }) => {
+const ABOUT = {
+    route: '/about',
+    slug: 'about',
+    label: 'About'
+}
+const SERVICES = {
+    route: '/services',
+    slug: 'services',
+    label: 'Services'
+}
+const CONTACT = {
+    route: '/contact',
+    slug: 'contact',
+    label: 'Contact Me'
+}
+interface BaseNaveItemProps {
+    onClick: Function
+    activePage: string
+}
+
+export const BaseNavItems = ({ onClick, activePage }: BaseNaveItemProps) => {
     return (
         <>
-            <li onClick={() => onClick('/about')}>
-                <p>About</p>
+            <li
+                className={activePage === ABOUT.slug ? 'active' : 'inactive'}
+                onClick={() => onClick(ABOUT.route)}>
+                <div className="highlight" />
+                <span>{ABOUT.label}</span>
             </li>
-            <li onClick={() => onClick('/services')}>
-                <p>Services</p>
+            <li
+                className={activePage === SERVICES.slug ? 'active' : 'inactive'}
+                onClick={() => onClick(SERVICES.route)}>
+                <div className="highlight" />
+                <span>{SERVICES.label}</span>
             </li>
-            <li onClick={() => onClick('/contact')}>
-                <p>Contact Me</p>
+            <li
+                className={activePage === CONTACT.slug ? 'active' : 'inactive'}
+                onClick={() => onClick(CONTACT.route)}>
+                <div className="highlight" />
+                <span>{CONTACT.label}</span>
             </li>
         </>
     )
 }
 
+interface AuthNavItemProps {
+    loggedIn: boolean
+    onLogin: MouseEventHandler<HTMLLIElement>
+    onLogout: MouseEventHandler<HTMLLIElement>
+    onDashboardClick: Function
+}
+
 export const AuthNavItems = ({
     loggedIn,
     onLogin,
-    onLogout
-}: {
-    loggedIn: boolean
-    onLogin: any
-    onLogout: any
-}) => {
+    onLogout,
+    onDashboardClick
+}: AuthNavItemProps) => {
     return (
         <>
-            <li>
-                <IconButton>
-                    <Dashboard />
-                </IconButton>
-            </li>
             {loggedIn ? (
-                <li>
-                    <IconButton onClick={onLogout}>
-                        <Login />
-                    </IconButton>
-                </li>
-            ) : (
-                <li>
-                    <IconButton onClick={onLogin}>
+                <>
+                    <li onClick={() => onDashboardClick('/dashboard')}>
+                        <div className="highlight" />
+                        <Dashboard />
+                        <span>Dashboard</span>
+                    </li>
+                    <li onClick={onLogout}>
+                        <div className="highlight" />
                         <Logout />
-                    </IconButton>
+                        <span>Log Out</span>
+                    </li>
+                </>
+            ) : (
+                <li onClick={onLogin}>
+                    <div className="highlight" />
+                    <Login />
+                    <span>Log In</span>
                 </li>
             )}
         </>

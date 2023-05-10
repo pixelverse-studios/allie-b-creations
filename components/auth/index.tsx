@@ -1,17 +1,22 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
 import Nav from '../nav'
 import StyledAuthWrapper from './StyledAuthWrapper'
-import { setUser } from '@/lib/redux/slices/user'
+import { removeUser, setUser } from '@/lib/redux/slices/user'
 
 const AuthWrapper = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
-    const { email } = useSelector((state: any) => state.user)
+    const { id } = useSelector((state: any) => state.homePage)
     const auth = getAuth()
+    useEffect(() => {
+        if (!id) {
+            getAllCmsData(dispatch).catch(error => console.error(error))
+        }
+    }, [id])
     useEffect(() => {
         const listen = onAuthStateChanged(auth, async user => {
             if (user) {
@@ -20,11 +25,9 @@ const AuthWrapper = ({ children }: { children: any }) => {
                 )
                 if (authorized) {
                     dispatch(setUser(validated))
-                    await getAllCmsData(dispatch).catch(error =>
-                        console.error(error)
-                    )
                 } else {
-                    // TODO: log the bitch ass out
+                    await signOut(auth)
+                    dispatch(removeUser())
                 }
             } else {
                 // do nothing
