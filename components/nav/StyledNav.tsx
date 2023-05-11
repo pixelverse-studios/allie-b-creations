@@ -1,5 +1,100 @@
 import styled from '@emotion/styled'
 
+export const StyledDesktopNav = styled.nav`
+    height: var(--mobile-nav-height);
+    background-color: var(--accent-color-1);
+
+    .contentWrapper {
+        max-width: var(--max-width);
+        margin: auto;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+
+        .brand {
+            img {
+                cursor: pointer;
+                height: 4rem;
+                width: auto;
+            }
+        }
+    }
+`
+
+export const StyledDesktopNavItems = styled.ul`
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    li {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: left;
+        padding: 0 1rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        & > * {
+            transition: var(--hover-transition);
+        }
+
+        .iconText {
+            display: none;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+
+        .highlight {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            opacity: 0;
+            height: 6px;
+            width: 80%;
+            border-radius: 5px;
+            margin-right: 1rem;
+            margin: auto;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            .highlight {
+                opacity: 1;
+                background-color: var(--brand-color-2);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-2);
+            }
+        }
+
+        &.active {
+            .highlight {
+                opacity: 1;
+                background-color: var(--brand-color-1);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-1);
+            }
+        }
+    }
+`
+
 export const StyledMobileNav = styled.nav`
     display: flex;
     align-items: center;
@@ -22,8 +117,8 @@ export const StyledMobileNav = styled.nav`
 export const StyledMobileNavItems = styled.ul`
     height: 100%;
     width: 100vw;
-    background-color: var(--brand-color-2);
-    color: var(--accent-color-1);
+    background-color: var(--nav-background);
+    color: var(--primary-color-3);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -38,6 +133,7 @@ export const StyledMobileNavItems = styled.ul`
         align-items: center;
 
         span {
+            color: var(--brand-color-3);
             display: flex;
             align-items: center;
         }
@@ -60,12 +156,22 @@ export const StyledMobileNavItems = styled.ul`
                 opacity: 1;
                 background-color: var(--accent-color-3);
             }
+
+            span,
+            svg {
+                color: var(--accent-color-3);
+            }
         }
 
         &.active {
             .highlight {
                 opacity: 1;
-                background-color: var(--accent-color-1);
+                background-color: var(--brand-color-1);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-1);
             }
         }
     }

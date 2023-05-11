@@ -10,11 +10,12 @@ import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-
+import bannerUtils from '@/utils/banners'
 import { StyledMobileNav, StyledMobileNavItems } from './StyledNav'
 import { BaseNavItems, AuthNavItems } from './NavItems'
 import Logo from '@/assets/logo.svg'
 import Hamburger from './Hamburger'
+const { statuses, messages } = bannerUtils
 
 const MobileNav = () => {
     const auth = getAuth()
@@ -61,14 +62,16 @@ const MobileNav = () => {
                 await getAllCmsData(dispatch)
                 dispatch(setUser(user))
                 enqueueSnackbar('Logged in successfully', {
-                    variant: 'success'
+                    variant: statuses.SUCCESS
                 })
                 dispatch(setLoading(false))
             } else {
                 onLogOut()
             }
         } catch (error) {
-            console.error(error)
+            enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
+                variant: statuses.ERROR
+            })
         }
     }
 
@@ -76,10 +79,12 @@ const MobileNav = () => {
         try {
             await signOut(auth)
             dispatch(removeUser())
-            enqueueSnackbar('Logged out successfully', { variant: 'success' })
+            enqueueSnackbar(messages.LOGGED_OUT, {
+                variant: statuses.SUCCESS
+            })
         } catch (error) {
-            enqueueSnackbar('There was an issue logging you out', {
-                variant: 'error'
+            enqueueSnackbar(messages.LOG_OUT_ERROR, {
+                variant: statuses.ERROR
             })
         }
     }
@@ -101,6 +106,7 @@ const MobileNav = () => {
                     />
                     <AuthNavItems
                         onLogin={onLogIn}
+                        activePage={activePage}
                         onLogout={onLogOut}
                         loggedIn={!!id}
                         onDashboardClick={onNavItemClick}

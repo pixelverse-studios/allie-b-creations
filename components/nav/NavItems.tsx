@@ -48,6 +48,7 @@ export const BaseNavItems = ({ onClick, activePage }: BaseNaveItemProps) => {
 
 interface AuthNavItemProps {
     loggedIn: boolean
+    activePage: string
     onLogin: MouseEventHandler<HTMLLIElement>
     onLogout: MouseEventHandler<HTMLLIElement>
     onDashboardClick: Function
@@ -55,6 +56,7 @@ interface AuthNavItemProps {
 
 export const AuthNavItems = ({
     loggedIn,
+    activePage,
     onLogin,
     onLogout,
     onDashboardClick
@@ -63,22 +65,26 @@ export const AuthNavItems = ({
         <>
             {loggedIn ? (
                 <>
-                    <li onClick={() => onDashboardClick('/dashboard')}>
+                    <li
+                        className={
+                            activePage === 'dashboard' ? 'active' : 'inactive'
+                        }
+                        onClick={() => onDashboardClick('/dashboard')}>
                         <div className="highlight" />
                         <Dashboard />
-                        <span>Dashboard</span>
+                        <span className="iconText">Dashboard</span>
                     </li>
                     <li onClick={onLogout}>
                         <div className="highlight" />
                         <Logout />
-                        <span>Log Out</span>
+                        <span className="iconText">Log Out</span>
                     </li>
                 </>
             ) : (
                 <li onClick={onLogin}>
                     <div className="highlight" />
                     <Login />
-                    <span>Log In</span>
+                    <span className="iconText">Log In</span>
                 </li>
             )}
         </>
