@@ -1,7 +1,8 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config'
+import { ContactLinkProps } from '@/utils/types/redux'
 
-const getContactLinks = async () => {
+const getContactLinks = async (): Promise<ContactLinkProps[]> => {
     try {
         const contactLinksRef = collection(db, 'contact-links')
         const data = await getDocs(contactLinksRef)

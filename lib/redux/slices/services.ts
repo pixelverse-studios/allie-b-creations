@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { ServicesProps } from '@/utils/types/redux'
 
 const initialState: ServicesProps = {
+    id: '',
     description: [],
     offerings: [
         { events: [{ description: '', img: '', title: '' }], section: '' }
@@ -12,7 +13,8 @@ export const servicesSlice = createSlice({
     name: 'services',
     initialState,
     reducers: {
-        setServices: (state, { payload }) => {
+        setServices: (state, { payload }: { payload: ServicesProps }) => {
+            state.id = payload.id
             state.description = payload.description
             state.offerings = payload.offerings
             state.pageHeader = payload.pageHeader

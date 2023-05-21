@@ -1,21 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit'
 import user from './slices/user'
 import aboutPage from './slices/aboutPage'
-import callToAction from './slices/callToAction'
 import services from './slices/services'
 import contactLinks from './slices/contactLinks'
 import homePage from './slices/homePage'
-import loading from './slices/loading'
+import gallery from './slices/gallery'
+import contacts from './slices/contacts'
+import app from './slices/app'
 
 export const store = configureStore({
     reducer: {
         user,
         aboutPage,
-        callToAction,
         services,
         contactLinks,
         homePage,
-        loading
+        gallery,
+        contacts,
+        app
     }
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
