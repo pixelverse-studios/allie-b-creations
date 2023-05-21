@@ -45,3 +45,10 @@ export interface ServicesProps {
     ]
     pageHeader: string
 }
+export interface TestimonialsProps {
+    id: string
+    display: boolean
+    name: string
+    rating: number
+    review: string
+}
