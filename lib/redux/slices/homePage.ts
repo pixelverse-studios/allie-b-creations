@@ -2,23 +2,24 @@ import { createSlice } from '@reduxjs/toolkit'
 import { HomePageProps } from '@/utils/types/redux'
 
 const initialState: HomePageProps = {
+    id: '',
     header: '',
     heroImg: '',
-    secondaryHeroImg: ''
+    secondaryHeroImg: '',
+    secondaryHeroBanner: ''
 }
 export const homePageSlice = createSlice({
     name: 'homePage',
     initialState,
     reducers: {
-        setHomePage: (state, { payload }) => {
+        setHomePage: (state, { payload }: { payload: HomePageProps }) => {
+            state.id = payload.id
             state.header = payload.header
             state.heroImg = payload.heroImg
             state.secondaryHeroImg = payload.secondaryHeroImg
-        },
-        updateHomePage: (state, { payload: { label, value } }) => {
-            state[label] = value
+            state.secondaryHeroBanner = payload.secondaryHeroBanner
         }
     }
 })
-export const { setHomePage, updateHomePage } = homePageSlice.actions
+export const { setHomePage } = homePageSlice.actions
 export default homePageSlice.reducer

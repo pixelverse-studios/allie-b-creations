@@ -1,0 +1,243 @@
+import styled from '@emotion/styled'
+
+export const StyledDesktopNav = styled.nav`
+    height: var(--mobile-nav-height);
+    background-color: var(--accent-color-1);
+
+    .contentWrapper {
+        max-width: var(--max-width);
+        margin: auto;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+
+        .brand {
+            img {
+                cursor: pointer;
+                height: 4rem;
+                width: auto;
+            }
+        }
+    }
+`
+
+export const StyledDesktopNavItems = styled.ul`
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    li {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: left;
+        padding: 0 1rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        & > * {
+            transition: var(--hover-transition);
+        }
+
+        .iconText {
+            display: none;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+
+        .highlight {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            opacity: 0;
+            height: 6px;
+            width: 80%;
+            border-radius: 5px;
+            margin-right: 1rem;
+            margin: auto;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            .highlight {
+                opacity: 1;
+                background-color: var(--brand-color-2);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-2);
+            }
+        }
+
+        &.active {
+            .highlight {
+                opacity: 1;
+                background-color: var(--brand-color-1);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-1);
+            }
+        }
+    }
+`
+
+export const StyledMobileNav = styled.nav`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: var(--mobile-nav-height);
+    background-color: var(--accent-color-1);
+    padding: 1rem;
+
+    .brand {
+        flex-grow: 1;
+
+        img {
+            cursor: pointer;
+            height: 4rem;
+            width: auto;
+        }
+    }
+`
+
+export const StyledMobileNavItems = styled.ul`
+    height: 100%;
+    width: 100vw;
+    background-color: var(--nav-background);
+    color: var(--primary-color-3);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 2rem;
+
+    li {
+        font-size: 2rem;
+        font-weight: 500;
+        text-align: left;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+
+        span {
+            color: var(--brand-color-3);
+            display: flex;
+            align-items: center;
+        }
+        svg {
+            display: none;
+        }
+
+        .highlight {
+            opacity: 0;
+            height: 100%;
+            width: 10px;
+            border-radius: 5px;
+            margin-right: 1rem;
+            transition: var(--hover-transition);
+        }
+        &:hover {
+            cursor: pointer;
+
+            .highlight {
+                opacity: 1;
+                background-color: var(--accent-color-3);
+            }
+
+            span,
+            svg {
+                color: var(--accent-color-3);
+            }
+        }
+
+        &.active {
+            .highlight {
+                opacity: 1;
+                background-color: var(--brand-color-1);
+            }
+
+            span,
+            svg {
+                color: var(--brand-color-1);
+            }
+        }
+    }
+`
+
+export const StyledHamburger = styled.div`
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    .burger {
+        width: 18px;
+        height: 8px;
+        position: relative;
+        display: block;
+        margin: -4px auto 0;
+        top: 50%;
+        .bar {
+            width: 100%;
+            height: 1px;
+            display: block;
+            position: relative;
+            background: var(--brand-color-1);
+            transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition-delay: 0s;
+            &.topBar {
+                transform: translateY(0px) rotate(0deg);
+            }
+            &.btmBar {
+                transform: translateY(6px) rotate(0deg);
+            }
+        }
+    }
+
+    &.open {
+        height: 100%;
+        background-color: var(--accent-color-1);
+        transition: all 0.3s ease-in, background 0.5s ease-in;
+
+        z-index: 100;
+        position: absolute;
+        right: 0;
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        transform: rotate(90deg);
+        .burger {
+            .bar {
+                transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+                transition-delay: 0.2s;
+                background: var(--brand-color-1);
+
+                &.topBar {
+                    transform: translateY(4px) rotate(45deg);
+                }
+                &.btmBar {
+                    transform: translateY(3px) rotate(-45deg);
+                }
+            }
+        }
+    }
+`

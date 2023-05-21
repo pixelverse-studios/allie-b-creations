@@ -5,7 +5,9 @@ import services from './slices/services'
 import contactLinks from './slices/contactLinks'
 import homePage from './slices/homePage'
 import testimonials from './slices/testimonials'
-import loading from './slices/loading'
+import gallery from './slices/gallery'
+import contacts from './slices/contacts'
+import app from './slices/app'
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +17,9 @@ export const store = configureStore({
         contactLinks,
         homePage,
         testimonials,
-        loading
+        gallery,
+        contacts,
+        app
     }
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself

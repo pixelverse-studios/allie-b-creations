@@ -16,6 +16,10 @@ const StyledAuthWrapper = styled.div`
 
     main {
         grid-area: main;
+        margin: 0 auto;
+        width: 100vw;
+        max-width: var(--max-width);
+        padding: 1rem;
     }
 
     footer {

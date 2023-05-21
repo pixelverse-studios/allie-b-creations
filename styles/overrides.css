@@ -1,0 +1,14 @@
+.MuiDrawer-root {
+    height: calc(100vh - var(--mobile-nav-height));
+    margin-top: var(--mobile-nav-height);
+}
+
+.MuiDrawer-root .MuiPaper-root {
+    top: var(--mobile-nav-height);
+}
+
+.MuiDrawer-root .MuiBackdrop-root {
+    background-color: transparent;
+    height: inherit;
+    margin-top: inherit;
+}

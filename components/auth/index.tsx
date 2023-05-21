@@ -1,25 +1,45 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 
+import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import { auth } from '@/lib/db/config'
+import Nav from '../nav'
 import StyledAuthWrapper from './StyledAuthWrapper'
+import { removeUser, setUser } from '@/lib/redux/slices/user'
 
 const AuthWrapper = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
-    const { email } = useSelector((state: any) => state.user)
-    const { currentUser } = auth
-
+    const { id } = useSelector((state: any) => state.homePage)
+    const auth = getAuth()
     useEffect(() => {
-        if (currentUser != null && !email) {
-            console.log(1)
+        if (!id) {
             getAllCmsData(dispatch).catch(error => console.error(error))
         }
-    }, [auth, email, currentUser])
+    }, [id])
+    useEffect(() => {
+        const listen = onAuthStateChanged(auth, async user => {
+            if (user) {
+                const { authorized, user: validated } = await getValidatedUser(
+                    user?.email
+                )
+                if (authorized) {
+                    dispatch(setUser(validated))
+                } else {
+                    await signOut(auth)
+                    dispatch(removeUser())
+                }
+            } else {
+                // do nothing
+            }
+        })
+
+        return () => listen()
+    }, [])
 
     return (
         <StyledAuthWrapper>
-            <nav>placeholder nav</nav>
+            <Nav />
             <main>{children}</main>
             <footer>placeholder footer</footer>
         </StyledAuthWrapper>
