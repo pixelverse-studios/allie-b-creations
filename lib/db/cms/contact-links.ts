@@ -6,6 +6,7 @@ const getContactLinks = async () => {
         const contactLinksRef = collection(db, 'contact-links')
         const data = await getDocs(contactLinksRef)
         return data.docs.map(doc => {
+            console.log(doc)
             const { icon, label, link } = doc.data()
             return {
                 id: doc.id,

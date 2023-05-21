@@ -1,20 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
 import user from './slices/user'
 import aboutPage from './slices/aboutPage'
-import callToAction from './slices/callToAction'
 import services from './slices/services'
 import contactLinks from './slices/contactLinks'
 import homePage from './slices/homePage'
+import testimonials from './slices/testimonials'
 import loading from './slices/loading'
 
 export const store = configureStore({
     reducer: {
         user,
         aboutPage,
-        callToAction,
         services,
         contactLinks,
         homePage,
+        testimonials,
         loading
     }
 })

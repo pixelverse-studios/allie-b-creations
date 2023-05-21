@@ -13,12 +13,6 @@ export interface AboutPageProps {
     subHeader: string
     title: string
 }
-export interface CallToActionProps {
-    [buttonLabel: string]: string
-    description: string
-    image: string
-    header: string
-}
 export interface ContactLinkProps {
     [icon: string]: string
     label: string

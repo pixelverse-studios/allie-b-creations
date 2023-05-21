@@ -1,29 +1,29 @@
-import { getServices } from './cms/services'
-import { getHomePage } from './cms/home-page'
-import { getContactLinks } from './cms/contact-links'
-import { getCallToAction } from './cms/call-to-action'
 import { getAboutPageData } from './cms/about-page'
 import { setAbout } from '@/lib/redux/slices/aboutPage'
+import { getContactLinks } from './cms/contact-links'
 import { setContactLinks } from '@/lib/redux/slices/contactLinks'
+import { getHomePage } from './cms/home-page'
 import { setHomePage } from '@/lib/redux/slices/homePage'
+import { getServices } from './cms/services'
 import { setServices } from '@/lib/redux/slices/services'
-import { setCallToAction } from '@/lib/redux/slices/callToAction'
+import { getTestimonials } from './cms/testimonials'
+import { setTestimonials } from '../redux/slices/testimonials'
 
 export const getAllCmsData = async (dispatch: Function) => {
     try {
-        const [aboutPage, contactLinks, homePage, services, callToAction] =
+        const [aboutPage, contactLinks, homePage, services, testimonials] =
             await Promise.all([
                 getAboutPageData(),
                 getContactLinks(),
                 getHomePage(),
                 getServices(),
-                getCallToAction()
+                getTestimonials()
             ])
         dispatch(setAbout(aboutPage))
         dispatch(setContactLinks(contactLinks))
         dispatch(setHomePage(homePage))
         dispatch(setServices(services))
-        dispatch(setCallToAction(callToAction))
+        dispatch(setTestimonials(testimonials))
     } catch (error) {
         throw error
     }

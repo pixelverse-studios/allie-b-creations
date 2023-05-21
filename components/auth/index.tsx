@@ -12,6 +12,7 @@ const AuthWrapper = ({ children }: { children: any }) => {
 
     useEffect(() => {
         if (currentUser != null && !email) {
+            console.log(1)
             getAllCmsData(dispatch).catch(error => console.error(error))
         }
     }, [auth, email, currentUser])
