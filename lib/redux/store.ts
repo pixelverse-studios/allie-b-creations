@@ -4,6 +4,7 @@ import aboutPage from './slices/aboutPage'
 import services from './slices/services'
 import contactLinks from './slices/contactLinks'
 import homePage from './slices/homePage'
+import testimonials from './slices/testimonials'
 import gallery from './slices/gallery'
 import contacts from './slices/contacts'
 import app from './slices/app'
@@ -15,6 +16,7 @@ export const store = configureStore({
         services,
         contactLinks,
         homePage,
+        testimonials,
         gallery,
         contacts,
         app

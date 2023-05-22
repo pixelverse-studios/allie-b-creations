@@ -10,6 +10,8 @@ export interface AboutPageProps {
     header: string
     profileImg: string
     role: string
+    subHeader: string
+    title: string
 }
 export interface ContactLinkProps {
     id: string
@@ -40,6 +42,13 @@ export interface ServicesProps {
         }
     ]
     pageHeader: string
+}
+export interface TestimonialsProps {
+    id: string
+    display: boolean
+    name: string
+    rating: number
+    review: string
 }
 export interface GalleryProps {
     id: string
