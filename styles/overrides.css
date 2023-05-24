@@ -1,10 +1,10 @@
 .MuiDrawer-root {
-    height: calc(100vh - var(--mobile-nav-height));
-    margin-top: var(--mobile-nav-height);
+    height: calc(100vh - var(--nav-height));
+    margin-top: var(--nav-height);
 }
 
 .MuiDrawer-root .MuiPaper-root {
-    top: var(--mobile-nav-height);
+    top: var(--nav-height);
 }
 
 .MuiDrawer-root .MuiBackdrop-root {
