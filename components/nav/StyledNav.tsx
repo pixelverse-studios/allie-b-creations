@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const StyledDesktopNav = styled.nav`
-    height: var(--mobile-nav-height);
+    height: var(--nav-height);
     background-color: var(--accent-color-1);
 
     .contentWrapper {
@@ -99,7 +99,7 @@ export const StyledMobileNav = styled.nav`
     display: flex;
     align-items: center;
     gap: 1rem;
-    height: var(--mobile-nav-height);
+    height: var(--nav-height);
     background-color: var(--accent-color-1);
     padding: 1rem;
 

@@ -1,29 +1,29 @@
 import styled from '@emotion/styled'
 
 const StyledAuthWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        'header'
-        'main'
-        'footer';
+    display: flex;
+    flex-direction: column;
+    height: inherit;
     height: 100%;
 
     nav {
-        grid-area: header;
+        position: absolute;
+        width: 100%;
+        top: 0;
     }
 
     main {
-        grid-area: main;
         margin: 0 auto;
+        margin-top: var(--nav-height);
         width: 100vw;
         max-width: var(--max-width);
-        padding: 1rem;
+        height: 100%;
     }
 
     footer {
-        grid-area: footer;
+        position: absolute;
+        bottom: calc(var(--footer-height) * -1);
+        height: var(--footer-height);
     }
 `
 export default StyledAuthWrapper

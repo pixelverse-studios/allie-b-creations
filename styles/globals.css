@@ -15,7 +15,8 @@
     --accent-color-3: #ff7f11;
 
     --nav-background: #080808;
-    --mobile-nav-height: 6rem;
+    --nav-height: 6rem;
+    --footer-height: 4rem;
 
     --hover-transition: 0.25s ease-in-out;
 }
@@ -36,6 +37,7 @@ body {
 
 #__next {
     height: 100%;
+    margin-bottom: var(--footer-height);
 }
 
 body {
