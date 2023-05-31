@@ -5,6 +5,8 @@ import { SnackbarProvider } from 'notistack'
 
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
+
+import Cta from '@/components/cta'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -23,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <AuthWrapper>
                     <Component {...pageProps} />
                     <SnackbarProvider />
+                    <Cta />
                 </AuthWrapper>
             </ReduxProvider>
         </>
