@@ -4,6 +4,7 @@ import { css } from '@emotion/react'
 export const StyledDesktopNav = styled.nav`
     height: var(--nav-height);
     background-color: var(--accent-color-2);
+    border-bottom: 5px solid var(--brand-color-2);
 
     .contentWrapper {
         max-width: var(--max-width);
