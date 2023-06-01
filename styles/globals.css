@@ -7,12 +7,15 @@
         'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
         'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-    --brand-color-1: #96f6c6;
+    --brand-color-1: #e4ede8;
     --brand-color-2: #fae8e6;
-    --brand-color-3: #faf2e7;
-    --accent-color-1: #554348;
-    --accent-color-2: #2a2d34;
-    --accent-color-3: #ff7f11;
+    --brand-color-3: #fce7b1;
+    /* --brand-color-3: #f5f5d1; */
+    /* --brand-color-3: #faf1e7; */
+
+    --accent-color-1: #272727;
+    --accent-color-2: #faf9f6;
+    /* --accent-color-3: #ff7f11; */
 
     --nav-background: #080808;
     --nav-height: 6rem;

@@ -1,10 +1,13 @@
 import { collection, getDocs } from 'firebase/firestore'
+import { format } from 'date-fns'
+
 import { db } from '../config'
 import { ContactPageProps } from '@/utils/types/redux'
+import { formatDbDateTime } from '@/utils/format/dates'
 
 const getContacts = async (): Promise<ContactPageProps[]> => {
     try {
-        const contactsRef = collection(db, 'contact-page')
+        const contactsRef = collection(db, 'client-requests')
         const data = await getDocs(contactsRef)
         return data.docs.map(doc => {
             const {
@@ -17,8 +20,22 @@ const getContacts = async (): Promise<ContactPageProps[]> => {
                 eventLocation,
                 eventType,
                 inspirationImg,
-                responded
+                responded,
+                createdAt
             } = doc.data()
+            const formattedCreatedAt = format(
+                new Date(createdAt.seconds),
+                'MM/dd/yyyy hh:mm a'
+            )
+            const formattedCreatedDate = createdAt.toDate().toDateString()
+            const formattedCreatedTime = createdAt
+                .toDate()
+                .toLocaleTimeString('en-US')
+            console.log(`${formattedCreatedDate} ${formattedCreatedTime}`)
+            console.log(
+                'date: ',
+                new Date(`${formattedCreatedDate} ${formattedCreatedTime}`)
+            )
             return {
                 id: doc.id,
                 firstName,
@@ -30,7 +47,8 @@ const getContacts = async (): Promise<ContactPageProps[]> => {
                 eventLocation,
                 eventType,
                 inspirationImg,
-                responded
+                responded,
+                createdAt: formattedCreatedAt
             }
         })
     } catch (error) {

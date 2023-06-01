@@ -67,4 +67,5 @@ export interface ContactPageProps {
     eventType: 'indoors' | 'outdoors'
     inspirationImg: string
     responded: boolean
+    createdAt: string
 }

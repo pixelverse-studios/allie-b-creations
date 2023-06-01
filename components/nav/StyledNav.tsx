@@ -1,8 +1,10 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 export const StyledDesktopNav = styled.nav`
     height: var(--nav-height);
-    background-color: var(--accent-color-1);
+    background-color: var(--accent-color-2);
+    border-bottom: 5px solid var(--brand-color-2);
 
     .contentWrapper {
         max-width: var(--max-width);
@@ -23,6 +25,15 @@ export const StyledDesktopNav = styled.nav`
     }
 `
 
+const ActiveItemStyles = css`
+    background-color: var(--brand-color-1);
+    color: var(--accent-color-1);
+`
+const HoverItemStyles = css`
+    background-color: var(--brand-color-3);
+    color: var(--accent-color-1);
+`
+
 export const StyledDesktopNavItems = styled.ul`
     list-style: none;
     width: 100%;
@@ -37,7 +48,6 @@ export const StyledDesktopNavItems = styled.ul`
         font-size: 1.5rem;
         font-weight: 500;
         text-align: left;
-        padding: 0 1rem;
         height: 100%;
         display: flex;
         flex-direction: column-reverse;
@@ -50,58 +60,49 @@ export const StyledDesktopNavItems = styled.ul`
             display: none;
         }
 
-        svg {
-            cursor: pointer;
+        span {
+            color: var(--accent-color-1);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            border-radius: 2rem;
         }
 
-        .highlight {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            opacity: 0;
-            height: 6px;
-            width: 80%;
-            border-radius: 5px;
-            margin-right: 1rem;
-            margin: auto;
+        svg {
+            color: var(--accent-color-1);
+            padding: 1rem;
+            cursor: pointer;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
         }
 
         &:hover {
             cursor: pointer;
 
-            .highlight {
-                opacity: 1;
-                background-color: var(--brand-color-2);
-            }
-
             span,
             svg {
-                color: var(--brand-color-2);
+                ${HoverItemStyles}
             }
         }
 
         &.active {
-            .highlight {
-                opacity: 1;
-                background-color: var(--brand-color-1);
-            }
-
             span,
             svg {
-                color: var(--brand-color-1);
+                ${ActiveItemStyles}
             }
         }
     }
 `
 
-export const StyledMobileNav = styled.nav`
+const BaseMobileNaveStyles = css`
     display: flex;
     align-items: center;
     gap: 1rem;
     height: var(--nav-height);
-    background-color: var(--accent-color-1);
+    background-color: var(--accent-color-2);
     padding: 1rem;
+    border-bottom: 5px solid var(--brand-color-2);
 
     .brand {
         flex-grow: 1;
@@ -114,64 +115,74 @@ export const StyledMobileNav = styled.nav`
     }
 `
 
-export const StyledMobileNavItems = styled.ul`
+export const StyledMobileNav = styled.nav`
+    ${BaseMobileNaveStyles}
+`
+
+export const StyledMobileNavItems = styled.div`
     height: 100%;
     width: 100vw;
-    background-color: var(--nav-background);
+    background-color: var(--accent-color-2);
     color: var(--primary-color-3);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-top: 2rem;
 
-    li {
-        font-size: 2rem;
-        font-weight: 500;
-        text-align: left;
-        padding: 0 1rem;
-        display: flex;
-        align-items: center;
+    .subMenuHeader {
+        ${BaseMobileNaveStyles}
+        transition: 0.1s;
 
-        span {
-            color: var(--brand-color-3);
-            display: flex;
-            align-items: center;
-        }
-        svg {
-            display: none;
-        }
-
-        .highlight {
+        &.hide {
             opacity: 0;
-            height: 100%;
-            width: 10px;
-            border-radius: 5px;
-            margin-right: 1rem;
-            transition: var(--hover-transition);
-        }
-        &:hover {
-            cursor: pointer;
-
-            .highlight {
-                opacity: 1;
-                background-color: var(--accent-color-3);
-            }
-
-            span,
-            svg {
-                color: var(--accent-color-3);
-            }
+            transition-delay: 0;
         }
 
-        &.active {
-            .highlight {
-                opacity: 1;
-                background-color: var(--brand-color-1);
+        &.show {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 2rem;
+
+        li {
+            font-size: 2rem;
+            font-weight: 500;
+            text-align: left;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            span {
+                transition: var(--hover-transition);
+                color: var(--accent-color-1);
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+                border-radius: 2rem;
+            }
+            svg {
+                display: none;
+                padding: 1rem;
+                border-radius: 2rem;
             }
 
-            span,
-            svg {
-                color: var(--brand-color-1);
+            &:hover {
+                cursor: pointer;
+
+                span,
+                svg {
+                    ${HoverItemStyles}
+                }
+            }
+
+            &.active {
+                span,
+                svg {
+                    ${ActiveItemStyles}
+                }
             }
         }
     }
@@ -201,7 +212,7 @@ export const StyledHamburger = styled.div`
             height: 1px;
             display: block;
             position: relative;
-            background: var(--brand-color-1);
+            background: var(--accent-color-1);
             transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
             transition-delay: 0s;
             &.topBar {
@@ -215,7 +226,7 @@ export const StyledHamburger = styled.div`
 
     &.open {
         height: 100%;
-        background-color: var(--accent-color-1);
+        background-color: var(--accent-color-2);
         transition: all 0.3s ease-in, background 0.5s ease-in;
 
         z-index: 100;
@@ -229,7 +240,7 @@ export const StyledHamburger = styled.div`
             .bar {
                 transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
                 transition-delay: 0.2s;
-                background: var(--brand-color-1);
+                background: var(--accent-color-1);
 
                 &.topBar {
                     transform: translateY(4px) rotate(45deg);

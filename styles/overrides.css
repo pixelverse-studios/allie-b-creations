@@ -1,14 +1,14 @@
 .MuiDrawer-root {
-    height: calc(100vh - var(--nav-height));
-    margin-top: var(--nav-height);
+    /* height: calc(100vh - var(--nav-height));
+    margin-top: var(--nav-height); */
 }
 
 .MuiDrawer-root .MuiPaper-root {
-    top: var(--nav-height);
+    /* top: var(--nav-height); */
 }
 
 .MuiDrawer-root .MuiBackdrop-root {
-    background-color: transparent;
+    /* background-color: transparent;
     height: inherit;
-    margin-top: inherit;
+    margin-top: inherit; */
 }

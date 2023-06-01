@@ -100,17 +100,28 @@ const MobileNav = () => {
                 open={showMenu}
                 onClose={toggleDrawer(false)}>
                 <StyledMobileNavItems>
-                    <BaseNavItems
-                        activePage={activePage}
-                        onClick={onNavItemClick}
-                    />
-                    <AuthNavItems
-                        onLogin={onLogIn}
-                        activePage={activePage}
-                        onLogout={onLogOut}
-                        loggedIn={!!id}
-                        onDashboardClick={onNavItemClick}
-                    />
+                    <div
+                        className={`subMenuHeader ${
+                            showMenu ? 'show' : 'hide'
+                        }`}>
+                        <div className="brand" onClick={onHomeClick}>
+                            <img src={Logo.src} alt="Logo" />
+                        </div>
+                        <Hamburger showing={showMenu} onClick={onBurgerClick} />
+                    </div>
+                    <ul>
+                        <BaseNavItems
+                            activePage={activePage}
+                            onClick={onNavItemClick}
+                        />
+                        <AuthNavItems
+                            onLogin={onLogIn}
+                            activePage={activePage}
+                            onLogout={onLogOut}
+                            loggedIn={!!id}
+                            onDashboardClick={onNavItemClick}
+                        />
+                    </ul>
                 </StyledMobileNavItems>
             </Drawer>
         </StyledMobileNav>
