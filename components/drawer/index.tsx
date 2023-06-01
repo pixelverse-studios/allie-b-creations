@@ -14,10 +14,8 @@ const FormDrawer = () => {
             anchor="right"
             open={showing}
             PaperProps={{ style: { width: '50%' } }}>
-            <StyledIcon
-                className="close-icon"
-                onClick={() => dispatch(closeDrawer())}>
-                <Close />
+            <StyledIcon onClick={() => dispatch(closeDrawer())}>
+                <Close className="close-icon" />
             </StyledIcon>
             {content}
         </Drawer>
