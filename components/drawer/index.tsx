@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Drawer } from '@mui/material'
 import { StyledDrawer } from './StyledDrawer'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDrawer } from '@/lib/redux/slices/drawer'
+import { closeDrawer } from '@/lib/redux/slices/drawer'
 
 const FormDrawer = () => {
     const dispatch = useDispatch()
     const { drawerDisplay, showDrawer } = useSelector(
-        (state: any) => state.drawerComponent
+        (state: any) => state.drawer
     )
 
     return (
@@ -15,18 +15,8 @@ const FormDrawer = () => {
             <Drawer
                 anchor="right"
                 open={showDrawer}
-                PaperProps={{ style: { width: '25%' } }}>
-                <span
-                    onClick={() =>
-                        dispatch(
-                            setDrawer({
-                                drawerDisplay: null,
-                                showDrawer: false
-                            })
-                        )
-                    }>
-                    Close
-                </span>
+                PaperProps={{ style: { width: '50%' } }}>
+                <span onClick={() => dispatch(closeDrawer())}>Close</span>
                 {drawerDisplay}
             </Drawer>
         </StyledDrawer>

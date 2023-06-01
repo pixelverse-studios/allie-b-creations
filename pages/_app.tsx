@@ -6,7 +6,7 @@ import { SnackbarProvider } from 'notistack'
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 
-import CallToActionButton from '@/components/CallToAction'
+import SpeedDial from '@/components/speeddial'
 import FormDrawer from '@/components/drawer'
 import '@/styles/globals.css'
 
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                     <SnackbarProvider />
                     <FormDrawer />
-                    <CallToActionButton />
+                    <SpeedDial />
                 </AuthWrapper>
             </ReduxProvider>
         </>

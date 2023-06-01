@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 
-export const StyledCallToAction = styled.div`
+export const StyledSpeedDial = styled.div`
     .MuiSpeedDial-fab {
         background-color: var(--accent-color-2);
-        color: var(--off-brand-dark);
+        color: var(--accent-color-1);
         &:hover {
             background-color: var(--accent-color-2);
         }
@@ -11,7 +11,7 @@ export const StyledCallToAction = styled.div`
     #SpeedDialCTA-actions {
         button {
             background-color: var(--accent-color-2);
-            color: var(--off-brand-dark);
+            color: var(--accent-color-1);
         }
     }
 `

@@ -71,6 +71,6 @@ export interface ContactPageProps {
 }
 
 export interface DrawerComponentProps {
-    drawerDisplay: 'message' | 'testimonial' | null
+    drawerDisplay: string
     showDrawer: boolean
 }
