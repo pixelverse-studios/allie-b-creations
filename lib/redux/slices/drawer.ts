@@ -2,21 +2,21 @@ import { createSlice } from '@reduxjs/toolkit'
 import { DrawerComponentProps } from '@/utils/types/redux'
 
 const initialState: DrawerComponentProps = {
-    drawerDisplay: '',
-    showDrawer: false
+    content: '',
+    showing: false
 }
 
 export const drawerComponentSlice = createSlice({
     name: 'drawerComponent',
     initialState,
     reducers: {
-        showDrawer: (state, { payload: { drawerDisplay } }) => {
-            state.drawerDisplay = drawerDisplay
-            state.showDrawer = true
+        showDrawer: (state, { payload }) => {
+            state.content = payload
+            state.showing = true
         },
         closeDrawer: state => {
-            state.drawerDisplay = initialState.drawerDisplay
-            state.showDrawer = initialState.showDrawer
+            state.content = initialState.content
+            state.showing = initialState.showing
         }
     }
 })

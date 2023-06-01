@@ -71,6 +71,6 @@ export interface ContactPageProps {
 }
 
 export interface DrawerComponentProps {
-    drawerDisplay: string
-    showDrawer: boolean
+    content: string
+    showing: boolean
 }

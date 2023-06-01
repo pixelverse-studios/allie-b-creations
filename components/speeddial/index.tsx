@@ -13,19 +13,18 @@ import { DRAWER_TYPES } from '@/utils/constants'
 
 const { TESTIMONIAL, CLIENT_REQUEST } = DRAWER_TYPES
 const SpeedDialOptions: SpeedDialProps[] = [
-    { icon: <Message />, label: 'Contact Me', drawerDisplay: CLIENT_REQUEST },
+    { icon: <Message />, label: 'Contact Me', content: CLIENT_REQUEST },
     {
         icon: <RateReview />,
         label: 'Create a Testimonial',
-        drawerDisplay: TESTIMONIAL
+        content: TESTIMONIAL
     }
 ]
 const SpeedDial = () => {
     const dispatch = useDispatch()
 
-    const drawerToggle = (drawerDisplay: string) => {
-        dispatch(showDrawer({ drawerDisplay }))
-    }
+    const drawerToggle = (content: string) => dispatch(showDrawer(content))
+
     return (
         <StyledSpeedDial>
             <MuiSpeedDial
@@ -38,7 +37,7 @@ const SpeedDial = () => {
                 icon={<SpeedDialIcon />}>
                 {SpeedDialOptions.map(option => (
                     <SpeedDialAction
-                        onClick={() => drawerToggle(option.drawerDisplay)}
+                        onClick={() => drawerToggle(option.content)}
                         key={option.label}
                         icon={option.icon}
                         tooltipTitle={option.label}
