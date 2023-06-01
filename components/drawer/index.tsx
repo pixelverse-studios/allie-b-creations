@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Drawer } from '@mui/material'
 import { StyledIcon } from './StyledDrawer'
 import { useDispatch, useSelector } from 'react-redux'
