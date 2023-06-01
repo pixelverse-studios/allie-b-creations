@@ -23,7 +23,8 @@ const SpeedDialOptions: SpeedDialProps[] = [
 const SpeedDial = () => {
     const dispatch = useDispatch()
 
-    const drawerToggle = (content: string) => dispatch(showDrawer(content))
+    const onDrawerToggle = (content: string, title: string) =>
+        dispatch(showDrawer({ content, title }))
 
     return (
         <StyledSpeedDial>
@@ -37,7 +38,9 @@ const SpeedDial = () => {
                 icon={<SpeedDialIcon />}>
                 {SpeedDialOptions.map(option => (
                     <SpeedDialAction
-                        onClick={() => drawerToggle(option.content)}
+                        onClick={() =>
+                            onDrawerToggle(option.content, option.label)
+                        }
                         key={option.label}
                         icon={option.icon}
                         tooltipTitle={option.label}

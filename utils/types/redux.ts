@@ -73,4 +73,5 @@ export interface ContactPageProps {
 export interface DrawerComponentProps {
     content: string
     showing: boolean
+    title: string
 }
