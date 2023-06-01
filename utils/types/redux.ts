@@ -69,3 +69,9 @@ export interface ContactPageProps {
     responded: boolean
     createdAt: string
 }
+
+export interface DrawerComponentProps {
+    content: string
+    showing: boolean
+    title: string
+}
