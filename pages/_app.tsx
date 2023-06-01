@@ -7,6 +7,7 @@ import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 
 import CallToActionButton from '@/components/CallToAction'
+import FormDrawer from '@/components/drawer'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <AuthWrapper>
                     <Component {...pageProps} />
                     <SnackbarProvider />
+                    <FormDrawer />
                     <CallToActionButton />
                 </AuthWrapper>
             </ReduxProvider>

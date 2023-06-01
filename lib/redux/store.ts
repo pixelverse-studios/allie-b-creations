@@ -8,6 +8,7 @@ import testimonials from './slices/testimonials'
 import gallery from './slices/gallery'
 import contacts from './slices/contacts'
 import app from './slices/app'
+import drawerComponent from './slices/drawer'
 
 export const store = configureStore({
     reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
         testimonials,
         gallery,
         contacts,
+        drawerComponent,
         app
     }
 })

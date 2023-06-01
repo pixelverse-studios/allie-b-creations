@@ -69,3 +69,8 @@ export interface ContactPageProps {
     responded: boolean
     createdAt: string
 }
+
+export interface DrawerComponentProps {
+    drawerDisplay: 'message' | 'testimonial' | null
+    showDrawer: boolean
+}
