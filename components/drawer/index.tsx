@@ -33,10 +33,7 @@ const FormDrawer = () => {
         )
     if (content === CLIENT_REQUEST)
         return (
-            <Drawer
-                anchor="right"
-                open={showing}
-                PaperProps={{ style: { width: '50%' } }}>
+            <Drawer anchor="right" open={showing}>
                 <StyledDrawerHeader>
                     <span>{title}</span>
                     <Close
