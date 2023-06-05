@@ -1,5 +1,5 @@
 import { Drawer } from '@mui/material'
-import { StyledDrawerHeader } from './StyledDrawer'
+import { StyledDrawerHeader, StyledDrawerContent } from './StyledDrawer'
 import { useDispatch, useSelector } from 'react-redux'
 import { closeDrawer } from '@/lib/redux/slices/drawer'
 import { Close } from '@mui/icons-material'
@@ -19,14 +19,16 @@ const FormDrawer = () => {
                 anchor="right"
                 open={showing}
                 PaperProps={{ style: { width: '50%' } }}>
-                <StyledDrawerHeader>
-                    <span>{title}</span>
-                    <Close
-                        className="close-icon"
-                        onClick={() => dispatch(closeDrawer())}
-                    />
-                </StyledDrawerHeader>
-                <TestimonialForm />
+                <StyledDrawerContent>
+                    <StyledDrawerHeader>
+                        <span>{title}</span>
+                        <Close
+                            className="close-icon"
+                            onClick={() => dispatch(closeDrawer())}
+                        />
+                    </StyledDrawerHeader>
+                    <TestimonialForm />
+                </StyledDrawerContent>
             </Drawer>
         )
     if (content === CLIENT_REQUEST)

@@ -4,12 +4,20 @@ import {
     FormHelperText
 } from '@mui/material'
 
-const TextField = () => {
+type TextFieldProps = {
+    type: 'text' | 'email' | 'textarea' | 'password'
+    label: string
+}
+
+const TextField = ({ label, type }: TextFieldProps) => {
     return (
         <FormControl>
             <MuiTextField
-                id="outlined-basic"
-                label="Kevin"
+                id={label}
+                label={label}
+                title={label}
+                name={label}
+                type={type}
                 variant="standard"
             />
         </FormControl>
