@@ -9,7 +9,8 @@ interface ActionState {
 function reducer(state: any, action: ActionState) {
     switch (action.type) {
         case UPDATE: {
-            return
+            const { name, value } = action.payload
+            return { ...state, [name]: { value } }
         }
         case RESET: {
             return action.payload
@@ -21,10 +22,10 @@ function reducer(state: any, action: ActionState) {
 
 const useForm = (initialState: any) => {
     const [form, dispatch] = useReducer(reducer, initialState)
-    const [formLoaading, setFormLoading] = useState<boolean>(false)
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
         let { value, name } = event.target
+
         dispatch({
             type: UPDATE,
             payload: {
@@ -39,7 +40,6 @@ const useForm = (initialState: any) => {
         mutation: Function
     ) => {
         event.preventDefault()
-        setFormLoading(true)
         mutation()
     }
 
@@ -47,7 +47,12 @@ const useForm = (initialState: any) => {
         dispatch({ type: RESET, payload: initialState })
     }
 
-    return [handleChange, handleFormSubmit, handleReset, formLoaading, form]
+    return {
+        handleChange,
+        handleFormSubmit,
+        handleReset,
+        form
+    }
 }
 
 export default useForm

@@ -5,20 +5,26 @@ import {
 } from '@mui/material'
 
 type TextFieldProps = {
+    id: string
     type: 'text' | 'email' | 'textarea' | 'password'
     label: string
+    onChange: any
+    field: any
 }
 
-const TextField = ({ label, type }: TextFieldProps) => {
+const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
     return (
         <FormControl>
             <MuiTextField
-                id={label}
+                multiline={type === 'textarea'}
+                variant="standard"
+                type={type}
+                id={id}
+                name={id}
                 label={label}
                 title={label}
-                name={label}
-                type={type}
-                variant="standard"
+                onChange={onChange}
+                value={field.value}
             />
         </FormControl>
     )
