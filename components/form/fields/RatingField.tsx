@@ -7,7 +7,7 @@ type RatingFieldProps = {
 }
 
 const RatingField = ({ name, field, onChange }: RatingFieldProps) => {
-    const parseValue = parseInt(field?.value)
+    const parseValue = parseInt(field.value)
     return (
         <div>
             <Typography>{name}</Typography>

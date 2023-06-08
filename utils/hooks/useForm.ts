@@ -10,6 +10,7 @@ function reducer(state: any, action: ActionState) {
     switch (action.type) {
         case UPDATE: {
             const { name, value } = action.payload
+
             return { ...state, [name]: { value } }
         }
         case RESET: {

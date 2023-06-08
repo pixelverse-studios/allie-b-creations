@@ -14,6 +14,16 @@ const FormDrawer = () => {
         (state: any) => state.drawer
     )
 
+    const renderDrawerBody = (contentType: string) => {
+        switch (contentType) {
+            case TESTIMONIAL:
+                return <TestimonialForm />
+
+            case CLIENT_REQUEST:
+                return 'content'
+        }
+    }
+
     return (
         <Drawer
             anchor="right"
@@ -27,7 +37,7 @@ const FormDrawer = () => {
                         onClick={() => dispatch(closeDrawer())}
                     />
                 </StyledDrawerHeader>
-                {content === TESTIMONIAL ? <TestimonialForm /> : '{ content }'}
+                {renderDrawerBody(content)}
             </StyledDrawerContent>
         </Drawer>
     )
