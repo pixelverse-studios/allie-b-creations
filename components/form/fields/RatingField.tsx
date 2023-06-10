@@ -2,7 +2,7 @@ import { Rating as MuiRatingField, Typography } from '@mui/material'
 
 type RatingFieldProps = {
     name: string
-    field: any
+    field: { value: string; error: string }
     onChange: any
 }
 

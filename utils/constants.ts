@@ -3,6 +3,8 @@ export const DRAWER_TYPES = {
     TESTIMONIAL: 'TESTIMONIAL'
 }
 
-export const RESET = 'RESET'
-export const UPDATE = 'UPDATE'
-export const IMPORT = 'IMPORT'
+export const FORM_ACTIONS = {
+    UPDATE: 'UPDATE',
+    RESET: 'RESET',
+    IMPORT: 'IMPORT'
+}

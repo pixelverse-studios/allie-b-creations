@@ -4,18 +4,14 @@ import {
     FormHelperText
 } from '@mui/material'
 
-type TextFieldProps = {
-    id: string
-    type: 'text' | 'email' | 'textarea' | 'password'
-    label: string
-    onChange: any
-    field: any
-}
+import { setColor } from '../utilities'
+import { TextFieldProps } from '@/utils/types/components/form'
 
 const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
     return (
-        <FormControl>
+        <FormControl color={setColor(field)} error={field.error ? true : false}>
             <MuiTextField
+                color={setColor(field)}
                 multiline={type === 'textarea'}
                 variant="standard"
                 type={type}
@@ -26,6 +22,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 onChange={onChange}
                 value={field.value}
             />
+            <FormHelperText id={id}>{field.error}</FormHelperText>
         </FormControl>
     )
 }

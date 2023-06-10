@@ -26,6 +26,8 @@ const TestimonialForm = () => {
     const submitTestimonial = (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
     }
+
+    console.log(form.rating)
     return (
         <form
             onSubmit={(event: FormEvent<HTMLFormElement>) =>

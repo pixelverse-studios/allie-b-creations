@@ -1,15 +1,16 @@
 import { useState, useReducer, ChangeEventHandler, FormEvent } from 'react'
-import { RESET, UPDATE, IMPORT } from '../constants'
+import { FORM_ACTIONS } from '../constants'
 
 interface ActionState {
     type: string
     payload?: any
 }
+const { UPDATE, RESET } = FORM_ACTIONS
 
 function reducer(state: any, action: ActionState) {
     switch (action.type) {
         case UPDATE: {
-            const { name, value } = action.payload
+            const { name, value, error } = action.payload
 
             return { ...state, [name]: { value } }
         }
@@ -21,17 +22,22 @@ function reducer(state: any, action: ActionState) {
     }
 }
 
-const useForm = (initialState: any) => {
+const useForm = (initialState: any, validations: any) => {
     const [form, dispatch] = useReducer(reducer, initialState)
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
-        let { value, name } = event.target
+        const { value, name } = event.target
+
+        const error = !validations[name]?.test(value.trim())
+            ? validations[name]?.message
+            : ''
 
         dispatch({
             type: UPDATE,
             payload: {
                 name,
-                value
+                value,
+                error
             }
         })
     }
