@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@mui/material'
 
 import useForm from '@/utils/hooks/useForm'
+import FormValidations from '@/utils/validations/forms'
 import { TextField, RatingField } from '@/components/form'
 import { StyledFieldSet } from './StyledFormComponents'
 import { FormEvent } from 'react'
@@ -17,11 +18,22 @@ const INITIAL_STATE = {
     }
 }
 
+const { validAlphaString, validEmail, validAlphaNumericSpacesSpecials } =
+    FormValidations
+
+const VALIDACHE = {
+    name: validAlphaString,
+    email: validEmail,
+    review: validAlphaNumericSpacesSpecials
+}
+
 const TestimonialForm = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const { handleChange, handleFormSubmit, handleReset, form } =
-        useForm(INITIAL_STATE)
+    const { handleChange, handleFormSubmit, handleReset, form } = useForm(
+        INITIAL_STATE,
+        VALIDACHE
+    )
 
     const submitTestimonial = (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()

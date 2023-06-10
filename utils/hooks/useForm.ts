@@ -12,7 +12,7 @@ function reducer(state: any, action: ActionState) {
         case UPDATE: {
             const { name, value, error } = action.payload
 
-            return { ...state, [name]: { value } }
+            return { ...state, [name]: { value, error } }
         }
         case RESET: {
             return action.payload
