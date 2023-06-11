@@ -46,7 +46,12 @@ const AuthWrapper = ({ children }: { children: any }) => {
     const isOnDashboard = isPageIncluded(['dashboard'])
 
     if (isOnDashboard) {
-        return <DashboardPage>{children}</DashboardPage>
+        const isOnSubPage = router.pathname.split('/')[2]
+        return (
+            <DashboardPage onSubPage={Boolean(isOnSubPage)}>
+                {children}
+            </DashboardPage>
+        )
     }
 
     return (

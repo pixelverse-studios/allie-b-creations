@@ -51,7 +51,9 @@ const MobileDashNav = () => {
     return (
         <StyledDashNav>
             <Logo />
-            <IconButton className={!activePage ? 'active' : 'inactive'}>
+            <IconButton
+                onClick={() => onMenuItemClick('/')}
+                className={!activePage ? 'active' : 'inactive'}>
                 <Home />
             </IconButton>
             <IconButton onClick={onLogout}>
