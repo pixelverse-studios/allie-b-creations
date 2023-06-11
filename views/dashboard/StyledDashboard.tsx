@@ -1,7 +1,10 @@
 import styled from '@emotion/styled'
 
 export const StyledDashboard = styled.section`
-    ul {
+    .dashboardContent {
+        margin-left: var(--dashboard-nav-width);
+    }
+    /* ul {
         padding: 1rem;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
@@ -23,5 +26,5 @@ export const StyledDashboard = styled.section`
                 background-color: var(--brand-color-2);
             }
         }
-    }
+    } */
 `

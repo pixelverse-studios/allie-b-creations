@@ -1,7 +1,16 @@
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { IconButton, Menu, MenuItem } from '@mui/material'
-import { Menu as MenuIcon, Logout, Home } from '@mui/icons-material'
+import {
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText
+} from '@mui/material'
+import uniqueId from 'lodash/uniqueId'
+import { ExpandMore } from '@mui/icons-material'
 import { signOut, getAuth } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { enqueueSnackbar } from 'notistack'
@@ -18,14 +27,8 @@ const MobileDashNav = () => {
     const auth = getAuth()
     const dispatch = useDispatch()
 
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-    const open = Boolean(anchorEl)
-
-    const onIconClick = (event: React.MouseEvent<HTMLButtonElement>) =>
-        setAnchorEl(event.currentTarget)
-    const onMenuClose = () => setAnchorEl(null)
     const onMenuItemClick = (path: string) => {
-        setAnchorEl(null)
+        // setAnchorEl(null)
         router.push(`/dashboard/${path}`)
     }
     const onLogout = async () => {
@@ -51,34 +54,31 @@ const MobileDashNav = () => {
     return (
         <StyledDashNav>
             <Logo />
-            <IconButton
-                onClick={() => onMenuItemClick('/')}
-                className={!activePage ? 'active' : 'inactive'}>
-                <Home />
-            </IconButton>
-            <IconButton onClick={onLogout}>
-                <Logout />
-            </IconButton>
-            <IconButton onClick={onIconClick}>
-                <MenuIcon />
-            </IconButton>
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={onMenuClose}>
-                {DASHBOARD_ROUTES.map(route => (
-                    <MenuItem
-                        selected={activePage === route.path}
-                        className={
-                            activePage === route.path ? 'active' : 'inactive'
-                        }
-                        key={route.label}
-                        onClick={() => onMenuItemClick(route.path)}>
-                        {route.label}
-                    </MenuItem>
-                ))}
-            </Menu>
+            <Accordion disableGutters elevation={0} square>
+                <AccordionSummary
+                    expandIcon={<ExpandMore />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header">
+                    Pages
+                </AccordionSummary>
+                <AccordionDetails>
+                    <List>
+                        {DASHBOARD_ROUTES.map(route => (
+                            <ListItem key={uniqueId('li')}>
+                                <ListItemButton key={uniqueId('lib')}>
+                                    <ListItemText
+                                        key={uniqueId('lit')}
+                                        onClick={() =>
+                                            onMenuItemClick(route.path)
+                                        }
+                                        primary={route.label}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </AccordionDetails>
+            </Accordion>
         </StyledDashNav>
     )
 }
