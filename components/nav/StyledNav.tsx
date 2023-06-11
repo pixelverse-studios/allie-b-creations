@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
-export const StyledDesktopNav = styled.nav`
+export const BaseDesktopNavStyles = css`
     height: var(--nav-height);
     background-color: var(--accent-color-2);
     border-bottom: 5px solid var(--brand-color-2);
@@ -25,11 +25,15 @@ export const StyledDesktopNav = styled.nav`
     }
 `
 
-const ActiveItemStyles = css`
+export const StyledDesktopNav = styled.nav`
+    ${BaseDesktopNavStyles}
+`
+
+export const ActiveItemStyles = css`
     background-color: var(--brand-color-1);
     color: var(--accent-color-1);
 `
-const HoverItemStyles = css`
+export const HoverItemStyles = css`
     background-color: var(--brand-color-3);
     color: var(--accent-color-1);
 `
@@ -95,7 +99,7 @@ export const StyledDesktopNavItems = styled.ul`
     }
 `
 
-const BaseMobileNaveStyles = css`
+export const BaseMobileNaveStyles = css`
     display: flex;
     align-items: center;
     gap: 1rem;

@@ -6,7 +6,6 @@ import { SnackbarProvider } from 'notistack'
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 
-import SpeedDial from '@/components/speeddial'
 import FormDrawer from '@/components/drawer'
 import '@/styles/globals.css'
 
@@ -20,14 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
                     name="viewport"
                     content="width=device-widthm initial-scale=1"
                 />
-                {/* <link rel="icon" href={Logo.src} /> */}
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>
                     <Component {...pageProps} />
                     <SnackbarProvider />
                     <FormDrawer />
-                    <SpeedDial />
                 </AuthWrapper>
             </ReduxProvider>
         </>
