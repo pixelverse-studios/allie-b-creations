@@ -5,7 +5,7 @@ import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
 import { TextField, RatingField } from '@/components/form'
 import { StyledFieldSet } from './StyledFormComponents'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 
 import { AppDispatch } from '@/lib/redux/store'
 
@@ -34,6 +34,7 @@ const VALIDACHE = {
 
 const TestimonialForm = () => {
     const dispatch = useDispatch<AppDispatch>()
+    const [submitRatingError, setSubmitRatingError] = useState<boolean>(false)
 
     const { handleChange, handleFormSubmit, handleReset, form } = useForm(
         INITIAL_STATE,
@@ -43,10 +44,11 @@ const TestimonialForm = () => {
     const { name, email, review, rating } = form
     const submitTestimonial = (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
-        console.log('Name', name.value)
-        console.log('Email" ', email.value)
-        console.log('Review', review.value)
-        console.log('Rating;', rating.value)
+        // console.log('Name', name.value)
+        // console.log('Email" ', email.value)
+        // console.log('Review', review.value)
+        // console.log('Rating;', rating.value)
+        setSubmitRatingError(VALIDACHE.rating.test(rating.value))
     }
 
     return (
@@ -73,6 +75,7 @@ const TestimonialForm = () => {
                         label="Rating"
                         field={form.rating}
                         onChange={handleChange}
+                        submitError={submitRatingError}
                     />
                     <TextField
                         field={form.review}

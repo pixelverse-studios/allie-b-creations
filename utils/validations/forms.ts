@@ -56,7 +56,7 @@ const validImage = {
 }
 
 const validNonZeroNumber = {
-    test: (value: number) => value > 0,
+    test: (value: number) => value === 0,
     message: 'Rating must be at least 1 star.'
 }
 
