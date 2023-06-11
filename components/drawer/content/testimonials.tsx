@@ -40,8 +40,13 @@ const TestimonialForm = () => {
         VALIDACHE
     )
 
+    const { name, email, review, rating } = form
     const submitTestimonial = (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
+        console.log('Name', name.value)
+        console.log('Email" ', email.value)
+        console.log('Review', review.value)
+        console.log('Rating;', rating.value)
     }
 
     return (
