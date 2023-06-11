@@ -9,7 +9,7 @@ import { TextFieldProps } from '@/utils/types/components/form'
 
 const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
     return (
-        <FormControl color={setColor(field)} error={field.error ? true : false}>
+        <FormControl color={setColor(field)} error={!!field.error}>
             <MuiTextField
                 color={setColor(field)}
                 multiline={type === 'textarea'}
@@ -21,6 +21,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 title={label}
                 onChange={onChange}
                 value={field.value}
+                required
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
         </FormControl>

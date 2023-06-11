@@ -18,13 +18,18 @@ const INITIAL_STATE = {
     }
 }
 
-const { validAlphaString, validEmail, validAlphaNumericSpacesSpecials } =
-    FormValidations
+const {
+    validAlphaString,
+    validEmail,
+    validAlphaNumericSpacesSpecials,
+    validNonZeroNumber
+} = FormValidations
 
 const VALIDACHE = {
     name: validAlphaString,
     email: validEmail,
-    review: validAlphaNumericSpacesSpecials
+    review: validAlphaNumericSpacesSpecials,
+    rating: validNonZeroNumber
 }
 
 const TestimonialForm = () => {
@@ -39,12 +44,8 @@ const TestimonialForm = () => {
         event?.preventDefault()
     }
 
-    console.log(form.rating)
     return (
-        <form
-            onSubmit={(event: FormEvent<HTMLFormElement>) =>
-                handleFormSubmit(event, submitTestimonial)
-            }>
+        <form onSubmit={submitTestimonial}>
             <StyledFieldSet>
                 <div className="form-fields">
                     <TextField
@@ -63,6 +64,8 @@ const TestimonialForm = () => {
                     />
                     <RatingField
                         name="rating"
+                        id="rating"
+                        label="Rating"
                         field={form.rating}
                         onChange={handleChange}
                     />

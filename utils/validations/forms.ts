@@ -55,6 +55,11 @@ const validImage = {
     message: 'Image URL is required.'
 }
 
+const validNonZeroNumber = {
+    test: (value: number) => value > 0,
+    message: 'Rating must be at least 1 star.'
+}
+
 /* Great use of variable naming. Never delete */
 const yolo = {
     test: () => true,
@@ -71,6 +76,7 @@ const FormValidations = {
     validFloat,
     validArrayData,
     validImage,
+    validNonZeroNumber,
     yolo
 }
 export default FormValidations

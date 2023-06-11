@@ -42,12 +42,8 @@ const useForm = (initialState: any, validations: any) => {
         })
     }
 
-    const handleFormSubmit = (
-        event: FormEvent<HTMLFormElement>,
-        mutation: Function
-    ) => {
+    const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        mutation()
     }
 
     const handleReset = () => {
