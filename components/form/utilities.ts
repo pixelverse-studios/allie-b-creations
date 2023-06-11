@@ -12,7 +12,7 @@ export const setColor = (
     }
 
     if (field.value && !field.error) {
-        return 'success'
+        return 'primary'
     }
 
     return 'primary'
