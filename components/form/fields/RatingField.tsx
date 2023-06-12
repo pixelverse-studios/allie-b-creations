@@ -25,7 +25,7 @@ const RatingField = ({
 }: RatingFieldProps) => {
     const parseValue = parseInt(field.value)
     return (
-        <FormControl color={setColor(field)} error={!!field.error}>
+        <FormControl color={setColor(field)} error={Boolean(field.error)}>
             <Typography>{label}</Typography>
             <MuiRatingField
                 id={id}
@@ -35,7 +35,9 @@ const RatingField = ({
             />
             <>
                 {parseValue === 0 && !submitError && (
-                    <FormHelperText>Please select a rating.</FormHelperText>
+                    <FormHelperText>
+                        Please rate your experience with Allie B Creations
+                    </FormHelperText>
                 )}
             </>
             <>

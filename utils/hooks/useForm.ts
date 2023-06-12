@@ -5,7 +5,7 @@ interface ActionState {
     type: string
     payload?: any
 }
-const { UPDATE, RESET } = FORM_ACTIONS
+const { UPDATE, RESET, IMPORT } = FORM_ACTIONS
 
 function reducer(state: any, action: ActionState) {
     switch (action.type) {
@@ -13,6 +13,9 @@ function reducer(state: any, action: ActionState) {
             const { name, value, error } = action.payload
 
             return { ...state, [name]: { value, error } }
+        }
+        case IMPORT: {
+            return { ...state, ...action.payload }
         }
         case RESET: {
             return action.payload
@@ -42,8 +45,12 @@ const useForm = (initialState: any, validations: any) => {
         })
     }
 
-    const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = (
+        event: FormEvent<HTMLFormElement>,
+        mutation: Function
+    ) => {
         event.preventDefault()
+        mutation()
     }
 
     const handleReset = () => {

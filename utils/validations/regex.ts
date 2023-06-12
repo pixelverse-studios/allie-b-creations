@@ -1,4 +1,4 @@
-export const VALID_ALPHA_STRING = /^[A-Za-z]+$/
+export const VALID_ALPHA_STRING = /^[ A-Za-z]+$/
 
 export const VALID_ALPHA_NUMERIC = /^[0-9a-zA-Z]+$/
 
