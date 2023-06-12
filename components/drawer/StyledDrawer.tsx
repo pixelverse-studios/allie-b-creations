@@ -6,7 +6,6 @@ export const StyledDrawerHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.2rem;
     span {
         font-weight: bold;
         text-transform: uppercase;
@@ -17,4 +16,7 @@ export const StyledDrawerHeader = styled.div`
             cursor: pointer;
         }
     }
+`
+export const StyledDrawerContent = styled.div`
+    padding: 1rem;
 `
