@@ -1,20 +1,20 @@
 import { useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { IconButton, Menu, MenuItem } from '@mui/material'
-import { Menu as MenuIcon, Logout, Home } from '@mui/icons-material'
+import { Avatar, IconButton } from '@mui/material'
+import { Logout, Home } from '@mui/icons-material'
 import { enqueueSnackbar } from 'notistack'
-import { useDispatch } from 'react-redux'
 import { signOut, getAuth } from 'firebase/auth'
 
 import { removeUser } from '@/lib/redux/slices/user'
 import DashNav from '@/components/nav/dashboard/DashNav'
 import bannerUtils from '@/utils/banners'
-import { DASHBOARD_ROUTES } from '@/components/nav/dashboard/routes'
 import { StyledDashboard } from './StyledDashboard'
 
 const { statuses, messages } = bannerUtils
 const DashboardPage = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
+    const { profileImg } = useSelector((state: any) => state.aboutPage)
     const router = useRouter()
     const auth = getAuth()
     const onHomeClick = () => router.push('/dashboard/')
@@ -50,6 +50,7 @@ const DashboardPage = ({ children }: { children: any }) => {
                     <IconButton onClick={onLogout}>
                         <Logout />
                     </IconButton>
+                    <Avatar src={profileImg} alt="profile_img" />
                 </header>
                 {children}
             </div>

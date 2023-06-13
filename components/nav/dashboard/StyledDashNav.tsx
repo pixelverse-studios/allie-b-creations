@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import { BaseMobileNaveStyles } from '../StyledNav'
 
 export const StyledDashNav = styled.nav`
-    /* ${BaseMobileNaveStyles} */
     background-color: var(--accent-color-2);
     padding: 1rem;
     position: fixed;
