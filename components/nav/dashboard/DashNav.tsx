@@ -29,6 +29,7 @@ const MobileDashNav = () => {
 
     const onMenuItemClick = (path: string) => {
         // setAnchorEl(null)
+        console.log(path)
         router.push(`/dashboard/${path}`)
     }
     const onLogout = async () => {
