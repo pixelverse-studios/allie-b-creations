@@ -12,7 +12,8 @@ const initialState: ContactPageProps = {
     eventLocation: '',
     eventType: 'indoors',
     inspirationImg: '',
-    responded: false
+    responded: false,
+    createdAt: ''
 }
 export const contactPageSlice = createSlice({
     name: 'contactPage',
