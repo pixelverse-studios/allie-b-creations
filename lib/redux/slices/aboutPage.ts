@@ -6,7 +6,9 @@ const initialState: AboutPageProps = {
     header: '',
     profileImg: '',
     role: '',
-    backgroundInfo: ['']
+    backgroundInfo: [''],
+    subHeader: '',
+    title: ''
 }
 export const aboutPageSlice = createSlice({
     name: 'aboutPage',
