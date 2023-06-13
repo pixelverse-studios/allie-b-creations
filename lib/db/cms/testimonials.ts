@@ -7,8 +7,8 @@ const getTestimonials = async () => {
     try {
         const data = await getDocs(TestimonialCollection)
         return data.docs.map(doc => {
-            const { display, name, rating, review } = doc.data()
-            return { id: doc.id, display, name, rating, review }
+            const { display, name, rating, review, email } = doc.data()
+            return { id: doc.id, display, name, rating, review, email }
         })
     } catch (error) {
         throw error

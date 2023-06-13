@@ -14,6 +14,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 color={setColor(field)}
                 multiline={type === 'textarea'}
                 variant="standard"
+                inputProps={{ maxLength: 600 }}
                 type={type}
                 id={id}
                 name={id}
@@ -24,6 +25,11 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 required
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
+            {type === 'textarea' && (
+                <FormHelperText id={id}>
+                    Max Characters: {field.value.length}/600
+                </FormHelperText>
+            )}
         </FormControl>
     )
 }

@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { TestimonialsProps } from '@/utils/types/redux'
+import { emit } from 'process'
 
 const initialState: TestimonialsProps = {
     id: '',
     display: false,
     name: '',
     rating: 0,
-    review: ''
+    review: '',
+    email: ''
 }
 export const testimonialsSlice = createSlice({
     name: 'testimonials',

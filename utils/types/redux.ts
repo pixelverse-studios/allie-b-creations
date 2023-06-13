@@ -49,6 +49,7 @@ export interface TestimonialsProps {
     name: string
     rating: number
     review: string
+    email: string
 }
 export interface GalleryProps {
     id: string
