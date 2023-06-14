@@ -1,5 +1,6 @@
-import { collection, getDocs, addDoc, Timestamp } from 'firebase/firestore'
+import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { db } from '../config'
+import { formatDateTime } from '@/utils/format/dates'
 
 const TestimonialCollection = collection(db, 'testimonials')
 
@@ -15,10 +16,10 @@ const getTestimonials = async () => {
     }
 }
 
-const createTestimonials = async () => {
+export const createTestimonials = async () => {
     try {
         await addDoc(collection(db, 'testimonials'), {
-            createdAt: Date.now(),
+            createdAt: formatDateTime(new Date()),
             display: true,
             email: 'kevin.lacarrubba@yahoo.com',
             name: 'Kevin LaCarrubba',
@@ -29,4 +30,18 @@ const createTestimonials = async () => {
         throw error
     }
 }
-export { getTestimonials, createTestimonials }
+
+export const updateTestimonialDisplay = async (data: {
+    id: string
+    checked: boolean
+}) => {
+    const testimonialRef = doc(db, 'testimonials', data.id)
+    try {
+        await updateDoc(testimonialRef, {
+            display: data.checked
+        })
+    } catch (error) {
+        throw error
+    }
+}
+export { getTestimonials }

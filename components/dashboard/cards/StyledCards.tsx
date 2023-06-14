@@ -12,39 +12,7 @@ export const StyledTestimonialCard = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
-    .card {
-        border: none !important;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-        transform-origin: center right;
-        transition: transform 1s;
-        .card__face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            line-height: 260px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 40px;
-        }
-        .front {
-            border: inherit;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-        .back {
-            border: inherit;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
 
-        &.is-flipped {
-            transform: translateX(-100%) rotateY(-180deg);
-        }
-    }
     .close {
         position: absolute;
         border-radius: 50%;
@@ -111,12 +79,12 @@ export const StyledTestimonialCard = styled.div`
 
             &:after {
                 content: attr(data-tg-on);
-                background: #02c66f;
+                background: var(--brand-color-2);
                 transform: rotateY(-180deg);
             }
 
             &:before {
-                background: #ff3a19;
+                background: var(--brand-color-2);
                 content: attr(data-tg-off);
             }
 
@@ -133,57 +101,13 @@ export const StyledTestimonialCard = styled.div`
             &:after {
                 transform: rotateY(0);
                 left: 0;
-                background: #7fc6a6;
+                background: var(--brand-color-1a);
             }
 
             &:active:after {
                 transform: rotateY(20deg);
             }
         }
-    }
-`
-
-export const StyledScene = styled.div`
-    display: inline-block;
-    width: 200px;
-    height: 260px;
-    /*   border: 1px solid #CCC; */
-    margin: 40px 0;
-    perspective: 600px;
-
-    .card {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        transform-style: preserve-3d;
-        transform-origin: center right;
-        transition: transform 1s;
-    }
-
-    .card.is-flipped {
-        transform: translateX(-100%) rotateY(-180deg);
-    }
-
-    .card__face {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        line-height: 260px;
-        color: white;
-        text-align: center;
-        font-weight: bold;
-        font-size: 40px;
-        backface-visibility: hidden;
-    }
-
-    .card__face--front {
-        background: crimson;
-    }
-
-    .card__face--back {
-        background: slateblue;
-        transform: rotateY(180deg);
     }
 `
 
