@@ -51,7 +51,7 @@ export const StyledTestimonialCard = styled.div`
         padding: 0.2rem;
         top: 2px;
         right: 2px;
-        cur
+        cursor: pointer;
     }
     .header {
         border: none !important;

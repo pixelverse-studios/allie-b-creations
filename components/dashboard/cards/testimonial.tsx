@@ -5,6 +5,7 @@ import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
 import { Close } from '@mui/icons-material'
 import { Button } from '@mui/material'
 import { useState } from 'react'
+import { createTestimonials } from '@/lib/db/cms/testimonials'
 
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
