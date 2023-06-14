@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledTestimonialPage = styled.section`
+export const StyledTestimonialGrid = styled.section`
     display: grid;
     grid-auto-rows: 300px;
     grid-gap: 1rem;
