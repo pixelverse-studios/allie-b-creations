@@ -2,6 +2,7 @@ import { TestimonialsProps } from '@/utils/types/redux'
 import { useSelector } from 'react-redux'
 import TestimonialCard from '@/components/dashboard/cards/testimonial'
 import { StyledTestimonialGrid } from './StyledTestimonials'
+import { Close } from '@mui/icons-material'
 
 const TestimonialWidget = () => {
     const { reviews } = useSelector((state: any) => state.testimonials)
@@ -17,7 +18,7 @@ const TestimonialWidget = () => {
         {
             display: false,
             email: 'KLacarrubba.dev@gmail.com',
-            id: '2313131315ads1hjida',
+            id: '2313131315adfsdafs1hjida',
             name: 'DuCkiii3',
             rating: 2,
             review: 'All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !'
@@ -25,7 +26,7 @@ const TestimonialWidget = () => {
         {
             display: true,
             email: 'Kevin.LaC213arrubba@yahoo.com',
-            id: '23131313151hjaaida',
+            id: '23131313151hj213aaida',
             name: 'Seth',
             rating: 5,
             review: 'Display Was beautiful !'
@@ -33,7 +34,7 @@ const TestimonialWidget = () => {
         {
             display: false,
             email: 'KLacarrubba.dev@gmail.com',
-            id: '2313131315ads1hjida',
+            id: '2313131315ads1@22hjida',
             name: 'DuCkiii3',
             rating: 2,
             review: 'All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and som'
@@ -41,7 +42,7 @@ const TestimonialWidget = () => {
         {
             display: true,
             email: 'Kevin.LaCarrubba@yahoo.com',
-            id: '23131313151hjida',
+            id: '2313131315asdfas1hjida',
             name: 'Kevin LaCarrubba',
             rating: 4,
             review: 'Beautiful and Quality Work !'
@@ -77,7 +78,7 @@ const TestimonialWidget = () => {
                     return (
                         <>
                             {data.display === false && (
-                                <TestimonialCard field={data} />
+                                <TestimonialCard field={data} className="hey" />
                             )}
                         </>
                     )
