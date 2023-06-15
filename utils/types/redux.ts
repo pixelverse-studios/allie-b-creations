@@ -28,7 +28,7 @@ export interface HomePageProps {
 }
 export interface ServicesProps {
     id: string
-    description: string[]
+    description: string
     offerings: [
         {
             events: [
