@@ -62,7 +62,7 @@ const TestimonialWidget = () => {
         <>
             Display
             <StyledTestimonialGrid>
-                {dummmyData.map((data: TestimonialsProps) => {
+                {reviews.map((data: TestimonialsProps) => {
                     return (
                         <>
                             {data.display === true && (
@@ -74,7 +74,7 @@ const TestimonialWidget = () => {
             </StyledTestimonialGrid>
             Hidden
             <StyledTestimonialGrid>
-                {dummmyData.map((data: TestimonialsProps) => {
+                {reviews.map((data: TestimonialsProps) => {
                     return (
                         <>
                             {data.display === false && (

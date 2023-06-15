@@ -9,13 +9,16 @@ import { TextFieldProps } from '@/utils/types/components/form'
 
 const CHARACTER_COUNT = 600
 const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
+    const isTextArea = type === 'textarea'
     return (
         <FormControl color={setColor(field)} error={Boolean(field.error)}>
             <MuiTextField
                 color={setColor(field)}
                 multiline={type === 'textarea'}
                 variant="standard"
-                inputProps={{ maxLength: CHARACTER_COUNT }}
+                inputProps={{
+                    maxLength: isTextArea ? CHARACTER_COUNT : 999999999
+                }}
                 type={type}
                 id={id}
                 name={id}

@@ -4,29 +4,26 @@ import { setTestimonials, setDisplay } from '@/lib/redux/slices/testimonials'
 import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
 import { Close } from '@mui/icons-material'
 import { Button } from '@mui/material'
-import { useState } from 'react'
 import {
     updateTestimonialDisplay,
     createTestimonials
 } from '@/lib/db/cms/testimonials'
+import { ChangeEvent } from 'react'
 
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
-    const [isFlipped, setIsFlipped] = useState(false)
+
     const { display, email, id, name, rating, review } = field
 
-    const handleDisplayChange = (event: {
-        target: { id: string; checked: boolean }
-    }) => {
-        const { id, checked } = event.target
+    const handleDisplayChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { id, checked }
+        } = event
         dispatch(setDisplay({ id, checked }))
         updateTestimonialDisplay({ id, checked })
         // createTestimonials()
     }
 
-    const toggleDeletionView = event => {
-        setIsFlipped(!isFlipped)
-    }
     return (
         <StyledTestimonialCard>
             <div className="header">
@@ -40,7 +37,7 @@ const TestimonialCard = ({ field }: any) => {
                     className="tgl tgl-flip"
                     id={id}
                     onChange={handleDisplayChange}
-                    checked={!!display}
+                    checked={display}
                 />
                 <label
                     className="tgl-btn"
