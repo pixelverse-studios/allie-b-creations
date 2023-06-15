@@ -4,10 +4,11 @@ import { Button } from '@mui/material'
 
 import { TextField } from '@/components/form'
 import useForm from '@/utils/hooks/useForm'
+import { setServices } from '@/lib/redux/slices/services'
 import FormValidations from '@/utils/validations/forms'
-import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { updateGeneralServiceData } from '@/lib/db/cms/services'
 import { StyledServicesWidget } from './StyledServicesWidget'
+import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 
 const initialState = {
     description: { value: [], error: '' },
@@ -40,10 +41,8 @@ const ServicesWidget = () => {
         })
 
     useEffect(() => {
-        console.log('id: ', id)
-        console.log('isDataImported: ', isDataImported)
         if (id && !isDataImported) handleResetForm()
-    }, [])
+    }, [id])
 
     // add in logic to useForm to check if form can be submit. check against redux state vs current form
     const onFormSubmit = async () => {
@@ -53,7 +52,8 @@ const ServicesWidget = () => {
         if (pageHeader !== form.pageHeader.value)
             payload.pageHeader = form.pageHeader.value
 
-        await updateGeneralServiceData(id, payload)
+        const updatedServices = await updateGeneralServiceData(id, payload)
+        dispatch(setServices(updatedServices))
     }
 
     return (

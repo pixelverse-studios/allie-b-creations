@@ -28,6 +28,8 @@ const updateGeneralServiceData = async (
         await updateDoc(ref, {
             ...fields
         })
+        const services = await getServices()
+        return services
     } catch (error) {
         throw error
     }
