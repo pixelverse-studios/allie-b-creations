@@ -3,87 +3,67 @@ import { useSelector } from 'react-redux'
 import TestimonialCard from '@/components/dashboard/cards/testimonial'
 import { StyledTestimonialGrid } from './StyledTestimonials'
 import { Close } from '@mui/icons-material'
+import { SELECT_ACTIONS } from '@/utils/constants'
+import SelectField from '@/components/form/fields/SelectField'
+import { useState } from 'react'
 
 const TestimonialWidget = () => {
     const { reviews } = useSelector((state: any) => state.testimonials)
-    const dummmyData = [
-        {
-            display: true,
-            email: 'Kevin.LaCarrubba@yahoo.com',
-            id: '23131313151hjida',
-            name: 'Kevin LaCarrubba',
-            rating: 4,
-            review: 'Beautiful and Quality Work !'
-        },
-        {
-            display: false,
-            email: 'KLacarrubba.dev@gmail.com',
-            id: '2313131315adfsdafs1hjida',
-            name: 'DuCkiii3',
-            rating: 2,
-            review: 'All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !'
-        },
-        {
-            display: true,
-            email: 'Kevin.LaC213arrubba@yahoo.com',
-            id: '23131313151hj213aaida',
-            name: 'Seth',
-            rating: 5,
-            review: 'Display Was beautiful !'
-        },
-        {
-            display: false,
-            email: 'KLacarrubba.dev@gmail.com',
-            id: '2313131315ads1@22hjida',
-            name: 'DuCkiii3',
-            rating: 2,
-            review: 'All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and somehow you sent a duck made out of balloons that sinks !All i wanted was a rubber duck that would float and som'
-        },
-        {
-            display: true,
-            email: 'Kevin.LaCarrubba@yahoo.com',
-            id: '2313131315asdfas1hjida',
-            name: 'Kevin LaCarrubba',
-            rating: 4,
-            review: 'Beautiful and Quality Work !'
-        },
 
-        {
-            display: true,
-            email: 'Kevin.LaC213arrubba@yahoo.com',
-            id: '23131313151hjaaida',
-            name: 'Seth',
-            rating: 5,
-            review: 'Display Was beautiful !'
+    const { HIDDEN, HIGH_RATING, LOW_RATING, NEWEST, OLDEST, SHOW } =
+        SELECT_ACTIONS
+    const [displayFilter, setDisplayFilter] = useState<string>('')
+
+    const handleDisplayFilter = (sortType: string) => {
+        const getReviews = [...reviews]
+        switch (sortType) {
+            case SHOW:
+                return getReviews.sort((a, b) => b.display - a.display)
+
+            case HIDDEN:
+                return getReviews.sort((a, b) => a.display - b.display)
+
+            case LOW_RATING:
+                return getReviews.sort((a, b) => a.rating - b.rating)
+
+            case HIGH_RATING:
+                return getReviews.sort((a, b) => b.rating - a.rating)
+
+            case NEWEST:
+                return getReviews.sort(
+                    (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+                )
+
+            case OLDEST:
+                return getReviews.sort(
+                    (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+                )
+
+            default:
+                return getReviews
         }
-    ]
+    }
 
     return (
         <>
-            Display
+            <SelectField
+                displayFilter={displayFilter}
+                setDisplayFilter={setDisplayFilter}
+            />
             <StyledTestimonialGrid>
-                {reviews.map((data: TestimonialsProps) => {
-                    return (
-                        <>
-                            {data.display === true && (
-                                <TestimonialCard field={data} />
-                            )}
-                        </>
-                    )
-                })}
+                {handleDisplayFilter(displayFilter)?.map(
+                    (data: TestimonialsProps) => {
+                        return <TestimonialCard field={data} key={data.id} />
+                    }
+                )}
             </StyledTestimonialGrid>
-            Hidden
-            <StyledTestimonialGrid>
+            {/* <h2>Hidden</h2> */}
+            {/* <StyledTestimonialGrid>
                 {reviews.map((data: TestimonialsProps) => {
-                    return (
-                        <>
-                            {data.display === false && (
-                                <TestimonialCard field={data} className="hey" />
-                            )}
-                        </>
-                    )
+                    if (!data.display) return <TestimonialCard field={data} />
+                    return null
                 })}
-            </StyledTestimonialGrid>
+            </StyledTestimonialGrid> */}
         </>
     )
 }

@@ -8,3 +8,12 @@ export const FORM_ACTIONS = {
     RESET: 'RESET',
     IMPORT: 'IMPORT'
 }
+
+export const SELECT_ACTIONS = {
+    SHOW: 'SHOW',
+    HIDDEN: 'HIDDEN',
+    LOW_RATING: 'LOW_RATING',
+    HIGH_RATING: 'HIGH_RATING',
+    NEWEST: 'NEWEST',
+    OLDEST: 'OLDEST'
+}

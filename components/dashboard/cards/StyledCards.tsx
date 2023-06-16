@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
 
 export const StyledTestimonialCard = styled.div`
-    padding: 1rem;
     display: inline-block;
     perspective: 600px;
-
     height: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none;
@@ -12,18 +10,50 @@ export const StyledTestimonialCard = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
+    border-radius: var(--border-radius);
 
-    .close {
-        position: absolute;
-        border-radius: 50%;
-        padding: 0.2rem;
-        top: 2px;
-        right: 2px;
-        cursor: pointer;
+    &.show {
+        border: 3px solid var(--brand-color-1a);
+
+        .close {
+            border-radius: 50%;
+            border: 3px solid var(--brand-color-3);
+            color: var(--brand-color-3);
+        }
+
+        .MuiRating-readOnly {
+            color: var(--brand-color-3);
+        }
     }
-    .header {
-        border: none !important;
+
+    &.hide {
+        border: 3px solid var(--brand-color-2);
+
+        .close {
+            border-radius: 50%;
+            border: 3px solid var(--brand-color-3);
+            color: var(--brand-color-3);
+        }
+
+        .MuiRating-readOnly {
+            color: var(--brand-color-3);
+        }
     }
+
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        padding: 0.5rem 0.5rem 0 0.5rem;
+        .button-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
     .tgl-btn {
         outline: 0;
         display: block;
@@ -79,12 +109,12 @@ export const StyledTestimonialCard = styled.div`
 
             &:after {
                 content: attr(data-tg-on);
-                background: var(--brand-color-2);
+                background: var(--brand-color-1a);
                 transform: rotateY(-180deg);
             }
 
             &:before {
-                background: var(--brand-color-2);
+                background: var(--brand-color-1a);
                 content: attr(data-tg-off);
             }
 
@@ -101,13 +131,17 @@ export const StyledTestimonialCard = styled.div`
             &:after {
                 transform: rotateY(0);
                 left: 0;
-                background: var(--brand-color-1a);
+                background: var(--brand-color-2);
             }
 
             &:active:after {
                 transform: rotateY(20deg);
             }
         }
+    }
+
+    .review {
+        padding: 0 0.5rem;
     }
 `
 
