@@ -6,7 +6,7 @@ import {
     InputLabel,
     FormControl
 } from '@mui/material'
-import { SELECT_ACTIONS } from '@/utils/constants'
+import { SELECT_FIELD_VALUES } from '@/utils/constants'
 
 const SelectField = ({
     displayFilter,
@@ -15,8 +15,6 @@ const SelectField = ({
     displayFilter: string
     setDisplayFilter: Dispatch<SetStateAction<string>>
 }) => {
-    const MENU_ITEMS = Object.keys(SELECT_ACTIONS)
-
     const handleChange = (event: SelectChangeEvent) => {
         setDisplayFilter(event.target.value)
     }
@@ -29,10 +27,10 @@ const SelectField = ({
                 id="select-field"
                 onChange={handleChange}
                 value={displayFilter}>
-                {MENU_ITEMS.map((item: string) => {
+                {SELECT_FIELD_VALUES.map(item => {
                     return (
-                        <MenuItem value={item} key={item}>
-                            {item}
+                        <MenuItem value={item.value} key={item.value}>
+                            {item.label}
                         </MenuItem>
                     )
                 })}
