@@ -31,11 +31,11 @@ const getContacts = async (): Promise<ContactPageProps[]> => {
             const formattedCreatedTime = createdAt
                 .toDate()
                 .toLocaleTimeString('en-US')
-            console.log(`${formattedCreatedDate} ${formattedCreatedTime}`)
-            console.log(
-                'date: ',
-                new Date(`${formattedCreatedDate} ${formattedCreatedTime}`)
-            )
+            // console.log(`${formattedCreatedDate} ${formattedCreatedTime}`)
+            // console.log(
+            //     'date: ',
+            //     new Date(`${formattedCreatedDate} ${formattedCreatedTime}`)
+            // )
             return {
                 id: doc.id,
                 firstName,

@@ -9,14 +9,14 @@ import {
 import { SELECT_FIELD_VALUES } from '@/utils/constants'
 
 const SelectField = ({
-    displayFilter,
-    setDisplayFilter
+    displaySort,
+    setDisplaySort
 }: {
-    displayFilter: string
-    setDisplayFilter: Dispatch<SetStateAction<string>>
+    displaySort: string
+    setDisplaySort: Dispatch<SetStateAction<string>>
 }) => {
     const handleChange = (event: SelectChangeEvent) => {
-        setDisplayFilter(event.target.value)
+        setDisplaySort(event.target.value)
     }
 
     return (
@@ -26,7 +26,7 @@ const SelectField = ({
                 labelId="select-field-label"
                 id="select-field"
                 onChange={handleChange}
-                value={displayFilter}>
+                value={displaySort}>
                 {SELECT_FIELD_VALUES.map(item => {
                     return (
                         <MenuItem value={item.value} key={item.value}>

@@ -44,3 +44,15 @@ export const SELECT_FIELD_VALUES = [
         label: 'Oldest'
     }
 ]
+
+export const RADIO_GROUP_ACTIONS = {
+    SHOW_DISPLAYED: 'SHOW_DISPLAYED',
+    SHOW_HIDDEN: 'SHOW_HIDDEN',
+    SHOW_ALL: 'SHOW_ALL'
+}
+
+export const RADIO_GROUP_VALUES = [
+    { value: RADIO_GROUP_ACTIONS.SHOW_ALL, label: 'All' },
+    { value: RADIO_GROUP_ACTIONS.SHOW_DISPLAYED, label: 'Displayed' },
+    { value: RADIO_GROUP_ACTIONS.SHOW_HIDDEN, label: 'Hidden' }
+]
