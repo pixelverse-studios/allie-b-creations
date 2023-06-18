@@ -27,6 +27,8 @@ function reducer(state: any, action: ActionState) {
 
 const useForm = (initialState: any, validations: any) => {
     const [form, dispatch] = useReducer(reducer, initialState)
+    const [formLoading, setFormLoading] = useState<boolean>(false)
+    const [isDataImported, setIsDataImported] = useState<boolean>(false)
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
         const { value, name } = event.target
@@ -45,12 +47,23 @@ const useForm = (initialState: any, validations: any) => {
         })
     }
 
-    const handleFormSubmit = (
+    const handleImport = (payload: any) => {
+        setIsDataImported(true)
+        const formattedData = {} as any
+        for (const [key, value] of Object.entries(payload)) {
+            formattedData[key] = { value, error: '' }
+        }
+        dispatch({ type: IMPORT, payload: formattedData })
+    }
+
+    const handleFormSubmit = async (
         event: FormEvent<HTMLFormElement>,
         mutation: Function
     ) => {
         event.preventDefault()
-        mutation()
+        setFormLoading(true)
+        await mutation()
+        setFormLoading(false)
     }
 
     const handleReset = () => {
@@ -58,10 +71,15 @@ const useForm = (initialState: any, validations: any) => {
     }
 
     return {
+        form,
+        formLoading,
         handleChange,
         handleFormSubmit,
+        handleImport,
         handleReset,
-        form
+        isDataImported,
+        setFormLoading,
+        setIsDataImported
     }
 }
 
