@@ -3,7 +3,7 @@ import { ServicesProps } from '@/utils/types/redux'
 
 const initialState: ServicesProps = {
     id: '',
-    description: [],
+    description: '',
     offerings: [
         { events: [{ description: '', img: '', title: '' }], section: '' }
     ],

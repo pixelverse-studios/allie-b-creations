@@ -15,10 +15,10 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
             <MuiTextField
                 color={setColor(field)}
                 multiline={type === 'textarea'}
-                variant="standard"
                 inputProps={{
                     maxLength: isTextArea ? CHARACTER_COUNT : 999999999
                 }}
+                variant="outlined"
                 type={type}
                 id={id}
                 name={id}

@@ -67,11 +67,11 @@ const yolo = {
 }
 
 const FormValidations = {
-    validEmail,
     validAlphaString,
     validAlphaNumeric,
     validAlphaNumericWithSpaces,
     validAlphaNumericSpacesSpecials,
+    validEmail,
     validPassword,
     validFloat,
     validArrayData,
