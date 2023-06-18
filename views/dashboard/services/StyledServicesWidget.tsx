@@ -26,7 +26,7 @@ export const StyledServicesBlock = styled.section`
 
     .offeringSections {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
         grid-gap: 1rem;
     }
 `
