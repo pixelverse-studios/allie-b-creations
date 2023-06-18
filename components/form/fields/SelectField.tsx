@@ -20,7 +20,7 @@ const SelectField = ({
     }
 
     return (
-        <FormControl variant="standard" sx={{ m: 1, maxWidth: 120 }}>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="select-field-label">Sort By</InputLabel>
             <Select
                 labelId="select-field-label"

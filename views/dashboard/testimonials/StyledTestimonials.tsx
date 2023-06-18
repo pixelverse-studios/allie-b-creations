@@ -7,3 +7,8 @@ export const StyledTestimonialGrid = styled.section`
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     width: 100%;
 `
+
+export const StyledSortAndFilter = styled.div`
+    display: flex;
+    justify-content: space-between;
+`

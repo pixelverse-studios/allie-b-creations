@@ -26,6 +26,7 @@ const RadioFieldGroup = ({
         <FormControl>
             <FormLabel id="radio-group-label">Filter By</FormLabel>
             <RadioGroup
+                row
                 aria-labelledby="radio-group-label"
                 name="radio-button-group"
                 onChange={handleChange}

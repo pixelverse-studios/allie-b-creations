@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { TestimonialsProps } from '@/utils/types/redux'
 import { useSelector } from 'react-redux'
 import TestimonialCard from '@/components/dashboard/cards/testimonial'
-import { StyledTestimonialGrid } from './StyledTestimonials'
+import {
+    StyledTestimonialGrid,
+    StyledSortAndFilter
+} from './StyledTestimonials'
 
 import { SELECT_ACTIONS, RADIO_GROUP_ACTIONS } from '@/utils/constants'
 import SelectField from '@/components/form/fields/SelectField'
@@ -90,15 +93,17 @@ const TestimonialWidget = () => {
 
     return (
         <>
-            <SelectField
-                displaySort={displaySort}
-                setDisplaySort={setDisplaySort}
-            />
-            <RadioFieldGroup
-                displayFilter={displayFilter}
-                setDisplayFilter={setDisplayFilter}
-                handleDisplayFilter={handleDisplayFilter}
-            />
+            <StyledSortAndFilter className="sort-&-filter">
+                <RadioFieldGroup
+                    displayFilter={displayFilter}
+                    setDisplayFilter={setDisplayFilter}
+                    handleDisplayFilter={handleDisplayFilter}
+                />
+                <SelectField
+                    displaySort={displaySort}
+                    setDisplaySort={setDisplaySort}
+                />
+            </StyledSortAndFilter>
             <StyledTestimonialGrid>
                 {handleDisplaySort(displaySort)?.map(
                     (data: TestimonialsProps) => {
