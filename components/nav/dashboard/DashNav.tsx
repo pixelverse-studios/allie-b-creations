@@ -39,7 +39,7 @@ const MobileDashNav = () => {
     return (
         <StyledDashNav>
             <Logo />
-            <Accordion>
+            <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMore />}
                     aria-controls="panel1a-content"
