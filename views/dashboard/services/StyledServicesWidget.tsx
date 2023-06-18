@@ -32,6 +32,10 @@ export const StyledServicesBlock = styled.section`
 `
 
 export const StyledEventTypeCard = styled.div`
+    &.newOfferingCard {
+        padding: 1rem;
+    }
+
     .MuiAccordionDetails-root {
         padding: 1rem;
     }

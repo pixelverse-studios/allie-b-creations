@@ -6,7 +6,7 @@ import useForm from '@/utils/hooks/useForm'
 import { setServices } from '@/lib/redux/slices/services'
 import FormValidations from '@/utils/validations/forms'
 import { updateGeneralServiceData } from '@/lib/db/cms/services'
-import { TextField } from '@/components/form'
+import { TextField, FormButtonGroup } from '@/components/form'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { StyledServicesBlock } from '../StyledServicesWidget'
 
@@ -29,6 +29,7 @@ const GeneralServiceDataForm = () => {
         disableSubmit,
         handleChange,
         form,
+        formLoading,
         handleImport,
         isDataImported,
         handleFormSubmit
@@ -73,21 +74,11 @@ const GeneralServiceDataForm = () => {
                     type="textarea"
                     onChange={handleChange}
                 />
-                <div className="button-group">
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        disabled={disableSubmit}>
-                        Submit
-                    </Button>
-                    <Button
-                        onClick={handleResetForm}
-                        variant="contained"
-                        color="error">
-                        Reset
-                    </Button>
-                </div>
+                <FormButtonGroup
+                    disableSubmit={disableSubmit}
+                    handleReset={handleResetForm}
+                    loading={formLoading}
+                />
             </StyledFieldSet>
         </StyledServicesBlock>
     )

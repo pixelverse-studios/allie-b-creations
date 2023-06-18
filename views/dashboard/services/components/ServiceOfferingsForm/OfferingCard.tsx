@@ -7,6 +7,7 @@ import {
 import { ExpandMore, ArrowForward, AddCircle } from '@mui/icons-material'
 import OfferingItem from './OfferingItem'
 import { StyledEventTypeCard } from '../../StyledServicesWidget'
+import { uniqueId } from 'lodash'
 
 export interface OfferingProps {
     section: string
@@ -29,7 +30,7 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                             {section}
                         </Typography>
                         <Typography variant="subtitle1" gutterBottom>
-                            {eventCount} {eventCount > 1 ? 'Events' : 'Event'}{' '}
+                            {eventCount} {eventCount !== 1 ? 'Events' : 'Event'}{' '}
                             Offered
                         </Typography>
                     </div>
@@ -38,6 +39,7 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                     <div className="offeringsList">
                         {events?.map((event: any) => (
                             <OfferingItem
+                                key={uniqueId()}
                                 eventTitle={event.title}
                                 Icon={ArrowForward}
                                 section={section}

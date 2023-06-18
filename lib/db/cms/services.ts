@@ -1,12 +1,12 @@
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { db } from '../config'
 import { ServicesProps } from '@/utils/types/redux'
 
 const SERVICES = 'services'
-const servicePageRef = collection(db, 'services')
+const serviceCollection = collection(db, SERVICES)
 const getServices = async (): Promise<ServicesProps> => {
     try {
-        const data = await getDocs(servicePageRef)
+        const data = await getDocs(serviceCollection)
         const { description, offerings, pageHeader } = data.docs[0].data()
         return {
             id: data.docs[0].id,
@@ -22,7 +22,7 @@ const getServices = async (): Promise<ServicesProps> => {
 const updateGeneralServiceData = async (
     id: string,
     fields: { description?: string; pageHeader?: string }
-) => {
+): Promise<ServicesProps> => {
     try {
         const ref = doc(db, SERVICES, id)
         await updateDoc(ref, {
@@ -35,4 +35,18 @@ const updateGeneralServiceData = async (
     }
 }
 
-export { getServices, updateGeneralServiceData }
+const addNewOfferingSection = async (
+    id: string,
+    offerings: { section: string; events: any }[]
+): Promise<ServicesProps> => {
+    try {
+        const ref = doc(db, SERVICES, id)
+        await updateDoc(ref, { offerings })
+        const freshServices = await getServices()
+        return freshServices
+    } catch (error) {
+        throw error
+    }
+}
+
+export { addNewOfferingSection, getServices, updateGeneralServiceData }
