@@ -7,15 +7,19 @@ import {
 } from '@mui/material'
 
 import { RADIO_GROUP_VALUES } from '@/utils/constants'
+import { Dispatch, SetStateAction } from 'react'
 
 const RadioFieldGroup = ({
     displayFilter,
+    setDisplayFilter,
     handleDisplayFilter
 }: {
     displayFilter: string
+    setDisplayFilter: Dispatch<SetStateAction<string>>
     handleDisplayFilter: Function
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDisplayFilter(event.target.value)
         return handleDisplayFilter(event.target.value)
     }
     return (

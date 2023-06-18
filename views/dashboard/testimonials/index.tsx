@@ -19,55 +19,48 @@ const TestimonialWidget = () => {
     const [displaySort, setDisplaySort] = useState<string>('')
     const [displayFilter, setDisplayFilter] = useState<string>('SHOW_ALL')
 
-    const [displayedReviews, setDisplayedReviews] = useState<any>([])
-
     const handleDisplaySort = (sortType: string) => {
-        const defaultReviews = [...reviews]
-        const getReviews = displayedReviews
-        console.log(displaySort)
+        const defaultReviews = handleDisplayFilter(displayFilter)
+
         switch (sortType) {
             case SHOW:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { display: number }, b: { display: number }) =>
                         b.display - a.display
                 )
 
             case HIDDEN:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { display: number }, b: { display: number }) =>
                         a.display - b.display
                 )
 
             case LOW_RATING:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { rating: number }, b: { rating: number }) =>
                         a.rating - b.rating
                 )
 
             case HIGH_RATING:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { rating: number }, b: { rating: number }) =>
                         b.rating - a.rating
                 )
 
             case NEWEST:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { createdAt: string }, b: { createdAt: string }) =>
                         Date.parse(b.createdAt) - Date.parse(a.createdAt)
                 )
 
             case OLDEST:
-                return getReviews.sort(
+                return defaultReviews.sort(
                     (a: { createdAt: string }, b: { createdAt: string }) =>
                         Date.parse(a.createdAt) - Date.parse(b.createdAt)
                 )
 
             default:
-                if (getReviews.length === 0) {
-                    return defaultReviews
-                } else {
-                    return getReviews
-                }
+                return defaultReviews
         }
     }
 
@@ -76,22 +69,19 @@ const TestimonialWidget = () => {
 
         switch (filterType) {
             case SHOW_ALL:
-                setDisplayFilter(filterType)
-                return setDisplayedReviews(getReviews)
+                return getReviews
 
             case SHOW_DISPLAYED:
-                setDisplayFilter(filterType)
                 const displayReviews = getReviews.filter(function (data) {
                     return data.display !== false
                 })
-                return setDisplayedReviews(displayReviews)
+                return displayReviews
 
             case SHOW_HIDDEN:
-                setDisplayFilter(filterType)
                 const hiddenReviews = getReviews.filter(function (data) {
                     return data.display !== true
                 })
-                return setDisplayedReviews(hiddenReviews)
+                return hiddenReviews
 
             default:
                 return getReviews
@@ -106,6 +96,7 @@ const TestimonialWidget = () => {
             />
             <RadioFieldGroup
                 displayFilter={displayFilter}
+                setDisplayFilter={setDisplayFilter}
                 handleDisplayFilter={handleDisplayFilter}
             />
             <StyledTestimonialGrid>
