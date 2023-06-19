@@ -21,13 +21,14 @@ const TestimonialCard = ({ field }: any) => {
     const [deleteFocus, setDeleteFocus] = useState<number>(0)
     const { display, id, name, rating, review, createdAt } = field
 
-    const handleDisplayChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const onDisplayStatusChange = async (
+        event: ChangeEvent<HTMLInputElement>
+    ) => {
         const {
             target: { id, checked }
         } = event
-
         dispatch(setDisplay({ id, checked }))
-        updateTestimonialDisplay({ id, checked })
+        await updateTestimonialDisplay({ id, checked })
     }
 
     const onDeleteTestimonial = async () => {
@@ -53,6 +54,9 @@ const TestimonialCard = ({ field }: any) => {
     const onDeleteFocus = () => setDeleteFocus(1)
     const onDeleteBlur = () => setDeleteFocus(0)
 
+    console.log('name', name)
+    console.log('checked: ', display)
+    console.log('---')
     return (
         <StyledTestimonialCard className={`${display ? 'show' : 'hide'}`}>
             <div className="card-header">
@@ -61,7 +65,7 @@ const TestimonialCard = ({ field }: any) => {
                         type="checkbox"
                         className="tgl tgl-flip"
                         id={id}
-                        onChange={handleDisplayChange}
+                        onChange={onDisplayStatusChange}
                         checked={display}
                     />
                     <label
