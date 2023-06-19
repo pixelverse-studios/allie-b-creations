@@ -19,7 +19,7 @@ const { statuses, messages } = bannerUtils
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
     const [deleteFocus, setDeleteFocus] = useState<number>(0)
-    const { display, email, id, name, rating, review, createdAt } = field
+    const { display, id, name, rating, review, createdAt } = field
 
     const handleDisplayChange = (event: ChangeEvent<HTMLInputElement>) => {
         const {
@@ -30,12 +30,12 @@ const TestimonialCard = ({ field }: any) => {
         updateTestimonialDisplay({ id, checked })
     }
 
-    const deleteTestimonial = async () => {
+    const onDeleteTestimonial = async () => {
+        const CONFIRMED_CLICK = 2
         try {
-            if (deleteFocus === 2) {
-                // const testimonialData = await deleteTestimonialCollection(id)
-
-                // dispatch(setTestimonials(testimonialData))
+            if (deleteFocus === CONFIRMED_CLICK) {
+                const testimonialData = await deleteTestimonialCollection(id)
+                dispatch(setTestimonials(testimonialData))
                 enqueueSnackbar('Testimonial Deleted', {
                     variant: statuses.SUCCESS
                 })
@@ -49,6 +49,9 @@ const TestimonialCard = ({ field }: any) => {
             })
         }
     }
+
+    const onDeleteFocus = () => setDeleteFocus(1)
+    const onDeleteBlur = () => setDeleteFocus(0)
 
     return (
         <StyledTestimonialCard className={`${display ? 'show' : 'hide'}`}>
@@ -68,9 +71,9 @@ const TestimonialCard = ({ field }: any) => {
                         htmlFor={id}
                     />
                     <button
-                        onClick={deleteTestimonial}
-                        onFocus={() => setDeleteFocus(1)}
-                        onBlur={() => setDeleteFocus(0)}>
+                        onClick={onDeleteTestimonial}
+                        onFocus={onDeleteFocus}
+                        onBlur={onDeleteBlur}>
                         <span>Confirm Delete</span>
                         <Close />
                     </button>
