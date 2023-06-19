@@ -45,9 +45,9 @@ const TestimonialWidget = () => {
                 />
             </StyledSortAndFilter>
             <StyledTestimonialGrid>
-                {displayReviews?.map((data: TestimonialsProps) => {
-                    return <TestimonialCard field={data} key={data.id} />
-                })}
+                {displayReviews?.map((data: TestimonialsProps) => (
+                    <TestimonialCard field={data} key={data.id} />
+                ))}
             </StyledTestimonialGrid>
         </>
     )
