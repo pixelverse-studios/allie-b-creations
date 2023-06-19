@@ -12,7 +12,7 @@ const initialState: TestimonialsProps = {
 export const testimonialsSlice = createSlice({
     name: 'testimonials',
     initialState: {
-        reviews: [initialState]
+        reviews: [] as [] | [TestimonialsProps]
     },
     reducers: {
         setTestimonials: (state, { payload }) => {
