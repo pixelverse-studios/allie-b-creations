@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useMemo } from 'react'
 import { TestimonialsProps } from '@/utils/types/redux'
 import { useSelector } from 'react-redux'
 import TestimonialCard from '@/components/dashboard/cards/testimonial'
@@ -15,45 +15,21 @@ const TestimonialWidget = () => {
     const { reviews } = useSelector((state: any) => state.testimonials)
     const [displaySort, setDisplaySort] = useState<string>('')
     const [displayFilter, setDisplayFilter] = useState<string>('SHOW_ALL')
-    const [displayReviews, setDisplayReviews] = useState<any>(null)
 
-    useEffect(() => {
-        if (displayReviews === null && reviews?.length) {
-            setDisplayReviews(reviews)
-        }
-    }, [reviews, displayReviews])
-
-    const handleDisplaySort = (sortType: string) => {
-        const reviewsCopy = [...reviews]
-        setDisplaySort(sortType)
-        if (!sortType) {
-            setDisplayReviews(reviewsCopy)
-        } else {
-            const sortedReviews = testimonialSortMap
-                .get(sortType)
-                ?.run(reviewsCopy)
-            const filteredReviews = testimonialFilterMap
-                .get(displayFilter)
-                ?.run(sortedReviews)
-            setDisplayReviews(filteredReviews)
-        }
-    }
-
-    const handleDisplayFilter = (filterType: string) => {
-        const reviewsCopy = [...reviews]
+    const handleDisplaySort = (sortType: string) => setDisplaySort(sortType)
+    const handleDisplayFilter = (filterType: string) =>
         setDisplayFilter(filterType)
-        if (!filterType) {
-            setDisplayReviews(reviewsCopy)
-        } else {
-            const filteredReviews = testimonialFilterMap
-                .get(filterType)
-                ?.run(reviewsCopy)
-            const sortedReviews = testimonialSortMap
-                .get(displaySort)
-                ?.run(filteredReviews)
-            setDisplayReviews(sortedReviews)
-        }
+    const handleRenderReviews = () => {
+        const filtered = testimonialFilterMap
+            .get(displayFilter)
+            ?.run([...reviews])
+        const sorted = testimonialSortMap.get(displaySort)?.run(filtered)
+        return sorted
     }
+    const displayReviews = useMemo(
+        () => handleRenderReviews(),
+        [displayFilter, displaySort, reviews]
+    )
 
     return (
         <>

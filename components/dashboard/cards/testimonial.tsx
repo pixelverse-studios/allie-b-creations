@@ -54,9 +54,6 @@ const TestimonialCard = ({ field }: any) => {
     const onDeleteFocus = () => setDeleteFocus(1)
     const onDeleteBlur = () => setDeleteFocus(0)
 
-    console.log('name', name)
-    console.log('checked: ', display)
-    console.log('---')
     return (
         <StyledTestimonialCard className={`${display ? 'show' : 'hide'}`}>
             <div className="card-header">
