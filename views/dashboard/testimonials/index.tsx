@@ -69,7 +69,6 @@ const TestimonialWidget = () => {
                 />
             </StyledSortAndFilter>
             <StyledTestimonialGrid>
-                {/* {handleDisplaySort(displaySort)?.map( */}
                 {displayReviews?.map((data: TestimonialsProps) => {
                     return <TestimonialCard field={data} key={data.id} />
                 })}
