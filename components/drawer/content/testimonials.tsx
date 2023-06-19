@@ -9,6 +9,7 @@ import { FormEvent, useState } from 'react'
 
 import { AppDispatch } from '@/lib/redux/store'
 import { createTestimonials } from '@/lib/db/cms/testimonials'
+import { setTestimonials } from '@/lib/redux/slices/testimonials'
 const INITIAL_STATE = {
     name: { value: '' },
     email: { value: '' },
@@ -42,23 +43,23 @@ const TestimonialForm = () => {
     )
 
     const { name, email, review, rating } = form
-    const submitTestimonial = async (event: FormEvent<HTMLFormElement>) => {
+    const onSubmitTestimonial = async (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
 
-        const formValues = {
+        const payload = {
             name: name?.value,
             email: email?.value,
             review: review?.value,
             rating: parseInt(rating?.value)
         }
-        // await createTestimonials(formValues)
-
+        const freshTestimonials = await createTestimonials(payload)
+        dispatch(setTestimonials(freshTestimonials))
         setSubmitRatingError(VALIDACHE.rating.test(rating.value))
         handleReset()
     }
 
     return (
-        <form onSubmit={submitTestimonial}>
+        <form onSubmit={(e: any) => handleFormSubmit(e, onSubmitTestimonial)}>
             <StyledFieldSet>
                 <div className="form-fields">
                     <TextField

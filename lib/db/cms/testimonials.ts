@@ -32,7 +32,7 @@ const getTestimonials = async () => {
     }
 }
 
-export const createTestimonials = async (data: any) => {
+const createTestimonials = async (data: any) => {
     try {
         const { name, email, rating, review } = data
         await addDoc(collection(db, 'testimonials'), {
@@ -50,7 +50,7 @@ export const createTestimonials = async (data: any) => {
     }
 }
 
-export const updateTestimonialDisplay = async (data: {
+const updateTestimonialDisplay = async (data: {
     id: string
     checked: boolean
 }) => {
@@ -64,7 +64,7 @@ export const updateTestimonialDisplay = async (data: {
     }
 }
 
-export const deleteTestimonialCollection = async (id: string) => {
+const deleteTestimonialCollection = async (id: string) => {
     try {
         await deleteDoc(doc(db, 'testimonials', id))
         const testimonials = await getTestimonials()
@@ -73,4 +73,9 @@ export const deleteTestimonialCollection = async (id: string) => {
         throw error
     }
 }
-export { getTestimonials }
+export {
+    createTestimonials,
+    deleteTestimonialCollection,
+    getTestimonials,
+    updateTestimonialDisplay
+}
