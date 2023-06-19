@@ -32,16 +32,19 @@ const getTestimonials = async () => {
     }
 }
 
-export const createTestimonials = async () => {
+export const createTestimonials = async (data: any) => {
     try {
+        const { name, email, rating, review } = data
         await addDoc(collection(db, 'testimonials'), {
             createdAt: formatDateTime(new Date()),
             display: false,
-            email: 'kevina@yahoo.com',
-            name: 'Leila',
-            rating: 5,
-            review: "I'm 1 today ! I loved my balloons at my party. I took so many pictures with them while holding my bottle of milk. I always try to have a bottle in my hand just like mommy and her wine. If daisy's weren't my favorite flower before today, they sure are now ! Thanks ABC !I'm 1 today ! I loved my balloons at my party. I took so many pictures with them while holding my bottle of milk. I always try to have a bottle in my hand just like mommy and her wine. If daisy's weren't my favorite flower before today, they sure are now ! Thanks ABC !I'm 1 today ! I loved my balloons at my party. I took so many pictures with them while holding my bottle of milk. I always try to have a bottle in my hand just like mommy and her wine. If daisy's weren't my favorite flower before today, they sure are now ! Thanks ABC !"
+            email: email,
+            name: name,
+            rating: rating,
+            review: review
         })
+        const testimonial = await getTestimonials()
+        return testimonial
     } catch (error) {
         throw error
     }

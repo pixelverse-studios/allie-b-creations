@@ -6,7 +6,7 @@ import {
     FormLabel
 } from '@mui/material'
 
-import { RADIO_GROUP_VALUES } from '@/utils/constants'
+import { TESTIMONIAL_FILTER_VALUES } from '@/utils/constants'
 import { Dispatch, SetStateAction } from 'react'
 
 const RadioFieldGroup = ({
@@ -31,7 +31,7 @@ const RadioFieldGroup = ({
                 name="radio-button-group"
                 onChange={handleChange}
                 value={displayFilter}>
-                {RADIO_GROUP_VALUES.map(data => {
+                {TESTIMONIAL_FILTER_VALUES.map(data => {
                     return (
                         <FormControlLabel
                             value={data.value}

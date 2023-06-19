@@ -7,7 +7,7 @@ import {
     StyledSortAndFilter
 } from './StyledTestimonials'
 
-import { SELECT_ACTIONS, RADIO_GROUP_ACTIONS } from '@/utils/constants'
+import { SELECT_ACTIONS, TESTIMONIAL_FILTER_ACTIONS } from '@/utils/constants'
 import SelectField from '@/components/form/fields/SelectField'
 import RadioFieldGroup from '@/components/form/fields/RadioFieldGroup'
 
@@ -17,7 +17,7 @@ const TestimonialWidget = () => {
     const { HIDDEN, HIGH_RATING, LOW_RATING, NEWEST, OLDEST, SHOW } =
         SELECT_ACTIONS
 
-    const { SHOW_ALL, SHOW_DISPLAYED, SHOW_HIDDEN } = RADIO_GROUP_ACTIONS
+    const { SHOW_ALL, SHOW_DISPLAYED, SHOW_HIDDEN } = TESTIMONIAL_FILTER_ACTIONS
 
     const [displaySort, setDisplaySort] = useState<string>('')
     const [displayFilter, setDisplayFilter] = useState<string>('SHOW_ALL')

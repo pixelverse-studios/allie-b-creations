@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Button } from '@mui/material'
 
 import useForm from '@/utils/hooks/useForm'
@@ -8,7 +8,7 @@ import { StyledFieldSet } from './StyledFormComponents'
 import { FormEvent, useState } from 'react'
 
 import { AppDispatch } from '@/lib/redux/store'
-
+import { createTestimonials } from '@/lib/db/cms/testimonials'
 const INITIAL_STATE = {
     name: { value: '' },
     email: { value: '' },
@@ -42,13 +42,19 @@ const TestimonialForm = () => {
     )
 
     const { name, email, review, rating } = form
-    const submitTestimonial = (event: FormEvent<HTMLFormElement>) => {
+    const submitTestimonial = async (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
-        // console.log('Name', name.value)
-        // console.log('Email" ', email.value)
-        // console.log('Review', review.value)
-        // console.log('Rating;', rating.value)
+
+        const formValues = {
+            name: name?.value,
+            email: email?.value,
+            review: review?.value,
+            rating: parseInt(rating?.value)
+        }
+        // await createTestimonials(formValues)
+
         setSubmitRatingError(VALIDACHE.rating.test(rating.value))
+        handleReset()
     }
 
     return (

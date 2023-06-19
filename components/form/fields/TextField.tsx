@@ -14,7 +14,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
         <FormControl color={setColor(field)} error={Boolean(field.error)}>
             <MuiTextField
                 color={setColor(field)}
-                multiline={type === 'textarea'}
+                multiline={isTextArea}
                 inputProps={{
                     maxLength: isTextArea ? CHARACTER_COUNT : 999999999
                 }}
@@ -29,7 +29,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 required
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
-            {type === 'textarea' && (
+            {isTextArea && (
                 <FormHelperText id={id}>
                     Max Characters: {field.value.length}/{CHARACTER_COUNT}
                 </FormHelperText>

@@ -6,7 +6,7 @@ import {
     InputLabel,
     FormControl
 } from '@mui/material'
-import { SELECT_FIELD_VALUES } from '@/utils/constants'
+import { TESTIMONIAL_SORT_VALUES } from '@/utils/constants'
 
 const SelectField = ({
     displaySort,
@@ -27,7 +27,7 @@ const SelectField = ({
                 id="select-field"
                 onChange={handleChange}
                 value={displaySort}>
-                {SELECT_FIELD_VALUES.map(item => {
+                {TESTIMONIAL_SORT_VALUES.map(item => {
                     return (
                         <MenuItem value={item.value} key={item.value}>
                             {item.label}

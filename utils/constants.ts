@@ -18,7 +18,7 @@ export const SELECT_ACTIONS = {
     OLDEST: 'OLDEST'
 }
 
-export const SELECT_FIELD_VALUES = [
+export const TESTIMONIAL_SORT_VALUES = [
     {
         value: SELECT_ACTIONS.SHOW,
         label: 'Displayed'
@@ -45,14 +45,14 @@ export const SELECT_FIELD_VALUES = [
     }
 ]
 
-export const RADIO_GROUP_ACTIONS = {
+export const TESTIMONIAL_FILTER_ACTIONS = {
     SHOW_DISPLAYED: 'SHOW_DISPLAYED',
     SHOW_HIDDEN: 'SHOW_HIDDEN',
     SHOW_ALL: 'SHOW_ALL'
 }
 
-export const RADIO_GROUP_VALUES = [
-    { value: RADIO_GROUP_ACTIONS.SHOW_ALL, label: 'All' },
-    { value: RADIO_GROUP_ACTIONS.SHOW_DISPLAYED, label: 'Displayed' },
-    { value: RADIO_GROUP_ACTIONS.SHOW_HIDDEN, label: 'Hidden' }
+export const TESTIMONIAL_FILTER_VALUES = [
+    { value: TESTIMONIAL_FILTER_ACTIONS.SHOW_ALL, label: 'All' },
+    { value: TESTIMONIAL_FILTER_ACTIONS.SHOW_DISPLAYED, label: 'Displayed' },
+    { value: TESTIMONIAL_FILTER_ACTIONS.SHOW_HIDDEN, label: 'Hidden' }
 ]

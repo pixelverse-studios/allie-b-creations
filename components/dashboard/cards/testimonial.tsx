@@ -6,17 +6,19 @@ import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
 import { Rating } from '@mui/material'
 import {
     updateTestimonialDisplay,
-    deleteTestimonialCollection,
-    createTestimonials,
-    getTestimonials
+    deleteTestimonialCollection
 } from '@/lib/db/cms/testimonials'
+import { enqueueSnackbar } from 'notistack'
 
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Close } from '@mui/icons-material'
+import bannerUtils from '@/utils/banners'
+
+const { statuses, messages } = bannerUtils
 
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
-
+    const [deleteFocus, setDeleteFocus] = useState<number>(0)
     const { display, email, id, name, rating, review, createdAt } = field
 
     const handleDisplayChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,23 +30,28 @@ const TestimonialCard = ({ field }: any) => {
         updateTestimonialDisplay({ id, checked })
     }
 
-    const deleteTestimonial = async (id: string) => {
+    const deleteTestimonial = async () => {
         try {
-            const testimonialData = await deleteTestimonialCollection(id)
-            dispatch(setTestimonials(testimonialData))
+            if (deleteFocus === 2) {
+                // const testimonialData = await deleteTestimonialCollection(id)
+
+                // dispatch(setTestimonials(testimonialData))
+                enqueueSnackbar('Testimonial Deleted', {
+                    variant: statuses.SUCCESS
+                })
+                setDeleteFocus(0)
+            } else {
+                setDeleteFocus(deleteFocus + 1)
+            }
         } catch (error) {
-            throw error
+            enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
+                variant: statuses.ERROR
+            })
         }
     }
 
-    const addSomeShit = async () => {
-        createTestimonials()
-        const testimonialData = await getTestimonials()
-        dispatch(setTestimonials(testimonialData))
-    }
     return (
         <StyledTestimonialCard className={`${display ? 'show' : 'hide'}`}>
-            {/* <button onClick={addSomeShit}>add</button> */}
             <div className="card-header">
                 <div className="button-group">
                     <StyledTestimonialInput
@@ -60,12 +67,13 @@ const TestimonialCard = ({ field }: any) => {
                         data-tg-on="Hide"
                         htmlFor={id}
                     />
-                    <Close
-                        className="close"
-                        onClick={() => {
-                            deleteTestimonial(id)
-                        }}
-                    />
+                    <button
+                        onClick={deleteTestimonial}
+                        onFocus={() => setDeleteFocus(1)}
+                        onBlur={() => setDeleteFocus(0)}>
+                        <span>Confirm Delete</span>
+                        <Close />
+                    </button>
                 </div>
                 <div className="title-group">
                     <h3>{name}</h3>
