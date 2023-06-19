@@ -45,6 +45,15 @@ export const StyledEventTypeCard = styled.div`
         gap: 1rem;
         border-bottom: 2px solid lightgray;
         padding: 5px;
+
+        .controls {
+            .edit > svg {
+                color: var(--brand-color-3a);
+            }
+            .delete > svg {
+                color: var(--brand-color-2a);
+            }
+        }
     }
 
     .cardBody {
@@ -53,11 +62,18 @@ export const StyledEventTypeCard = styled.div`
         align-items: center;
         gap: 1rem;
         padding: 1rem 0.5rem;
+    }
+    .offeringsList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-        .offeringsList {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+    .collapseIcon {
+        transition: var(--hover-transition);
+
+        &.flip {
+            transform: rotate(180deg);
         }
     }
 `

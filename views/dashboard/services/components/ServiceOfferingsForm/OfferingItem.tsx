@@ -23,7 +23,9 @@ const OfferingItem = ({
         )
     }
     return (
-        <StyledOfferingItem onClick={onItemClick}>
+        <StyledOfferingItem
+            className="serviceOfferingItem"
+            onClick={onItemClick}>
             <span>{eventTitle}</span>
             <Icon />
         </StyledOfferingItem>
