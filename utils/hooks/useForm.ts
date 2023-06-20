@@ -70,9 +70,12 @@ const useForm = (initialState: any, validations: any) => {
         dispatch({ type: RESET, payload: initialState })
     }
 
+    const isFormValid = Object.keys(form).every(label => !form[label].error)
+
     return {
         form,
         formLoading,
+        isFormValid,
         handleChange,
         handleFormSubmit,
         handleImport,

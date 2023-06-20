@@ -20,14 +20,14 @@ const INITIAL_STATE = {
 }
 
 const {
-    validAlphaString,
+    validAlphaNumericWithSpaces,
     validEmail,
     validAlphaNumericSpacesSpecials,
     validNonZeroNumber
 } = FormValidations
 
 const VALIDACHE = {
-    name: validAlphaString,
+    name: validAlphaNumericWithSpaces,
     email: validEmail,
     review: validAlphaNumericSpacesSpecials,
     rating: validNonZeroNumber
@@ -37,10 +37,8 @@ const TestimonialForm = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [submitRatingError, setSubmitRatingError] = useState<boolean>(false)
 
-    const { handleChange, handleFormSubmit, handleReset, form } = useForm(
-        INITIAL_STATE,
-        VALIDACHE
-    )
+    const { handleChange, handleFormSubmit, handleReset, form, isFormValid } =
+        useForm(INITIAL_STATE, VALIDACHE)
 
     const { name, email, review, rating } = form
     const onSubmitTestimonial = async (event: FormEvent<HTMLFormElement>) => {
@@ -57,6 +55,7 @@ const TestimonialForm = () => {
         setSubmitRatingError(VALIDACHE.rating.test(rating.value))
         handleReset()
     }
+    console.log(isFormValid)
 
     return (
         <form onSubmit={(e: any) => handleFormSubmit(e, onSubmitTestimonial)}>
@@ -93,7 +92,10 @@ const TestimonialForm = () => {
                     />
                 </div>
                 <div className="button-group">
-                    <Button variant="outlined" type="submit">
+                    <Button
+                        variant="outlined"
+                        type="submit"
+                        disabled={!isFormValid}>
                         Submit
                     </Button>
                     <Button variant="outlined" onClick={handleReset}>
