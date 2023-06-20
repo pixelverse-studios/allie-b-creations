@@ -37,54 +37,61 @@ export const StyledFooter = styled.footer`
     .social-icons {
         display: flex;
         justify-content: space-around;
-        column-gap: 1.5rem;
-        .group {
-            position: relative;
-            height: 2.33rem;
-            width: 2.33rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        column-gap: 1.6rem;
 
+        .icon1 {
+            color: #fce4e2;
+            background: linear-gradient(#fff 50%, #fce4e2 50%);
+            transition: all 0.4s ease-in-out;
+            border: 2px solid #fce4e2;
+            border-radius: 50%;
+            padding: 0.3rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            .icon-circle {
-                background: linear-gradient(
-                    143deg,
-                    rgba(250, 232, 230, 1) 0%,
-                    rgba(252, 231, 177, 1) 50%,
-                    rgba(175, 230, 199, 1) 100%
-                );
-                padding: 0.3rem;
-                border-radius: 50%;
-                height: 2.33rem;
-                width: 2.33rem;
-                position: absolute;
-
-                transition: all 0.6s ease-out;
-            }
-            .icon {
-                position: absolute;
-                color: white;
-                z-index: 1;
-                transition: all 0.4s ease-in-out;
-            }
-
+            background-size: 100% 200%;
             &:hover {
-                .icon-circle {
-                    transform: scale(0);
-                }
-
-                .icon {
-                    transform: scale(1.5);
-                    animation: colorWheel 2s infinite linear;
-                }
+                color: white;
+                background-position: 100% 100%;
             }
         }
-    }
-    small {
-        position: absolute;
-        font-size: 0.6rem;
-        left: 2px;
-        bottom: 2px;
+        .icon2 {
+            color: #faeee3;
+            background: linear-gradient(#fff 50%, #faeee3 50%);
+            transition: all 0.4s ease-in-out;
+            border: 2px solid #faeee3;
+            border-radius: 50%;
+            padding: 0.3rem;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background-size: 100% 200%;
+
+            &:hover {
+                color: white;
+                background-position: 100% 100%;
+            }
+        }
+        .icon3 {
+            color: #e0ebe3;
+            background: linear-gradient(#fff 50%, #e0ebe3 50%);
+            transition: all 0.4s ease-in-out;
+            border: 2px solid #e0ebe3;
+            border-radius: 50%;
+            padding: 0.3rem;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background-size: 100% 200%;
+            &:hover {
+                color: white;
+
+                background-position: 100% 100%;
+            }
+        }
+
+        small {
+            position: absolute;
+            font-size: 0.6rem;
+            left: 2px;
+            bottom: 2px;
+        }
     }
 `

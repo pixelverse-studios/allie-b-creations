@@ -8,20 +8,13 @@ const Footer = () => {
         <StyledFooter>
             <img src={LogoImg.src} alt="Logo" className="logo" />
             <div className="social-icons">
-                <div className="group">
-                    <Instagram className="icon" />
-                    <div className="icon-circle"></div>
-                </div>
-                <div className="group">
-                    <LinkedIn className="icon" />
-                    <div className="icon-circle"></div>
-                </div>
-                <div className="group">
-                    <MailOutline className="icon" />
-                    <div className="icon-circle"></div>
-                </div>
+                <Instagram className="icon1" />
+
+                <LinkedIn className="icon2" />
+
+                <MailOutline className="icon3" />
             </div>
-            <small>&copy; ABC LLC 2023</small>
+            {/* <small>&copy; ABC LLC 2023</small> */}
         </StyledFooter>
     )
 }
