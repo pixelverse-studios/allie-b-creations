@@ -14,7 +14,6 @@ const SelectField = ({
 }: {
     displaySort: string
     setDisplaySort: Function
-    // setDisplaySort: Dispatch<SetStateAction<string>>
 }) => {
     const handleChange = (event: SelectChangeEvent) => {
         setDisplaySort(event.target.value)
