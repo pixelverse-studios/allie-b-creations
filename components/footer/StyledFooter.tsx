@@ -86,12 +86,5 @@ export const StyledFooter = styled.footer`
                 background-position: 100% 100%;
             }
         }
-
-        small {
-            position: absolute;
-            font-size: 0.6rem;
-            left: 2px;
-            bottom: 2px;
-        }
     }
 `

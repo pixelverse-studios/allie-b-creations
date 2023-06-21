@@ -14,7 +14,7 @@ const Footer = () => {
 
                 <MailOutline className="icon3" />
             </div>
-            {/* <small>&copy; ABC LLC 2023</small> */}
+            <small>&copy; ABC LLC 2023</small>
         </StyledFooter>
     )
 }
