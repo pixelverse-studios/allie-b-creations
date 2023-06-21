@@ -20,10 +20,11 @@ const TestimonialWidget = () => {
     const handleDisplayFilter = (filterType: string) =>
         setDisplayFilter(filterType)
     const handleRenderReviews = () => {
+        // console.log(testimonialFilterMap.get(displayFilter))
         const filtered = testimonialFilterMap
-            .get(displayFilter)
+            ?.get(displayFilter)
             ?.run([...reviews])
-        const sorted = testimonialSortMap.get(displaySort)?.run(filtered)
+        const sorted = testimonialSortMap?.get(displaySort)?.run(filtered)
         return sorted
     }
     const displayReviews = useMemo(

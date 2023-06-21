@@ -1,15 +1,18 @@
-import { useDispatch } from 'react-redux'
-import { Button } from '@mui/material'
-
-import useForm from '@/utils/hooks/useForm'
-import FormValidations from '@/utils/validations/forms'
-import { TextField, RatingField } from '@/components/form'
-import { StyledFieldSet } from './StyledFormComponents'
 import { FormEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { enqueueSnackbar } from 'notistack'
 
 import { AppDispatch } from '@/lib/redux/store'
+import useForm from '@/utils/hooks/useForm'
+import FormValidations from '@/utils/validations/forms'
+import { TextField, RatingField, FormButtonGroup } from '@/components/form'
 import { createTestimonials } from '@/lib/db/cms/testimonials'
 import { setTestimonials } from '@/lib/redux/slices/testimonials'
+import bannerUtils from '@/utils/banners'
+import { StyledFieldSet } from './StyledFormComponents'
+
+const { statuses, messages } = bannerUtils
+
 const INITIAL_STATE = {
     name: { value: '' },
     email: { value: '' },
@@ -33,29 +36,46 @@ const VALIDACHE = {
     rating: validNonZeroNumber
 }
 
-const TestimonialForm = () => {
+const TestimonialForm = ({ onCloseDrawer }: { onCloseDrawer: Function }) => {
     const dispatch = useDispatch<AppDispatch>()
-    const [submitRatingError, setSubmitRatingError] = useState<boolean>(false)
 
-    const { handleChange, handleFormSubmit, handleReset, form, isFormValid } =
-        useForm(INITIAL_STATE, VALIDACHE)
+    const {
+        disableSubmit,
+        form,
+        formLoading,
+        handleChange,
+        handleFormSubmit,
+        handleReset,
+        isFormValid
+    } = useForm(INITIAL_STATE, VALIDACHE, INITIAL_STATE)
 
     const { name, email, review, rating } = form
     const onSubmitTestimonial = async (event: FormEvent<HTMLFormElement>) => {
         event?.preventDefault()
-
-        const payload = {
-            name: name?.value,
-            email: email?.value,
-            review: review?.value,
-            rating: parseInt(rating?.value)
+        try {
+            const payload = {
+                name: name?.value,
+                email: email?.value,
+                review: review?.value,
+                rating: parseInt(rating?.value)
+            }
+            const freshTestimonials = await createTestimonials(payload)
+            dispatch(setTestimonials(freshTestimonials))
+            handleReset()
+            enqueueSnackbar('Testimonial Created', {
+                variant: statuses.SUCCESS
+            })
+            onCloseDrawer()
+        } catch (error) {
+            console.log(error)
+            enqueueSnackbar(
+                'There was an issue creating your testimonial. Please try again or reach out to us by the email in the footer.',
+                {
+                    variant: statuses.ERROR
+                }
+            )
         }
-        const freshTestimonials = await createTestimonials(payload)
-        dispatch(setTestimonials(freshTestimonials))
-        setSubmitRatingError(VALIDACHE.rating.test(rating.value))
-        handleReset()
     }
-    console.log(isFormValid)
 
     return (
         <form onSubmit={(e: any) => handleFormSubmit(e, onSubmitTestimonial)}>
@@ -81,7 +101,6 @@ const TestimonialForm = () => {
                         label="Rating"
                         field={form.rating}
                         onChange={handleChange}
-                        submitError={submitRatingError}
                     />
                     <TextField
                         field={form.review}
@@ -91,17 +110,11 @@ const TestimonialForm = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="button-group">
-                    <Button
-                        variant="outlined"
-                        type="submit"
-                        disabled={!isFormValid}>
-                        Submit
-                    </Button>
-                    <Button variant="outlined" onClick={handleReset}>
-                        Reset
-                    </Button>
-                </div>
+                <FormButtonGroup
+                    disableSubmit={!disableSubmit && isFormValid}
+                    handleReset={handleReset}
+                    loading={formLoading}
+                />
             </StyledFieldSet>
         </form>
     )
