@@ -6,18 +6,26 @@ const initialState: TestimonialsProps = {
     display: false,
     name: '',
     rating: 0,
-    review: ''
+    review: '',
+    email: ''
 }
 export const testimonialsSlice = createSlice({
     name: 'testimonials',
     initialState: {
-        reviews: [initialState]
+        reviews: [] as [] | [TestimonialsProps]
     },
     reducers: {
         setTestimonials: (state, { payload }) => {
             state.reviews = payload
+        },
+        setDisplay: (state, { payload }) => {
+            const index = state.reviews.findIndex(
+                data => data.id === payload.id
+            )
+
+            state.reviews[index].display = payload.checked
         }
     }
 })
-export const { setTestimonials } = testimonialsSlice.actions
+export const { setTestimonials, setDisplay } = testimonialsSlice.actions
 export default testimonialsSlice.reducer
