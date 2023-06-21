@@ -18,7 +18,7 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 inputProps={{
                     maxLength: isTextArea ? CHARACTER_COUNT : 999999999
                 }}
-                variant="outlined"
+                variant="standard"
                 type={type}
                 id={id}
                 name={id}

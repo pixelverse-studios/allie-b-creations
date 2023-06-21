@@ -1,4 +1,10 @@
-import { useState, useReducer, ChangeEventHandler, FormEvent } from 'react'
+import {
+    useState,
+    useEffect,
+    useReducer,
+    ChangeEventHandler,
+    FormEvent
+} from 'react'
 import { FORM_ACTIONS } from '../constants'
 
 interface ActionState {
@@ -25,10 +31,21 @@ function reducer(state: any, action: ActionState) {
     }
 }
 
-const useForm = (initialState: any, validations: any) => {
+const useForm = (initialState: any, validations: any, store?: any) => {
     const [form, dispatch] = useReducer(reducer, initialState)
     const [formLoading, setFormLoading] = useState<boolean>(false)
     const [isDataImported, setIsDataImported] = useState<boolean>(false)
+    const [disableSubmit, setDisableSumit] = useState<boolean>(true)
+
+    useEffect(() => {
+        if (store != null) {
+            const formFieldStatus = Object.entries(form).map(
+                ([key, field]: [key: string, value: any]) =>
+                    store[key] === field.value
+            )
+            setDisableSumit(!formFieldStatus.some(field => !field))
+        }
+    }, [store, form])
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
         const { value, name } = event.target
@@ -46,6 +63,16 @@ const useForm = (initialState: any, validations: any) => {
             }
         })
     }
+
+    const handleClearField = (fieldLabel: string) =>
+        dispatch({
+            type: UPDATE,
+            payload: {
+                name: fieldLabel,
+                value: initialState[fieldLabel],
+                error: ''
+            }
+        })
 
     const handleImport = (payload: any) => {
         setIsDataImported(true)
@@ -73,10 +100,12 @@ const useForm = (initialState: any, validations: any) => {
     const isFormValid = Object.keys(form).every(label => !form[label].error)
 
     return {
+        disableSubmit,
         form,
         formLoading,
         isFormValid,
         handleChange,
+        handleClearField,
         handleFormSubmit,
         handleImport,
         handleReset,

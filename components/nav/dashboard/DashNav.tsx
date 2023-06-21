@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import {
     Accordion,
@@ -12,7 +12,7 @@ import {
 import uniqueId from 'lodash/uniqueId'
 import { ExpandMore } from '@mui/icons-material'
 import { signOut, getAuth } from 'firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { enqueueSnackbar } from 'notistack'
 
 import { removeUser } from '@/lib/redux/slices/user'
@@ -28,23 +28,7 @@ const MobileDashNav = () => {
     const dispatch = useDispatch()
 
     const onMenuItemClick = (path: string) => {
-        // setAnchorEl(null)
-        console.log(path)
         router.push(`/dashboard/${path}`)
-    }
-    const onLogout = async () => {
-        try {
-            await signOut(auth)
-            dispatch(removeUser())
-            router.push('/')
-            enqueueSnackbar(messages.LOGGED_OUT, {
-                variant: statuses.SUCCESS
-            })
-        } catch (error) {
-            enqueueSnackbar(messages.LOG_OUT_ERROR, {
-                variant: statuses.ERROR
-            })
-        }
     }
 
     const activePage = useMemo(
@@ -55,7 +39,7 @@ const MobileDashNav = () => {
     return (
         <StyledDashNav>
             <Logo />
-            <Accordion disableGutters elevation={0} square>
+            <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMore />}
                     aria-controls="panel1a-content"
@@ -66,7 +50,9 @@ const MobileDashNav = () => {
                     <List>
                         {DASHBOARD_ROUTES.map(route => (
                             <ListItem key={uniqueId('li')}>
-                                <ListItemButton key={uniqueId('lib')}>
+                                <ListItemButton
+                                    key={uniqueId('lib')}
+                                    selected={activePage === route.path}>
                                     <ListItemText
                                         key={uniqueId('lit')}
                                         onClick={() =>
