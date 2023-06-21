@@ -32,17 +32,49 @@ export const StyledServicesBlock = styled.section`
 `
 
 export const StyledEventTypeCard = styled.div`
-    &.newOfferingCard {
-        padding: 1rem;
-    }
+    padding: 1rem;
 
     .MuiAccordionDetails-root {
         padding: 1rem;
+    }
+
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 2px solid lightgray;
+        padding: 5px;
+
+        .controls {
+            .edit > svg {
+                color: var(--brand-color-3a);
+            }
+            .delete > svg {
+                color: var(--brand-color-2a);
+            }
+        }
+    }
+
+    .cardBody {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
     }
     .offeringsList {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .collapseIcon {
+        transition: var(--hover-transition);
+
+        &.flip {
+            transform: rotate(180deg);
+        }
     }
 `
 

@@ -37,11 +37,15 @@ const updateGeneralServiceData = async (
 
 const addNewOfferingSection = async (
     id: string,
-    offerings: { section: string; events: any }[]
+    newSection: string
 ): Promise<ServicesProps> => {
     try {
+        const services = await getServices()
+        const updatedOfferings = [...services.offerings]
+        updatedOfferings.push({ section: newSection, events: [] as any })
+
         const ref = doc(db, SERVICES, id)
-        await updateDoc(ref, { offerings })
+        await updateDoc(ref, { offerings: updatedOfferings })
         const freshServices = await getServices()
         return freshServices
     } catch (error) {
@@ -49,4 +53,30 @@ const addNewOfferingSection = async (
     }
 }
 
-export { addNewOfferingSection, getServices, updateGeneralServiceData }
+const deleteOfferingSection = async (
+    id: string,
+    section: string
+): Promise<ServicesProps> => {
+    try {
+        const services = await getServices()
+        const updatedOfferings = [...services.offerings]
+        const deleteIndex = updatedOfferings.findIndex(
+            offering => offering.section === section
+        )
+        updatedOfferings.splice(deleteIndex, 1)
+
+        const ref = doc(db, SERVICES, id)
+        await updateDoc(ref, { offerings: updatedOfferings })
+        const freshServices = await getServices()
+        return freshServices
+    } catch (error) {
+        throw error
+    }
+}
+
+export {
+    addNewOfferingSection,
+    deleteOfferingSection,
+    getServices,
+    updateGeneralServiceData
+}

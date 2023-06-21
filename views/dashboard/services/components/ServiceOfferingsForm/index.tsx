@@ -1,17 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Card, Typography } from '@mui/material'
+import { uniqueId } from 'lodash'
 import useForm from '@/utils/hooks/useForm'
 import { addNewOfferingSection } from '@/lib/db/cms/services'
 import OfferingCard from './OfferingCard'
 import FormValidations from '@/utils/validations/forms'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
+import { TextField, FormButtonGroup } from '@/components/form'
+import { setServices } from '@/lib/redux/slices/services'
 import {
     StyledServicesBlock,
     StyledEventTypeCard
 } from '../../StyledServicesWidget'
-import { TextField, FormButtonGroup } from '@/components/form'
-import { uniqueId } from 'lodash'
-import { setServices } from '@/lib/redux/slices/services'
 
 const initialState = { newSection: { value: '', error: '' } }
 const validations = { newSection: FormValidations.yolo }
@@ -31,13 +31,9 @@ const ServiceOfferingsForm = () => {
     } = useForm(initialState, validations, { newSection: '' })
 
     const onSubmit = async () => {
-        const updatedOfferings = [
-            ...offerings,
-            { section: form.newSection.value, events: [] }
-        ]
         const refreshedServices = await addNewOfferingSection(
             id,
-            updatedOfferings
+            form.newSection.value
         )
         dispatch(setServices(refreshedServices))
         handleReset()

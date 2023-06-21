@@ -13,7 +13,8 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
             <MuiTextField
                 color={setColor(field)}
                 multiline={type === 'textarea'}
-                variant="outlined"
+                variant="standard"
+                // variant="outlined"
                 type={type}
                 id={id}
                 name={id}
