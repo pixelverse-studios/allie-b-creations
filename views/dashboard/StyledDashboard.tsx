@@ -8,8 +8,6 @@ export const DashboardCardStyles = css`
 `
 
 export const StyledDashboard = styled.section`
-    height: 100%;
-
     .dashboardContent {
         margin-left: var(--dashboard-nav-width);
         padding: 1rem;
@@ -18,6 +16,7 @@ export const StyledDashboard = styled.section`
         flex-direction: column;
         gap: 1rem;
         max-width: var(--max-width);
+        padding-bottom: 1rem;
 
         header {
             ${DashboardCardStyles}

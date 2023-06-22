@@ -1,7 +1,6 @@
 import {
     Rating as MuiRatingField,
     Typography,
-    FormHelperText,
     FormControl
 } from '@mui/material'
 import { setColor } from '../utilities'
@@ -12,7 +11,6 @@ type RatingFieldProps = {
     onChange: any
     id: string
     label: string
-    submitError: boolean
 }
 
 const RatingField = ({
@@ -20,8 +18,7 @@ const RatingField = ({
     field,
     onChange,
     id,
-    label,
-    submitError
+    label
 }: RatingFieldProps) => {
     const parseValue = parseInt(field.value)
     return (
@@ -33,20 +30,6 @@ const RatingField = ({
                 value={parseValue}
                 onChange={onChange}
             />
-            <>
-                {parseValue === 0 && !submitError && (
-                    <FormHelperText>
-                        Please rate your experience with Allie B Creations
-                    </FormHelperText>
-                )}
-            </>
-            <>
-                {submitError && (
-                    <FormHelperText id={id} error>
-                        You must select a rating.
-                    </FormHelperText>
-                )}
-            </>
         </FormControl>
     )
 }

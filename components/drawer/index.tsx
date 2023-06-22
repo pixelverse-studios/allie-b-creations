@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { Drawer } from '@mui/material'
 import { StyledDrawerHeader, StyledDrawerContent } from './StyledDrawer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,10 +15,12 @@ const FormDrawer = () => {
         (state: any) => state.drawer
     )
 
+    const onCloseDrawer = () => dispatch(closeDrawer())
+
     const renderDrawerBody = (contentType: string) => {
         switch (contentType) {
             case TESTIMONIAL:
-                return <TestimonialForm />
+                return <TestimonialForm onCloseDrawer={onCloseDrawer} />
 
             case CLIENT_REQUEST:
                 return 'content'
@@ -34,7 +37,7 @@ const FormDrawer = () => {
                     <span>{title}</span>
                     <Close
                         className="close-icon"
-                        onClick={() => dispatch(closeDrawer())}
+                        onClick={() => onCloseDrawer()}
                     />
                 </StyledDrawerHeader>
                 {renderDrawerBody(content)}

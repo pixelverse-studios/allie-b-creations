@@ -1,4 +1,5 @@
 import TextField from './fields/TextField'
 import RatingField from './fields/RatingField'
+import FormButtonGroup from './buttonGroup'
 
-export { TextField, RatingField }
+export { FormButtonGroup, RatingField, TextField }

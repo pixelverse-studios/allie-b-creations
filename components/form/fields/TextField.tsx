@@ -7,13 +7,18 @@ import {
 import { setColor } from '../utilities'
 import { TextFieldProps } from '@/utils/types/components/form'
 
+const CHARACTER_COUNT = 600
 const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
+    const isTextArea = type === 'textarea'
     return (
         <FormControl color={setColor(field)} error={Boolean(field.error)}>
             <MuiTextField
                 color={setColor(field)}
-                multiline={type === 'textarea'}
-                variant="outlined"
+                multiline={isTextArea}
+                inputProps={{
+                    maxLength: isTextArea ? CHARACTER_COUNT : 999999999
+                }}
+                variant="standard"
                 type={type}
                 id={id}
                 name={id}
@@ -24,6 +29,11 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 required
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
+            {isTextArea && (
+                <FormHelperText id={id}>
+                    Max Characters: {field.value.length}/{CHARACTER_COUNT}
+                </FormHelperText>
+            )}
         </FormControl>
     )
 }
