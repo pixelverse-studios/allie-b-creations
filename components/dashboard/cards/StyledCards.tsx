@@ -206,77 +206,78 @@ export const StyledContactLinkCard = styled.div`
         height: 10rem;
         padding: 0.2rem 0.4rem;
 
-        .button-group {
+        .card-header {
             display: flex;
             justify-content: space-between;
-
-            column-gap: 0.2rem;
-
-            .edit-button {
-                position: relative;
-                width: 40px;
-                height: 40px;
-                border-radius: 25px;
-                border: 3px solid var(--brand-color-3);
-                background-color: #fff;
-                cursor: pointer;
-                overflow: hidden;
-                transition: 0.3s;
-
-                svg {
-                    color: var(--brand-color-1a);
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    transition: 0.3s;
-                }
-            }
-
-            .delete-button {
-                position: relative;
-                width: 40px;
-                height: 40px;
-                border-radius: 25px;
-                border: 3px solid var(--brand-color-3);
-                background-color: #fff;
-                cursor: pointer;
-                overflow: hidden;
-                transition: 0.3s;
-
-                svg {
-                    color: var(--brand-color-1a);
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    transition: 0.3s;
-                }
-                &:focus {
-                    width: 150px;
+            .button-group {
+                display: flex;
+                column-gap: 0.2rem;
+                .edit-button {
+                    position: relative;
+                    width: 40px;
                     height: 40px;
+                    border-radius: 25px;
+                    border: 3px solid var(--brand-color-3);
+                    background-color: #fff;
+                    cursor: pointer;
+                    overflow: hidden;
                     transition: 0.3s;
-                    background-color: var(--brand-color-1a);
 
                     svg {
-                        opacity: 0;
-                        transition: 0.3s;
-                    }
-
-                    span {
-                        color: white;
-                        opacity: 1;
+                        color: var(--brand-color-1a);
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
                         transition: 0.3s;
                     }
                 }
-                span {
-                    width: 150px;
-                    position: absolute;
-                    opacity: 0;
-                    transform: translate(-50%, -50%);
-                    color: var(--brand-color-1a);
-                    font-weight: 600;
+
+                .delete-button {
+                    position: relative;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 25px;
+                    border: 3px solid var(--brand-color-3);
+                    background-color: #fff;
+                    cursor: pointer;
+                    overflow: hidden;
                     transition: 0.3s;
+
+                    svg {
+                        color: var(--brand-color-1a);
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        transition: 0.3s;
+                    }
+                    &:focus {
+                        width: 150px;
+                        height: 40px;
+                        transition: 0.3s;
+                        background-color: var(--brand-color-1a);
+
+                        svg {
+                            opacity: 0;
+                            transition: 0.3s;
+                        }
+
+                        span {
+                            color: white;
+                            opacity: 1;
+                            transition: 0.3s;
+                        }
+                    }
+                    span {
+                        width: 150px;
+                        position: absolute;
+                        opacity: 0;
+                        transform: translate(-50%, -50%);
+                        color: var(--brand-color-1a);
+                        font-weight: 600;
+                        transition: 0.3s;
+                    }
                 }
             }
         }

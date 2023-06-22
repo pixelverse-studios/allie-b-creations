@@ -7,7 +7,7 @@ import {
     TextField,
     SelectChangeEvent
 } from '@mui/material'
-import { Close, Edit, Pin } from '@mui/icons-material'
+import { Close, Edit, Check } from '@mui/icons-material'
 
 import { StyledContactLinkCard } from './StyledCards'
 
@@ -98,6 +98,9 @@ const ContactLinkCard = ({ field }: any) => {
         setIconValue(icon)
         setIsEditMode(!isEditMode)
     }
+    const onEditModeCancel = () => {
+        setIsEditMode(false)
+    }
 
     const onIconSelectChange = (event: SelectChangeEvent) => {
         setIconValue(event.target.value as string)
@@ -108,29 +111,46 @@ const ContactLinkCard = ({ field }: any) => {
     return (
         <StyledContactLinkCard>
             <div className="link-card">
-                <div className="button-group">
-                    <h6
+                <div className="card-header">
+                    <h5
                         style={
                             !isEditMode
                                 ? { color: 'transparent' }
-                                : { color: 'green' }
+                                : { color: 'red' }
                         }>
                         * Edit Mode *
-                    </h6>
-                    <div>
-                        <button
-                            className="edit-button"
-                            onClick={onEditModeChange}>
-                            <Edit />
-                        </button>
-                        <button
-                            onClick={onDeleteContactLink}
-                            onFocus={onDeleteFocus}
-                            onBlur={onDeleteBlur}
-                            className="delete-button">
-                            <span>Confirm Delete</span>
-                            <Close />
-                        </button>
+                    </h5>
+                    <div className="button-group">
+                        {!isEditMode ? (
+                            <>
+                                <button
+                                    className="edit-button"
+                                    onClick={onEditModeChange}>
+                                    <Edit />
+                                </button>
+                                <button
+                                    onClick={onDeleteContactLink}
+                                    onFocus={onDeleteFocus}
+                                    onBlur={onDeleteBlur}
+                                    className="delete-button">
+                                    <span>Confirm Delete</span>
+                                    <Close />
+                                </button>
+                            </>
+                        ) : (
+                            <div className="button-group">
+                                <button
+                                    className="edit-button"
+                                    onClick={onEditModeChange}>
+                                    <Check />
+                                </button>
+                                <button
+                                    onClick={onEditModeCancel}
+                                    className="edit-button">
+                                    <Close />
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="input-group">
