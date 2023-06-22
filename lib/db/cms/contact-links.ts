@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { db } from '../config'
 import { ContactLinkProps } from '@/utils/types/redux'
 
@@ -20,4 +20,20 @@ const getContactLinks = async (): Promise<ContactLinkProps[]> => {
     }
 }
 
-export { getContactLinks }
+const updateContactLink = async (data: {
+    id: string
+    link: string
+    icon: string
+}) => {
+    const contactLinkRef = doc(db, 'contact-links', data.id)
+    const { link, icon } = data
+    try {
+        await updateDoc(contactLinkRef, {
+            link: link,
+            icon: icon
+        })
+    } catch (error) {
+        throw error
+    }
+}
+export { getContactLinks, updateContactLink }

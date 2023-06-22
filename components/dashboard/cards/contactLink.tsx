@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/lib/redux/store'
 import {
     InputLabel,
     MenuItem,
@@ -7,11 +9,11 @@ import {
     TextField,
     SelectChangeEvent
 } from '@mui/material'
-import { Close, Edit, Check } from '@mui/icons-material'
-
-import { StyledContactLinkCard } from './StyledCards'
 
 import {
+    Close,
+    Edit,
+    Check,
     Email,
     MailOutline,
     Send,
@@ -23,6 +25,10 @@ import {
     Reddit,
     YouTube
 } from '@mui/icons-material'
+
+import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
+import { updateContactLink } from '@/lib/db/cms/contact-links'
+import { StyledContactLinkCard } from './StyledCards'
 
 const SocialMenuItems = [
     {
@@ -68,8 +74,8 @@ const SocialMenuItems = [
 ]
 
 const ContactLinkCard = ({ field }: any) => {
+    const dispatch = useDispatch<AppDispatch>()
     const [deleteFocus, setDeleteFocus] = useState<number>(0)
-
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [iconValue, setIconValue] = useState<string>('')
     const [linkValue, setLinkValue] = useState<string>('')
@@ -98,9 +104,13 @@ const ContactLinkCard = ({ field }: any) => {
         setIconValue(icon)
         setIsEditMode(!isEditMode)
     }
-    const onEditModeConfirm = () => {
-        console.log('Link Value:', linkValue)
-        console.log('Icon value:', iconValue)
+    const onEditModeConfirm = async () => {
+        // console.log('Link Value:', linkValue)
+        // console.log('Icon value:', iconValue)
+        await updateContactLink({ link: linkValue, icon: iconValue, id: id })
+        dispatch(
+            updateContactLinks({ link: linkValue, icon: iconValue, id: id })
+        )
         setIsEditMode(false)
     }
     const onEditModeCancel = () => {
