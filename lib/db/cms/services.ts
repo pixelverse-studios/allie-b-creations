@@ -53,6 +53,31 @@ const addNewOfferingSection = async (
     }
 }
 
+const editOfferingSection = async (
+    id: string,
+    newTitle: string,
+    oldTitle: string
+) => {
+    try {
+        const services = await getServices()
+        const updatedOfferings = [...services.offerings].map(offering => {
+            if (offering.section === oldTitle) {
+                const uopdatedOffering = { ...offering }
+                uopdatedOffering.section = newTitle
+                return uopdatedOffering
+            }
+            return offering
+        })
+
+        const ref = doc(db, SERVICES, id)
+        await updateDoc(ref, { offerings: updatedOfferings })
+        const freshServices = await getServices()
+        return freshServices
+    } catch (error) {
+        throw error
+    }
+}
+
 const deleteOfferingSection = async (
     id: string,
     section: string
@@ -77,6 +102,7 @@ const deleteOfferingSection = async (
 export {
     addNewOfferingSection,
     deleteOfferingSection,
+    editOfferingSection,
     getServices,
     updateGeneralServiceData
 }

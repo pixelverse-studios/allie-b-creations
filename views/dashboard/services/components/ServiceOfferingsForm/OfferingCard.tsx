@@ -1,18 +1,30 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Card, IconButton, Typography, Popover, Collapse } from '@mui/material'
 import {
-    ExpandMore,
-    ArrowForward,
+    Card,
+    CircularProgress,
+    Collapse,
+    IconButton,
+    Typography
+} from '@mui/material'
+import {
     AddCircle,
+    ArrowForward,
+    Cancel,
+    CheckCircle,
     Edit,
-    DeleteForever
+    ExpandMore
 } from '@mui/icons-material'
 import { enqueueSnackbar } from 'notistack'
 
+import { TextField } from '@/components/form'
 import bannerUtils from '@/utils/banners'
-import { deleteOfferingSection } from '@/lib/db/cms/services'
+import {
+    deleteOfferingSection,
+    editOfferingSection
+} from '@/lib/db/cms/services'
 import OfferingItem from './OfferingItem'
+import { ConfirmDeleteButton } from '@/components/buttons'
 import { StyledEventTypeCard } from '../../StyledServicesWidget'
 import { uniqueId } from 'lodash'
 import { setServices } from '@/lib/redux/slices/services'
@@ -29,9 +41,42 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
     const dispatch = useDispatch()
     const { id } = useSelector((state: any) => state.services)
     const [expanded, setExpanded] = useState<boolean>(false)
+    const [isEditing, setIsEditing] = useState<boolean>(false)
+    const [newSectionTitle, setNewSectionTitle] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
     const eventCount = events?.length
 
-    const onDeleteClick = async (section: string) => {
+    const onEditIconClick = () => {
+        setIsEditing(true)
+        setNewSectionTitle(section)
+    }
+    const onEditSubmit = async () => {
+        setLoading(true)
+        try {
+            const updatedOfferings = await editOfferingSection(
+                id,
+                newSectionTitle,
+                section
+            )
+            dispatch(setServices(updatedOfferings))
+            enqueueSnackbar(
+                `Section ${section} has successfully been renamed to ${newSectionTitle}`,
+                {
+                    variant: statuses.SUCCESS
+                }
+            )
+        } catch (error) {
+            enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
+                variant: statuses.ERROR
+            })
+        }
+    }
+    const onEditCancel = () => {
+        setIsEditing(false)
+        setNewSectionTitle('')
+    }
+    const onEditFieldUpdate = (e: any) => setNewSectionTitle(e.target.value)
+    const onDeleteClick = async () => {
         // set loading
         try {
             const newServices = await deleteOfferingSection(id, section)
@@ -53,16 +98,52 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
         <Card>
             <StyledEventTypeCard className="offeringCard">
                 <div className="cardHeader">
-                    <Typography variant="h6">{section}</Typography>
+                    {isEditing ? (
+                        <TextField
+                            field={{ value: newSectionTitle, error: '' }}
+                            id="name"
+                            label="Name"
+                            type="text"
+                            onChange={onEditFieldUpdate}
+                        />
+                    ) : (
+                        <Typography variant="h6">{section}</Typography>
+                    )}
                     <div className="controls">
-                        <IconButton className="edit">
-                            <Edit />
-                        </IconButton>
-                        <IconButton
-                            className="delete"
-                            onClick={() => onDeleteClick(section)}>
-                            <DeleteForever />
-                        </IconButton>
+                        {isEditing ? (
+                            <>
+                                {loading ? (
+                                    <CircularProgress className="loading" />
+                                ) : (
+                                    <IconButton
+                                        disabled={
+                                            newSectionTitle === section ||
+                                            !newSectionTitle
+                                        }
+                                        className="submit"
+                                        onClick={onEditSubmit}>
+                                        <CheckCircle />
+                                    </IconButton>
+                                )}
+                                <IconButton
+                                    className="cancel"
+                                    onClick={onEditCancel}>
+                                    <Cancel />
+                                </IconButton>
+                            </>
+                        ) : null}
+                        {!isEditing ? (
+                            <>
+                                <IconButton
+                                    className="edit"
+                                    onClick={onEditIconClick}>
+                                    <Edit />
+                                </IconButton>
+                                <ConfirmDeleteButton
+                                    onTriggerMutation={onDeleteClick}
+                                />
+                            </>
+                        ) : null}
                     </div>
                 </div>
                 <div className="cardBody">

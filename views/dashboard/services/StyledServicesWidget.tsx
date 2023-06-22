@@ -45,13 +45,33 @@ export const StyledEventTypeCard = styled.div`
         gap: 1rem;
         border-bottom: 2px solid lightgray;
         padding: 5px;
+        height: 4rem;
 
         .controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
             .edit > svg {
                 color: var(--brand-color-3a);
             }
             .delete > svg {
                 color: var(--brand-color-2a);
+            }
+            .submit > svg {
+                color: var(--brand-color-1a);
+            }
+            .cancel > svg {
+                color: var(--brand-color-2a);
+            }
+
+            button:disabled > svg {
+                color: lightgray;
+            }
+
+            .loading {
+                height: 1.25rem !important;
+                width: 1.25rem !important;
             }
         }
     }
