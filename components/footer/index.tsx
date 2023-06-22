@@ -8,12 +8,11 @@ const Footer = () => {
         <StyledFooter>
             <img src={LogoImg.src} alt="Logo" className="logo" />
             <div className="social-icons">
-                <Instagram className="icon1" />
-
-                <LinkedIn className="icon2" />
-
-                <MailOutline className="icon3" />
+                <Instagram className="icon" />
+                <LinkedIn className="icon" />
+                <MailOutline className="icon" />
             </div>
+
             <small>&copy; ABC LLC 2023</small>
         </StyledFooter>
     )
