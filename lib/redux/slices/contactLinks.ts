@@ -12,7 +12,7 @@ export const contactLinks = createSlice({
             state,
             { payload }: { payload: ContactLinkProps[] }
         ) => {
-            state = payload
+            return payload
         }
     }
 })
