@@ -98,7 +98,14 @@ const ContactLinkCard = ({ field }: any) => {
         setIconValue(icon)
         setIsEditMode(!isEditMode)
     }
+    const onEditModeConfirm = () => {
+        console.log('Link Value:', linkValue)
+        console.log('Icon value:', iconValue)
+        setIsEditMode(false)
+    }
     const onEditModeCancel = () => {
+        setLinkValue(link)
+        setIconValue(icon)
         setIsEditMode(false)
     }
 
@@ -141,7 +148,7 @@ const ContactLinkCard = ({ field }: any) => {
                             <div className="button-group">
                                 <button
                                     className="edit-button"
-                                    onClick={onEditModeChange}>
+                                    onClick={onEditModeConfirm}>
                                     <Check />
                                 </button>
                                 <button

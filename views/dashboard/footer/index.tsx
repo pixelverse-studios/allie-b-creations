@@ -9,9 +9,11 @@ const FooterWidget = () => {
     return (
         <StyledFooterWedgie>
             <h1>Contact Links</h1>
-            {links.map((data: any) => {
-                return <ContactLinkCard field={data} key={data.label} />
-            })}
+            <div className="footer-grid">
+                {links.map((data: any) => {
+                    return <ContactLinkCard field={data} key={data.label} />
+                })}
+            </div>
         </StyledFooterWedgie>
     )
 }

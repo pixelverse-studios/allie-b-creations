@@ -203,7 +203,7 @@ export const StyledContactLinkCard = styled.div`
     .link-card {
         border: 3px solid var(--brand-color-1a);
         border-radius: var(--border-radius);
-        height: 10rem;
+        height: 100%;
         padding: 0.2rem 0.4rem;
 
         .card-header {
