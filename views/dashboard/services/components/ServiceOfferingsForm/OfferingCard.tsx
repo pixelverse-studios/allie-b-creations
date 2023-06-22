@@ -12,7 +12,6 @@ import {
     ArrowForward,
     Cancel,
     CheckCircle,
-    DeleteForever,
     Edit,
     ExpandMore
 } from '@mui/icons-material'
@@ -25,6 +24,7 @@ import {
     editOfferingSection
 } from '@/lib/db/cms/services'
 import OfferingItem from './OfferingItem'
+import { ConfirmDeleteButton } from '@/components/buttons'
 import { StyledEventTypeCard } from '../../StyledServicesWidget'
 import { uniqueId } from 'lodash'
 import { setServices } from '@/lib/redux/slices/services'
@@ -139,11 +139,9 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                                     onClick={onEditIconClick}>
                                     <Edit />
                                 </IconButton>
-                                <IconButton
-                                    className="delete"
-                                    onClick={onDeleteClick}>
-                                    <DeleteForever />
-                                </IconButton>
+                                <ConfirmDeleteButton
+                                    onTriggerMutation={onDeleteClick}
+                                />
                             </>
                         ) : null}
                     </div>

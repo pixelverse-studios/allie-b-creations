@@ -1,24 +1,22 @@
+import { ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/lib/redux/store'
 import { setDisplay, setTestimonials } from '@/lib/redux/slices/testimonials'
-import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
-
 import { Rating } from '@mui/material'
+import { enqueueSnackbar } from 'notistack'
+
 import {
     updateTestimonialDisplay,
     deleteTestimonialCollection
 } from '@/lib/db/cms/testimonials'
-import { enqueueSnackbar } from 'notistack'
-
-import { ChangeEvent, useState } from 'react'
-import { Close } from '@mui/icons-material'
 import bannerUtils from '@/utils/banners'
+import { ConfirmDeleteButton } from '@/components/buttons'
+import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
 
 const { statuses, messages } = bannerUtils
 
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
-    const [deleteFocus, setDeleteFocus] = useState<number>(0)
     const { display, id, name, rating, review, createdAt } = field
 
     const onDisplayStatusChange = async (
@@ -32,27 +30,18 @@ const TestimonialCard = ({ field }: any) => {
     }
 
     const onDeleteTestimonial = async () => {
-        const CONFIRMED_CLICK = 2
         try {
-            if (deleteFocus === CONFIRMED_CLICK) {
-                const testimonialData = await deleteTestimonialCollection(id)
-                dispatch(setTestimonials(testimonialData))
-                enqueueSnackbar('Testimonial Deleted', {
-                    variant: statuses.SUCCESS
-                })
-                setDeleteFocus(0)
-            } else {
-                setDeleteFocus(deleteFocus + 1)
-            }
+            const testimonialData = await deleteTestimonialCollection(id)
+            dispatch(setTestimonials(testimonialData))
+            enqueueSnackbar('Testimonial Deleted', {
+                variant: statuses.SUCCESS
+            })
         } catch (error) {
             enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
                 variant: statuses.ERROR
             })
         }
     }
-
-    const onDeleteFocus = () => setDeleteFocus(1)
-    const onDeleteBlur = () => setDeleteFocus(0)
 
     return (
         <StyledTestimonialCard className={`${display ? 'show' : 'hide'}`}>
@@ -71,13 +60,9 @@ const TestimonialCard = ({ field }: any) => {
                         data-tg-on="Hide"
                         htmlFor={id}
                     />
-                    <button
-                        onClick={onDeleteTestimonial}
-                        onFocus={onDeleteFocus}
-                        onBlur={onDeleteBlur}>
-                        <span>Confirm Delete</span>
-                        <Close />
-                    </button>
+                    <ConfirmDeleteButton
+                        onTriggerMutation={onDeleteTestimonial}
+                    />
                 </div>
                 <div className="title-group">
                     <h3>{name}</h3>
