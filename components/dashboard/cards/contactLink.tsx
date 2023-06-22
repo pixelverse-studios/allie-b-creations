@@ -25,6 +25,8 @@ import {
     Reddit,
     YouTube
 } from '@mui/icons-material'
+import { enqueueSnackbar } from 'notistack'
+import bannerUtils from '@/utils/banners'
 
 import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
 import { updateContactLink } from '@/lib/db/cms/contact-links'
@@ -73,6 +75,8 @@ const SocialMenuItems = [
     }
 ]
 
+const { statuses, messages } = bannerUtils
+
 const ContactLinkCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
     const [deleteFocus, setDeleteFocus] = useState<number>(0)
@@ -105,13 +109,24 @@ const ContactLinkCard = ({ field }: any) => {
         setIsEditMode(!isEditMode)
     }
     const onEditModeConfirm = async () => {
-        // console.log('Link Value:', linkValue)
-        // console.log('Icon value:', iconValue)
-        await updateContactLink({ link: linkValue, icon: iconValue, id: id })
-        dispatch(
-            updateContactLinks({ link: linkValue, icon: iconValue, id: id })
-        )
-        setIsEditMode(false)
+        try {
+            await updateContactLink({
+                link: linkValue,
+                icon: iconValue,
+                id: id
+            })
+            dispatch(
+                updateContactLinks({ link: linkValue, icon: iconValue, id: id })
+            )
+            setIsEditMode(false)
+            enqueueSnackbar('Contact Link Updated', {
+                variant: statuses.SUCCESS
+            })
+        } catch (error) {
+            enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
+                variant: statuses.ERROR
+            })
+        }
     }
     const onEditModeCancel = () => {
         setLinkValue(link)
