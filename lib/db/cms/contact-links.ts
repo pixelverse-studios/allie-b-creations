@@ -1,4 +1,5 @@
 import {
+    addDoc,
     collection,
     deleteDoc,
     doc,
@@ -23,6 +24,25 @@ const getContactLinks = async (): Promise<ContactLinkProps[]> => {
         })
     } catch (error) {
         throw error
+    }
+}
+
+const createContactLink = async (data: {
+    icon: string
+    label: string
+    link: string
+}) => {
+    const { icon, label, link } = data
+    try {
+        await addDoc(collection(db, 'contact-links'), {
+            icon,
+            label,
+            link
+        })
+        const contactLinks = await getContactLinks()
+        return contactLinks
+    } catch (deez) {
+        throw deez
     }
 }
 
@@ -53,4 +73,9 @@ const deleteContactLink = async (id: string) => {
         throw error
     }
 }
-export { getContactLinks, updateContactLink, deleteContactLink }
+export {
+    getContactLinks,
+    updateContactLink,
+    deleteContactLink,
+    createContactLink
+}
