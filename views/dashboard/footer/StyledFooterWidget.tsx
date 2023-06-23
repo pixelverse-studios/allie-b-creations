@@ -13,9 +13,26 @@ export const StyledFooterWedgie = styled.div`
         width: 100%;
     }
 `
-export const StyledSubmissionCard = styled.div`
+export const StyledSubmissionForm = styled.form`
     border: var(--brand-border-1);
     border-radius: var(--border-radius);
-    padding: 0.2rem 0.4rem;
+    padding: 1rem;
     height: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1rem;
+    .form-group {
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            column-gap: 1rem;
+            row-gap: 1rem;
+        }
+    }
 `

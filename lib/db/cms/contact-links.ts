@@ -33,6 +33,7 @@ const createContactLink = async (data: {
     link: string
 }) => {
     const { icon, label, link } = data
+    console.log(data)
     try {
         await addDoc(collection(db, 'contact-links'), {
             icon,
