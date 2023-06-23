@@ -3,78 +3,26 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/lib/redux/store'
 import {
     InputLabel,
-    MenuItem,
     FormControl,
-    Select,
     TextField,
     SelectChangeEvent
 } from '@mui/material'
 
-import {
-    Close,
-    Edit,
-    Check,
-    Email,
-    MailOutline,
-    Send,
-    Facebook,
-    FacebookOutlined,
-    Instagram,
-    Pinterest,
-    Twitter,
-    Reddit,
-    YouTube
-} from '@mui/icons-material'
+import { Close, Edit, Check } from '@mui/icons-material'
 import { enqueueSnackbar } from 'notistack'
 import bannerUtils from '@/utils/banners'
 
-import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
-import { updateContactLink } from '@/lib/db/cms/contact-links'
-import { StyledContactLinkCard } from './StyledCards'
+import {
+    setContactLinks,
+    updateContactLinks
+} from '@/lib/redux/slices/contactLinks'
+import {
+    deleteContactLink,
+    updateContactLink
+} from '@/lib/db/cms/contact-links'
 import { ConfirmDeleteButton, CircleIconButton } from '@/components/buttons'
-
-const SocialMenuItems = [
-    {
-        icon: <Send />,
-        value: 'Send'
-    },
-    {
-        icon: <Email />,
-        value: 'Email'
-    },
-    {
-        icon: <MailOutline />,
-        value: 'Email Outline'
-    },
-    {
-        icon: <Facebook />,
-        value: 'Facebook'
-    },
-    {
-        icon: <FacebookOutlined />,
-        value: 'FacebookOutlined'
-    },
-    {
-        icon: <Instagram />,
-        value: 'Instagram'
-    },
-    {
-        icon: <Pinterest />,
-        value: 'Pinterest'
-    },
-    {
-        icon: <Twitter />,
-        value: 'Twitter'
-    },
-    {
-        icon: <Reddit />,
-        value: 'Reddit'
-    },
-    {
-        icon: <YouTube />,
-        value: 'YouTube'
-    }
-]
+import IconSelectField from '@/components/form/fields/IconSelectField'
+import { StyledContactLinkCard } from './StyledCards'
 
 const { statuses, messages } = bannerUtils
 
@@ -83,11 +31,21 @@ const ContactLinkCard = ({ field }: any) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [iconValue, setIconValue] = useState<string>('')
     const [linkValue, setLinkValue] = useState<string>('')
-    const { id, icon, label, link } = field
+    const { id, icon, link } = field
 
     //Functions for Delete Button
     const onDeleteContactLink = async () => {
-        console.log('deleted')
+        try {
+            const contactLinkData = await deleteContactLink(id)
+            dispatch(setContactLinks(contactLinkData))
+            enqueueSnackbar('Contact Link Deleted', {
+                variant: statuses.SUCCESS
+            })
+        } catch (error) {
+            enqueueSnackbar(messages.TECHNICAL_DIFFICULTIES, {
+                variant: statuses.ERROR
+            })
+        }
     }
 
     //Functions for Edit Button
@@ -122,6 +80,7 @@ const ContactLinkCard = ({ field }: any) => {
         setIsEditMode(false)
     }
 
+    //Functions for event changes on select and text fields. Hi Philly
     const onIconSelectChange = (event: SelectChangeEvent) => {
         setIconValue(event.target.value as string)
     }
@@ -152,7 +111,7 @@ const ContactLinkCard = ({ field }: any) => {
                                 />
                             </>
                         ) : (
-                            <div className="button-group">
+                            <>
                                 <CircleIconButton
                                     onClickEvent={onEditModeConfirm}>
                                     <Check />
@@ -161,7 +120,7 @@ const ContactLinkCard = ({ field }: any) => {
                                     onClickEvent={onEditModeCancel}>
                                     <Close />
                                 </CircleIconButton>
-                            </div>
+                            </>
                         )}
                     </div>
                 </div>
@@ -169,39 +128,18 @@ const ContactLinkCard = ({ field }: any) => {
                     <FormControl sx={{ minWidth: 80 }}>
                         <InputLabel id="select-icon">Select</InputLabel>
                         {!isEditMode ? (
-                            <Select
-                                labelId="select-icon"
+                            <IconSelectField
+                                icon={icon}
                                 label="Select"
-                                value={icon}
-                                inputProps={{ readOnly: true }}>
-                                {SocialMenuItems.map(data => {
-                                    return (
-                                        <MenuItem
-                                            value={data.value}
-                                            key={data.value}
-                                            className="menu-item">
-                                            {data.icon}
-                                        </MenuItem>
-                                    )
-                                })}
-                            </Select>
+                                readOnly={true}
+                            />
                         ) : (
-                            <Select
-                                labelId="select-icon"
+                            <IconSelectField
+                                icon={iconValue}
                                 label="Select"
-                                value={iconValue}
-                                onChange={onIconSelectChange}>
-                                {SocialMenuItems.map(data => {
-                                    return (
-                                        <MenuItem
-                                            value={data.value}
-                                            key={data.value}
-                                            className="menu-item">
-                                            {data.icon}
-                                        </MenuItem>
-                                    )
-                                })}
-                            </Select>
+                                readOnly={false}
+                                onSelectChange={onIconSelectChange}
+                            />
                         )}
                     </FormControl>
                     <FormControl sx={{ minWidth: 300 }}>

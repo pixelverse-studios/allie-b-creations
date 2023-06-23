@@ -1,4 +1,10 @@
-import { collection, doc, getDocs, updateDoc } from 'firebase/firestore'
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    updateDoc
+} from 'firebase/firestore'
 import { db } from '../config'
 import { ContactLinkProps } from '@/utils/types/redux'
 
@@ -30,10 +36,21 @@ const updateContactLink = async (data: {
     try {
         await updateDoc(contactLinkRef, {
             link: link,
-            icon: icon
+            icon: icon,
+            label: icon
         })
     } catch (error) {
         throw error
     }
 }
-export { getContactLinks, updateContactLink }
+
+const deleteContactLink = async (id: string) => {
+    try {
+        await deleteDoc(doc(db, 'contact-links', id))
+        const contactLinks = await getContactLinks()
+        return contactLinks
+    } catch (error) {
+        throw error
+    }
+}
+export { getContactLinks, updateContactLink, deleteContactLink }
