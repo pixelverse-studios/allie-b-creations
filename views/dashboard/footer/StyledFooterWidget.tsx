@@ -13,3 +13,9 @@ export const StyledFooterWedgie = styled.div`
         width: 100%;
     }
 `
+export const StyledSubmissionCard = styled.div`
+    border: var(--brand-border-1);
+    border-radius: var(--border-radius);
+    padding: 0.2rem 0.4rem;
+    height: 100%;
+`

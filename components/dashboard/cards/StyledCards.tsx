@@ -2,16 +2,15 @@ import styled from '@emotion/styled'
 
 export const StyledTestimonialCard = styled.div`
     display: inline-block;
-    perspective: 600px;
     height: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none;
     position: relative;
+    border-radius: var(--border-radius);
+    border: 3px solid;
     &::-webkit-scrollbar {
         display: none;
     }
-    border-radius: var(--border-radius);
-    border: 3px solid;
     &.show {
         border-color: var(--brand-color-1a);
 
@@ -127,7 +126,6 @@ export const StyledTestimonialCard = styled.div`
             }
         }
     }
-
     .review {
         padding: 0 0.5rem;
     }

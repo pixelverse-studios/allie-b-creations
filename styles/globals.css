@@ -21,6 +21,8 @@
     --footer-height: 10rem;
 
     --hover-transition: 0.25s ease-in-out;
+
+    --brand-border-1: 3px solid var(--brand-color-1a);
 }
 
 * {

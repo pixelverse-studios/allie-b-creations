@@ -31,6 +31,7 @@ import bannerUtils from '@/utils/banners'
 import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
 import { updateContactLink } from '@/lib/db/cms/contact-links'
 import { StyledContactLinkCard } from './StyledCards'
+import { ConfirmDeleteButton, CircleIconButton } from '@/components/buttons'
 
 const SocialMenuItems = [
     {
@@ -79,7 +80,6 @@ const { statuses, messages } = bannerUtils
 
 const ContactLinkCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()
-    const [deleteFocus, setDeleteFocus] = useState<number>(0)
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [iconValue, setIconValue] = useState<string>('')
     const [linkValue, setLinkValue] = useState<string>('')
@@ -87,20 +87,8 @@ const ContactLinkCard = ({ field }: any) => {
 
     //Functions for Delete Button
     const onDeleteContactLink = async () => {
-        const CONFIRMED_CLICK = 2
-        try {
-            if (deleteFocus === CONFIRMED_CLICK) {
-                console.log('deleted')
-                setDeleteFocus(0)
-            } else {
-                setDeleteFocus(deleteFocus + 1)
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        console.log('deleted')
     }
-    const onDeleteFocus = () => setDeleteFocus(1)
-    const onDeleteBlur = () => setDeleteFocus(0)
 
     //Functions for Edit Button
     const onEditModeChange = () => {
@@ -155,32 +143,24 @@ const ContactLinkCard = ({ field }: any) => {
                     <div className="button-group">
                         {!isEditMode ? (
                             <>
-                                <button
-                                    className="edit-button"
-                                    onClick={onEditModeChange}>
+                                <CircleIconButton
+                                    onClickEvent={onEditModeChange}>
                                     <Edit />
-                                </button>
-                                <button
-                                    onClick={onDeleteContactLink}
-                                    onFocus={onDeleteFocus}
-                                    onBlur={onDeleteBlur}
-                                    className="delete-button">
-                                    <span>Confirm Delete</span>
-                                    <Close />
-                                </button>
+                                </CircleIconButton>
+                                <ConfirmDeleteButton
+                                    onTriggerMutation={onDeleteContactLink}
+                                />
                             </>
                         ) : (
                             <div className="button-group">
-                                <button
-                                    className="edit-button"
-                                    onClick={onEditModeConfirm}>
+                                <CircleIconButton
+                                    onClickEvent={onEditModeConfirm}>
                                     <Check />
-                                </button>
-                                <button
-                                    onClick={onEditModeCancel}
-                                    className="edit-button">
+                                </CircleIconButton>
+                                <CircleIconButton
+                                    onClickEvent={onEditModeCancel}>
                                     <Close />
-                                </button>
+                                </CircleIconButton>
                             </div>
                         )}
                     </div>
