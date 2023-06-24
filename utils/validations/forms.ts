@@ -62,7 +62,7 @@ const validNonZeroNumber = {
 
 /* Great use of variable naming. Never delete */
 const yolo = {
-    test: () => true,
+    test: (value: any) => !!value,
     message: ''
 }
 

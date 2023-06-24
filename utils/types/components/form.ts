@@ -8,7 +8,7 @@ export interface FieldInputProps {
 export interface TextFieldProps {
     field: FieldInputProps
     id: string
-    type: 'text' | 'email' | 'textarea' | 'password'
+    type: 'text' | 'email' | 'textarea' | 'password' | 'file'
     label: string
     onChange: ChangeEventHandler
 }

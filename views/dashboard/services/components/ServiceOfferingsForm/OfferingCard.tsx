@@ -146,16 +146,18 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                         ) : null}
                     </div>
                 </div>
-                <div className="cardBody">
-                    <Typography variant="subtitle1" gutterBottom>
-                        {eventCount} {eventCount !== 1 ? 'Events' : 'Event'}{' '}
-                        Offered
-                    </Typography>
-                    <IconButton onClick={() => setExpanded(!expanded)}>
+                <div
+                    className="cardBody"
+                    onClick={() => setExpanded(!expanded)}>
+                    <div className="eventsRow">
+                        <Typography variant="subtitle1" gutterBottom>
+                            {eventCount} {eventCount !== 1 ? 'Events' : 'Event'}{' '}
+                            Offered
+                        </Typography>
                         <ExpandMore
                             className={`${expanded ? 'flip' : ''} collapseIcon`}
                         />
-                    </IconButton>
+                    </div>
                 </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <div className="offeringsList">

@@ -13,8 +13,3 @@ const ServicesWidget = () => {
 }
 
 export default ServicesWidget
-
-// TODO:
-// Build out the Edit Service Offering page (/dashboard/services/offerings/:section/:offering title)
-// Build out the Add new Service Offering page (/dashboard/services/offerings/add)
-// Add logic for Add New Event Section

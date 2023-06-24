@@ -1,5 +1,9 @@
 import styled from '@emotion/styled'
 import { DashboardCardStyles } from '../StyledDashboard'
+import {
+    rowWithIcon_HoverInLeft,
+    rowWithIcon_HoverInRight
+} from '@/styles/components/rowWithIconHover'
 
 export const StyledServicesWidget = styled.section`
     display: flex;
@@ -9,6 +13,35 @@ export const StyledServicesWidget = styled.section`
     h2 {
         color: var(--brand-color-1a);
         font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        a {
+            display: inline-block;
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 3px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--brand-color-1a);
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
+
+            &:hover::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+
+        span {
+            margin: 0 0.5rem;
+        }
     }
 `
 
@@ -77,24 +110,36 @@ export const StyledEventTypeCard = styled.div`
     }
 
     .cardBody {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 0.5rem;
+        .eventsRow {
+            transition: var(--hover-transition);
+            margin: 0.5rem 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border-radius: var(--border-radius);
+
+            h6 {
+                margin-bottom: 0;
+            }
+
+            ${rowWithIcon_HoverInLeft}
+
+            .collapseIcon {
+                transition: var(--hover-transition);
+                transform: rotate(0deg);
+                &.flip {
+                    transition: var(--hover-transition);
+                    transform: rotate(180deg);
+                }
+            }
+        }
     }
     .offeringsList {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-    }
-
-    .collapseIcon {
-        transition: var(--hover-transition);
-
-        &.flip {
-            transform: rotate(180deg);
-        }
     }
 `
 
@@ -108,24 +153,8 @@ export const StyledOfferingItem = styled.div`
     position: relative;
     transition: var(--hover-transition);
     padding: 1rem;
-    border-radius: var(--border-radius);
 
-    background: linear-gradient(to right, var(--brand-color-1) 50%, white 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-
-    svg {
-        transition: var(--hover-transition);
-        font-size: 1.5rem;
-    }
-
-    &:hover {
-        cursor: pointer;
-        background-position: left bottom;
-        font-weight: 700;
-
-        svg {
-            transform: scale(1.5);
-        }
-    }
+    ${rowWithIcon_HoverInRight}
 `
+
+export const StyledServicesEventform = styled.form``
