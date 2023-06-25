@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { Instagram, LinkedIn, MailOutline } from '@mui/icons-material'
 import { SocialMenuItems } from '@/utils/IconSelection'
 import LogoImg from '../../assets/logo.svg'
 import { StyledFooter } from './StyledFooter'
