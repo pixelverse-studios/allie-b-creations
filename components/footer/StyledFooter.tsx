@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledFooter = styled.footer`
     @keyframes colorWheel {
         0% {
-            color: var(--brand-color-1a);
+            color: var(--brand-color-1);
         }
         25% {
             color: var(--brand-color-2);
@@ -15,7 +15,7 @@ export const StyledFooter = styled.footer`
             color: var(--brand-color-2);
         }
         100% {
-            color: var(--brand-color-1a);
+            color: var(--brand-color-1);
         }
     }
     background-color: var(--accent-color-2);

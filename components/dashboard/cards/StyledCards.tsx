@@ -12,7 +12,7 @@ export const StyledTestimonialCard = styled.div`
         display: none;
     }
     &.show {
-        border-color: var(--brand-color-1a);
+        border-color: var(--brand-color-1);
 
         .MuiRating-readOnly {
             color: var(--brand-color-3);
@@ -96,12 +96,12 @@ export const StyledTestimonialCard = styled.div`
 
             &:after {
                 content: attr(data-tg-on);
-                background: var(--brand-color-1a);
+                background: var(--brand-color-1);
                 transform: rotateY(-180deg);
             }
 
             &:before {
-                background: var(--brand-color-1a);
+                background: var(--brand-color-1);
                 content: attr(data-tg-off);
             }
 
@@ -151,7 +151,7 @@ export const StyledTestimonialInput = styled.input`
 
 export const StyledContactLinkCard = styled.div`
     .link-card {
-        border: 3px solid var(--brand-color-1a);
+        border: 3px solid var(--brand-color-1);
         border-radius: var(--border-radius);
         height: 100%;
         padding: 0.5rem;

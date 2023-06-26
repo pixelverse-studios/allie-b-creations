@@ -14,7 +14,7 @@ export const StyledConfirmDeleteButton = styled.button`
     transition: 0.3s;
 
     svg {
-        color: var(--brand-color-1a);
+        color: var(--brand-color-1);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -25,7 +25,7 @@ export const StyledConfirmDeleteButton = styled.button`
         width: 150px;
         height: 40px;
         transition: 0.3s;
-        background-color: var(--brand-color-1a);
+        background-color: var(--brand-color-1);
 
         svg {
             opacity: 0;
@@ -43,7 +43,7 @@ export const StyledConfirmDeleteButton = styled.button`
         position: absolute;
         opacity: 0;
         transform: translate(-50%, -50%);
-        color: var(--brand-color-1a);
+        color: var(--brand-color-1);
         font-weight: 600;
         transition: 0.3s;
     }
@@ -66,7 +66,7 @@ export const StyledCircleIconButton = styled.button`
     transition: 0.3s;
 
     svg {
-        color: var(--brand-color-1a);
+        color: var(--brand-color-1);
         position: absolute;
         top: 50%;
         left: 50%;
