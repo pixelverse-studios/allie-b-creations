@@ -1,12 +1,15 @@
+import { MouseEventHandler } from 'react'
 import { StyledCircleIconButton } from './StyledButtons'
+
+interface CircleIconButtonProps {
+    children: React.ReactNode
+    onClickEvent: MouseEventHandler<HTMLButtonElement> | (() => void)
+}
 
 const CircleIconButton = ({
     children,
     onClickEvent
-}: {
-    children: any
-    onClickEvent: any
-}) => {
+}: CircleIconButtonProps) => {
     return (
         <StyledCircleIconButton onClick={onClickEvent}>
             {children}
