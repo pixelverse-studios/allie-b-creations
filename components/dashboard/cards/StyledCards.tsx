@@ -154,7 +154,10 @@ export const StyledContactLinkCard = styled.div`
         border: 3px solid var(--brand-color-1a);
         border-radius: var(--border-radius);
         height: 100%;
-        padding: 0.2rem 0.4rem;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.7rem;
 
         .card-header {
             display: flex;
@@ -167,7 +170,8 @@ export const StyledContactLinkCard = styled.div`
 
         .input-group {
             display: flex;
-            column-gap: 1rem;
+            flex-direction: column;
+            row-gap: 1rem;
             .MuiOutlinedInput-root {
                 height: 3.5rem;
             }
