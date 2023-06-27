@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
-import { TextField } from '@/components/form'
+import { TextField, FileDragAndDrop } from '@/components/form'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
 
@@ -79,13 +79,14 @@ const ServicesEventForm = ({
                     type="text"
                     onChange={handleChange}
                 />
-                <TextField
+                {/* <TextField
                     field={form.img}
                     id="img"
                     label="Event img"
                     type="file"
                     onChange={handleChange}
-                />
+                /> */}
+                <FileDragAndDrop id="yer" label="Upload it, yer" />
             </StyledFieldSet>
         </StyledServicesEventform>
     )
