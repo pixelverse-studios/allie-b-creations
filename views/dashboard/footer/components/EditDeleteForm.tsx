@@ -46,9 +46,11 @@ const EditDeleteForm = ({
             <div className="card-header">
                 <h5 style={{ color: 'transparent' }}>* Edit Mode *</h5>
                 <div className="button-group">
-                    <CircleIconButton onClickEvent={onEditModeChange}>
-                        <Edit />
-                    </CircleIconButton>
+                    <CircleIconButton
+                        onClickEvent={onEditModeChange}
+                        Icon={<Edit />}
+                    />
+
                     <ConfirmDeleteButton
                         onTriggerMutation={onDeleteContactLink}
                     />

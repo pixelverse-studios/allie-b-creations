@@ -75,9 +75,10 @@ const FooterWidget = () => {
                             onChange={onLinkChange}
                         />
                     </FormControl>
-                    <CircleIconButton onClickEvent={onSubmitNewContactLink}>
-                        <Add />
-                    </CircleIconButton>
+                    <CircleIconButton
+                        onClickEvent={onSubmitNewContactLink}
+                        Icon={<Add />}
+                    />
                 </div>
             </StyledSubmissionForm>
             <div className="footer-grid">

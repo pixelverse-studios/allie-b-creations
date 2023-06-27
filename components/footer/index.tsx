@@ -16,7 +16,7 @@ const Footer = () => {
                     return iconValue?.icon
                 })}
             </div>
-            <small>&copy; ABC LLC 2023</small>
+            <small>&copy;Allie B Creations LLC 2023</small>
         </StyledFooter>
     )
 }

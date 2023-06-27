@@ -76,12 +76,14 @@ const AddCancelForm = ({
             <div className="card-header">
                 <h5 style={{ color: 'red' }}>* Edit Mode *</h5>
                 <div className="button-group">
-                    <CircleIconButton onClickEvent={onEditModeConfirm}>
-                        <Check />
-                    </CircleIconButton>
-                    <CircleIconButton onClickEvent={onEditModeCancel}>
-                        <Close />
-                    </CircleIconButton>
+                    <CircleIconButton
+                        onClickEvent={onEditModeConfirm}
+                        Icon={<Check />}
+                    />
+                    <CircleIconButton
+                        onClickEvent={onEditModeCancel}
+                        Icon={<Close />}
+                    />
                 </div>
             </div>
             <div className="input-group">
