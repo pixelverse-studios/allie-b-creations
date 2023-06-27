@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/lib/redux/store'
 import { CircleIconButton } from '@/components/buttons'
@@ -65,6 +65,11 @@ const AddCancelForm = ({
     const onLinkChange = (event: { target: { value: string } }) => {
         setLinkValue(event.target.value)
     }
+
+    useEffect(() => {
+        setLinkValue(link)
+        setIconValue(icon)
+    }, [setLinkValue, setIconValue])
 
     return (
         <div className="link-card">
