@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { TestimonialsProps } from '@/utils/types/redux'
 import { useSelector } from 'react-redux'
-import TestimonialCard from '@/components/dashboard/cards/testimonial'
+import TestimonialCard from '@/views/dashboard/testimonials/cards/testimonial'
 
 import { testimonialFilterMap, testimonialSortMap } from '@/utils/constants'
 import SelectField from '@/components/form/fields/SelectField'

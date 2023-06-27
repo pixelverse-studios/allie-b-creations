@@ -21,8 +21,8 @@ import {
     updateContactLink
 } from '@/lib/db/cms/contact-links'
 import { ConfirmDeleteButton, CircleIconButton } from '@/components/buttons'
-import IconSelectField from '@/components/form/fields/IconSelectField'
-import { StyledContactLinkCard } from './StyledCards'
+import IconSelectField from '@/views/dashboard/footer/components/IconSelectField'
+import { StyledContactLinkCard } from './StyledCard'
 
 const { statuses, messages } = bannerUtils
 
