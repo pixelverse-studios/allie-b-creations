@@ -1,3 +1,5 @@
+import AboutPage from '@/views/about'
+
 export default function ContactPage() {
-    return <div>Contact Page placeholder</div>
+    return <AboutPage />
 }
