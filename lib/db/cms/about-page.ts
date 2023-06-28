@@ -1,11 +1,13 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { db } from '../config'
 import { AboutPageProps } from '@/utils/types/redux'
 
+const ABOUT = 'about-page'
+const aboutPageCollection = collection(db, ABOUT)
+
 const getAboutPageData = async (): Promise<AboutPageProps> => {
     try {
-        const aboutPageRef = collection(db, 'about-page')
-        const data = await getDocs(aboutPageRef)
+        const data = await getDocs(aboutPageCollection)
         const { backgroundInfo, header, profileImg, role, subHeader, title } =
             data.docs[0].data()
         const aboutPageData = {
@@ -24,4 +26,28 @@ const getAboutPageData = async (): Promise<AboutPageProps> => {
     }
 }
 
-export { getAboutPageData }
+const updateAboutPageData = async (
+    id: string,
+    fields: {
+        backgroundInfo: string[]
+        header: string
+        profileImg: string
+        role: string
+        subheader: string
+        title: string
+    }
+): Promise<AboutPageProps> => {
+    try {
+        const ref = doc(db, ABOUT, id)
+        await updateDoc(ref, {
+            ...fields
+        })
+
+        const aboutPageData = await getAboutPageData()
+        return aboutPageData
+    } catch (error) {
+        throw error
+    }
+}
+
+export { getAboutPageData, updateAboutPageData }
