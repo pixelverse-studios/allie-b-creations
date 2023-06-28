@@ -20,6 +20,8 @@ export const aboutPageSlice = createSlice({
             state.profileImg = payload.profileImg
             state.header = payload.header
             state.role = payload.role
+            state.subHeader = payload.subHeader
+            state.title = payload.title
         }
     }
 })
