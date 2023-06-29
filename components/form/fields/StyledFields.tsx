@@ -1,53 +1,75 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
-export const StyledFileDragAndDrop = styled.div`
-    height: 16rem;
-    width: 28rem;
-    max-width: 100%;
-    text-align: center;
-    position: relative;
+export const StyledFileUpload = styled.div`
+    padding: 1rem;
+    padding-top: 2rem;
+    border: 2px solid lightgray;
+    border-radius: var(--border-radius);
+    width: 25rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-    .fileInput {
-        display: none;
-    }
-
-    .fileLabel {
-        height: 100%;
+    .uploadBlock {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-width: 2px;
-        border-radius: 1rem;
-        border-style: dashed;
-        border-color: #cbd5e1;
-        background-color: #f8fafc;
+        flex-direction: column;
+        gap: 1rem;
+        h4 {
+            font-size: 1.8rem;
+            text-align: center;
+        }
 
-        &.active {
-            background-color: #ffffff;
+        p {
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        label span {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            transition: 0.3s ease;
+            .loading {
+                animation: spin 1s infinite;
+            }
+            @keyframes spin {
+                from {
+                    transform: rotate(0);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
         }
     }
+    .previewBlock {
+        max-height: 50%;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+`
 
-    #dragElement {
+export const StyledImgPreview = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid lightgray;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+
+    span {
+        font-size: 1.2rem;
+        text-overflow: ellipsis;
+        width: 70%;
+    }
+
+    button {
         position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 1rem;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        right: 0.5rem;
     }
-
-    /* .upload-button {
-        cursor: pointer;
-        padding: 0.25rem;
-        font-size: 1rem;
-        border: none;
-        font-family: 'Oswald', sans-serif;
-        background-color: transparent;
-    }
-
-    .upload-button:hover {
-        text-decoration-line: underline;
-    } */
 `

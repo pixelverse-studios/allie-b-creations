@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
-import { TextField, FileDragAndDrop } from '@/components/form'
+import { TextField, FileUpload } from '@/components/form'
+import { FileItem, FilesList } from '@/components/form/fields/FileUpload'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
 
@@ -20,14 +21,14 @@ interface ServicesEventFormTypes extends EventFormFields {
 
 const initialState = {
     description: '',
-    img: '',
-    title: ''
+    title: '',
+    img: []
 }
 
 const validations = {
     description: FormValidations.yolo,
-    img: FormValidations.yolo,
-    title: FormValidations.yolo
+    title: FormValidations.yolo,
+    img: FormValidations.yolo
 }
 
 const ServicesEventForm = ({
@@ -53,6 +54,7 @@ const ServicesEventForm = ({
         isDataImported,
         handleFormSubmit
     } = useForm(initialState, validations, store)
+    const [files, setFiles] = useState<FileItem[] | []>([])
 
     useEffect(() => {
         const hasData = Object.values(store).some(item => !!item)
@@ -63,8 +65,15 @@ const ServicesEventForm = ({
 
     return (
         <StyledServicesEventform>
-            <h6>{renderLabel}</h6>
+            <h3>{renderLabel}</h3>
             <StyledFieldSet>
+                <FileUpload
+                    context="serviceEvents"
+                    files={files}
+                    label="Upload image"
+                    multiple={false}
+                    setFiles={setFiles}
+                />
                 <TextField
                     field={form.description}
                     id="description"
@@ -79,14 +88,6 @@ const ServicesEventForm = ({
                     type="text"
                     onChange={handleChange}
                 />
-                {/* <TextField
-                    field={form.img}
-                    id="img"
-                    label="Event img"
-                    type="file"
-                    onChange={handleChange}
-                /> */}
-                <FileDragAndDrop id="yer" label="Upload it, yer" />
             </StyledFieldSet>
         </StyledServicesEventform>
     )

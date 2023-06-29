@@ -157,4 +157,8 @@ export const StyledOfferingItem = styled.div`
     ${rowWithIcon_HoverInRight}
 `
 
-export const StyledServicesEventform = styled.form``
+export const StyledServicesEventform = styled.form`
+    h3 {
+        margin-bottom: 1rem;
+    }
+`
