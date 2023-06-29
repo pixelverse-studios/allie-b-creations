@@ -6,16 +6,6 @@ export const StyledAboutPage = styled.div`
     row-gap: 5rem;
     padding-top: 1rem;
 
-    .title-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .title {
-            width: 20rem;
-        }
-    }
-
     .image-about-content {
         display: flex;
         flex-direction: row;
@@ -30,12 +20,13 @@ export const StyledAboutPage = styled.div`
         .about {
             display: flex;
             flex-direction: column;
-            background-color: var(--brand-color-1);
+            background-color: var(--brand-color-2);
             width: 100%;
             align-items: center;
             text-align: center;
             justify-content: space-around;
             padding: 2rem;
+            border-radius: var(--border-radius);
 
             .header {
                 width: 3rem;

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { StyledAboutPage } from './StyledAboutPage'
-import AboutMeLogo from '@/assets/about-me.svg'
+import HeaderWithPaintStreaks from '@/components/title/headerWithPaint'
 
 const AboutPageView = () => {
     const aboutPageData = useSelector((state: any) => state.aboutPage)
@@ -9,9 +9,7 @@ const AboutPageView = () => {
 
     return (
         <StyledAboutPage>
-            <div className="title-container">
-                <img src={AboutMeLogo.src} alt="About Me" className="title" />
-            </div>
+            <HeaderWithPaintStreaks title="About Me" />
             <div className="image-about-content">
                 <img src={profileImg} alt="alt text" className="image" />
                 <div className="about">

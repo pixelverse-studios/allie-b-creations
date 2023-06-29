@@ -21,6 +21,13 @@
     --footer-height: 4rem;
 
     --hover-transition: 0.25s ease-in-out;
+
+    --Gistesy: 'Gistesy', sans-serif;
+}
+
+@font-face {
+    font-family: 'Gistesy';
+    src: url('../assets/fonts/Gistesy.ttf') format('truetype');
 }
 
 * {
