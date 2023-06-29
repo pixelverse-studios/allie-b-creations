@@ -32,11 +32,7 @@ const AboutPageView = () => {
                                 <h2 className="subHeader">{data.subHeader}</h2>
                                 <div className="background-info-container">
                                     <p className="background-info">
-                                        I'm a paragraph. Click here to add your
-                                        own text and edit me. It’s easy. Just
-                                        click “Edit Text” or double click me to
-                                        add your own content and make changes to
-                                        the font.
+                                        {data.info}
                                     </p>
                                 </div>
                             </div>
