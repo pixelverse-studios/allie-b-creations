@@ -7,7 +7,6 @@ import {
     FormControl,
     FormHelperText,
     InputLabel,
-    SelectChangeEvent,
     TextField
 } from '@mui/material'
 import { enqueueSnackbar } from 'notistack'
@@ -71,25 +70,31 @@ const EditDetails = ({
     }
 
     //Functions for event changes on select and text fields. Hi Philly
-    const onIconSelectChange = (event: SelectChangeEvent) => {
-        setIconValue(event.target.value as string)
-    }
-    const onLinkChange = (event: { target: { value: string } }) => {
-        setLinkValue(event.target.value)
-        let errorValue
-        //If Email
-        if (iconValue.includes(EMAIL)) {
-            errorValue = validEmail.test(event.target.value)
-        } else {
-            errorValue = validHttpOrHttpsUrl.test(event.target.value)
-        }
 
-        if (!errorValue) {
-            return setHasError(true)
-        } else {
-            console.log('false')
-            return setHasError(false)
-        }
+    const validateForm = (icon: string, link: string) => {
+        const errorValue = icon.includes(EMAIL)
+            ? validEmail.test(link)
+            : validHttpOrHttpsUrl.test(link)
+
+        setHasError(!errorValue)
+    }
+
+    const onIconSelectChange = ({
+        target: { value }
+    }: {
+        target: { value: string }
+    }) => {
+        setIconValue(value)
+        validateForm(value, linkValue)
+    }
+
+    const onLinkChange = ({
+        target: { value }
+    }: {
+        target: { value: string }
+    }) => {
+        setLinkValue(value)
+        validateForm(iconValue, value)
     }
 
     const disableCheck = useMemo(

@@ -13,10 +13,6 @@ import {
 
 export const SocialMenuItems = [
     {
-        icon: <Send className="icon" />,
-        value: 'Send'
-    },
-    {
         icon: <Email className="icon" />,
         value: 'Email'
     },

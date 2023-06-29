@@ -73,4 +73,13 @@ export const StyledCircleIconButton = styled.button`
         transform: translate(-50%, -50%);
         transition: 0.3s;
     }
+
+    &:disabled {
+        border: 3px solid grey;
+        cursor: not-allowed;
+
+        svg {
+            color: grey;
+        }
+    }
 `

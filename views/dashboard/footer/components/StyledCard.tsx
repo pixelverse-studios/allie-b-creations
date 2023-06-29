@@ -25,9 +25,6 @@ export const StyledContactLinkCard = styled.div`
             .MuiOutlinedInput-root {
                 height: 3.5rem;
             }
-
-            .error-text {
-            }
         }
     }
 `
