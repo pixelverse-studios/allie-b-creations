@@ -6,9 +6,10 @@ export const StyledAboutPage = styled.div`
     row-gap: 5rem;
     padding-top: 1rem;
 
-    .image-about-content {
+    .image-about-content-0,
+    .image-about-content-1 {
         display: flex;
-        flex-direction: row;
+
         justify-content: space-around;
         column-gap: 3rem;
 
@@ -28,7 +29,7 @@ export const StyledAboutPage = styled.div`
             padding: 2rem;
             border-radius: var(--border-radius);
 
-            .header {
+            .quote {
                 width: 3rem;
             }
 
@@ -58,5 +59,11 @@ export const StyledAboutPage = styled.div`
                 }
             }
         }
+    }
+    .image-about-content-0 {
+        flex-direction: row;
+    }
+    .image-about-content-1 {
+        flex-direction: row-reverse;
     }
 `

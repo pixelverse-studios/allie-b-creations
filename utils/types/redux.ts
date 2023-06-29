@@ -12,6 +12,7 @@ export interface AboutPageProps {
     role: string
     subHeader: string
     title: string
+    name: string
 }
 
 export interface ContactLinkProps {

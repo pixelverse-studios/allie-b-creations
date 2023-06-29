@@ -10,7 +10,7 @@ const getAboutPageData = async (): Promise<AboutPageProps[]> => {
         const data = await getDocs(aboutPageCollection)
 
         return data.docs.map(doc => {
-            const { info, header, profileImg, role, subHeader, title } =
+            const { info, header, profileImg, role, subHeader, title, name } =
                 doc.data()
             return {
                 id: doc.id,
@@ -19,7 +19,8 @@ const getAboutPageData = async (): Promise<AboutPageProps[]> => {
                 subHeader,
                 profileImg,
                 title,
-                role
+                role,
+                name
             }
         })
     } catch (error) {

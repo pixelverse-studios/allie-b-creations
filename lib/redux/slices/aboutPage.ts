@@ -9,7 +9,8 @@ const initialState: AboutPageProps[] = [
         role: '',
         info: '',
         subHeader: '',
-        title: ''
+        title: '',
+        name: ''
     }
 ]
 export const aboutPageSlice = createSlice({
