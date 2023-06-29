@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
-import { TextField, FileUpload } from '@/components/form'
+import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
 import { FileItem, FilesList } from '@/components/form/fields/FileUpload'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
@@ -20,9 +20,9 @@ interface ServicesEventFormTypes extends EventFormFields {
 }
 
 const initialState = {
-    description: '',
-    title: '',
-    img: []
+    description: { value: '' },
+    title: { value: '' },
+    img: { value: [] }
 }
 
 const validations = {
@@ -46,15 +46,15 @@ const ServicesEventForm = ({
             : `Editing event for ${section}`
 
     const {
-        disableSubmit,
         handleChange,
+        handleNonFormEventChange,
         form,
         formLoading,
         handleImport,
         isDataImported,
-        handleFormSubmit
+        handleFormSubmit,
+        handleReset
     } = useForm(initialState, validations, store)
-    const [files, setFiles] = useState<FileItem[] | []>([])
 
     useEffect(() => {
         const hasData = Object.values(store).some(item => !!item)
@@ -63,32 +63,56 @@ const ServicesEventForm = ({
         }
     }, [store, isDataImported])
 
+    const onFilesChange = (files: any) => {
+        handleNonFormEventChange(files, 'img')
+    }
+
+    const disableSubmit = useMemo(() => {
+        const formStatuses = Object.entries(form).map(
+            ([label, field]: [label: string, field: any]) => {
+                if (label === 'img') {
+                    return field.value?.length > 0
+                }
+
+                return !!field.value
+            }
+        )
+        return !formStatuses.every(item => item)
+    }, [form])
+
     return (
         <StyledServicesEventform>
             <h3>{renderLabel}</h3>
-            <StyledFieldSet>
+            <StyledFieldSet className="serviceEventFields">
                 <FileUpload
                     context="serviceEvents"
-                    files={files}
+                    files={form.img.value}
                     label="Upload image"
-                    multiple={false}
-                    setFiles={setFiles}
+                    multiple={true}
+                    setFiles={onFilesChange}
                 />
-                <TextField
-                    field={form.description}
-                    id="description"
-                    label="Event Description"
-                    type="text"
-                    onChange={handleChange}
-                />
-                <TextField
-                    field={form.title}
-                    id="title"
-                    label="Event Title"
-                    type="text"
-                    onChange={handleChange}
-                />
+                <div className="fields">
+                    <TextField
+                        field={form.description}
+                        id="description"
+                        label="Event Description"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        field={form.title}
+                        id="title"
+                        label="Event Title"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                </div>
             </StyledFieldSet>
+            <FormButtonGroup
+                disableSubmit={disableSubmit}
+                loading={formLoading}
+                handleReset={handleReset}
+            />
         </StyledServicesEventform>
     )
 }

@@ -4,10 +4,8 @@ import { css } from '@emotion/react'
 export const StyledFileUpload = styled.div`
     padding: 1rem;
     padding-top: 2rem;
-    border: 2px solid lightgray;
-    border-radius: var(--border-radius);
-    width: 25rem;
-    margin: auto;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -64,6 +62,8 @@ export const StyledImgPreview = styled.div`
 
     span {
         font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
         text-overflow: ellipsis;
         width: 70%;
     }

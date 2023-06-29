@@ -99,52 +99,6 @@ export const FileUpload = ({
 
     return (
         <StyledFileUpload>
-            {/* <div className="uploadContainer">
-                <label>
-                    <div className="uploadBlock">
-                        <CloudUpload />
-                        <span>
-                            {files?.length > 0 ? (
-                                <p className="imgCount">
-                                    {files?.length ?? 0}{' '}
-                                    {files?.length === 1 ? 'File' : 'Files'}{' '}
-                                    ready to be uploaded
-                                </p>
-                            ) : (
-                                label
-                            )}
-                        </span>
-                        <input
-                            multiple={multiple}
-                            type="file"
-                            accept="image/*"
-                            hidden
-                            onChange={
-                                multiple && files?.length > 0
-                                    ? onMoreFilesUpload
-                                    : onFileUpload
-                            }
-                        />
-                    </div>
-                </label>
-            </div>
-            <div className="imgPreviews">
-                {files?.map((file: any) => (
-                    <StyledImgPreview key={uniqueId()}>
-                        <img
-                            key={uniqueId()}
-                            src={file.preview}
-                            alt={file.contents.name}
-                        />
-                        <span>{file.contents.name}</span>
-                        <ConfirmDeleteButton
-                            onTriggerMutation={() =>
-                                onFilePreviewDelete(file.contents.name)
-                            }
-                        />
-                    </StyledImgPreview>
-                ))}
-            </div> */}
             <div className="uploadBlock">
                 <h4>Upload your file{multiple ? 's' : ''}</h4>
                 <p>as JPG, PNG, or SVG types.</p>

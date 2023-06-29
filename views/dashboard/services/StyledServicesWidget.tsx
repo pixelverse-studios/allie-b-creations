@@ -158,7 +158,29 @@ export const StyledOfferingItem = styled.div`
 `
 
 export const StyledServicesEventform = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
     h3 {
         margin-bottom: 1rem;
+    }
+
+    .serviceEventFields {
+        display: grid;
+        grid-template-columns: 0.75fr 1fr;
+        grid-gap: 1rem;
+
+        .fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .serviceEventFields {
+            grid-template-columns: 1fr;
+        }
     }
 `
