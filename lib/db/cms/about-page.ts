@@ -5,23 +5,23 @@ import { AboutPageProps } from '@/utils/types/redux'
 const ABOUT = 'about-page'
 const aboutPageCollection = collection(db, ABOUT)
 
-const getAboutPageData = async (): Promise<AboutPageProps> => {
+const getAboutPageData = async (): Promise<AboutPageProps[]> => {
     try {
         const data = await getDocs(aboutPageCollection)
-        const { backgroundInfo, header, profileImg, role, subHeader, title } =
-            data.docs[0].data()
 
-        const aboutPageData = {
-            id: data.docs[0].id,
-            backgroundInfo,
-            header,
-            subHeader,
-            profileImg,
-            title,
-            role
-        }
-
-        return aboutPageData
+        return data.docs.map(doc => {
+            const { info, header, profileImg, role, subHeader, title } =
+                doc.data()
+            return {
+                id: doc.id,
+                info,
+                header,
+                subHeader,
+                profileImg,
+                title,
+                role
+            }
+        })
     } catch (error) {
         throw error
     }
@@ -30,14 +30,14 @@ const getAboutPageData = async (): Promise<AboutPageProps> => {
 const updateAboutPageData = async (
     id: string,
     fields: {
-        backgroundInfo: string[]
+        info: string[]
         header: string
         profileImg: string
         role: string
         subHeader: string
         title: string
     }
-): Promise<AboutPageProps> => {
+): Promise<AboutPageProps[]> => {
     try {
         const ref = doc(db, ABOUT, id)
         await updateDoc(ref, {

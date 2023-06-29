@@ -7,6 +7,8 @@ const AboutPageView = () => {
     const { backgroundInfo, header, profileImg, role, subHeader, title } =
         aboutPageData
 
+    console.log(aboutPageData)
+
     return (
         <StyledAboutPage>
             <HeaderWithPaintStreaks title="About Me" />

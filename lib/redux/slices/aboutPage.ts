@@ -1,27 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AboutPageProps } from '@/utils/types/redux'
 
-const initialState: AboutPageProps = {
-    id: '',
-    header: '',
-    profileImg: '',
-    role: '',
-    backgroundInfo: [''],
-    subHeader: '',
-    title: ''
-}
+const initialState: AboutPageProps[] = [
+    {
+        id: '',
+        header: '',
+        profileImg: '',
+        role: '',
+        info: '',
+        subHeader: '',
+        title: ''
+    }
+]
 export const aboutPageSlice = createSlice({
     name: 'aboutPage',
     initialState,
     reducers: {
-        setAbout: (state, { payload }: { payload: AboutPageProps }) => {
-            state.id = payload.id
-            state.backgroundInfo = payload.backgroundInfo
-            state.profileImg = payload.profileImg
-            state.header = payload.header
-            state.role = payload.role
-            state.subHeader = payload.subHeader
-            state.title = payload.title
+        setAbout: (state, { payload }: { payload: AboutPageProps[] }) => {
+            return (state = payload)
         }
     }
 })
