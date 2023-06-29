@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { StyledContactLinkCard } from './StyledCard'
-import EditDeleteForm from './EditDeleteForm'
-import AddCancelForm from './AddCancelForm'
+import ViewDetails from './ViewDetails'
+import EditDetails from './EditDetails'
 
 const ContactLinkCard = ({ field }: any) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -10,14 +10,14 @@ const ContactLinkCard = ({ field }: any) => {
     return (
         <StyledContactLinkCard>
             {!isEditMode ? (
-                <EditDeleteForm
+                <ViewDetails
                     setIsEditMode={setIsEditMode}
                     id={id}
                     icon={icon}
                     link={link}
                 />
             ) : (
-                <AddCancelForm
+                <EditDetails
                     setIsEditMode={setIsEditMode}
                     id={id}
                     icon={icon}

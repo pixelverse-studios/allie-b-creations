@@ -4,11 +4,16 @@ import { StyledCircleIconButton } from './StyledButtons'
 interface CircleIconButtonProps {
     Icon: any
     onClickEvent: MouseEventHandler<HTMLButtonElement> | (() => void)
+    disabled?: boolean
 }
 
-const CircleIconButton = ({ Icon, onClickEvent }: CircleIconButtonProps) => {
+const CircleIconButton = ({
+    Icon,
+    onClickEvent,
+    disabled
+}: CircleIconButtonProps) => {
     return (
-        <StyledCircleIconButton onClick={onClickEvent}>
+        <StyledCircleIconButton disabled={disabled} onClick={onClickEvent}>
             {Icon}
         </StyledCircleIconButton>
     )

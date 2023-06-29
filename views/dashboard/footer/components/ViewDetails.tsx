@@ -11,7 +11,7 @@ import { enqueueSnackbar } from 'notistack'
 import bannerUtils from '@/utils/banners'
 
 const { statuses, messages } = bannerUtils
-const EditDeleteForm = ({
+const ViewDetails = ({
     setIsEditMode,
     id,
     icon,
@@ -77,4 +77,4 @@ const EditDeleteForm = ({
     )
 }
 
-export default EditDeleteForm
+export default ViewDetails

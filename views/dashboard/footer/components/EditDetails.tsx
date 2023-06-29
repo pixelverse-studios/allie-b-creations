@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/lib/redux/store'
 import { CircleIconButton } from '@/components/buttons'
@@ -17,7 +17,7 @@ import bannerUtils from '@/utils/banners'
 
 const { statuses, messages } = bannerUtils
 
-const AddCancelForm = ({
+const EditDetails = ({
     setIsEditMode,
     id,
     icon,
@@ -31,6 +31,11 @@ const AddCancelForm = ({
     const dispatch = useDispatch<AppDispatch>()
     const [iconValue, setIconValue] = useState<string>('')
     const [linkValue, setLinkValue] = useState<string>('')
+
+    useEffect(() => {
+        setLinkValue(link)
+        setIconValue(icon)
+    }, [setLinkValue, setIconValue])
 
     const onEditModeConfirm = async () => {
         try {
@@ -66,10 +71,10 @@ const AddCancelForm = ({
         setLinkValue(event.target.value)
     }
 
-    useEffect(() => {
-        setLinkValue(link)
-        setIconValue(icon)
-    }, [setLinkValue, setIconValue])
+    const disableCheck = useMemo(
+        () => iconValue === icon && link === linkValue,
+        [iconValue, icon, link, linkValue]
+    )
 
     return (
         <div className="link-card">
@@ -79,6 +84,7 @@ const AddCancelForm = ({
                     <CircleIconButton
                         onClickEvent={onEditModeConfirm}
                         Icon={<Check />}
+                        disabled={disableCheck}
                     />
                     <CircleIconButton
                         onClickEvent={onEditModeCancel}
@@ -108,4 +114,4 @@ const AddCancelForm = ({
     )
 }
 
-export default AddCancelForm
+export default EditDetails
