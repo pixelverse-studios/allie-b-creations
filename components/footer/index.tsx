@@ -14,7 +14,7 @@ const Footer = () => {
                     const iconValue = SocialMenuItems.find(
                         option => option.value === link?.label
                     )
-                    if (iconValue?.value !== 'Email')
+                    if (!iconValue?.value.includes('Email'))
                         return (
                             <a
                                 className="icon"
