@@ -5,6 +5,7 @@ import { StyledFooter } from './StyledFooter'
 
 const Footer = () => {
     const contactLinks = useSelector((state: any) => state.contactLinks)
+
     return (
         <StyledFooter>
             <img src={LogoImg.src} alt="Logo" className="logo" />
@@ -13,7 +14,24 @@ const Footer = () => {
                     const iconValue = SocialMenuItems.find(
                         option => option.value === link?.label
                     )
-                    return iconValue?.icon
+                    if (iconValue?.value !== 'Email')
+                        return (
+                            <a
+                                className="icon"
+                                target="_blank"
+                                href={link?.link}
+                                rel="noopener noreferrer">
+                                {iconValue?.icon}
+                            </a>
+                        )
+                    return (
+                        <a
+                            className="icon"
+                            target="_blank"
+                            href={`mailto:${link?.link}`}>
+                            {iconValue?.icon}
+                        </a>
+                    )
                 })}
             </div>
             <small>&copy;Allie B Creations LLC 2023</small>

@@ -40,8 +40,10 @@ export const StyledFooter = styled.footer`
         column-gap: 1rem;
 
         .icon {
+            display: grid;
+            place-items: center;
             border-radius: 50%;
-            padding: 0.3rem;
+            padding: 0.4rem;
             font-size: 2.5rem;
             cursor: pointer;
             transition: all 0.4s ease-in-out;
@@ -51,7 +53,7 @@ export const StyledFooter = styled.footer`
             }
         }
 
-        svg:nth-of-type(3n + 1) {
+        a:nth-of-type(3n + 1) {
             color: #fce4e2;
             background: linear-gradient(#fff 50%, #fce4e2 50%);
 
@@ -59,13 +61,13 @@ export const StyledFooter = styled.footer`
             background-size: 100% 200%;
         }
 
-        svg:nth-of-type(3n + 2) {
+        a:nth-of-type(3n + 2) {
             color: #faeee3;
             background: linear-gradient(#fff 50%, #faeee3 50%);
             border: 2px solid #faeee3;
             background-size: 100% 200%;
         }
-        svg:nth-of-type(3n + 3) {
+        a:nth-of-type(3n + 3) {
             color: #e0ebe3;
             background: linear-gradient(#fff 50%, #e0ebe3 50%);
             border: 2px solid #e0ebe3;
