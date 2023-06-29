@@ -5,17 +5,23 @@ import { CircleIconButton } from '@/components/buttons'
 import { Check, Close } from '@mui/icons-material'
 import {
     FormControl,
+    FormHelperText,
     InputLabel,
     SelectChangeEvent,
     TextField
 } from '@mui/material'
+import { enqueueSnackbar } from 'notistack'
 import IconSelectField from './IconSelectField'
 import { updateContactLink } from '@/lib/db/cms/contact-links'
 import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
-import { enqueueSnackbar } from 'notistack'
+import FormValidations from '@/utils/validations/forms'
 import bannerUtils from '@/utils/banners'
 
 const { statuses, messages } = bannerUtils
+
+const { validHttpOrHttpsUrl, validEmail } = FormValidations
+
+const EMAIL = 'Email'
 
 const EditDetails = ({
     setIsEditMode,
@@ -31,6 +37,7 @@ const EditDetails = ({
     const dispatch = useDispatch<AppDispatch>()
     const [iconValue, setIconValue] = useState<string>('')
     const [linkValue, setLinkValue] = useState<string>('')
+    const [hasError, setHasError] = useState<boolean>(false)
 
     useEffect(() => {
         setLinkValue(link)
@@ -69,11 +76,25 @@ const EditDetails = ({
     }
     const onLinkChange = (event: { target: { value: string } }) => {
         setLinkValue(event.target.value)
+        let errorValue
+        //If Email
+        if (iconValue.includes(EMAIL)) {
+            errorValue = validEmail.test(event.target.value)
+        } else {
+            errorValue = validHttpOrHttpsUrl.test(event.target.value)
+        }
+
+        if (!errorValue) {
+            return setHasError(true)
+        } else {
+            console.log('false')
+            return setHasError(false)
+        }
     }
 
     const disableCheck = useMemo(
-        () => iconValue === icon && link === linkValue,
-        [iconValue, icon, link, linkValue]
+        () => (iconValue === icon && link === linkValue) || hasError,
+        [iconValue, icon, link, linkValue, hasError]
     )
 
     return (
@@ -107,7 +128,17 @@ const EditDetails = ({
                         label="Link"
                         value={linkValue}
                         onChange={onLinkChange}
+                        error={hasError}
+                        id={id}
                     />
+                    {hasError && (
+                        <FormHelperText id={id} error className="error-text">
+                            {iconValue.includes(EMAIL)
+                                ? `Must containt a valid email address (example@test.com)`
+                                : `  The URL must have the following format:
+                            https://www.website.com.`}
+                        </FormHelperText>
+                    )}
                 </FormControl>
             </div>
         </div>
