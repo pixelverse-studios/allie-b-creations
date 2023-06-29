@@ -27,7 +27,8 @@ const AboutPageView = () => {
                                 </div>
                             </div>
                             <div className="body-content">
-                                <h2 className="subHeader">{data.header}</h2>
+                                <h2 className="header">{data.header}</h2>
+                                {/* iGotYouOnTheNextLine */}
                                 <h2 className="subHeader">{data.subHeader}</h2>
                                 <div className="background-info-container">
                                     <p className="background-info">
@@ -39,7 +40,7 @@ const AboutPageView = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="role-content">
+                            <div className="role-name-content">
                                 <span className="name">{data.name}</span>
                                 <span className="role">{data.role}</span>
                             </div>

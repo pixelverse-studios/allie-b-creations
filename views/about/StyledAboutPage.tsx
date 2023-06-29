@@ -9,7 +9,6 @@ export const StyledAboutPage = styled.div`
     .image-about-content-0,
     .image-about-content-1 {
         display: flex;
-
         justify-content: space-around;
         column-gap: 3rem;
 
@@ -32,7 +31,7 @@ export const StyledAboutPage = styled.div`
             .quote {
                 width: 3rem;
             }
-
+            .header,
             .subHeader {
                 font-weight: 300;
                 letter-spacing: 3px;
@@ -50,7 +49,7 @@ export const StyledAboutPage = styled.div`
                     letter-spacing: 0.05em;
                 }
             }
-            .role-content {
+            .role-name-content {
                 display: flex;
                 flex-direction: column;
                 .role {
