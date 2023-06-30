@@ -12,7 +12,6 @@ const AboutPageView = () => {
             <HeaderWithPaintStreaks title="About Me" />
 
             {aboutPageData.map((data: AboutPageProps, index: number) => {
-                console.log(data)
                 return (
                     <div className={`image-about-content-${index}`} key={index}>
                         <img

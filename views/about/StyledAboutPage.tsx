@@ -11,10 +11,19 @@ export const StyledAboutPage = styled.div`
         display: flex;
         justify-content: space-around;
         column-gap: 3rem;
+        padding: 1rem;
+
+        @media (max-width: 900px) {
+            flex-direction: column !important;
+            align-items: center;
+        }
 
         .image {
             max-width: 30rem;
-            border: 1px solid var(--brand-color-1);
+
+            @media (max-width: 1000px) {
+                max-width: 20rem;
+            }
         }
 
         .about {
@@ -44,9 +53,14 @@ export const StyledAboutPage = styled.div`
                 line-height: 1.5em;
                 text-align: center;
                 font-size: 16px;
+
+                @media (max-width: 1200px) {
+                    margin: 0rem 2rem;
+                }
                 .background-info {
                     font-weight: 100;
                     letter-spacing: 0.05em;
+                    padding-bottom: 1rem;
                 }
             }
             .role-name-content {
