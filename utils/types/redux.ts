@@ -6,7 +6,7 @@ export interface UserProps {
 }
 export interface AboutPageProps {
     id: string
-    info: string
+    description: string
     header: string
     profileImg: string
     role: string

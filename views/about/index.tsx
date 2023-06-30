@@ -31,7 +31,7 @@ const AboutPageView = () => {
                                 <h2 className="subHeader">{data.subHeader}</h2>
                                 <div className="background-info-container">
                                     <p className="background-info">
-                                        {data.info}
+                                        {data.description}
                                     </p>
                                 </div>
                             </div>

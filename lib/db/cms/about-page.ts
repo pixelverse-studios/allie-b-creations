@@ -10,11 +10,18 @@ const getAboutPageData = async (): Promise<AboutPageProps[]> => {
         const data = await getDocs(aboutPageCollection)
 
         return data.docs.map(doc => {
-            const { info, header, profileImg, role, subHeader, title, name } =
-                doc.data()
+            const {
+                description,
+                header,
+                profileImg,
+                role,
+                subHeader,
+                title,
+                name
+            } = doc.data()
             return {
                 id: doc.id,
-                info,
+                description,
                 header,
                 subHeader,
                 profileImg,
@@ -31,7 +38,7 @@ const getAboutPageData = async (): Promise<AboutPageProps[]> => {
 const updateAboutPageData = async (
     id: string,
     fields: {
-        info: string[]
+        description: string[]
         header: string
         profileImg: string
         role: string

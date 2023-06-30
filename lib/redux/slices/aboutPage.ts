@@ -7,7 +7,7 @@ const initialState: AboutPageProps[] = [
         header: '',
         profileImg: '',
         role: '',
-        info: '',
+        description: '',
         subHeader: '',
         title: '',
         name: ''
