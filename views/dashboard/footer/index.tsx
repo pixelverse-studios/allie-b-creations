@@ -28,7 +28,7 @@ interface ContactLink {
     link: string
 }
 
-const { validHttpOrHttpsUrl, validEmail } = FormValidations
+const { validWebUrl, validEmail } = FormValidations
 
 const EMAIL = 'Email'
 
@@ -44,7 +44,7 @@ const FooterWidget = () => {
     const validateForm = (icon: string, link: string) => {
         const errorValue = icon.includes(EMAIL)
             ? validEmail.test(link)
-            : validHttpOrHttpsUrl.test(link)
+            : validWebUrl.test(link)
 
         setHasError(!errorValue)
     }

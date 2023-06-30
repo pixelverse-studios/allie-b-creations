@@ -18,7 +18,7 @@ import bannerUtils from '@/utils/banners'
 
 const { statuses, messages } = bannerUtils
 
-const { validHttpOrHttpsUrl, validEmail } = FormValidations
+const { validWebUrl, validEmail } = FormValidations
 
 const EMAIL = 'Email'
 
@@ -69,12 +69,10 @@ const EditDetails = ({
         setIsEditMode(false)
     }
 
-    //Functions for event changes on select and text fields. Hi Philly
-
     const validateForm = (icon: string, link: string) => {
         const errorValue = icon.includes(EMAIL)
             ? validEmail.test(link)
-            : validHttpOrHttpsUrl.test(link)
+            : validWebUrl.test(link)
 
         setHasError(!errorValue)
     }

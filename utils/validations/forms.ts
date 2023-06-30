@@ -61,7 +61,7 @@ const validNonZeroNumber = {
     message: 'Rating must be at least 1 star.'
 }
 
-const validHttpOrHttpsUrl = {
+const validWebUrl = {
     test: (value: string) => VALID_HTTP_OR_HTTPS_URL.test(value),
     message: 'The URL must have the following format: https://www.website.com.'
 }
@@ -83,7 +83,7 @@ const FormValidations = {
     validArrayData,
     validImage,
     validNonZeroNumber,
-    validHttpOrHttpsUrl,
+    validWebUrl,
     yolo
 }
 export default FormValidations
