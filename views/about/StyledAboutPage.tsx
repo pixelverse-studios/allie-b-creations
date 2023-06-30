@@ -12,7 +12,6 @@ export const StyledAboutPage = styled.div`
         justify-content: space-around;
         column-gap: 3rem;
         padding: 1rem;
-
         @media (max-width: 900px) {
             flex-direction: column !important;
             align-items: center;
@@ -20,7 +19,6 @@ export const StyledAboutPage = styled.div`
 
         .image {
             max-width: 30rem;
-
             @media (max-width: 1000px) {
                 max-width: 20rem;
             }
