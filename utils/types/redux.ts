@@ -6,13 +6,15 @@ export interface UserProps {
 }
 export interface AboutPageProps {
     id: string
-    backgroundInfo: string[]
+    description: string
     header: string
     profileImg: string
     role: string
     subHeader: string
     title: string
+    name: string
 }
+
 export interface ContactLinkProps {
     id: string
     icon: string
