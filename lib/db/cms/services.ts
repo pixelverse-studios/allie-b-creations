@@ -105,20 +105,17 @@ const addOfferingEvent = async (
     data: { description: string; title: string; img: string }
 ): Promise<ServicesProps> => {
     try {
-        const services = await getServices()
-        const updatedOfferings = [...services.offerings].map(offering => {
-            if (offering.section === section) {
-                const newEvents = [...offering.events]
-                newEvents.push(data)
-                return { ...offering, events: newEvents }
-            }
-            return offering
+        const { offerings } = await getServices()
+
+        await updateDoc(doc(db, SERVICES, id), {
+            offerings: offerings.map(offering =>
+                offering.section === section
+                    ? { ...offering, events: [...offering.events, data] }
+                    : offering
+            )
         })
 
-        const ref = doc(db, SERVICES, id)
-        await updateDoc(ref, { offerings: updatedOfferings })
-        const freshServices = await getServices()
-        return freshServices
+        return await getServices()
     } catch (error) {
         throw error
     }
