@@ -2,18 +2,17 @@ import styled from '@emotion/styled'
 
 export const StyledTestimonialCard = styled.div`
     display: inline-block;
-    perspective: 600px;
     height: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none;
     position: relative;
+    border-radius: var(--border-radius);
+    border: 3px solid;
     &::-webkit-scrollbar {
         display: none;
     }
-    border-radius: var(--border-radius);
-    border: 3px solid;
     &.show {
-        border-color: var(--brand-color-1a);
+        border-color: var(--brand-color-1);
 
         .MuiRating-readOnly {
             color: var(--brand-color-3);
@@ -97,12 +96,12 @@ export const StyledTestimonialCard = styled.div`
 
             &:after {
                 content: attr(data-tg-on);
-                background: var(--brand-color-1a);
+                background: var(--brand-color-1);
                 transform: rotateY(-180deg);
             }
 
             &:before {
-                background: var(--brand-color-1a);
+                background: var(--brand-color-1);
                 content: attr(data-tg-off);
             }
 
@@ -127,7 +126,6 @@ export const StyledTestimonialCard = styled.div`
             }
         }
     }
-
     .review {
         padding: 0 0.5rem;
     }

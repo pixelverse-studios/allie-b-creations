@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 
 export const DashboardCardStyles = css`
     border-radius: var(--border-radius);
-    border: 2px solid var(--brand-color-1a);
+    border: 2px solid var(--brand-color-1);
     padding: 1rem;
 `
 
