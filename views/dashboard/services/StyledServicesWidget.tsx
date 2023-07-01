@@ -28,7 +28,7 @@ export const StyledServicesWidget = styled.section`
                 height: 3px;
                 bottom: 0;
                 left: 0;
-                background-color: var(--brand-color-1a);
+                background-color: var(--brand-color-1);
                 transform-origin: bottom right;
                 transition: transform 0.25s ease-out;
             }
@@ -45,7 +45,7 @@ export const StyledServicesWidget = styled.section`
     }
 `
 
-export const StyledServicesBlock = styled.section`
+export const StyledServicesBlock = styled.form`
     ${DashboardCardStyles}
     width: 100%;
     display: flex;
