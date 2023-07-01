@@ -18,17 +18,14 @@
 
     --hover-transition: 0.25s ease-in-out;
 
-<<<<<<< HEAD
     --Gistesy: 'Gistesy', sans-serif;
 }
 
 @font-face {
     font-family: 'Gistesy';
     src: url('../assets/fonts/Gistesy.ttf') format('truetype');
-=======
     --border-radius: 12px;
     --brand-border-1: 3px solid var(--brand-color-1);
->>>>>>> f50f1668f0a82761b8be9a117900ce9b327400d1
 }
 
 * {
