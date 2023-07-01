@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { AboutMeFormView, StoryFormView } from './components'
 
 import { StyledAboutWidget } from './StyledAboutWidget'
 
 const AboutWidget = () => {
+    const AboutPageData = useSelector((state: any) => state.aboutPage)
     const [formView, setFormView] = useState<boolean>(true)
 
     const handleViewChange = () => {
@@ -26,7 +28,12 @@ const AboutWidget = () => {
                 </h3>
             </div>
             <div className="form-view">
-                {formView ? <AboutMeFormView /> : <StoryFormView />}
+                {formView ? (
+                    <AboutMeFormView FormData={AboutPageData?.[0]} />
+                ) : (
+                    'Hey'
+                    // <StoryFormView  data={AboutPageData[1]/>
+                )}
             </div>
         </StyledAboutWidget>
     )
