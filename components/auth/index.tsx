@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import DashboardPage from '@/views/dashboard'
 import SpeedDial from '@/components/speeddial'
+import Footer from '../footer'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
 import Nav from '../nav'
@@ -53,8 +54,8 @@ const AuthWrapper = ({ children }: { children: any }) => {
         <StyledAuthWrapper>
             <Nav />
             <main>{children}</main>
-            <footer>placeholder footer</footer>
             <SpeedDial />
+            <Footer />
         </StyledAuthWrapper>
     )
 }

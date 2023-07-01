@@ -20,3 +20,6 @@ export const VALID_EMAIL =
 
 export const VALID_ALPHA_NUMERIC_SPACES_SPECIALS =
     /^[ A-Za-z0-9 _@.,/#&+-?!$%*()]*$/
+
+export const VALID_HTTP_OR_HTTPS_URL =
+    /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
