@@ -1,12 +1,10 @@
-import { useState, ChangeEvent, SetStateAction } from 'react'
+import { useState, useRef, ChangeEvent, SetStateAction } from 'react'
 import { CloudUpload, Sync } from '@mui/icons-material'
 import { Avatar, Button } from '@mui/material'
 import { uniqueId } from 'lodash'
-import { enqueueSnackbar } from 'notistack'
 
 import { ConfirmDeleteButton } from '@/components/buttons'
-import { statuses, messages } from '@/utils/banners'
-import { convertFileToBase64, handleCloudUpload } from '@/utils/fileConversions'
+import { convertFileToBase64 } from '@/utils/fileConversions'
 import { StyledFileUpload, StyledImgPreview } from './StyledFields'
 export interface FileItem {
     [preview: string]: any
@@ -17,21 +15,22 @@ export interface FileItem {
 export type FilesList = FileItem[]
 
 interface FileUploadTypes {
-    label: string
     multiple: boolean
     context: string
     files: FilesList
     setFiles: SetStateAction<any>
+    label?: string
 }
 
 export const FileUpload = ({
-    context,
-    label,
     multiple,
     files,
-    setFiles
+    setFiles,
+    label
 }: FileUploadTypes) => {
     const [loading, setLoading] = useState<boolean>(false)
+    const inputRef = useRef<any>(null)
+
     const curateFilesList = async (files: any) => {
         const newFiles = Array.from(files)
         const curatedFiles = await Promise.all(
@@ -48,50 +47,27 @@ export const FileUpload = ({
         if (!e.target.files) {
             return
         }
+        setLoading(true)
         const curatedFiles = await curateFilesList(e.target.files)
         setFiles(curatedFiles)
+        setLoading(false)
     }
 
     const onMoreFilesUpload = async (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) {
             return
         }
+        setLoading(true)
         const curatedFiles = await curateFilesList(e.target.files)
         setFiles([...files, ...curatedFiles])
+        setLoading(false)
     }
 
-    const onFilePreviewDelete = (filename: string) =>
+    const onFilePreviewDelete = (filename: string) => {
+        inputRef.current.value = '' as any
         setFiles(
             files?.filter((file: any) => file.contents.name !== filename) ?? []
         )
-
-    const onCloudUploadClick = async () => {
-        try {
-            const images = await Promise.all(
-                files.map((file: any) =>
-                    handleCloudUpload({
-                        context,
-                        base64: file.base64,
-                        filename: file.contents.name
-                    })
-                )
-            )
-            enqueueSnackbar(
-                `Your image${
-                    images?.length > 1 ? 's have been' : 'has been'
-                } uploaded successfully`,
-                {
-                    variant: statuses.SUCCESS
-                }
-            )
-        } catch (error) {
-            enqueueSnackbar(
-                'There was an issue uploading your images. Please try again or reach out to us for assistance.',
-                {
-                    variant: statuses.ERROR
-                }
-            )
-        }
     }
 
     return (
@@ -115,6 +91,7 @@ export const FileUpload = ({
                         </span>
                     )}
                     <input
+                        ref={inputRef}
                         multiple={multiple}
                         type="file"
                         accept="image/*"

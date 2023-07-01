@@ -7,7 +7,6 @@ import FormValidations from '@/utils/validations/forms'
 import { addOfferingEvent } from '@/lib/db/cms/services'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
 import { handleCloudUpload } from '@/utils/fileConversions'
-import { FileItem, FilesList } from '@/components/form/fields/FileUpload'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { statuses, messages } from '@/utils/banners'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
@@ -108,6 +107,7 @@ const ServicesEventForm = ({
                     payload
                 )
                 dispatch(setServices(freshServices))
+                handleReset()
                 enqueueSnackbar('Your new Service Offering has been added', {
                     variant: statuses.SUCCESS
                 })
