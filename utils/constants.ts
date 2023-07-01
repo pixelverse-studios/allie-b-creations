@@ -156,3 +156,11 @@ export const testimonialSortMap = new Map([
         }
     ]
 ])
+
+export const CLOUD_KEYS = {
+    UPLOAD_URL:
+        'https://api.cloudinary.com/v1_1/ezpzcoding-cloudinary/image/upload',
+    PRESET_FOLDER: 'allie-b-creations',
+    OVERRIDE: 'filename_override',
+    PUBLIC: 'https://res.cloudinary.com/ezpzcoding-cloudinary'
+}

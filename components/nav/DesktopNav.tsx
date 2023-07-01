@@ -9,11 +9,10 @@ import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledDesktopNav, StyledDesktopNavItems } from './StyledNav'
 import { BaseNavItems, AuthNavItems } from './NavItems'
 import Logo from './Logo'
-const { statuses, messages } = bannerUtils
 
 const DesktopNav = () => {
     const auth = getAuth()
