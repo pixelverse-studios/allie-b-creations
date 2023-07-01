@@ -10,12 +10,11 @@ import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledMobileNav, StyledMobileNavItems } from './StyledNav'
 import { BaseNavItems, AuthNavItems } from './NavItems'
 import Logo from './Logo'
 import Hamburger from './Hamburger'
-const { statuses, messages } = bannerUtils
 
 const MobileNav = () => {
     const auth = getAuth()

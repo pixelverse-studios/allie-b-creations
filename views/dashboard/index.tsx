@@ -8,12 +8,11 @@ import { signOut, getAuth } from 'firebase/auth'
 
 import { removeUser } from '@/lib/redux/slices/user'
 import DashNav from '@/components/nav/dashboard/DashNav'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledDashboard } from './StyledDashboard'
 import { DASHBOARD_ROUTES } from '@/components/nav/dashboard/routes'
 import { uniqueId } from 'lodash'
 
-const { statuses, messages } = bannerUtils
 const DashboardPage = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
     const { profileImg } = useSelector((state: any) => state.aboutPage)

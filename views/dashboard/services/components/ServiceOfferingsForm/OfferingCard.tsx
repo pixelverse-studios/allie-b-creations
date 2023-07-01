@@ -18,7 +18,7 @@ import {
 import { enqueueSnackbar } from 'notistack'
 
 import { TextField } from '@/components/form'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import {
     deleteOfferingSection,
     editOfferingSection
@@ -29,7 +29,6 @@ import { StyledEventTypeCard } from '../../StyledServicesWidget'
 import { uniqueId } from 'lodash'
 import { setServices } from '@/lib/redux/slices/services'
 
-const { statuses, messages } = bannerUtils
 export interface OfferingProps {
     section: string
     events: { description: string; img: string; title: string }[]

@@ -99,10 +99,36 @@ const deleteOfferingSection = async (
     }
 }
 
+const addOfferingEvent = async (
+    id: string,
+    section: string,
+    data: { description: string; title: string; img: string }
+): Promise<ServicesProps> => {
+    try {
+        const services = await getServices()
+        const updatedOfferings = [...services.offerings].map(offering => {
+            if (offering.section === section) {
+                const newEvents = [...offering.events]
+                newEvents.push(data)
+                return { ...offering, events: newEvents }
+            }
+            return offering
+        })
+
+        const ref = doc(db, SERVICES, id)
+        await updateDoc(ref, { offerings: updatedOfferings })
+        const freshServices = await getServices()
+        return freshServices
+    } catch (error) {
+        throw error
+    }
+}
+
 export {
     addNewOfferingSection,
     deleteOfferingSection,
     editOfferingSection,
     getServices,
-    updateGeneralServiceData
+    updateGeneralServiceData,
+    addOfferingEvent
 }

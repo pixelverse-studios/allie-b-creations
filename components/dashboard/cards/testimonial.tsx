@@ -9,11 +9,9 @@ import {
     updateTestimonialDisplay,
     deleteTestimonialCollection
 } from '@/lib/db/cms/testimonials'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { ConfirmDeleteButton } from '@/components/buttons'
 import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
-
-const { statuses, messages } = bannerUtils
 
 const TestimonialCard = ({ field }: any) => {
     const dispatch = useDispatch<AppDispatch>()

@@ -1,10 +1,17 @@
 import { useEffect, useMemo } from 'react'
+import { enqueueSnackbar } from 'notistack'
+import { useSelector, useDispatch } from 'react-redux'
+
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
+import { addOfferingEvent } from '@/lib/db/cms/services'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
+import { handleCloudUpload } from '@/utils/fileConversions'
 import { FileItem, FilesList } from '@/components/form/fields/FileUpload'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
+import { statuses, messages } from '@/utils/banners'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
+import { setServices } from '@/lib/redux/slices/services'
 
 interface EventFormFields {
     description?: string
@@ -40,6 +47,9 @@ const ServicesEventForm = ({
     label,
     store
 }: ServicesEventFormTypes) => {
+    const dispatch = useDispatch()
+    const { id: serviceID } = useSelector((state: any) => state.services)
+
     const renderLabel =
         label === 'Adding'
             ? `Adding a new event to ${section}`
@@ -80,8 +90,43 @@ const ServicesEventForm = ({
         return !formStatuses.every(item => item)
     }, [form])
 
+    const onFormSubmit = async () => {
+        const payload = {} as any
+        try {
+            if (id == '') {
+                payload.description = form.description.value
+                payload.title = form.title.value
+                payload.img = await handleCloudUpload({
+                    base64: form.img.value[0].base64,
+                    context: 'serviceEvents',
+                    filename: form.img.value[0].contents.name
+                })
+
+                const freshServices = await addOfferingEvent(
+                    serviceID,
+                    section,
+                    payload
+                )
+                dispatch(setServices(freshServices))
+                enqueueSnackbar('Your new Service Offering has been added', {
+                    variant: statuses.SUCCESS
+                })
+            }
+        } catch (error: any) {
+            enqueueSnackbar(
+                error.message === 'Image upload failed'
+                    ? error.message
+                    : messages.TECHNICAL_DIFFICULTIES,
+                {
+                    variant: statuses.ERROR
+                }
+            )
+        }
+    }
+
     return (
-        <StyledServicesEventform>
+        <StyledServicesEventform
+            onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
             <h3>{renderLabel}</h3>
             <StyledFieldSet className="serviceEventFields">
                 <FileUpload

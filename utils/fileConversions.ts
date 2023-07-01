@@ -55,6 +55,6 @@ export const handleCloudUpload = async ({
 
         return `${CLOUD_KEYS.PUBLIC}/${res.data.public_id}`
     } catch (error) {
-        throw error
+        throw new Error('Image upload failed')
     }
 }

@@ -5,12 +5,9 @@ import { uniqueId } from 'lodash'
 import { enqueueSnackbar } from 'notistack'
 
 import { ConfirmDeleteButton } from '@/components/buttons'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { convertFileToBase64, handleCloudUpload } from '@/utils/fileConversions'
 import { StyledFileUpload, StyledImgPreview } from './StyledFields'
-
-const { statuses } = bannerUtils
-
 export interface FileItem {
     [preview: string]: any
     contents: any
