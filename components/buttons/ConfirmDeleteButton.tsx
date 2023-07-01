@@ -12,7 +12,8 @@ const ConfirmDeleteButton = ({
 
     const onDeleteFocus = () => setDeleteFocus(1)
     const onDeleteBlur = () => setDeleteFocus(0)
-    const onConfirmDeleteClick = async () => {
+    const onConfirmDeleteClick = async (e: any) => {
+        e?.preventDefault()
         const CONFIRMED_CLICK = 2
         const SHOW_CONFIRM = 1
         switch (deleteFocus) {

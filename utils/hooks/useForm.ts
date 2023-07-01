@@ -64,6 +64,19 @@ const useForm = (initialState: any, validations: any, store?: any) => {
         })
     }
 
+    const handleNonFormEventChange = (data: any, name: string) => {
+        const hasValidation = validations[name]?.message
+
+        dispatch({
+            type: UPDATE,
+            payload: {
+                name,
+                value: data,
+                error: hasValidation ? !validations[name].test(data) : ''
+            }
+        })
+    }
+
     const handleClearField = (fieldLabel: string) =>
         dispatch({
             type: UPDATE,
@@ -103,13 +116,14 @@ const useForm = (initialState: any, validations: any, store?: any) => {
         disableSubmit,
         form,
         formLoading,
-        isFormValid,
         handleChange,
         handleClearField,
         handleFormSubmit,
         handleImport,
+        handleNonFormEventChange,
         handleReset,
         isDataImported,
+        isFormValid,
         setFormLoading,
         setIsDataImported
     }

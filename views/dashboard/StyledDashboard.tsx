@@ -24,6 +24,27 @@ export const StyledDashboard = styled.section`
             margin-top: 1rem;
             display: flex;
             justify-content: flex-end;
+
+            .mobileSelect {
+                display: none;
+            }
+
+            .headerControls {
+                display: flex;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .dashboardContent {
+            margin-left: 0;
+
+            header {
+                justify-content: space-between;
+                .mobileSelect {
+                    display: flex;
+                }
+            }
         }
     }
 `

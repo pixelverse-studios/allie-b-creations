@@ -8,10 +8,8 @@ import FormValidations from '@/utils/validations/forms'
 import { TextField, RatingField, FormButtonGroup } from '@/components/form'
 import { createTestimonials } from '@/lib/db/cms/testimonials'
 import { setTestimonials } from '@/lib/redux/slices/testimonials'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledFieldSet } from './StyledFormComponents'
-
-const { statuses, messages } = bannerUtils
 
 const INITIAL_STATE = {
     name: { value: '' },

@@ -14,13 +14,11 @@ const OfferingItem = ({
     const router = useRouter()
 
     const onItemClick = () => {
-        const BASE_URL = '/dashboard/services/offerings'
+        const BASE_URL = `/dashboard/services/offerings/${encodeURIComponent(
+            section
+        )}`
         if (eventTitle === ADD_NEW) return router.push(`${BASE_URL}/add`)
-        return router.push(
-            `${BASE_URL}/${encodeURIComponent(section)}/${encodeURIComponent(
-                eventTitle
-            )}`
-        )
+        return router.push(`${BASE_URL}/edit/${encodeURIComponent(eventTitle)}`)
     }
     return (
         <StyledOfferingItem

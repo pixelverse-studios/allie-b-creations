@@ -11,21 +11,15 @@ import {
 } from '@mui/material'
 import uniqueId from 'lodash/uniqueId'
 import { ExpandMore } from '@mui/icons-material'
-import { signOut, getAuth } from 'firebase/auth'
-import { useDispatch } from 'react-redux'
-import { enqueueSnackbar } from 'notistack'
 
-import { removeUser } from '@/lib/redux/slices/user'
+import useBreakpoint from '@/utils/hooks/useWindowWidth'
 import { DASHBOARD_ROUTES } from './routes'
 import Logo from '../Logo'
-import bannerUtils from '@/utils/banners'
 import { StyledDashNav } from './StyledDashNav'
 
-const { statuses, messages } = bannerUtils
-const MobileDashNav = () => {
+const DashNav = () => {
     const router = useRouter()
-    const auth = getAuth()
-    const dispatch = useDispatch()
+    const { isMobile } = useBreakpoint()
 
     const onMenuItemClick = (path: string) => {
         router.push(`/dashboard/${path}`)
@@ -35,6 +29,8 @@ const MobileDashNav = () => {
         () => router.pathname.split('/')[2],
         [router.pathname]
     )
+
+    if (isMobile) return null
 
     return (
         <StyledDashNav>
@@ -70,4 +66,4 @@ const MobileDashNav = () => {
     )
 }
 
-export default MobileDashNav
+export default DashNav

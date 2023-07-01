@@ -18,7 +18,7 @@ import {
 import { enqueueSnackbar } from 'notistack'
 
 import { TextField } from '@/components/form'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import {
     deleteOfferingSection,
     editOfferingSection
@@ -29,7 +29,6 @@ import { StyledEventTypeCard } from '../../StyledServicesWidget'
 import { uniqueId } from 'lodash'
 import { setServices } from '@/lib/redux/slices/services'
 
-const { statuses, messages } = bannerUtils
 export interface OfferingProps {
     section: string
     events: { description: string; img: string; title: string }[]
@@ -146,16 +145,18 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                         ) : null}
                     </div>
                 </div>
-                <div className="cardBody">
-                    <Typography variant="subtitle1" gutterBottom>
-                        {eventCount} {eventCount !== 1 ? 'Events' : 'Event'}{' '}
-                        Offered
-                    </Typography>
-                    <IconButton onClick={() => setExpanded(!expanded)}>
+                <div
+                    className="cardBody"
+                    onClick={() => setExpanded(!expanded)}>
+                    <div className="eventsRow">
+                        <Typography variant="subtitle1" gutterBottom>
+                            {eventCount} {eventCount !== 1 ? 'Events' : 'Event'}{' '}
+                            Offered
+                        </Typography>
                         <ExpandMore
                             className={`${expanded ? 'flip' : ''} collapseIcon`}
                         />
-                    </IconButton>
+                    </div>
                 </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <div className="offeringsList">
