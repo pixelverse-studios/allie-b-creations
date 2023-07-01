@@ -1,5 +1,5 @@
 import TestimonialWidget from '@/views/dashboard/testimonials'
 
-export default function DashboardHomePage() {
+export default function TestimonialDashboardPage() {
     return <TestimonialWidget />
 }

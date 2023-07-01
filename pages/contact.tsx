@@ -1,3 +1,3 @@
 export default function ContactPage() {
-    return <div>Contact Page placeholder</div>
+    return <div>Contact Page holder</div>
 }

@@ -11,7 +11,7 @@ export const StyledServicesWidget = styled.section`
     gap: 1rem;
 
     h2 {
-        color: var(--brand-color-1a);
+        color: var(--brand-color-1);
         font-weight: bold;
         display: flex;
         align-items: center;
@@ -53,7 +53,7 @@ export const StyledServicesBlock = styled.section`
     gap: 1rem;
 
     h4 {
-        color: var(--brand-color-1a);
+        color: var(--brand-color-1);
         font-weight: 500;
     }
 
@@ -92,7 +92,7 @@ export const StyledEventTypeCard = styled.div`
                 color: var(--brand-color-2a);
             }
             .submit > svg {
-                color: var(--brand-color-1a);
+                color: var(--brand-color-1);
             }
             .cancel > svg {
                 color: var(--brand-color-2a);

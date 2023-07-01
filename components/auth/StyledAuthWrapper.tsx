@@ -4,7 +4,7 @@ const StyledAuthWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100% - var(--footer-height));
+    min-height: 100%;
 
     nav {
         position: absolute;

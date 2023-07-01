@@ -5,7 +5,8 @@ import {
     VALID_PASSWORD,
     VALID_ALPHA_NUMERIC_WITH_SPACES,
     VALID_FLOATS,
-    VALID_ALPHA_NUMERIC_SPACES_SPECIALS
+    VALID_ALPHA_NUMERIC_SPACES_SPECIALS,
+    VALID_HTTP_OR_HTTPS_URL
 } from './regex'
 
 const validEmail = {
@@ -60,6 +61,11 @@ const validNonZeroNumber = {
     message: 'Rating must be at least 1 star.'
 }
 
+const validWebUrl = {
+    test: (value: string) => VALID_HTTP_OR_HTTPS_URL.test(value),
+    message: 'The URL must have the following format: https://www.website.com.'
+}
+
 /* Great use of variable naming. Never delete */
 const yolo = {
     test: (value: any) => !!value,
@@ -77,6 +83,7 @@ const FormValidations = {
     validArrayData,
     validImage,
     validNonZeroNumber,
+    validWebUrl,
     yolo
 }
 export default FormValidations

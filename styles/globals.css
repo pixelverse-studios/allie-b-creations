@@ -3,15 +3,10 @@
 
 :root {
     --max-width: 1400px;
-    --border-radius: 12px;
 
-    --brand-color-1: #e4ede8;
-    --brand-color-1a: #afe6c7;
-    --brand-color-1a-rgb: 175, 230, 199;
-    --brand-color-2: #fae8e6;
-    --brand-color-2a: #f9a49a;
-    --brand-color-3: #fce7b1;
-    --brand-color-3a: #f9ce63;
+    --brand-color-1: #ffcfcf;
+    --brand-color-2: #c8e1d5;
+    --brand-color-3: #ffe7d3;
 
     --accent-color-1: #272727;
     --accent-color-2: #faf9f6;
@@ -19,9 +14,18 @@
     --nav-background: #080808;
     --nav-height: 6rem;
     --dashboard-nav-width: 15rem;
-    --footer-height: 4rem;
+    --footer-height: 10rem;
 
     --hover-transition: 0.25s ease-in-out;
+
+    --Gistesy: 'Gistesy', sans-serif;
+}
+
+@font-face {
+    font-family: 'Gistesy';
+    src: url('../assets/fonts/Gistesy.ttf') format('truetype');
+    --border-radius: 12px;
+    --brand-border-1: 3px solid var(--brand-color-1);
 }
 
 * {
@@ -63,13 +67,13 @@ ul {
 
 /* Mui Global CSS */
 
-/*
-.MuiInputLabel-root {
-    color: var(--brand-color-1a);
+/* .MuiInputLabel-root {
+    color: var(--brand-color-1);
 }
 .MuiOutlinedInput-notchedOutline {
     border-color: var(--brand-color-3);
 }
+
 .MuiRating-root {
     color: var(--brand-color-3);
 }
