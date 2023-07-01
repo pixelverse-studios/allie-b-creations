@@ -12,7 +12,7 @@
     --accent-color-2: #faf9f6;
 
     --border-radius: 12px;
-
+    --brand-border-1: 3px solid var(--brand-color-1);
     --nav-background: #080808;
     --nav-height: 6rem;
     --dashboard-nav-width: 15rem;
