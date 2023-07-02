@@ -9,6 +9,7 @@ import { StyledForm } from './StyledFormView'
 import { handleCloudUpload } from '@/utils/fileConversions'
 import { enqueueSnackbar } from 'notistack'
 import { statuses, messages } from '@/utils/banners'
+
 const initialState = {
     name: { value: '', error: '' },
     description: { value: '', error: '' },
@@ -17,12 +18,14 @@ const initialState = {
         value: '',
         error: ''
     },
-    img: {
-        name: '',
-        src: '',
-        title: '',
-        type: ''
-    },
+    img: [
+        {
+            name: '',
+            src: '',
+            title: '',
+            type: ''
+        }
+    ],
     role: {
         value: '',
         error: ''
@@ -80,12 +83,12 @@ const AboutMeFormView = ({ FormData }: any) => {
                 }),
                 ...(role !== form.role.value && { role: form.role.value }),
                 ...(title !== form.title.value && { title: form.title.value }),
-                ...(name !== form.name.value && { name: form.name.value })
-            }
-            payload.img = {
-                src: cloudImg,
-                type: form.img.value[0].type,
-                name: form.img.value[0].name
+                ...(name !== form.name.value && { name: form.name.value }),
+                ...(img !== form.img.value && {
+                    src: cloudImg,
+                    type: form.img.value[0].type,
+                    name: form.img.value[0].name
+                })
             }
 
             const updatedAbout = await updateAboutPageData(id, payload)
@@ -164,7 +167,7 @@ const AboutMeFormView = ({ FormData }: any) => {
                 <div className="current-image">
                     <h6>Current Image</h6>
                     <img
-                        src={form.img?.value?.src}
+                        src={form.img?.value?.src || form.img?.value?.[0]?.src}
                         alt="uploaded image"
                         className="uploaded-image"
                     />
@@ -173,7 +176,11 @@ const AboutMeFormView = ({ FormData }: any) => {
                     <FileUpload
                         context="aboutPage"
                         multiple={false}
-                        files={[form.img.value]}
+                        files={
+                            Array.isArray(form.img.value)
+                                ? form.img.value
+                                : [form.img.value]
+                        }
                         setFiles={onFilesChange}
                         label="Upload image"
                     />
