@@ -13,13 +13,12 @@ import { StyledServicesEventform } from '../../StyledServicesWidget'
 import { setServices } from '@/lib/redux/slices/services'
 
 interface EventFormFields {
-    description?: string
-    img?: string
-    title?: string
+    description: string
+    img: string
+    title: string
 }
 
-interface ServicesEventFormTypes extends EventFormFields {
-    id: string
+interface ServicesEventFormTypes {
     section: string
     label: 'Adding' | 'Editing'
     store: EventFormFields
@@ -38,11 +37,7 @@ const validations = {
 }
 
 const ServicesEventForm = ({
-    id,
     section,
-    description,
-    img,
-    title,
     label,
     store
 }: ServicesEventFormTypes) => {
@@ -92,15 +87,19 @@ const ServicesEventForm = ({
     const onFormSubmit = async () => {
         const payload = {} as any
         try {
-            if (id == '') {
+            if (store.title == '') {
                 payload.description = form.description.value
                 payload.title = form.title.value
-                payload.img = await handleCloudUpload({
+                const cloudImg = await handleCloudUpload({
                     base64: form.img.value[0].base64,
                     context: 'serviceEvents',
-                    filename: form.img.value[0].contents.name
+                    filename: form.img.value[0].name
                 })
-
+                payload.img = {
+                    src: cloudImg,
+                    type: form.img.value[0].type,
+                    name: form.img.value[0].name
+                }
                 const freshServices = await addOfferingEvent(
                     serviceID,
                     section,
