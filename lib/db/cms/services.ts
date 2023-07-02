@@ -125,11 +125,46 @@ const addOfferingEvent = async (
     }
 }
 
+const editOfferingEvent = async (
+    id: string,
+    section: string,
+    data: {
+        description: string
+        title: string
+        img: { src: string; type: string; name: string }
+    },
+    eventID: string
+): Promise<ServicesProps> => {
+    try {
+        const { offerings } = await getServices()
+
+        await updateDoc(doc(db, SERVICES, id), {
+            offerings: offerings.map(offering =>
+                offering.section === section
+                    ? {
+                          ...offering,
+                          events: offering.events.map(event =>
+                              event.title === eventID
+                                  ? { ...event, ...data }
+                                  : event
+                          )
+                      }
+                    : offering
+            )
+        })
+
+        return await getServices()
+    } catch (error) {
+        throw error
+    }
+}
+
 export {
     addNewOfferingSection,
+    addOfferingEvent,
     deleteOfferingSection,
+    editOfferingEvent,
     editOfferingSection,
     getServices,
-    updateGeneralServiceData,
-    addOfferingEvent
+    updateGeneralServiceData
 }

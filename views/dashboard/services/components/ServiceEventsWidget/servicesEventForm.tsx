@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react'
+import { useRouter } from 'next/router'
 
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -7,9 +8,14 @@ import { handleCloudUpload } from '@/utils/fileConversions'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
 
+interface ImgProps {
+    name?: string
+    type?: string
+    src?: string
+}
 interface EventFormFields {
     description: string
-    img: string
+    img: ImgProps[]
     title: string
 }
 
@@ -36,6 +42,7 @@ const ServicesEventForm = ({
     store,
     handleUpdate
 }: ServicesEventFormTypes) => {
+    const router = useRouter()
     const {
         handleChange,
         handleNonFormEventChange,
@@ -75,18 +82,25 @@ const ServicesEventForm = ({
         const payload = {} as any
         payload.description = form.description.value
         payload.title = form.title.value
-        const cloudImg = await handleCloudUpload({
-            base64: form.img.value[0].base64,
-            context: 'serviceEvents',
-            filename: form.img.value[0].name
-        })
+        const cloudImg =
+            store.img[0].src !== form.img.value[0].src
+                ? await handleCloudUpload({
+                      base64: form.img.value[0].base64,
+                      context: 'serviceEvents',
+                      filename: form.img.value[0].name
+                  })
+                : store.img[0].src
         payload.img = {
             src: cloudImg,
             type: form.img.value[0].type,
             name: form.img.value[0].name
         }
         await handleUpdate(payload)
-        handleReset()
+        if (!store.title) {
+            handleReset()
+        } else {
+            router.push('/dashboard/services')
+        }
     }
 
     return (

@@ -1,7 +1,12 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { enqueueSnackbar } from 'notistack'
+
+import { editOfferingEvent } from '@/lib/db/cms/services'
+import { statuses, messages } from '@/utils/banners'
+import { setServices } from '@/lib/redux/slices/services'
 import ServicesEventForm from './servicesEventForm'
 import { StyledServicesWidget } from '../../StyledServicesWidget'
 
@@ -11,8 +16,17 @@ const EditEventWidget = () => {
         eventType: string
         offeringId: string
     }
-    const { offerings } = useSelector((state: any) => state.services)
-    const editingData = useMemo(() => {
+    const dispatch = useDispatch()
+    const { id: serviceID, offerings } = useSelector(
+        (state: any) => state.services
+    )
+
+    const derivedSection = useMemo(
+        () => decodeURIComponent((query?.eventType as string) ?? ''),
+        [query]
+    )
+
+    const store = useMemo(() => {
         const currentOfferingSection = offerings?.find(
             (offering: any) => offering?.section === eventType
         )
@@ -23,21 +37,47 @@ const EditEventWidget = () => {
         return { ...currentItem, img: [currentItem?.img] }
     }, [offerings])
 
+    const onUpdate = async (payload: {
+        img: { src: string; type: string; name: string }
+        title: string
+        description: string
+    }) => {
+        try {
+            const freshServices = await editOfferingEvent(
+                serviceID,
+                derivedSection,
+                payload,
+                store.title
+            )
+            dispatch(setServices(freshServices))
+            enqueueSnackbar('Your new Service Offering has been edited', {
+                variant: statuses.SUCCESS
+            })
+        } catch (error: any) {
+            enqueueSnackbar(
+                error.message === 'Image upload failed'
+                    ? error.message
+                    : messages.TECHNICAL_DIFFICULTIES,
+                {
+                    variant: statuses.ERROR
+                }
+            )
+        }
+    }
+
     return (
         <StyledServicesWidget>
             <h2>
                 <Link href="/dashboard/services">Services</Link>
                 <span>/</span> Edit {decodeURIComponent(offeringId)}
             </h2>
-            {editingData == null ? (
+            {store == null ? (
                 <span>Loading...</span>
             ) : (
                 <ServicesEventForm
-                    section={decodeURIComponent(
-                        (query?.eventType as string) ?? ''
-                    )}
-                    store={editingData}
-                    label="Adding"
+                    handleUpdate={onUpdate}
+                    store={store}
+                    label={`Editing for ${derivedSection}`}
                 />
             )}
         </StyledServicesWidget>

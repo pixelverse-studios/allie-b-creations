@@ -10,7 +10,11 @@ import { statuses, messages } from '@/utils/banners'
 import { setServices } from '@/lib/redux/slices/services'
 import { StyledServicesWidget } from '../../StyledServicesWidget'
 
-const STORE = { description: '', img: '', title: '' }
+const STORE = {
+    description: '',
+    img: [],
+    title: ''
+}
 
 const AddNewEventWidget = () => {
     const { query } = useRouter()

@@ -113,13 +113,13 @@ export const FileUpload = ({
                     <StyledImgPreview key={uniqueId()}>
                         <Avatar
                             key={uniqueId()}
-                            src={file.src}
-                            alt={file.name}
+                            src={file?.src}
+                            alt={file?.name}
                         />
-                        <span>{file.name}</span>
+                        <span>{file?.name}</span>
                         <ConfirmDeleteButton
                             onTriggerMutation={() =>
-                                onFilePreviewDelete(file.name)
+                                onFilePreviewDelete(file?.name)
                             }
                         />
                     </StyledImgPreview>
