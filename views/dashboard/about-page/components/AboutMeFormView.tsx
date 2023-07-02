@@ -6,7 +6,9 @@ import { FileUpload, FormButtonGroup, TextField } from '@/components/form'
 import { updateAboutPageData } from '@/lib/db/cms/about-page'
 import { setAbout } from '@/lib/redux/slices/aboutPage'
 import { StyledForm } from './StyledFormView'
-
+import { handleCloudUpload } from '@/utils/fileConversions'
+import { enqueueSnackbar } from 'notistack'
+import { statuses, messages } from '@/utils/banners'
 const initialState = {
     name: { value: '', error: '' },
     description: { value: '', error: '' },
@@ -59,21 +61,48 @@ const AboutMeFormView = ({ FormData }: any) => {
     } = useForm(initialState, validations, FormData)
 
     const onFormSubmit = async () => {
-        const payload = {
-            ...(description !== form.description.value && {
-                description: form.description.value
-            }),
-            ...(header !== form.header.value && { header: form.header.value }),
-            ...(subHeader !== form.subHeader.value && {
-                subHeader: form.subHeader.value
-            }),
-            ...(role !== form.role.value && { role: form.role.value }),
-            ...(title !== form.title.value && { title: form.title.value }),
-            ...(name !== form.name.value && { name: form.name.value })
-        }
+        try {
+            const cloudImg = await handleCloudUpload({
+                base64: form.img.value[0].base64,
+                context: 'aboutPage',
+                filename: form.img.value[0].name
+            })
 
-        const updatedAbout = await updateAboutPageData(id, payload)
-        dispatch(setAbout(updatedAbout))
+            const payload = {
+                ...(description !== form.description.value && {
+                    description: form.description.value
+                }),
+                ...(header !== form.header.value && {
+                    header: form.header.value
+                }),
+                ...(subHeader !== form.subHeader.value && {
+                    subHeader: form.subHeader.value
+                }),
+                ...(role !== form.role.value && { role: form.role.value }),
+                ...(title !== form.title.value && { title: form.title.value }),
+                ...(name !== form.name.value && { name: form.name.value })
+            }
+            payload.img = {
+                src: cloudImg,
+                type: form.img.value[0].type,
+                name: form.img.value[0].name
+            }
+
+            const updatedAbout = await updateAboutPageData(id, payload)
+            dispatch(setAbout(updatedAbout))
+            enqueueSnackbar('Your About Me pagehas been updated.', {
+                variant: statuses.SUCCESS
+            })
+        } catch (error: any) {
+            enqueueSnackbar(
+                error.message === 'You about page update failed.'
+                    ? error.message
+                    : messages.TECHNICAL_DIFFICULTIES,
+                {
+                    variant: statuses.ERROR
+                }
+            )
+        }
     }
     const handleResetForm = () =>
         handleImport({
