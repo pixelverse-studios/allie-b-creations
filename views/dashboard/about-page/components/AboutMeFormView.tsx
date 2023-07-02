@@ -1,8 +1,8 @@
-import { FormEvent, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
-import { FormButtonGroup, TextField } from '@/components/form'
+import { FileUpload, FormButtonGroup, TextField } from '@/components/form'
 import { updateAboutPageData } from '@/lib/db/cms/about-page'
 import { setAbout } from '@/lib/redux/slices/aboutPage'
 import { StyledForm } from './StyledFormView'
@@ -15,7 +15,7 @@ const initialState = {
         value: '',
         error: ''
     },
-    profileImg: {
+    img: {
         value: '',
         error: ''
     },
@@ -34,7 +34,7 @@ const validations = {
     description: FormValidations.yolo,
     header: FormValidations.yolo,
     subHeader: FormValidations.yolo,
-    profileImg: FormValidations.yolo,
+    img: FormValidations.yolo,
     role: FormValidations.yolo,
     title: FormValidations.yolo
 }
@@ -42,16 +42,8 @@ const validations = {
 const AboutMeFormView = ({ FormData }: any) => {
     const dispatch = useDispatch()
 
-    const {
-        description,
-        header,
-        subHeader,
-        profileImg,
-        role,
-        title,
-        name,
-        id
-    } = FormData
+    const { description, header, subHeader, img, role, title, name, id } =
+        FormData
 
     const {
         disableSubmit,
@@ -59,6 +51,7 @@ const AboutMeFormView = ({ FormData }: any) => {
         formLoading,
         handleChange,
         handleFormSubmit,
+        handleNonFormEventChange,
         handleImport,
         isDataImported
     } = useForm(initialState, validations, FormData)
@@ -72,8 +65,8 @@ const AboutMeFormView = ({ FormData }: any) => {
             ...(subHeader !== form.subHeader.value && {
                 subHeader: form.subHeader.value
             }),
-            ...(profileImg !== form.profileImg.value && {
-                profileImg: form.profileImg.value
+            ...(img !== form.img.value && {
+                img: form.img.value
             }),
             ...(role !== form.role.value && { role: form.role.value }),
             ...(title !== form.title.value && { title: form.title.value }),
@@ -88,7 +81,7 @@ const AboutMeFormView = ({ FormData }: any) => {
             description,
             header,
             subHeader,
-            profileImg,
+            img,
             role,
             title,
             name
@@ -97,6 +90,10 @@ const AboutMeFormView = ({ FormData }: any) => {
     useEffect(() => {
         if (id && !isDataImported) handleResetForm()
     }, [id])
+
+    const onFilesChange = (files: any) => {
+        handleNonFormEventChange(files, 'img')
+    }
 
     return (
         <StyledForm onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
@@ -135,6 +132,23 @@ const AboutMeFormView = ({ FormData }: any) => {
                 type="text"
                 onChange={handleChange}
             />
+            <div className="image-upload">
+                <div className="current-image">
+                    <h6>Current Image</h6>
+                    <img
+                        src={form.img.value}
+                        alt="uploaded image"
+                        className="uploaded-image"
+                    />
+                </div>
+                {/* <FileUpload
+                    context="aboutPage"
+                    multiple={false}
+                    files={form.img.value}
+                    setFiles={onFilesChange}
+                    label="Upload image"
+                /> */}
+            </div>
             <FormButtonGroup
                 disableSubmit={disableSubmit}
                 handleReset={handleResetForm}

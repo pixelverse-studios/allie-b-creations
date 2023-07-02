@@ -15,7 +15,7 @@ const initialState = {
         value: '',
         error: ''
     },
-    profileImg: {
+    img: {
         value: '',
         error: ''
     },
@@ -34,7 +34,7 @@ const validations = {
     description: FormValidations.yolo,
     header: FormValidations.yolo,
     subHeader: FormValidations.yolo,
-    profileImg: FormValidations.yolo,
+    img: FormValidations.yolo,
     role: FormValidations.yolo,
     title: FormValidations.yolo
 }
@@ -42,16 +42,8 @@ const validations = {
 const StoryFormView = ({ FormData }: any) => {
     const dispatch = useDispatch()
 
-    const {
-        description,
-        header,
-        subHeader,
-        profileImg,
-        role,
-        title,
-        name,
-        id
-    } = FormData
+    const { description, header, subHeader, img, role, title, name, id } =
+        FormData
     const {
         disableSubmit,
         form,
@@ -71,8 +63,8 @@ const StoryFormView = ({ FormData }: any) => {
             ...(subHeader !== form.subHeader.value && {
                 subHeader: form.subHeader.value
             }),
-            ...(profileImg !== form.profileImg.value && {
-                profileImg: form.profileImg.value
+            ...(img !== form.img.value && {
+                img: form.img.value
             }),
             ...(role !== form.role.value && { role: form.role.value }),
             ...(title !== form.title.value && { title: form.title.value }),
@@ -88,7 +80,7 @@ const StoryFormView = ({ FormData }: any) => {
             description,
             header,
             subHeader,
-            profileImg,
+            img,
             role,
             title,
             name

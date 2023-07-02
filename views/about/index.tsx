@@ -6,7 +6,7 @@ import { AboutPageProps } from '@/utils/types/redux'
 
 const AboutPageView = () => {
     const aboutPageData = useSelector((state: any) => state.aboutPage)
-
+    console.log(aboutPageData)
     return (
         <StyledAboutPage>
             <HeaderWithPaintStreaks title="About Me" />
@@ -15,7 +15,7 @@ const AboutPageView = () => {
                 return (
                     <div className={`image-about-content-${index}`} key={index}>
                         <img
-                            src={data.profileImg}
+                            src={data.img.src}
                             alt="alt text"
                             className="image"
                         />
