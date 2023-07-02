@@ -6,7 +6,7 @@ import { AboutPageProps } from '@/utils/types/redux'
 
 const AboutPageView = () => {
     const aboutPageData = useSelector((state: any) => state.aboutPage)
-    console.log(aboutPageData)
+
     return (
         <StyledAboutPage>
             <HeaderWithPaintStreaks title="About Me" />
