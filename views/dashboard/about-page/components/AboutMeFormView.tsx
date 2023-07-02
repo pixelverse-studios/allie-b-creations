@@ -16,8 +16,10 @@ const initialState = {
         error: ''
     },
     img: {
-        value: '',
-        error: ''
+        name: '',
+        src: '',
+        title: '',
+        type: ''
     },
     role: {
         value: '',
@@ -64,9 +66,6 @@ const AboutMeFormView = ({ FormData }: any) => {
             ...(header !== form.header.value && { header: form.header.value }),
             ...(subHeader !== form.subHeader.value && {
                 subHeader: form.subHeader.value
-            }),
-            ...(img !== form.img.value && {
-                img: form.img.value
             }),
             ...(role !== form.role.value && { role: form.role.value }),
             ...(title !== form.title.value && { title: form.title.value }),
@@ -136,18 +135,20 @@ const AboutMeFormView = ({ FormData }: any) => {
                 <div className="current-image">
                     <h6>Current Image</h6>
                     <img
-                        src={form.img.value}
+                        src={form.img?.value?.src}
                         alt="uploaded image"
                         className="uploaded-image"
                     />
                 </div>
-                {/* <FileUpload
-                    context="aboutPage"
-                    multiple={false}
-                    files={form.img.value}
-                    setFiles={onFilesChange}
-                    label="Upload image"
-                /> */}
+                <div className="file-upload">
+                    <FileUpload
+                        context="aboutPage"
+                        multiple={false}
+                        files={[form.img.value]}
+                        setFiles={onFilesChange}
+                        label="Upload image"
+                    />
+                </div>
             </div>
             <FormButtonGroup
                 disableSubmit={disableSubmit}
