@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { use, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -46,7 +46,7 @@ const validations = {
     title: FormValidations.yolo
 }
 
-const AboutMeFormView = ({ FormData }: any) => {
+const FormView = ({ FormData }: any) => {
     const dispatch = useDispatch()
 
     const { description, header, subHeader, img, role, title, name, id } =
@@ -121,6 +121,9 @@ const AboutMeFormView = ({ FormData }: any) => {
     useEffect(() => {
         if (id && !isDataImported) handleResetForm()
     }, [id])
+    useEffect(() => {
+        handleResetForm()
+    }, [FormData])
 
     const onFilesChange = (files: any) => {
         handleNonFormEventChange(files, 'img')
@@ -195,4 +198,4 @@ const AboutMeFormView = ({ FormData }: any) => {
     )
 }
 
-export default AboutMeFormView
+export default FormView

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AboutMeFormView, StoryFormView } from './components'
+import FormView from './components/FormView'
 import { StyledAboutWidget } from './StyledAboutWidget'
 
 const AboutWidget = () => {
@@ -28,9 +28,9 @@ const AboutWidget = () => {
             </div>
             <div className="form-view">
                 {formView ? (
-                    <AboutMeFormView FormData={AboutPageData?.[0]} />
+                    <FormView FormData={AboutPageData?.[0]} />
                 ) : (
-                    <StoryFormView FormData={AboutPageData?.[1]} />
+                    <FormView FormData={AboutPageData?.[1]} />
                 )}
             </div>
         </StyledAboutWidget>
