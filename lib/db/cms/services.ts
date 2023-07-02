@@ -102,7 +102,11 @@ const deleteOfferingSection = async (
 const addOfferingEvent = async (
     id: string,
     section: string,
-    data: { description: string; title: string; img: string }
+    data: {
+        description: string
+        title: string
+        img: { src: string; type: string; name: string }
+    }
 ): Promise<ServicesProps> => {
     try {
         const { offerings } = await getServices()

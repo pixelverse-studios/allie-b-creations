@@ -1,16 +1,11 @@
 import { useEffect, useMemo } from 'react'
-import { enqueueSnackbar } from 'notistack'
-import { useSelector, useDispatch } from 'react-redux'
 
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
-import { addOfferingEvent } from '@/lib/db/cms/services'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
 import { handleCloudUpload } from '@/utils/fileConversions'
 import { StyledFieldSet } from '@/components/drawer/content/StyledFormComponents'
-import { statuses, messages } from '@/utils/banners'
 import { StyledServicesEventform } from '../../StyledServicesWidget'
-import { setServices } from '@/lib/redux/slices/services'
 
 interface EventFormFields {
     description: string
@@ -19,9 +14,9 @@ interface EventFormFields {
 }
 
 interface ServicesEventFormTypes {
-    section: string
-    label: 'Adding' | 'Editing'
+    label: string
     store: EventFormFields
+    handleUpdate: Function
 }
 
 const initialState = {
@@ -37,18 +32,10 @@ const validations = {
 }
 
 const ServicesEventForm = ({
-    section,
     label,
-    store
+    store,
+    handleUpdate
 }: ServicesEventFormTypes) => {
-    const dispatch = useDispatch()
-    const { id: serviceID } = useSelector((state: any) => state.services)
-
-    const renderLabel =
-        label === 'Adding'
-            ? `Adding a new event to ${section}`
-            : `Editing event for ${section}`
-
     const {
         handleChange,
         handleNonFormEventChange,
@@ -86,47 +73,26 @@ const ServicesEventForm = ({
 
     const onFormSubmit = async () => {
         const payload = {} as any
-        try {
-            if (store.title == '') {
-                payload.description = form.description.value
-                payload.title = form.title.value
-                const cloudImg = await handleCloudUpload({
-                    base64: form.img.value[0].base64,
-                    context: 'serviceEvents',
-                    filename: form.img.value[0].name
-                })
-                payload.img = {
-                    src: cloudImg,
-                    type: form.img.value[0].type,
-                    name: form.img.value[0].name
-                }
-                const freshServices = await addOfferingEvent(
-                    serviceID,
-                    section,
-                    payload
-                )
-                dispatch(setServices(freshServices))
-                handleReset()
-                enqueueSnackbar('Your new Service Offering has been added', {
-                    variant: statuses.SUCCESS
-                })
-            }
-        } catch (error: any) {
-            enqueueSnackbar(
-                error.message === 'Image upload failed'
-                    ? error.message
-                    : messages.TECHNICAL_DIFFICULTIES,
-                {
-                    variant: statuses.ERROR
-                }
-            )
+        payload.description = form.description.value
+        payload.title = form.title.value
+        const cloudImg = await handleCloudUpload({
+            base64: form.img.value[0].base64,
+            context: 'serviceEvents',
+            filename: form.img.value[0].name
+        })
+        payload.img = {
+            src: cloudImg,
+            type: form.img.value[0].type,
+            name: form.img.value[0].name
         }
+        await handleUpdate(payload)
+        handleReset()
     }
 
     return (
         <StyledServicesEventform
             onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
-            <h3>{renderLabel}</h3>
+            <h3>{label}</h3>
             <StyledFieldSet className="serviceEventFields">
                 <FileUpload
                     context="serviceEvents"
