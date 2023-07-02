@@ -6,13 +6,14 @@ import { uniqueId } from 'lodash'
 import { ConfirmDeleteButton } from '@/components/buttons'
 import { convertFileToBase64 } from '@/utils/fileConversions'
 import { StyledFileUpload, StyledImgPreview } from './StyledFields'
-export interface FileItem {
-    [preview: string]: any
-    contents: any
-    base64: string
-}
 
-export type FilesList = FileItem[]
+export type FileProps = {
+    base64: string
+    preview: string
+    type: string
+    name: string
+}
+export type FilesList = FileProps[]
 
 interface FileUploadTypes {
     multiple: boolean
@@ -33,14 +34,19 @@ export const FileUpload = ({
 
     const curateFilesList = async (files: any) => {
         const newFiles = Array.from(files)
-        const curatedFiles = await Promise.all(
-            newFiles.map(async file => {
-                const preview = URL.createObjectURL(file as any)
+        const curatedFilesList = await Promise.all(
+            newFiles.map(async (file: any) => {
+                const img = URL.createObjectURL(file as any)
                 const base64 = await convertFileToBase64(file)
-                return { contents: file, preview, base64 } as any
+                return {
+                    base64,
+                    src: img,
+                    type: file.type,
+                    name: file.name
+                }
             })
         )
-        return curatedFiles
+        return curatedFilesList
     }
 
     const onFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,9 +71,7 @@ export const FileUpload = ({
 
     const onFilePreviewDelete = (filename: string) => {
         inputRef.current.value = '' as any
-        setFiles(
-            files?.filter((file: any) => file.contents.name !== filename) ?? []
-        )
+        setFiles(files?.filter((file: any) => file.name !== filename) ?? [])
     }
 
     return (
@@ -109,17 +113,17 @@ export const FileUpload = ({
                     <StyledImgPreview key={uniqueId()}>
                         <Avatar
                             key={uniqueId()}
-                            src={file.preview}
-                            alt={file.contents.name}
+                            src={file.src}
+                            alt={file.name}
                         />
-                        <span>{file.contents.name}</span>
+                        <span>{file.name}</span>
                         <ConfirmDeleteButton
                             onTriggerMutation={() =>
-                                onFilePreviewDelete(file.contents.name)
+                                onFilePreviewDelete(file.name)
                             }
                         />
                     </StyledImgPreview>
-                ))}
+                )) ?? null}
             </div>
         </StyledFileUpload>
     )

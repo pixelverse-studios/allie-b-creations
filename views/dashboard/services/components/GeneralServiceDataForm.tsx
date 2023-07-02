@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { enqueueSnackbar } from 'notistack'
 
+import { statuses, messages } from '@/utils/banners'
 import useForm from '@/utils/hooks/useForm'
 import { setServices } from '@/lib/redux/slices/services'
 import FormValidations from '@/utils/validations/forms'
@@ -45,40 +47,50 @@ const GeneralServiceDataForm = () => {
     }, [id])
 
     const onFormSubmit = async () => {
-        const payload = {} as { description?: string; pageHeader?: string }
-        if (description !== form.description.value)
-            payload.description = form.description.value
-        if (pageHeader !== form.pageHeader.value)
-            payload.pageHeader = form.pageHeader.value
-
-        const updatedServices = await updateGeneralServiceData(id, payload)
-        dispatch(setServices(updatedServices))
+        try {
+            const payload = {} as { description?: string; pageHeader?: string }
+            if (description !== form.description.value)
+                payload.description = form.description.value
+            if (pageHeader !== form.pageHeader.value)
+                payload.pageHeader = form.pageHeader.value
+            const updatedServices = await updateGeneralServiceData(id, payload)
+            enqueueSnackbar(messages.SAVED_UPDATES('Service Page'), {
+                variant: statuses.SUCCESS
+            })
+            dispatch(setServices(updatedServices))
+        } catch (error) {
+            enqueueSnackbar(messages.FAILED_UPDATES('Service Page'), {
+                variant: statuses.ERROR
+            })
+        }
     }
+
     return (
-        <StyledServicesBlock
-            onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
-            <h4>General Page Data</h4>
-            <StyledFieldSet>
-                <TextField
-                    field={form.pageHeader}
-                    id="pageHeader"
-                    label="Page Header"
-                    type="text"
-                    onChange={handleChange}
-                />
-                <TextField
-                    field={form.description}
-                    id="description"
-                    label="Page Description"
-                    type="textarea"
-                    onChange={handleChange}
-                />
-                <FormButtonGroup
-                    disableSubmit={disableSubmit}
-                    handleReset={handleResetForm}
-                    loading={formLoading}
-                />
-            </StyledFieldSet>
+        <StyledServicesBlock>
+            <form onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
+                <h4>General Page Data</h4>
+                <StyledFieldSet>
+                    <TextField
+                        field={form.pageHeader}
+                        id="pageHeader"
+                        label="Page Header"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        field={form.description}
+                        id="description"
+                        label="Page Description"
+                        type="textarea"
+                        onChange={handleChange}
+                    />
+                    <FormButtonGroup
+                        disableSubmit={disableSubmit}
+                        handleReset={handleResetForm}
+                        loading={formLoading}
+                    />
+                </StyledFieldSet>
+            </form>
         </StyledServicesBlock>
     )
 }
