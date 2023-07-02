@@ -31,8 +31,7 @@ const AboutWidget = () => {
                 {formView ? (
                     <AboutMeFormView FormData={AboutPageData?.[0]} />
                 ) : (
-                    'Hey'
-                    // <StoryFormView  data={AboutPageData[1]/>
+                    <StoryFormView FormData={AboutPageData?.[1]} />
                 )}
             </div>
         </StyledAboutWidget>

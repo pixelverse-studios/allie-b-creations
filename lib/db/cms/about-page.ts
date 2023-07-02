@@ -38,12 +38,13 @@ const getAboutPageData = async (): Promise<AboutPageProps[]> => {
 const updateAboutPageData = async (
     id: string,
     fields: {
-        description: string[]
-        header: string
-        profileImg: string
-        role: string
-        subHeader: string
-        title: string
+        description?: string
+        header?: string
+        profileImg?: string
+        role?: string
+        subHeader?: string
+        title?: string
+        name?: string
     }
 ): Promise<AboutPageProps[]> => {
     try {

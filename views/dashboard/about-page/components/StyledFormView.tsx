@@ -1,3 +1,7 @@
 import styled from '@emotion/styled'
 
-export const StyledForm = styled.div``
+export const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+`

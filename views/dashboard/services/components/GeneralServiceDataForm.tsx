@@ -54,6 +54,7 @@ const GeneralServiceDataForm = () => {
         const updatedServices = await updateGeneralServiceData(id, payload)
         dispatch(setServices(updatedServices))
     }
+
     return (
         <StyledServicesBlock
             onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
