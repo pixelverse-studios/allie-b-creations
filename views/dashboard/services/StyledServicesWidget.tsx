@@ -164,6 +164,9 @@ export const StyledServicesEventform = styled.form`
 
     h3 {
         margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .serviceEventFields {

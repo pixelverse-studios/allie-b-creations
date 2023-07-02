@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import { Delete } from '@mui/icons-material'
 
+import { ConfirmDeleteButton } from '@/components/buttons'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
@@ -106,7 +108,15 @@ const ServicesEventForm = ({
     return (
         <StyledServicesEventform
             onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
-            <h3>{label}</h3>
+            <h3>
+                {label}
+                {store.title ? (
+                    <ConfirmDeleteButton
+                        onTriggerMutation={() => console.log('uer')}
+                        Icon={Delete}
+                    />
+                ) : null}
+            </h3>
             <StyledFieldSet className="serviceEventFields">
                 <FileUpload
                     context="serviceEvents"
