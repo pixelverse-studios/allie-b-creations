@@ -45,7 +45,7 @@ export const StyledServicesWidget = styled.section`
     }
 `
 
-export const StyledServicesBlock = styled.form`
+export const StyledServicesBlock = styled.section`
     ${DashboardCardStyles}
     width: 100%;
     display: flex;

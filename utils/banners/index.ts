@@ -27,6 +27,3 @@ const messages = {
 }
 
 export { statuses, messages }
-// statuses: { SUCCESS, ERROR, WARNING },
-// messages: { TECHNICAL_DIFFICULTIES, LOGGED_IN, LOGGED_OUT, LOG_OUT_ERROR }
-// }

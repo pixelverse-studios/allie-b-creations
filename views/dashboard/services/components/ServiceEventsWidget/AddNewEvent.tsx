@@ -15,7 +15,6 @@ const AddNewEventWidget = () => {
                 <span>/</span> Add
             </h2>
             <ServicesEventForm
-                id=""
                 section={decodeURIComponent((query?.eventType as string) ?? '')}
                 store={STORE}
                 label="Adding"

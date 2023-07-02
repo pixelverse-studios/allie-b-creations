@@ -66,30 +66,31 @@ const GeneralServiceDataForm = () => {
     }
 
     return (
-        <StyledServicesBlock
-            onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
-            <h4>General Page Data</h4>
-            <StyledFieldSet>
-                <TextField
-                    field={form.pageHeader}
-                    id="pageHeader"
-                    label="Page Header"
-                    type="text"
-                    onChange={handleChange}
-                />
-                <TextField
-                    field={form.description}
-                    id="description"
-                    label="Page Description"
-                    type="textarea"
-                    onChange={handleChange}
-                />
-                <FormButtonGroup
-                    disableSubmit={disableSubmit}
-                    handleReset={handleResetForm}
-                    loading={formLoading}
-                />
-            </StyledFieldSet>
+        <StyledServicesBlock>
+            <form onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
+                <h4>General Page Data</h4>
+                <StyledFieldSet>
+                    <TextField
+                        field={form.pageHeader}
+                        id="pageHeader"
+                        label="Page Header"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        field={form.description}
+                        id="description"
+                        label="Page Description"
+                        type="textarea"
+                        onChange={handleChange}
+                    />
+                    <FormButtonGroup
+                        disableSubmit={disableSubmit}
+                        handleReset={handleResetForm}
+                        loading={formLoading}
+                    />
+                </StyledFieldSet>
+            </form>
         </StyledServicesBlock>
     )
 }
