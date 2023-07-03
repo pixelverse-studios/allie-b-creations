@@ -17,13 +17,13 @@ const AboutWidget = () => {
                 <h3
                     className={`${formView && 'active'}`}
                     onClick={handleViewChange}>
-                    About Me
+                    ABOUT ME
                 </h3>
                 <span>/</span>
                 <h3
                     className={`${!formView && 'active'}`}
                     onClick={handleViewChange}>
-                    Company Story
+                    COMPANY STORE
                 </h3>
             </div>
             <div className="form-view">

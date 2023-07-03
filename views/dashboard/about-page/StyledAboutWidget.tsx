@@ -7,11 +7,11 @@ export const StyledAboutWidget = styled.div`
     }
 
     h3 {
-        font-weight: lighter;
+        font-weight: 400;
         cursor: pointer;
     }
     .active {
-        font-weight: bolder;
+        font-weight: 800;
     }
 
     .form-view {

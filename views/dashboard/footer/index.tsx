@@ -14,13 +14,11 @@ import { Add } from '@mui/icons-material'
 import ContactLinkCard from '@/views/dashboard/footer/components/contactLink'
 import IconSelectField from '@/views/dashboard/footer/components/IconSelectField'
 import { CircleIconButton } from '@/components/buttons'
-import bannerUtils from '@/utils/banners'
+import { statuses } from '@/utils/banners'
 import { createContactLink } from '@/lib/db/cms/contact-links'
 import { StyledFooterWedgie, StyledSubmissionForm } from './StyledFooterWidget'
 import FormValidations from '@/utils/validations/forms'
 import { setContactLinks } from '@/lib/redux/slices/contactLinks'
-
-const { statuses } = bannerUtils
 
 interface ContactLink {
     icon: string
