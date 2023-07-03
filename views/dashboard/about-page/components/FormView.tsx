@@ -34,17 +34,6 @@ interface Payload {
     [key: string]: any
 }
 
-interface Store {
-    [key: string]: any
-    description: string
-    header: string
-    subHeader: string
-    img: string
-    role: string
-    title: string
-    name: string
-    id: string
-}
 const validations = {
     name: FormValidations.yolo,
     description: FormValidations.yolo,
