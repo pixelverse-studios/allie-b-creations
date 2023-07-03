@@ -179,12 +179,21 @@ const FormView = ({ store }: any) => {
             />
             <div className="image-upload">
                 <div className="current-image">
-                    <h6>Current Image</h6>
-                    <img
-                        src={form.img?.value?.src || form.img?.value?.[0]?.src}
-                        alt="uploaded image"
-                        className="uploaded-image"
-                    />
+                    {form.img?.value?.src || form.img?.value?.[0]?.src ? (
+                        <>
+                            <h6>Current Image</h6>
+                            <img
+                                src={
+                                    form.img?.value?.src ||
+                                    form.img?.value?.[0]?.src
+                                }
+                                alt="uploaded image"
+                                className="uploaded-image"
+                            />
+                        </>
+                    ) : (
+                        <h6>Image Not Available</h6>
+                    )}
                 </div>
                 <div className="file-upload">
                     <FileUpload
