@@ -1,4 +1,4 @@
-import { use, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -18,14 +18,8 @@ const initialState = {
         value: '',
         error: ''
     },
-    img: [
-        {
-            name: '',
-            src: '',
-            title: '',
-            type: ''
-        }
-    ],
+    img: { value: [], error: '' },
+
     role: {
         value: '',
         error: ''
@@ -36,6 +30,21 @@ const initialState = {
     }
 }
 
+interface Payload {
+    [key: string]: any
+}
+
+interface Store {
+    [key: string]: any
+    description: string
+    header: string
+    subHeader: string
+    img: string
+    role: string
+    title: string
+    name: string
+    id: string
+}
 const validations = {
     name: FormValidations.yolo,
     description: FormValidations.yolo,
@@ -46,11 +55,10 @@ const validations = {
     title: FormValidations.yolo
 }
 
-const FormView = ({ FormData }: any) => {
+const FormView = ({ store }: any) => {
     const dispatch = useDispatch()
 
-    const { description, header, subHeader, img, role, title, name, id } =
-        FormData
+    const { description, header, subHeader, img, role, title, name, id } = store
 
     const {
         disableSubmit,
@@ -61,44 +69,47 @@ const FormView = ({ FormData }: any) => {
         handleNonFormEventChange,
         handleImport,
         isDataImported
-    } = useForm(initialState, validations, FormData)
+    } = useForm(initialState, validations, store)
 
     const onFormSubmit = async () => {
-        try {
-            const cloudImg = await handleCloudUpload({
-                base64: form.img.value[0].base64,
-                context: 'aboutPage',
-                filename: form.img.value[0].name
-            })
+        if (!store) {
+            return
+        }
+        if (!form) {
+            return
+        }
 
-            const payload = {
-                ...(description !== form.description.value && {
-                    description: form.description.value
-                }),
-                ...(header !== form.header.value && {
-                    header: form.header.value
-                }),
-                ...(subHeader !== form.subHeader.value && {
-                    subHeader: form.subHeader.value
-                }),
-                ...(role !== form.role.value && { role: form.role.value }),
-                ...(title !== form.title.value && { title: form.title.value }),
-                ...(name !== form.name.value && { name: form.name.value }),
-                ...(img !== form.img.value && {
-                    src: cloudImg,
-                    type: form.img.value[0].type,
-                    name: form.img.value[0].name
-                })
+        try {
+            const payload: Payload = {}
+            for (const [key] of Object.entries(store)) {
+                if (!form[key]) {
+                    continue
+                }
+                if (store[key] !== form[key].value) {
+                    if (key === 'img') {
+                        payload[key] = {
+                            src: await handleCloudUpload({
+                                base64: form.img.value[0].base64,
+                                context: 'aboutPage',
+                                filename: form.img.value[0].name
+                            }),
+                            type: form.img.value[0].type,
+                            name: form.img.value[0].name
+                        }
+                    } else {
+                        payload[key] = form[key].value
+                    }
+                }
             }
 
             const updatedAbout = await updateAboutPageData(id, payload)
             dispatch(setAbout(updatedAbout))
-            enqueueSnackbar('Your About Me pagehas been updated.', {
+            enqueueSnackbar('Your About Me page has been updated.', {
                 variant: statuses.SUCCESS
             })
         } catch (error: any) {
             enqueueSnackbar(
-                error.message === 'You about page update failed.'
+                error.message === 'Your about page update failed.'
                     ? error.message
                     : messages.TECHNICAL_DIFFICULTIES,
                 {
@@ -107,6 +118,7 @@ const FormView = ({ FormData }: any) => {
             )
         }
     }
+
     const handleResetForm = () =>
         handleImport({
             description,
@@ -118,12 +130,22 @@ const FormView = ({ FormData }: any) => {
             name
         })
 
+    const handleImportache = () =>
+        handleImport({
+            description,
+            header,
+            subHeader,
+            img,
+            role,
+            title,
+            name
+        })
     useEffect(() => {
-        if (id && !isDataImported) handleResetForm()
+        if (id && !isDataImported) handleImportache()
     }, [id])
     useEffect(() => {
-        handleResetForm()
-    }, [FormData])
+        handleImportache()
+    }, [store])
 
     const onFilesChange = (files: any) => {
         handleNonFormEventChange(files, 'img')

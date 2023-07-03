@@ -27,11 +27,9 @@ const AboutWidget = () => {
                 </h3>
             </div>
             <div className="form-view">
-                {formView ? (
-                    <FormView FormData={AboutPageData?.[0]} />
-                ) : (
-                    <FormView FormData={AboutPageData?.[1]} />
-                )}
+                <FormView
+                    store={formView ? AboutPageData?.[0] : AboutPageData?.[1]}
+                />
             </div>
         </StyledAboutWidget>
     )
