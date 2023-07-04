@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Button, ButtonGroup } from '@mui/material'
 import FormView from './components/FormView'
 import { StyledAboutWidget } from './StyledAboutWidget'
 
@@ -7,26 +8,21 @@ const AboutWidget = () => {
     const AboutPageData = useSelector((state: any) => state.aboutPage)
     const [formView, setFormView] = useState<boolean>(true)
 
-    const handleViewChange = () => {
-        setFormView(!formView)
-    }
-
     return (
         <StyledAboutWidget>
             <div className="header">
-                <h3
-                    className={`${formView && 'active'}`}
-                    onClick={handleViewChange}>
-                    ABOUT ME
-                </h3>
-                <span>/</span>
-                <h3
-                    className={`${!formView && 'active'}`}
-                    onClick={handleViewChange}>
-                    COMPANY STORE
-                </h3>
+                <ButtonGroup
+                    variant="text"
+                    aria-label="text button group"
+                    className="button-group">
+                    <Button onClick={() => setFormView(true)}>ABOUT ME</Button>
+                    <Button onClick={() => setFormView(false)}>
+                        COMPANY STORY
+                    </Button>
+                </ButtonGroup>
             </div>
             <div className="form-view">
+                <h3>{formView ? 'About Me' : 'Company Story'}</h3>
                 <FormView
                     store={formView ? AboutPageData?.[0] : AboutPageData?.[1]}
                 />

@@ -4,14 +4,11 @@ export const StyledAboutWidget = styled.div`
     .header {
         display: flex;
         column-gap: 0.5rem;
-    }
+        padding-bottom: 1rem;
 
-    h3 {
-        font-weight: 400;
-        cursor: pointer;
-    }
-    .active {
-        font-weight: 800;
+        .button-group {
+            color: var(--brand-color-1);
+        }
     }
 
     .form-view {

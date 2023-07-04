@@ -9,6 +9,10 @@ export const StyledForm = styled.form`
         flex-direction: row;
         width: 100%;
         column-gap: 1rem;
+
+        @media (max-width: 840px) {
+            flex-direction: column;
+        }
         .current-image {
             .uploaded-image {
                 max-width: 15rem;
