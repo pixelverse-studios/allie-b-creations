@@ -25,6 +25,7 @@ interface ServicesEventFormTypes {
     label: string
     store: EventFormFields
     handleUpdate: Function
+    handleDelete?: Function
 }
 
 const initialState = {
@@ -42,7 +43,8 @@ const validations = {
 const ServicesEventForm = ({
     label,
     store,
-    handleUpdate
+    handleUpdate,
+    handleDelete
 }: ServicesEventFormTypes) => {
     const router = useRouter()
     const {
@@ -85,7 +87,7 @@ const ServicesEventForm = ({
         payload.description = form.description.value
         payload.title = form.title.value
         const cloudImg =
-            store.img[0].src !== form.img.value[0].src
+            store?.img[0]?.src !== form.img.value[0].src
                 ? await handleCloudUpload({
                       base64: form.img.value[0].base64,
                       context: 'serviceEvents',
@@ -110,9 +112,9 @@ const ServicesEventForm = ({
             onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
             <h3>
                 {label}
-                {store.title ? (
+                {handleDelete != null ? (
                     <ConfirmDeleteButton
-                        onTriggerMutation={() => console.log('uer')}
+                        onTriggerMutation={handleDelete}
                         Icon={Delete}
                     />
                 ) : null}
