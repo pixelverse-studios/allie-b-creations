@@ -159,9 +159,35 @@ const editOfferingEvent = async (
     }
 }
 
+const deleteOfferingEvent = async (
+    id: string,
+    section: string,
+    eventID: string
+): Promise<ServicesProps> => {
+    try {
+        const { offerings } = await getServices()
+        await updateDoc(doc(db, SERVICES, id), {
+            offerings: offerings.map(offering =>
+                offering.section === section
+                    ? {
+                          ...offering,
+                          events: offering.events.filter(
+                              event => event.title !== eventID
+                          )
+                      }
+                    : offering
+            )
+        })
+        return await getServices()
+    } catch (error) {
+        throw error
+    }
+}
+
 export {
     addNewOfferingSection,
     addOfferingEvent,
+    deleteOfferingEvent,
     deleteOfferingSection,
     editOfferingEvent,
     editOfferingSection,
