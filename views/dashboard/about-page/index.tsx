@@ -15,8 +15,14 @@ const AboutWidget = () => {
                     variant="text"
                     aria-label="text button group"
                     className="button-group">
-                    <Button onClick={() => setFormView(true)}>ABOUT ME</Button>
-                    <Button onClick={() => setFormView(false)}>
+                    <Button
+                        sx={{ color: 'black' }}
+                        onClick={() => setFormView(true)}>
+                        ABOUT ME
+                    </Button>
+                    <Button
+                        sx={{ color: 'black' }}
+                        onClick={() => setFormView(false)}>
                         COMPANY STORY
                     </Button>
                 </ButtonGroup>

@@ -8,6 +8,9 @@ export const StyledAboutWidget = styled.div`
 
         .button-group {
             color: var(--brand-color-1);
+            .MuiButtonGroup-grouped {
+                border-color: var(--brand-color-1) !important;
+            }
         }
     }
 

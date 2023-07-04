@@ -61,12 +61,14 @@ const FormView = ({ store }: any) => {
     } = useForm(initialState, validations, store)
 
     const onFormSubmit = async () => {
-        if (!store || !form) return
+        if (!store || !form) {
+            return
+        }
 
         try {
             const payload: Payload = {}
-            for (const [key] of Object.entries(form)) {
-                if (form[key] !== store[key].value) {
+            for (const [key] of Object.entries(store)) {
+                if (form[key] && store[key] !== form[key].value) {
                     if (key === 'img') {
                         payload[key] = {
                             src: await handleCloudUpload({
@@ -114,12 +116,8 @@ const FormView = ({ store }: any) => {
     const handleResetForm = () => handleImportache()
 
     useEffect(() => {
-        if (id && !isDataImported) handleImportache()
-    }, [store])
-
-    useEffect(() => {
-        handleImportache()
-    }, [store])
+        if (id) handleImportache()
+    }, [id, store])
 
     const onFilesChange = (files: any) => {
         handleNonFormEventChange(files, 'img')
