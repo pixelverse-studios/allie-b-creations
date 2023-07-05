@@ -15,7 +15,7 @@ const AboutPageView = () => {
                 return (
                     <div className={`image-about-content-${index}`} key={index}>
                         <img
-                            src={data.profileImg}
+                            src={data.img.src}
                             alt="alt text"
                             className="image"
                         />

@@ -15,7 +15,7 @@ import { uniqueId } from 'lodash'
 
 const DashboardPage = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
-    const { profileImg } = useSelector((state: any) => state.aboutPage)
+    const { img } = useSelector((state: any) => state.aboutPage)
     const router = useRouter()
     const auth = getAuth()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -85,7 +85,7 @@ const DashboardPage = ({ children }: { children: any }) => {
                         <IconButton onClick={onLogout}>
                             <Logout />
                         </IconButton>
-                        <Avatar src={profileImg} alt="profile_img" />
+                        <Avatar src={img} alt="profile_img" />
                     </div>
                 </header>
                 {children}
