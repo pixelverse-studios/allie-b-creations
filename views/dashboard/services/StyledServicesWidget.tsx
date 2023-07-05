@@ -57,9 +57,13 @@ export const StyledServicesBlock = styled.section`
         font-weight: 500;
     }
 
+    & > form > h4 {
+        margin-bottom: 1rem;
+    }
+
     .offeringSections {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
         grid-gap: 1rem;
     }
 `
@@ -164,6 +168,9 @@ export const StyledServicesEventform = styled.form`
 
     h3 {
         margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .serviceEventFields {

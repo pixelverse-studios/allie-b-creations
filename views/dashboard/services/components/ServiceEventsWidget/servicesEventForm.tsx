@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import { Delete } from '@mui/icons-material'
 
+import { ConfirmDeleteButton } from '@/components/buttons'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
@@ -23,6 +25,7 @@ interface ServicesEventFormTypes {
     label: string
     store: EventFormFields
     handleUpdate: Function
+    handleDelete?: Function
 }
 
 const initialState = {
@@ -40,7 +43,8 @@ const validations = {
 const ServicesEventForm = ({
     label,
     store,
-    handleUpdate
+    handleUpdate,
+    handleDelete
 }: ServicesEventFormTypes) => {
     const router = useRouter()
     const {
@@ -83,7 +87,7 @@ const ServicesEventForm = ({
         payload.description = form.description.value
         payload.title = form.title.value
         const cloudImg =
-            store.img[0].src !== form.img.value[0].src
+            store?.img[0]?.src !== form.img.value[0].src
                 ? await handleCloudUpload({
                       base64: form.img.value[0].base64,
                       context: 'serviceEvents',
@@ -106,7 +110,15 @@ const ServicesEventForm = ({
     return (
         <StyledServicesEventform
             onSubmit={(e: any) => handleFormSubmit(e, onFormSubmit)}>
-            <h3>{label}</h3>
+            <h3>
+                {label}
+                {handleDelete != null ? (
+                    <ConfirmDeleteButton
+                        onTriggerMutation={handleDelete}
+                        Icon={Delete}
+                    />
+                ) : null}
+            </h3>
             <StyledFieldSet className="serviceEventFields">
                 <FileUpload
                     context="serviceEvents"

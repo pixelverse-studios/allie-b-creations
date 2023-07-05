@@ -1,12 +1,14 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { Close } from '@mui/icons-material'
 
 import { StyledConfirmDeleteButton } from './StyledButtons'
 
 const ConfirmDeleteButton = ({
-    onTriggerMutation
+    onTriggerMutation,
+    Icon
 }: {
     onTriggerMutation: any
+    Icon?: any
 }) => {
     const [deleteFocus, setDeleteFocus] = useState<number>(0)
 
@@ -34,7 +36,7 @@ const ConfirmDeleteButton = ({
             onFocus={onDeleteFocus}
             onBlur={onDeleteBlur}>
             <span>Confirm Delete</span>
-            <Close />
+            {Icon ? <Icon /> : <Close />}
         </StyledConfirmDeleteButton>
     )
 }
