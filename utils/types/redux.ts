@@ -8,7 +8,12 @@ export interface AboutPageProps {
     id: string
     description: string
     header: string
-    profileImg: string
+    img: {
+        name: string
+        src: string
+        title: string
+        type: string
+    }
     role: string
     subHeader: string
     title: string

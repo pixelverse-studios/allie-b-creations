@@ -5,7 +5,12 @@ const initialState: AboutPageProps[] = [
     {
         id: '',
         header: '',
-        profileImg: '',
+        img: {
+            name: '',
+            src: '',
+            title: '',
+            type: ''
+        },
         role: '',
         description: '',
         subHeader: '',

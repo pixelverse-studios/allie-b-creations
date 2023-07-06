@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <ReduxProvider store={store}>
                 <AuthWrapper>
                     <Component {...pageProps} />
-                    <SnackbarProvider />
+                    <SnackbarProvider hideIconVariant />
                     <FormDrawer />
                 </AuthWrapper>
             </ReduxProvider>

@@ -14,9 +14,7 @@ import IconSelectField from './IconSelectField'
 import { updateContactLink } from '@/lib/db/cms/contact-links'
 import { updateContactLinks } from '@/lib/redux/slices/contactLinks'
 import FormValidations from '@/utils/validations/forms'
-import bannerUtils from '@/utils/banners'
-
-const { statuses, messages } = bannerUtils
+import { statuses, messages } from '@/utils/banners'
 
 const { validWebUrl, validEmail } = FormValidations
 

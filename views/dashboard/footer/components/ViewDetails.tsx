@@ -8,9 +8,8 @@ import IconSelectField from './IconSelectField'
 import { deleteContactLink } from '@/lib/db/cms/contact-links'
 import { setContactLinks } from '@/lib/redux/slices/contactLinks'
 import { enqueueSnackbar } from 'notistack'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 
-const { statuses, messages } = bannerUtils
 const ViewDetails = ({
     setIsEditMode,
     id,
