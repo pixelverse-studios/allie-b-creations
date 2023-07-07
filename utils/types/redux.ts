@@ -28,7 +28,7 @@ export interface ContactLinkProps {
 }
 export interface HomePageProps {
     id: string
-    header: string
+    heroBanner: string
     heroImg: string
     secondaryHeroImg: string
     secondaryHeroBanner: string
