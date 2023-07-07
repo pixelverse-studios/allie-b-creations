@@ -3,7 +3,7 @@ import { HomePageProps } from '@/utils/types/redux'
 
 const initialState: HomePageProps = {
     id: '',
-    header: '',
+    heroBanner: '',
     heroImg: '',
     secondaryHeroImg: '',
     secondaryHeroBanner: ''
@@ -14,7 +14,7 @@ export const homePageSlice = createSlice({
     reducers: {
         setHomePage: (state, { payload }: { payload: HomePageProps }) => {
             state.id = payload.id
-            state.header = payload.header
+            state.heroBanner = payload.heroBanner
             state.heroImg = payload.heroImg
             state.secondaryHeroImg = payload.secondaryHeroImg
             state.secondaryHeroBanner = payload.secondaryHeroBanner
