@@ -5,18 +5,24 @@ import { HomePageProps } from '@/utils/types/redux'
 const HOME = 'home-page'
 const homePageCollection = collection(db, HOME)
 
-const getHomePage = async (): Promise<HomePageProps> => {
+const getHomePage = async (): Promise<HomePageProps[]> => {
     try {
         const data = await getDocs(homePageCollection)
-        const { heroBanner, heroImg, secondaryHeroImg, secondaryHeroBanner } =
-            data.docs[0].data()
-        return {
-            id: data.docs[0].id,
-            heroBanner,
-            heroImg,
-            secondaryHeroImg,
-            secondaryHeroBanner
-        }
+        return data.docs.map(doc => {
+            const {
+                heroBanner,
+                heroImg,
+                secondaryHeroImg,
+                secondaryHeroBanner
+            } = doc.data()
+            return {
+                id: doc.id,
+                heroBanner,
+                heroImg,
+                secondaryHeroImg,
+                secondaryHeroBanner
+            }
+        })
     } catch (error) {
         throw error
     }
@@ -27,10 +33,8 @@ const updateHomePage = async (
     fields: {
         heroBanner: string
         heroImg: string
-        secondaryHeroBanner: string
-        secondaryHeroImg: string
     }
-): Promise<HomePageProps> => {
+): Promise<HomePageProps[]> => {
     try {
         const ref = doc(db, HOME, id)
         await updateDoc(ref, {
