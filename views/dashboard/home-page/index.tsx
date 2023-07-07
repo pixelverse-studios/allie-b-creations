@@ -10,8 +10,7 @@ const HERO = 'Primary Hero'
 const SECONDARY_HERO = 'Gallery'
 
 const HomePageWidget = () => {
-    const { heroBanner, heroImg, secondaryHeroBanner, secondaryHeroImg } =
-        useSelector((state: any) => state.homePage)
+    const HomePageData = useSelector((state: any) => state.homePage)
     const [formView, setFormView] = useState<boolean>(true)
 
     return (
@@ -37,8 +36,7 @@ const HomePageWidget = () => {
             <div className="form-view">
                 <h3>{formView ? HERO : SECONDARY_HERO}</h3>
                 <HeroForm
-                    banner={formView ? heroBanner : secondaryHeroBanner}
-                    img={formView ? heroImg : secondaryHeroImg}
+                    store={formView ? HomePageData?.[0] : HomePageData?.[1]}
                 />
             </div>
         </StyledHomePageWidget>

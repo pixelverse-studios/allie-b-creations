@@ -5,7 +5,7 @@ const initialState: HomePageProps[] = [
     {
         id: '',
         heroBanner: '',
-        heroImg: {
+        img: {
             name: '',
             src: '',
             type: ''

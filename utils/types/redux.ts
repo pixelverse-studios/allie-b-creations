@@ -29,7 +29,7 @@ export interface ContactLinkProps {
 export interface HomePageProps {
     id: string
     heroBanner: string
-    heroImg: {
+    img: {
         name: string
         src: string
         type: string

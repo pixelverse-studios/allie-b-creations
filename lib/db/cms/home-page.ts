@@ -9,11 +9,11 @@ const getHomePage = async (): Promise<HomePageProps[]> => {
     try {
         const data = await getDocs(homePageCollection)
         return data.docs.map(doc => {
-            const { heroBanner, heroImg } = doc.data()
+            const { heroBanner, img } = doc.data()
             return {
                 id: doc.id,
                 heroBanner,
-                heroImg
+                img
             }
         })
     } catch (error) {
@@ -24,8 +24,8 @@ const getHomePage = async (): Promise<HomePageProps[]> => {
 const updateHomePage = async (
     id: string,
     fields: {
-        heroBanner: string
-        heroImg: string
+        heroBanner?: string
+        img?: string
     }
 ): Promise<HomePageProps[]> => {
     try {
