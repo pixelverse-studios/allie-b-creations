@@ -9,18 +9,11 @@ const getHomePage = async (): Promise<HomePageProps[]> => {
     try {
         const data = await getDocs(homePageCollection)
         return data.docs.map(doc => {
-            const {
-                heroBanner,
-                heroImg,
-                secondaryHeroImg,
-                secondaryHeroBanner
-            } = doc.data()
+            const { heroBanner, heroImg } = doc.data()
             return {
                 id: doc.id,
                 heroBanner,
-                heroImg,
-                secondaryHeroImg,
-                secondaryHeroBanner
+                heroImg
             }
         })
     } catch (error) {
