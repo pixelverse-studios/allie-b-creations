@@ -1,27 +1,26 @@
 import { useSelector } from 'react-redux'
 import { Carousel } from './components/carousel'
-import StyledHomePage from './StyledHomePage'
+import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
+import StyledHomePage, { PrimaryHero, SecondaryHero } from './StyledHomePage'
+import { useRef } from 'react'
 
 const HomePage = () => {
     const homePageData = useSelector((state: any) => state.homePage)
-    console.log(homePageData[0])
+    const parallax = useRef<IParallax>(null!)
 
     return (
         <StyledHomePage>
-            <div className="primary-hero">
-                <img src={homePageData[0]?.img.src} className="hero-image" />
-                {/* <div className="overlay" /> */}
+            <PrimaryHero backgroundUrl={homePageData[0]?.img.src}>
                 <h1 className="title">{homePageData[0]?.heroBanner}</h1>
-            </div>
+            </PrimaryHero>
             <div className="carousel">
                 <Carousel />
             </div>
-            <div className="secondary-hero">
-                <img src={homePageData[1]?.img.src} className="hero-image" />
+            <SecondaryHero backgroundUrl={homePageData[1]?.img.src}>
                 <div className="gallery-block">
-                    <h2></h2>
+                    <h2>Gallery</h2>
                 </div>
-            </div>
+            </SecondaryHero>
         </StyledHomePage>
     )
 }

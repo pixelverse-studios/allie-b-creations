@@ -1,51 +1,52 @@
+import { CSSProperties } from 'react'
 import styled from '@emotion/styled'
+
+interface StyledHomePageProps {
+    backgroundUrl: string
+}
 
 const StyledHomePage = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: var(--brand-color-1);
-    .primary-hero {
-        position: relative;
-        display: grid;
-        place-items: center;
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 0;
-        }
-        /* .overlay {
-            min-height: 100vh;
-            min-width: 100vw;
-            background-color: #ffffff46;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-        } */
-
-        .title {
-            font-family: 'Gistesy';
-            position: absolute;
-            color: white;
-            text-shadow: 0 0 10px var(--brand-color-1);
-            font-size: 4rem;
-            text-align: center;
-        }
-    }
+    row-gap: 1rem;
 
     .carousel {
-        height: 60vh;
-    }
-    .secondary-hero {
-        position: relative;
-        .hero-image {
-            width: 100%;
-            height: 100vh;
-        }
+        height: 40vh;
     }
 `
 
+export const PrimaryHero = styled.div<StyledHomePageProps>`
+    background-image: url(${props => props.backgroundUrl});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(100vh - var(--nav-height));
+    display: grid;
+    place-items: center;
+    .title {
+        font-family: 'Gistesy';
+
+        color: white;
+        text-shadow: 0 0 10px var(--brand-color-1);
+        font-size: 4rem;
+        text-align: center;
+    }
+`
+export const SecondaryHero = styled.div<StyledHomePageProps>`
+    background-image: url(${props => props.backgroundUrl});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+    display: flex;
+    justify-content: flex-end;
+    padding: 4rem;
+    .gallery-block {
+        height: 100%;
+
+        border: 3px solid yellow;
+    }
+`
 export default StyledHomePage
 
 // @keyframes pulse {
