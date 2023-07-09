@@ -8,9 +8,18 @@ export const Carousel = () => {
     const { reviews } = useSelector((state: any) => state.testimonials)
     const [activeTestimonial, setActiveTestimonial] = useState<number>(0)
 
+    const displayedReviews = reviews.filter(
+        (data: {
+            id: string
+            display: boolean
+            name: string
+            rating: number
+            review: string
+        }) => data.display === true
+    )
     const getNextTestimonial = () => {
         setActiveTestimonial(prevActive => {
-            if (prevActive === reviews.length - 1) {
+            if (prevActive === displayedReviews.length - 1) {
                 return 0
             } else {
                 return prevActive + 1
@@ -21,28 +30,28 @@ export const Carousel = () => {
     const getPreviousTestimonial = () => {
         setActiveTestimonial(prevActive => {
             if (prevActive === 0) {
-                return reviews.length - 1
+                return displayedReviews.length - 1
             } else {
                 return prevActive - 1
             }
         })
     }
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         setActiveTestimonial(prevActive => {
-    //             if (prevActive === reviews.length - 1) {
-    //                 return 0
-    //             } else {
-    //                 return prevActive + 1
-    //             }
-    //         })
-    //     }, 6000)
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveTestimonial(prevActive => {
+                if (prevActive === displayedReviews.length - 1) {
+                    return 0
+                } else {
+                    return prevActive + 1
+                }
+            })
+        }, 6000)
 
-    //     return () => {
-    //         clearInterval(timer)
-    //     }
-    // }, [reviews.length])
+        return () => {
+            clearInterval(timer)
+        }
+    }, [displayedReviews.length])
 
     return (
         <StyledCarousel>
@@ -54,7 +63,7 @@ export const Carousel = () => {
                     <QuoteSvg />
                 </div>
                 <div className="testimonial">
-                    {reviews.map((review: any, index: number) => {
+                    {displayedReviews.map((review: any, index: number) => {
                         return (
                             <p
                                 key={index}
@@ -72,7 +81,7 @@ export const Carousel = () => {
                 </div>
 
                 <div className="author">
-                    {reviews?.map((review: any, index: number) => {
+                    {displayedReviews?.map((review: any, index: number) => {
                         return (
                             <p
                                 style={{

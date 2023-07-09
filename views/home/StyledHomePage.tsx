@@ -23,9 +23,9 @@ export const PrimaryHero = styled.div<StyledHomePageProps>`
     height: calc(100vh - var(--nav-height));
     display: grid;
     place-items: center;
+    border-radius: var(--border-radius);
     .title {
         font-family: 'Gistesy';
-
         color: white;
         text-shadow: 0 0 10px var(--brand-color-1);
         font-size: 4rem;
@@ -41,6 +41,7 @@ export const SecondaryHero = styled.div<StyledHomePageProps>`
     display: flex;
     justify-content: flex-end;
     padding: 4rem;
+    border-radius: var(--border-radius);
     .gallery-block {
         height: 100%;
 

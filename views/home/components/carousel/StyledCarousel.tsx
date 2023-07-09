@@ -19,7 +19,6 @@ export const StyledCarousel = styled.div`
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     justify-items: center;
-    border: 3px solid var(--brand-color-1);
 
     .arrow {
         .MuiSvgIcon-root {
