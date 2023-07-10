@@ -56,7 +56,7 @@ export const StyledCarousel = styled.div`
                 max-height: 100%;
                 opacity: 0;
                 visibility: hidden;
-                animation: fade-in 1s ease-in-out;
+                animation: fade-in 1.4s ease-in-out;
                 animation-fill-mode: forwards;
             }
         }
@@ -67,7 +67,7 @@ export const StyledCarousel = styled.div`
             p {
                 opacity: 0;
                 visibility: hidden;
-                animation: fade-in 1s ease-in-out;
+                animation: fade-in 1.4s ease-in-out;
                 animation-fill-mode: forwards;
             }
         }
