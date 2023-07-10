@@ -11,10 +11,10 @@ const SERVICES = {
     slug: 'services',
     label: 'Services'
 }
-const CONTACT = {
-    route: '/contact',
-    slug: 'contact',
-    label: 'Contact Me'
+const GALLERY = {
+    route: '/gallery',
+    slug: 'gallery',
+    label: 'Gallery'
 }
 interface BaseNaveItemProps {
     onClick: Function
@@ -35,9 +35,9 @@ export const BaseNavItems = ({ onClick, activePage }: BaseNaveItemProps) => {
                 <span>{SERVICES.label}</span>
             </li>
             <li
-                className={activePage === CONTACT.slug ? 'active' : 'inactive'}
-                onClick={() => onClick(CONTACT.route)}>
-                <span>{CONTACT.label}</span>
+                className={activePage === GALLERY.slug ? 'active' : 'inactive'}
+                onClick={() => onClick(GALLERY.route)}>
+                <span>{GALLERY.label}</span>
             </li>
         </>
     )

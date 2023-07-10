@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { SocialMenuItems } from '@/utils/IconSelection'
 import LogoImg from '../../assets/logo.svg'
+import { uniqueId } from 'lodash'
 import { StyledFooter } from './StyledFooter'
 
 const Footer = () => {
@@ -17,6 +18,7 @@ const Footer = () => {
                     if (!iconValue?.value.includes('Email'))
                         return (
                             <a
+                                key={uniqueId()}
                                 className="icon"
                                 target="_blank"
                                 href={link?.link}
@@ -26,6 +28,7 @@ const Footer = () => {
                         )
                     return (
                         <a
+                            key={uniqueId()}
                             className="icon"
                             target="_blank"
                             href={`mailto:${link?.link}`}>
