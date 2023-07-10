@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
 import {
     SelectChangeEvent,
     Select,
@@ -6,30 +5,36 @@ import {
     InputLabel,
     FormControl
 } from '@mui/material'
-import { TESTIMONIAL_SORT_VALUES } from '@/utils/constants'
+import { uniqueId } from 'lodash'
 
 const SelectField = ({
-    displaySort,
-    setDisplaySort
+    field,
+    items,
+    label,
+    name,
+    onChange
 }: {
-    displaySort: string
-    setDisplaySort: Function
+    field: { value: any; error: string }
+    items: { label: string; value: any }[]
+    label: string
+    name: string
+    onChange: Function
 }) => {
-    const handleChange = (event: SelectChangeEvent) => {
-        setDisplaySort(event.target.value)
-    }
+    const handleChange = (event: SelectChangeEvent) =>
+        onChange(event.target.value, event.target.name)
 
     return (
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="select-field-label">Sort By</InputLabel>
+        <FormControl variant="outlined" className="selectField">
+            <InputLabel id={name}>{label}</InputLabel>
             <Select
-                labelId="select-field-label"
-                id="select-field"
+                labelId={name}
+                id={name + 'id'}
+                name={name}
                 onChange={handleChange}
-                value={displaySort}>
-                {TESTIMONIAL_SORT_VALUES.map(item => {
+                value={field.value}>
+                {items.map(item => {
                     return (
-                        <MenuItem value={item.value} key={item.value}>
+                        <MenuItem key={uniqueId()} value={item.value}>
                             {item.label}
                         </MenuItem>
                     )

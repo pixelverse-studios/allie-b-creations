@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app'
 import { Provider as ReduxProvider } from 'react-redux'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import Head from 'next/head'
 import { SnackbarProvider } from 'notistack'
 
@@ -22,9 +24,11 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>
-                    <Component {...pageProps} />
-                    <SnackbarProvider hideIconVariant />
-                    <FormDrawer />
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Component {...pageProps} />
+                        <SnackbarProvider hideIconVariant />
+                        <FormDrawer />
+                    </LocalizationProvider>
                 </AuthWrapper>
             </ReduxProvider>
         </>

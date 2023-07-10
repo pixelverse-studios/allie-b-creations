@@ -82,3 +82,7 @@ ul {
 .MuiRating-iconEmpty {
     color: var(--brand-color-3);
 } */
+
+.selectField label {
+    background-color: white;
+}

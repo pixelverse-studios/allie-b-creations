@@ -6,7 +6,8 @@ import {
     VALID_ALPHA_NUMERIC_WITH_SPACES,
     VALID_FLOATS,
     VALID_ALPHA_NUMERIC_SPACES_SPECIALS,
-    VALID_HTTP_OR_HTTPS_URL
+    VALID_HTTP_OR_HTTPS_URL,
+    VALID_PHONE_NUMBER
 } from './regex'
 
 const validEmail = {
@@ -72,17 +73,23 @@ const yolo = {
     message: ''
 }
 
+const validPhoneNumber = {
+    test: (value: string) => VALID_PHONE_NUMBER.test(value),
+    message: 'Invalid phone number.'
+}
+
 const FormValidations = {
-    validAlphaString,
     validAlphaNumeric,
-    validAlphaNumericWithSpaces,
     validAlphaNumericSpacesSpecials,
-    validEmail,
-    validPassword,
-    validFloat,
+    validAlphaNumericWithSpaces,
+    validAlphaString,
     validArrayData,
+    validEmail,
+    validFloat,
     validImage,
     validNonZeroNumber,
+    validPassword,
+    validPhoneNumber,
     validWebUrl,
     yolo
 }
