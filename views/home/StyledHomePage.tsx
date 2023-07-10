@@ -9,7 +9,7 @@ export const StyledHomePage = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    color: white;
+    color: black;
     .carousel {
         height: 40vh;
     }
@@ -59,6 +59,7 @@ export const StyledGalleryContainer = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 2rem;
+    color: white;
     .header {
         font-family: 'Gistesy';
         font-size: 3rem;
