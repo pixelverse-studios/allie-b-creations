@@ -7,6 +7,9 @@ import { FormRow } from '@/styles/components/form'
 import { TextField, FileUpload, SelectField } from '@/components/form'
 import { FormButtonGroup } from '@/components/form'
 import { StyledFieldSet } from './StyledFormComponents'
+import { handleCloudUpload } from '@/utils/fileConversions'
+
+const LINE_BREAK = '%0D%0A'
 
 type ContactFormProps = {
     onCloseDrawer: Function
@@ -67,8 +70,87 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
         handleNonFormEventChange(files, 'img')
     }
 
+    const formatFormToBody = (cloudImg: string | null) => {
+        const formElements = [`Hello ${form.firstName}`] as any
+        Object.entries(form).forEach(
+            ([key, field]: [key: string, value: any]) => {
+                switch (key) {
+                    case 'firstName':
+                        formElements.push(
+                            `First Name: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'lastName':
+                        formElements.push(
+                            `Last Name: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'phone':
+                        formElements.push(
+                            `Phone Number: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'email':
+                        formElements.push(`Email: ${field.value}${LINE_BREAK}-`)
+                        break
+                    case 'eventTime':
+                        formElements.push(
+                            `Event Time: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'eventType':
+                        formElements.push(
+                            `Event Type: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'eventLocation':
+                        formElements.push(
+                            `Event Location: ${field.value}${LINE_BREAK}-`
+                        )
+                        break
+                    case 'description':
+                        if (form.description.value) {
+                            formElements.push(
+                                `Description: ${field.value}${LINE_BREAK}-`
+                            )
+                            break
+                        }
+                    case 'img':
+                        if (cloudImg) {
+                            formElements.push(
+                                `Image(s): ${cloudImg}${LINE_BREAK}-`
+                            )
+                        }
+                        break
+                    default:
+                        break
+                }
+            }
+        )
+
+        return formElements.join().replace(/-,/g, '')
+    }
+
+    const onFormSubmit = async () => {
+        let cloudImg = null
+        if (form.img.value?.[0]?.src) {
+            cloudImg = await handleCloudUpload({
+                base64: form.img.value[0].base64,
+                context: 'client-request',
+                filename: form.img.value[0].name
+            })
+        }
+        const body = formatFormToBody(cloudImg)
+        const link = document.createElement('a')
+        link.href = `mailto: info@ezpzcoding.com?subject=New Quote Request&body=${body}`
+        link.download = 'image file name here'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+
     return (
-        <form>
+        <form onSubmit={e => handleFormSubmit(e, onFormSubmit)}>
             <StyledFieldSet>
                 <FormRow>
                     <TextField
@@ -134,14 +216,15 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                         type="textarea"
                         onChange={handleChange}
                         rows={5}
+                        required={false}
                     />
                 </FormRow>
                 <FormRow>
                     <FileUpload
                         context="serviceEvents"
+                        multiple={false}
                         files={form.img.value}
                         label="Upload Inspiration Image(s)"
-                        multiple
                         setFiles={onFilesChange}
                     />
                 </FormRow>
