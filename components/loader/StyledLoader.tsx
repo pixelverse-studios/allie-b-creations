@@ -9,9 +9,10 @@ export const StyledLoader = styled.div`
             opacity: 1;
         }
     }
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center;
+    position: fixed;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: fadeIn 0.3s ease-in-out;
 `

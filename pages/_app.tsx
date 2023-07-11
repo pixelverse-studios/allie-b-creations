@@ -12,7 +12,7 @@ import styled from '@emotion/styled'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const router = useRouter()
 
     const handleRouteChangeStart = () => setLoading(true)
