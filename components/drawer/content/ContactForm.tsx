@@ -148,7 +148,7 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                 <FormButtonGroup
                     disableSubmit={disableSubmit}
                     handleReset={handleReset}
-                    loading={false}
+                    loading={formLoading}
                 />
             </StyledFieldSet>
         </form>
