@@ -19,11 +19,14 @@ export default function App({ Component, pageProps }: AppProps) {
     const handleRouteChangeComplete = () => setLoading(false)
 
     useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 1500)
+
         router.events.on('routeChangeStart', handleRouteChangeStart)
         router.events.on('routeChangeComplete', handleRouteChangeComplete)
         handleRouteChangeStart()
 
         return () => {
+            clearTimeout(timer)
             router.events.off('routeChangeStart', handleRouteChangeStart)
             router.events.off('routeChangeComplete', handleRouteChangeComplete)
         }
@@ -39,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
             }
         }
 
-        animation: fadeIn 0.5s ease-in-out;
+        animation: fadeIn 1s ease-in-out;
     `
 
     return (
