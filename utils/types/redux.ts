@@ -28,10 +28,12 @@ export interface ContactLinkProps {
 }
 export interface HomePageProps {
     id: string
-    header: string
-    heroImg: string
-    secondaryHeroImg: string
-    secondaryHeroBanner: string
+    heroBanner: string
+    img: {
+        name: string
+        src: string
+        type: string
+    }
 }
 export interface ServicesProps {
     id: string

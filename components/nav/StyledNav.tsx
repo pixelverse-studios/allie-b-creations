@@ -27,6 +27,7 @@ export const BaseDesktopNavStyles = css`
 
 export const StyledDesktopNav = styled.nav`
     ${BaseDesktopNavStyles}
+    z-index:2;
 `
 
 export const ActiveItemStyles = css`
@@ -121,6 +122,7 @@ export const BaseMobileNaveStyles = css`
 
 export const StyledMobileNav = styled.nav`
     ${BaseMobileNaveStyles}
+    z-index:2;
 `
 
 export const StyledMobileNavItems = styled.div`

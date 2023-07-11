@@ -10,6 +10,7 @@ import { TextFieldProps } from '@/utils/types/components/form'
 const CHARACTER_COUNT = 600
 interface TextFieldTypes extends TextFieldProps {
     rows?: number
+    required?: boolean
 }
 const TextField = ({
     id,
@@ -17,7 +18,8 @@ const TextField = ({
     type,
     onChange,
     field,
-    rows
+    rows,
+    required = true
 }: TextFieldTypes) => {
     const isTextArea = type === 'textarea'
     return (
@@ -36,7 +38,7 @@ const TextField = ({
                 title={label}
                 onChange={onChange}
                 value={field.value}
-                required
+                required={required}
                 rows={isTextArea ? rows : ''}
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
