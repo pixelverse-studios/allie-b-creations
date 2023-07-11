@@ -37,21 +37,21 @@ export const Carousel = () => {
         })
     }
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setActiveTestimonial(prevActive => {
-                if (prevActive === displayedReviews.length - 1) {
-                    return 0
-                } else {
-                    return prevActive + 1
-                }
-            })
-        }, 6000)
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         setActiveTestimonial(prevActive => {
+    //             if (prevActive === displayedReviews.length - 1) {
+    //                 return 0
+    //             } else {
+    //                 return prevActive + 1
+    //             }
+    //         })
+    //     }, 6000)
 
-        return () => {
-            clearInterval(timer)
-        }
-    }, [displayedReviews.length])
+    //     return () => {
+    //         clearInterval(timer)
+    //     }
+    // }, [displayedReviews.length])
 
     return (
         <StyledCarousel>

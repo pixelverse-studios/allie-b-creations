@@ -19,12 +19,12 @@ export const StyledCarousel = styled.div`
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     justify-items: center;
+    overflow: hidden;
 
     .arrow {
         .MuiSvgIcon-root {
             font-size: 3rem;
             color: var(--brand-color-1);
-            /* filter: drop-shadow(0 0 2px var(--brand-color-1)); */
             transition: all 0.4s linear;
             &:hover {
                 transform: scale(1.2);
