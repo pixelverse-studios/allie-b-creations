@@ -8,13 +8,16 @@ import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 import BalloonLoader from '@/components/loader'
 import FormDrawer from '@/components/drawer'
+import styled from '@emotion/styled'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
     const [loading, setLoading] = useState(false)
+
     const router = useRouter()
 
     const handleRouteChangeStart = () => setLoading(true)
+
     const handleRouteChangeComplete = () => setLoading(false)
 
     useEffect(() => {
@@ -31,6 +34,19 @@ export default function App({ Component, pageProps }: AppProps) {
         }
     }, [router])
 
+    const AnimatedDiv = styled.div`
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        animation: fadeIn 0.5s ease-in-out;
+    `
+
     return (
         <>
             <Head>
@@ -43,7 +59,13 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>
-                    {loading ? <BalloonLoader /> : <Component {...pageProps} />}
+                    {loading ? (
+                        <BalloonLoader />
+                    ) : (
+                        <AnimatedDiv>
+                            <Component {...pageProps} />
+                        </AnimatedDiv>
+                    )}
                     <SnackbarProvider hideIconVariant />
                     <FormDrawer />
                 </AuthWrapper>
