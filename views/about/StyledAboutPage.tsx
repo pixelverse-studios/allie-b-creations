@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledAboutPage = styled.div`
     display: flex;
     flex-direction: column;
-    row-gap: 5rem;
+    row-gap: 4rem;
     padding-top: 1rem;
 
     .image-about-content-0,
@@ -12,13 +12,17 @@ export const StyledAboutPage = styled.div`
         justify-content: space-around;
         column-gap: 3rem;
         padding: 1rem;
+
         @media (max-width: 900px) {
             flex-direction: column !important;
             align-items: center;
+            row-gap: 1rem;
         }
 
         .image {
             max-width: 30rem;
+            box-shadow: var(--box-shadow-1);
+            border-radius: var(--border-radius);
             @media (max-width: 1000px) {
                 max-width: 20rem;
             }
@@ -34,6 +38,7 @@ export const StyledAboutPage = styled.div`
             justify-content: space-around;
             padding: 2rem;
             border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-1);
 
             .quote {
                 width: 3rem;

@@ -12,6 +12,9 @@ export const StyledCarousel = styled.div`
         }
     }
 
+    box-shadow: var(--box-shadow-1);
+    border-radius: var(--border-radius);
+    background-color: var(--brand-color-2) !important;
     width: 100%;
     height: 100%;
     background-color: white;
@@ -24,7 +27,7 @@ export const StyledCarousel = styled.div`
     .arrow {
         .MuiSvgIcon-root {
             font-size: 3rem;
-            color: var(--brand-color-1);
+
             transition: all 0.4s linear;
             &:hover {
                 transform: scale(1.2);

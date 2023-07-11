@@ -29,6 +29,7 @@ export const StyledFooter = styled.footer`
     justify-content: center;
     align-items: center;
     align-content: center;
+
     .logo {
         width: 12rem;
         height: 6rem;

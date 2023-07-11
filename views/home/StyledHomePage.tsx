@@ -18,14 +18,15 @@ export const StyledHomePage = styled.div`
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
     background-image: url(${props => props.backgroundUrl});
-    background-size: cover;
+    background-size: 75% 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 90vh;
+    height: 80vh;
     display: grid;
     place-items: center;
     border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-1);
     .title {
         font-family: 'Gistesy';
         color: white;
@@ -36,7 +37,7 @@ export const PrimaryHero = styled.div<StyledHomePageProps>`
 `
 export const SecondaryHero = styled.div<StyledHomePageProps>`
     background-image: url(${props => props.backgroundUrl});
-    background-size: cover;
+    background-size: 75% 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -45,6 +46,7 @@ export const SecondaryHero = styled.div<StyledHomePageProps>`
     justify-content: flex-end;
     padding: 4rem;
     border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-1);
     .gallery-block {
         height: 100%;
 
@@ -63,6 +65,7 @@ export const StyledGalleryContainer = styled.div`
     align-items: center;
     row-gap: 2rem;
     color: white;
+    box-shadow: var(--box-shadow-1);
     .header {
         font-family: 'Gistesy';
         font-size: 3rem;
@@ -88,7 +91,6 @@ export const StyledGalleryButton = styled.button`
     transition: all 0.4s ease-in-out;
     color: var(--brand-color-1);
     background: linear-gradient(white 50%, var(--brand-color-1) 50%);
-
     border: 2px solid #fce4e2;
     background-size: 100% 210%;
     &:hover {
