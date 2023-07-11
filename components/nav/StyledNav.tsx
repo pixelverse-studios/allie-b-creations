@@ -4,8 +4,7 @@ import { css } from '@emotion/react'
 export const BaseDesktopNavStyles = css`
     height: var(--nav-height);
     background-color: var(--accent-color-2);
-    border-bottom: 5px solid var(--brand-color-2);
-
+    box-shadow: var(--box-shadow-nav);
     .contentWrapper {
         max-width: var(--max-width);
         margin: auto;
@@ -13,12 +12,11 @@ export const BaseDesktopNavStyles = css`
         grid-template-columns: auto 1fr;
         align-items: center;
         gap: 1rem;
-        padding: 1rem;
 
         .brand {
             img {
                 cursor: pointer;
-                height: 4rem;
+                height: 6rem;
                 width: auto;
             }
         }
@@ -27,6 +25,7 @@ export const BaseDesktopNavStyles = css`
 
 export const StyledDesktopNav = styled.nav`
     ${BaseDesktopNavStyles}
+
     z-index:2;
 `
 
@@ -50,7 +49,7 @@ export const StyledDesktopNavItems = styled.ul`
 
     li {
         position: relative;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 500;
         text-align: left;
         height: 100%;
@@ -77,8 +76,8 @@ export const StyledDesktopNavItems = styled.ul`
             color: var(--accent-color-1);
             padding: 1rem;
             cursor: pointer;
-            width: 4rem;
-            height: 4rem;
+            width: 3.5rem;
+            height: 3.5rem;
             border-radius: 50%;
         }
 
