@@ -13,22 +13,17 @@ import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
     const [loading, setLoading] = useState(false)
-
     const router = useRouter()
 
     const handleRouteChangeStart = () => setLoading(true)
-
     const handleRouteChangeComplete = () => setLoading(false)
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1500)
-
         router.events.on('routeChangeStart', handleRouteChangeStart)
         router.events.on('routeChangeComplete', handleRouteChangeComplete)
         handleRouteChangeStart()
 
         return () => {
-            clearTimeout(timer)
             router.events.off('routeChangeStart', handleRouteChangeStart)
             router.events.off('routeChangeComplete', handleRouteChangeComplete)
         }
