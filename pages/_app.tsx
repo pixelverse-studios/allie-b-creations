@@ -22,7 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
         }
         animation: fadeIn 1s ease-in-out;
     `
-
     return (
         <>
             <Head>

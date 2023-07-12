@@ -40,8 +40,10 @@ const AuthWrapper = ({ children }: { children: any }) => {
                     dispatch(removeUser())
                 }
             } else {
-                // do nothing
+                // "do nothing" -Phil
                 // oh yea ? lmfao
+                //we striving for perfection then
+                //else deez
             }
         })
 
