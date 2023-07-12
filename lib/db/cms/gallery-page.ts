@@ -1,7 +1,7 @@
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../config'
+import { useSelector } from 'react-redux'
 import { GalleryProps } from '@/utils/types/redux'
 import axios from 'axios'
+import { RootState } from '@/lib/redux/store'
 
 // Instagrams API currently only gives 25 images at a time
 // It then provoides you with a link for the next api call if there is more then 25 iamges
@@ -36,42 +36,30 @@ const getGalleryContent = async (): Promise<GalleryProps> => {
     }
 }
 
-// const getNextImages = async () => {
-//     try {
-//         const data = await fetch(nextImageSetUrl)
-//         const feed = await data.json()
-//         const imageUrls = feed.data.map(
-//             (item: { media_url: any }) => item.media_url
-//         )
+const getNextImages = async (data: any) => {
+    const { nextUrl, images } = data
+    try {
+        const response = await axios.get(nextUrl)
+        const responseData = response.data
 
-//         if (feed.paging.next) {
-//             setNextImageSetUrl(feed.paging.next)
-//         }
+        const newImages = responseData.data.map(
+            (item: { media_url: any; caption: any }) => {
+                return {
+                    media_url: item.media_url,
+                    caption: item.caption
+                }
+            }
+        )
 
-//         const validImageUrls = await Promise.all(
-//             imageUrls.map(imageUrl => {
-//                 return new Promise((resolve, reject) => {
-//                     const img = new Image()
-//                     img.src = imageUrl
-//                     //I was deep . idk wtf this even does but it was the cmd v of a lifetime
-//                     img.onload = () => resolve(imageUrl)
-//                     img.onerror = () => resolve(null)
-//                 })
-//             })
-//         )
+        const updatedImages = [...images, ...newImages]
 
-//         const filteredImageUrls = validImageUrls.filter(
-//             imageUrl => imageUrl !== null
-//         )
-//         //These errors are errors but they belong here right now
-//         setImageUrlArray(prevImageUrlArray => [
-//             ...prevImageUrlArray,
-//             ...filteredImageUrls
-//         ])
-//         return imageUrlArray
-//     } catch (error: any) {
-//         console.error(error)
-//     }
-// }
+        return {
+            nextUrl: responseData.paging.next,
+            images: updatedImages
+        }
+    } catch (error: any) {
+        console.error(error)
+    }
+}
 
-export { getGalleryContent }
+export { getGalleryContent, getNextImages }

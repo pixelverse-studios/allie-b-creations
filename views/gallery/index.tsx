@@ -1,9 +1,13 @@
-import { useEffect, useState, MouseEvent } from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Dialog, ImageList, ImageListItem } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store'
+import { getNextImages } from '@/lib/db/cms/gallery-page'
+import { setGallery } from '@/lib/redux/slices/gallery'
 
 const GalleryPage = () => {
+    const dispatch = useDispatch()
     const [imageSrc, setImgSrc] = useState({
         url: '',
         caption: ''
@@ -25,6 +29,15 @@ const GalleryPage = () => {
             caption
         })
         handleClickOpen()
+    }
+
+    const onLoadMoreImage = async () => {
+        try {
+            const nextImageSetData = await getNextImages(data)
+            dispatch(setGallery(nextImageSetData))
+        } catch (error) {
+            console.error('error')
+        }
     }
 
     return (
@@ -59,6 +72,7 @@ const GalleryPage = () => {
                     </ImageListItem>
                 ))}
             </ImageList>
+            <button onClick={() => onLoadMoreImage()}>Load More</button>
         </>
     )
 }
