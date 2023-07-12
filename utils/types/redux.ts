@@ -61,9 +61,8 @@ export interface TestimonialsProps {
     email: string
 }
 export interface GalleryProps {
-    id: string
-    img: string
-    tag: string
+    nextUrl: string
+    images: string[]
 }
 export interface ContactPageProps {
     id: string

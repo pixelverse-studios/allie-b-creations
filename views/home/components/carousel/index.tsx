@@ -84,6 +84,7 @@ export const Carousel = () => {
                     {displayedReviews?.map((review: any, index: number) => {
                         return (
                             <p
+                                key={index}
                                 style={{
                                     display: `${
                                         index !== activeTestimonial

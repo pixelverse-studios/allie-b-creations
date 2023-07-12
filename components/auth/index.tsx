@@ -11,14 +11,19 @@ import { getAllCmsData } from '@/lib/db/methods'
 import Nav from '../nav'
 import StyledAuthWrapper from './StyledAuthWrapper'
 import { removeUser, setUser } from '@/lib/redux/slices/user'
+import { setLoading } from '@/lib/redux/slices/app'
+import BalloonLoader from '@/components/loader'
 
 const AuthWrapper = ({ children }: { children: any }) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const { id } = useSelector((state: any) => state.homePage)
+    const isLoading = useSelector((state: any) => state.app.loading)
+
     const auth = getAuth()
     useEffect(() => {
         if (!id) {
+            dispatch(setLoading(true))
             getAllCmsData(dispatch).catch(error => console.error(error))
         }
     }, [id])
@@ -36,6 +41,7 @@ const AuthWrapper = ({ children }: { children: any }) => {
                 }
             } else {
                 // do nothing
+                // oh yea ? lmfao
             }
         })
 
@@ -47,13 +53,17 @@ const AuthWrapper = ({ children }: { children: any }) => {
     const isOnDashboard = isPageIncluded(['dashboard'])
 
     if (isOnDashboard) {
-        return <DashboardPage>{children}</DashboardPage>
+        return (
+            <DashboardPage>
+                {isLoading ? <BalloonLoader /> : children}
+            </DashboardPage>
+        )
     }
 
     return (
         <StyledAuthWrapper>
             <Nav />
-            <main>{children}</main>
+            <main>{isLoading ? <BalloonLoader /> : children}</main>
             <SpeedDial />
             <Footer />
         </StyledAuthWrapper>

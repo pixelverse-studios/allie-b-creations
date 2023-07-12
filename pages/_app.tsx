@@ -6,32 +6,11 @@ import Head from 'next/head'
 import { SnackbarProvider } from 'notistack'
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
-import BalloonLoader from '@/components/loader'
 import FormDrawer from '@/components/drawer'
 import styled from '@emotion/styled'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [loading, setLoading] = useState(true)
-    const router = useRouter()
-
-    const handleRouteChangeStart = () => setLoading(true)
-    const handleRouteChangeComplete = () => setLoading(false)
-
-    useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1500)
-
-        router.events.on('routeChangeStart', handleRouteChangeStart)
-        router.events.on('routeChangeComplete', handleRouteChangeComplete)
-        handleRouteChangeStart()
-
-        return () => {
-            clearTimeout(timer)
-            router.events.off('routeChangeStart', handleRouteChangeStart)
-            router.events.off('routeChangeComplete', handleRouteChangeComplete)
-        }
-    }, [router])
-
     const AnimatedDiv = styled.div`
         @keyframes fadeIn {
             from {
@@ -41,7 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 opacity: 1;
             }
         }
-
         animation: fadeIn 1s ease-in-out;
     `
 
@@ -57,13 +35,9 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>
-                    {loading ? (
-                        <BalloonLoader />
-                    ) : (
-                        <AnimatedDiv>
-                            <Component {...pageProps} />
-                        </AnimatedDiv>
-                    )}
+                    <AnimatedDiv>
+                        <Component {...pageProps} />
+                    </AnimatedDiv>
                     <SnackbarProvider hideIconVariant />
                     <FormDrawer />
                 </AuthWrapper>

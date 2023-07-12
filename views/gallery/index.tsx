@@ -6,7 +6,6 @@ const GalleryPage = () => {
     const [open, setOpen] = useState(false)
 
     // State for images
-
     const [imageUrlArray, setImageUrlArray] = useState([])
     const [nextImageSetUrl, setNextImageSetUrl] = useState('')
 
@@ -14,11 +13,11 @@ const GalleryPage = () => {
     // It then provoides you with a link for the next api call if there is more then 25 iamges
     const getInitialImages = async () => {
         //Initial URL for the 1st API call
-        const url = `https://graph.instagram.com/me/media?fields=id,media_url,timestamp,permalink&access_token=${process.env.NEXT_PUBLIC_IG_SECRET}`
+        const url = `https://graph.instagram.com/me/media?fields=id,media_url,timestamp,caption,permalink&access_token=${process.env.NEXT_PUBLIC_IG_SECRET}`
         try {
             const data = await fetch(url)
             const feed = await data.json()
-
+            console.log('feed :>> ', feed)
             const imageUrls = feed.data.map(
                 (item: { media_url: any }) => item.media_url
             )
@@ -33,6 +32,7 @@ const GalleryPage = () => {
             console.error(error.message)
         }
     }
+    console.log(imageUrlArray)
     //This function will use the URL provided by the initial call if there is more images to be loaded.
     const getNextImages = async () => {
         try {
