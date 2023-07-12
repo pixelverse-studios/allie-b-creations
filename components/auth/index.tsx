@@ -20,6 +20,18 @@ const AuthWrapper = ({ children }: { children: any }) => {
     const { id } = useSelector((state: any) => state.homePage)
     const isLoading = useSelector((state: any) => state.app.loading)
 
+    const handleRouteChangeStart = () => dispatch(setLoading(true))
+    const handleRouteChangeComplete = () => dispatch(setLoading(false))
+    useEffect(() => {
+        router.events.on('routeChangeStart', handleRouteChangeStart)
+        router.events.on('routeChangeComplete', handleRouteChangeComplete)
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChangeStart)
+            router.events.off('routeChangeComplete', handleRouteChangeComplete)
+        }
+    }, [router])
+
     const auth = getAuth()
     useEffect(() => {
         if (!id) {

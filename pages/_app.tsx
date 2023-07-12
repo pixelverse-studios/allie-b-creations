@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
 import { Provider as ReduxProvider } from 'react-redux'
 import Head from 'next/head'
 import { SnackbarProvider } from 'notistack'
