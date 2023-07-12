@@ -62,7 +62,10 @@ export interface TestimonialsProps {
 }
 export interface GalleryProps {
     nextUrl: string
-    images: string[]
+    images: {
+        media_url: string
+        caption: string
+    }[]
 }
 export interface ContactPageProps {
     id: string
