@@ -32,12 +32,8 @@ const GalleryPage = () => {
     }
 
     const onLoadMoreImage = async () => {
-        try {
-            const nextImageSetData = await getNextImages(data)
-            dispatch(setGallery(nextImageSetData))
-        } catch (error) {
-            console.error('error')
-        }
+        const nextImageSet = await getNextImages(data)
+        if (nextImageSet) dispatch(setGallery(nextImageSet))
     }
 
     return (
