@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store'
 import { getNextImages } from '@/lib/db/cms/gallery-page'
 import { setGallery } from '@/lib/redux/slices/gallery'
+import isImgUrl from '@/utils/validations/image'
 
 const GalleryPage = () => {
     const dispatch = useDispatch()

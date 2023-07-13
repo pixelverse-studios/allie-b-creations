@@ -22,16 +22,16 @@ export const getAllCmsData = async (dispatch: Function) => {
             homePage,
             services,
             gallery,
-            testimonials,
-            contacts
+            testimonials
+            // contacts
         ] = await Promise.all([
             getAboutPageData(),
             getContactLinks(),
             getHomePage(),
             getServices(),
             getGalleryContent(),
-            getTestimonials(),
-            getContacts()
+            getTestimonials()
+            // getContacts()
         ])
         dispatch(setAbout(aboutPage))
         dispatch(setContactLinks(contactLinks))
@@ -39,7 +39,7 @@ export const getAllCmsData = async (dispatch: Function) => {
         dispatch(setServices(services))
         dispatch(setTestimonials(testimonials))
         dispatch(setGallery(gallery))
-        dispatch(setAllContacts(contacts))
+        // dispatch(setAllContacts(contacts))
         dispatch(setLoading(false))
     } catch (error) {
         throw error
