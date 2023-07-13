@@ -3,6 +3,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { Autocomplete, TextField as MuiTextField } from '@mui/material'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
+import { formatDateTime } from '@/utils/format/dates'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
 import { FormRow } from '@/styles/components/form'
@@ -24,6 +25,7 @@ const REQUIRED = [
     'email',
     'eventTime',
     'eventType',
+    'eventLocationType',
     'eventLocation'
 ]
 const INITIAL_STATE = {
@@ -33,6 +35,7 @@ const INITIAL_STATE = {
     email: { value: '' },
     eventTime: { value: null },
     eventType: { value: '' },
+    eventLocationType: { value: '' },
     eventLocation: { value: '' },
     description: { value: '' },
     img: { value: [] }
@@ -44,7 +47,8 @@ const VALIDACHE = {
     phone: FormValidations.validPhoneNumber,
     email: FormValidations.validEmail,
     eventTime: FormValidations.yolo,
-    eventType: FormValidations.validAlphaNumericSpacesSpecials,
+    eventType: FormValidations.yolo,
+    eventLocationType: FormValidations.validAlphaNumericSpacesSpecials,
     eventLocation: FormValidations.validAlphaNumericSpacesSpecials,
     description: FormValidations.yolo,
     img: FormValidations.yolo
@@ -61,11 +65,9 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
     } = useForm(INITIAL_STATE, VALIDACHE, INITIAL_STATE)
 
     const {
-        ready,
         value: locationValue,
-        suggestions: { status, data },
-        setValue,
-        clearSuggestions
+        suggestions: { data },
+        setValue
     } = usePlacesAutocomplete({
         debounce: 300
     })
@@ -86,67 +88,42 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
         setValue(newValue)
 
     const onLocationSelect = (event: any, newValue: string | null) =>
-        handleNonFormEventChange(newValue, 'locationEvent')
+        handleNonFormEventChange(newValue, 'eventLocation')
 
     const formatFormToBody = (cloudImg: string | null) => {
-        const formElements = [`Hello ${form.firstName}`] as any
-        Object.entries(form).forEach(
-            ([key, field]: [key: string, value: any]) => {
-                switch (key) {
-                    case 'firstName':
-                        formElements.push(
-                            `First Name: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'lastName':
-                        formElements.push(
-                            `Last Name: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'phone':
-                        formElements.push(
-                            `Phone Number: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'email':
-                        formElements.push(`Email: ${field.value}${LINE_BREAK}-`)
-                        break
-                    case 'eventTime':
-                        formElements.push(
-                            `Event Time: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'eventType':
-                        formElements.push(
-                            `Event Type: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'eventLocation':
-                        formElements.push(
-                            `Event Location: ${field.value}${LINE_BREAK}-`
-                        )
-                        break
-                    case 'description':
-                        if (form.description.value) {
-                            formElements.push(
-                                `Description: ${field.value}${LINE_BREAK}-`
-                            )
-                            break
-                        }
-                    case 'img':
-                        if (cloudImg) {
-                            formElements.push(
-                                `Image(s): ${cloudImg}${LINE_BREAK}-`
-                            )
-                        }
-                        break
-                    default:
-                        break
-                }
-            }
-        )
+        const opening = [
+            `Dear Allie B, ${LINE_BREAK} ${LINE_BREAK}-`,
+            `I hope this email finds you well. My name is ${form.firstName.value} ${form.lastName.value}. ${LINE_BREAK} ${LINE_BREAK}-`,
+            `I am planning a ${form.eventType.value} on ${formatDateTime(
+                form.eventTime.value
+            )} and I would love to discuss how you can help me make it a truly special event. ${LINE_BREAK} ${LINE_BREAK}-`,
+            `Here are the event details: ${LINE_BREAK} -`,
+            `Date and Time: ${formatDateTime(
+                form.eventTime.value
+            )} ${LINE_BREAK}-`,
+            `Event Type: ${form.eventType.value} ${LINE_BREAK}-`,
+            `Event Location: ${form.eventLocation.value} ${LINE_BREAK}-`,
+            `Location Type: ${form.eventLocationType.value} ${LINE_BREAK} ${LINE_BREAK}-`
+        ]
 
-        return formElements.join().replace(/-,/g, '')
+        if (form.description.value) {
+            opening.push(
+                `General Details: ${form.description.value} ${LINE_BREAK}-`
+            )
+        }
+
+        if (cloudImg) {
+            opening.push(`Inspiration image link: ${cloudImg} ${LINE_BREAK}-`)
+        }
+
+        const closing = [
+            `${LINE_BREAK} I am available to discuss via email (${form.email.value}) or by phone (${form.phone.value}) to discuss my event in more detail. ${LINE_BREAK} ${LINE_BREAK}-`,
+            `Thank you for your time and consideration.${LINE_BREAK} ${LINE_BREAK}-`,
+            `Sincerely, ${LINE_BREAK} ${form.firstName.value}`
+        ]
+
+        const emailBody = [...opening, ...closing]
+        return emailBody.join().replace(/-,/g, '')
     }
 
     const onFormSubmit = async () => {
@@ -160,7 +137,7 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
         }
         const body = formatFormToBody(cloudImg)
         const link = document.createElement('a')
-        link.href = `mailto: info@ezpzcoding.com?subject=New Quote Request&body=${body}`
+        link.href = `mailto: info@alliebcreations.com?subject=New Quote Request&body=${body}`
         link.download = 'image file name here'
         document.body.appendChild(link)
         link.click()
@@ -208,10 +185,19 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                         value={form.eventTime.value}
                         onChange={onDateTimeUpdate}
                     />
-                    <SelectField
+                    <TextField
                         field={form.eventType}
-                        name="eventType"
+                        id="eventType"
                         label="Event Type"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                </FormRow>
+                <FormRow>
+                    <SelectField
+                        field={form.eventLocationType}
+                        name="eventLocationType"
+                        label="Event Location Type"
                         onChange={handleNonFormEventChange}
                         items={[
                             { value: 'Indoors', label: 'Indoors' },
@@ -244,7 +230,7 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                     <TextField
                         field={form.description}
                         id="description"
-                        label="Description"
+                        label="Description (event theme, details, color scheme, etc.)"
                         type="textarea"
                         onChange={handleChange}
                         rows={5}
