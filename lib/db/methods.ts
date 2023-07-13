@@ -10,7 +10,7 @@ import { getTestimonials } from './cms/testimonials'
 import { setTestimonials } from '../redux/slices/testimonials'
 import { getGalleryContent } from './cms/gallery-page'
 import { setGallery } from '../redux/slices/gallery'
-import { getContacts } from './cms/contacts'
+// import { getContacts } from './cms/contacts'
 import { setAllContacts } from '../redux/slices/contacts'
 import { setLoading } from '../redux/slices/app'
 

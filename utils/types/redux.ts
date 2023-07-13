@@ -73,11 +73,16 @@ export interface ContactPageProps {
     lastName: string
     email: string
     phone: number
-    description: string
-    eventDate: Date | null
+    description?: string
+    eventTime: Date | null
+    eventType: string
     eventLocation: string
-    eventType: 'indoors' | 'outdoors'
-    inspirationImg: string
+    eventLocationType: 'indoors' | 'outdoors'
+    img?: {
+        src: string
+        name: string
+        type: string
+    }
     responded: boolean
     createdAt: string
 }
