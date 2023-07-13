@@ -9,15 +9,13 @@ const getGalleryContent = async (): Promise<GalleryProps> => {
     const url = `https://graph.instagram.com/me/media?fields=id,media_url,timestamp,caption,permalink&access_token=${process.env.NEXT_PUBLIC_IG_SECRET}`
     try {
         const response = await axios.get(url)
-        const data = response.data
+        const { data } = response
 
         const initialImages = data.data.map(
-            (item: { media_url: string; caption: string }) => {
-                return {
-                    media_url: item.media_url,
-                    caption: item.caption
-                }
-            }
+            (item: { media_url: string; caption: string }) => ({
+                media_url: item.media_url,
+                caption: item.caption
+            })
         )
 
         const validImgArray = (await validImageUrls(initialImages)) as {
@@ -41,12 +39,10 @@ const getNextImages = async (data: any) => {
         const responseData = response.data
 
         const initialImages = responseData.data.map(
-            (item: { media_url: any; caption: any }) => {
-                return {
-                    media_url: item.media_url,
-                    caption: item.caption
-                }
-            }
+            (item: { media_url: any; caption: any }) => ({
+                media_url: item.media_url,
+                caption: item.caption
+            })
         )
 
         const validImgArray = (await validImageUrls(initialImages)) as {
