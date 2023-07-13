@@ -4,7 +4,7 @@ import { Autocomplete, TextField as MuiTextField } from '@mui/material'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 import { enqueueSnackbar } from 'notistack'
 
-import { statuses, messages } from '@/utils/banners'
+import { statuses } from '@/utils/banners'
 import { createNewContact } from '@/lib/db/cms/contacts'
 import { formatDateTime } from '@/utils/format/dates'
 import useForm from '@/utils/hooks/useForm'
@@ -139,7 +139,6 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                 filename: form.img.value[0].name
             })
         }
-
         const body = formatFormToBody(cloudImg)
         const link = document.createElement('a')
         link.href = `mailto: info@alliebcreations.com?subject=New Quote Request&body=${body}`
