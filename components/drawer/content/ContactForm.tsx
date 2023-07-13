@@ -2,7 +2,10 @@ import { useMemo } from 'react'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { Autocomplete, TextField as MuiTextField } from '@mui/material'
 import usePlacesAutocomplete from 'use-places-autocomplete'
+import { enqueueSnackbar } from 'notistack'
 
+import { statuses, messages } from '@/utils/banners'
+import { createNewContact } from '@/lib/db/cms/contacts'
 import { formatDateTime } from '@/utils/format/dates'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -127,7 +130,8 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
     }
 
     const onFormSubmit = async () => {
-        let cloudImg = null
+        // TODO: set loading
+        let cloudImg = '' as string
         if (form.img.value?.[0]?.src) {
             cloudImg = await handleCloudUpload({
                 base64: form.img.value[0].base64,
@@ -135,6 +139,7 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                 filename: form.img.value[0].name
             })
         }
+
         const body = formatFormToBody(cloudImg)
         const link = document.createElement('a')
         link.href = `mailto: info@alliebcreations.com?subject=New Quote Request&body=${body}`
@@ -142,6 +147,33 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
+
+        const payload = {} as any
+        Object.entries(form).forEach((field: any) => {
+            if (field[0] === 'img' && field[1]?.value?.length > 0) {
+                payload['img'] = {
+                    src: cloudImg,
+                    name: form.img.value[0].name,
+                    type: form.img.value[0].type
+                }
+            } else {
+                payload[field[0]] = field[1].value
+            }
+        })
+
+        try {
+            await createNewContact(payload)
+            enqueueSnackbar('Your request has been submitted successfully!', {
+                variant: statuses.SUCCESS
+            })
+        } catch (error) {
+            enqueueSnackbar(
+                'There was an issue with your request. Please try again or reach out to us for help.',
+                {
+                    variant: statuses.ERROR
+                }
+            )
+        }
     }
 
     return (
@@ -200,8 +232,8 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                         label="Event Location Type"
                         onChange={handleNonFormEventChange}
                         items={[
-                            { value: 'Indoors', label: 'Indoors' },
-                            { value: 'Outdoors', label: 'Outdoors' }
+                            { value: 'indoors', label: 'Indoors' },
+                            { value: 'outdoors', label: 'Outdoors' }
                         ]}
                     />
                     <Autocomplete
