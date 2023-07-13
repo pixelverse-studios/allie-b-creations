@@ -3,6 +3,7 @@ import { StyledAboutPage } from './StyledAboutPage'
 import HeaderWithPaintStreaks from '@/components/title/headerWithPaint'
 import QuoteSvg from './assets/QuoteSvg'
 import { AboutPageProps } from '@/utils/types/redux'
+import { SelectField } from '@/components/form'
 
 const AboutPageView = () => {
     const aboutPageData = useSelector((state: any) => state.aboutPage)
@@ -10,7 +11,6 @@ const AboutPageView = () => {
     return (
         <StyledAboutPage>
             <HeaderWithPaintStreaks title="About Me" />
-
             {aboutPageData.map((data: AboutPageProps, index: number) => {
                 return (
                     <div className={`image-about-content-${index}`} key={index}>

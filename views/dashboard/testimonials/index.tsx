@@ -6,6 +6,7 @@ import TestimonialCard from '@/views/dashboard/testimonials/cards/testimonial'
 import { testimonialFilterMap, testimonialSortMap } from '@/utils/constants'
 import SelectField from '@/components/form/fields/SelectField'
 import RadioFieldGroup from '@/components/form/fields/RadioFieldGroup'
+import { TESTIMONIAL_SORT_VALUES } from '@/utils/constants'
 import {
     StyledTestimonialGrid,
     StyledSortAndFilter
@@ -40,8 +41,11 @@ const TestimonialWidget = () => {
                     handleDisplayFilter={handleDisplayFilter}
                 />
                 <SelectField
-                    displaySort={displaySort}
-                    setDisplaySort={handleDisplaySort}
+                    items={TESTIMONIAL_SORT_VALUES}
+                    label="Sort by"
+                    name="displaySort"
+                    field={{ value: displaySort, error: '' }}
+                    onChange={handleDisplaySort}
                 />
             </StyledSortAndFilter>
             <StyledTestimonialGrid>

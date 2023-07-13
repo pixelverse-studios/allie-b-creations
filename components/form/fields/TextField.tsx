@@ -8,7 +8,19 @@ import { setColor } from '../utilities'
 import { TextFieldProps } from '@/utils/types/components/form'
 
 const CHARACTER_COUNT = 600
-const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
+interface TextFieldTypes extends TextFieldProps {
+    rows?: number
+    required?: boolean
+}
+const TextField = ({
+    id,
+    label,
+    type,
+    onChange,
+    field,
+    rows,
+    required
+}: TextFieldTypes) => {
     const isTextArea = type === 'textarea'
     return (
         <FormControl color={setColor(field)} error={Boolean(field.error)}>
@@ -26,7 +38,8 @@ const TextField = ({ id, label, type, onChange, field }: TextFieldProps) => {
                 title={label}
                 onChange={onChange}
                 value={field.value}
-                required
+                required={required}
+                rows={isTextArea ? rows : ''}
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
             {isTextArea && (
