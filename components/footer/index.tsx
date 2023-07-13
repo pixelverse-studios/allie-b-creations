@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
+import { uniqueId } from 'lodash'
 import { SocialMenuItems } from '@/utils/IconSelection'
 import LogoImg from '../../assets/logo.svg'
-import { uniqueId } from 'lodash'
 import { StyledFooter } from './StyledFooter'
 
 const Footer = () => {
