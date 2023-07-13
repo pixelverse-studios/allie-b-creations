@@ -1,23 +1,43 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../config'
 import { HomePageProps } from '@/utils/types/redux'
 
-const getHomePage = async (): Promise<HomePageProps> => {
+const HOME = 'home-page'
+const homePageCollection = collection(db, HOME)
+
+const getHomePage = async (): Promise<HomePageProps[]> => {
     try {
-        const homePageRef = collection(db, 'home-page')
-        const data = await getDocs(homePageRef)
-        const { header, heroImg, secondaryHeroImg, secondaryHeroBanner } =
-            data.docs[0].data()
-        return {
-            id: data.docs[0].id,
-            header,
-            heroImg,
-            secondaryHeroImg,
-            secondaryHeroBanner
-        }
+        const data = await getDocs(homePageCollection)
+        return data.docs.map(doc => {
+            const { heroBanner, img } = doc.data()
+            return {
+                id: doc.id,
+                heroBanner,
+                img
+            }
+        })
     } catch (error) {
         throw error
     }
 }
 
-export { getHomePage }
+const updateHomePage = async (
+    id: string,
+    fields: {
+        heroBanner?: string
+        img?: string
+    }
+): Promise<HomePageProps[]> => {
+    try {
+        const ref = doc(db, HOME, id)
+        await updateDoc(ref, {
+            ...fields
+        })
+        const homePageData = await getHomePage()
+        return homePageData
+    } catch (error) {
+        throw error
+    }
+}
+
+export { getHomePage, updateHomePage }

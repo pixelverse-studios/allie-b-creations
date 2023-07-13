@@ -29,6 +29,7 @@ export const StyledFooter = styled.footer`
     justify-content: center;
     align-items: center;
     align-content: center;
+
     .logo {
         width: 12rem;
         height: 6rem;
@@ -58,20 +59,20 @@ export const StyledFooter = styled.footer`
             background: linear-gradient(#fff 50%, #fce4e2 50%);
 
             border: 2px solid #fce4e2;
-            background-size: 100% 200%;
+            background-size: 100% 205%;
         }
 
         a:nth-of-type(3n + 2) {
             color: #faeee3;
             background: linear-gradient(#fff 50%, #faeee3 50%);
             border: 2px solid #faeee3;
-            background-size: 100% 200%;
+            background-size: 100% 205%;
         }
         a:nth-of-type(3n + 3) {
             color: #e0ebe3;
             background: linear-gradient(#fff 50%, #e0ebe3 50%);
             border: 2px solid #e0ebe3;
-            background-size: 100% 200%;
+            background-size: 100% 205%;
         }
     }
     small {

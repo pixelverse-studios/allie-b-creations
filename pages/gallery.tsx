@@ -1,3 +1,4 @@
+import GalleryPageView from '@/views/gallery'
 export default function GalleryPage() {
-    return <div>Gallery Page holder</div>
+    return <GalleryPageView />
 }

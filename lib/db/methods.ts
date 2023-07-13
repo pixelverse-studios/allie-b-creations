@@ -12,6 +12,7 @@ import { getGalleryContent } from './cms/gallery-page'
 import { setGallery } from '../redux/slices/gallery'
 // import { getContacts } from './cms/contacts'
 import { setAllContacts } from '../redux/slices/contacts'
+import { setLoading } from '../redux/slices/app'
 
 export const getAllCmsData = async (dispatch: Function) => {
     try {
@@ -39,6 +40,7 @@ export const getAllCmsData = async (dispatch: Function) => {
         dispatch(setTestimonials(testimonials))
         dispatch(setGallery(gallery))
         // dispatch(setAllContacts(contacts))
+        dispatch(setLoading(false))
     } catch (error) {
         throw error
     }

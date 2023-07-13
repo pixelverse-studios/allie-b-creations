@@ -9,8 +9,8 @@ import { enqueueSnackbar } from 'notistack'
 
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
-
 import FormDrawer from '@/components/drawer'
+import styled from '@emotion/styled'
 import '@/styles/globals.css'
 
 const loadScriptDetails = {
@@ -19,6 +19,17 @@ const loadScriptDetails = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+    const AnimatedDiv = styled.div`
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        animation: fadeIn 1s ease-in-out;
+    `
     const { loadError } = useLoadScript(loadScriptDetails as any)
     if (loadError) {
         enqueueSnackbar(
@@ -35,13 +46,15 @@ export default function App({ Component, pageProps }: AppProps) {
                 <meta name="description" content="Allie B Creations" />
                 <meta
                     name="viewport"
-                    content="width=device-widthm initial-scale=1"
+                    content="width=device-width, initial-scale=1"
                 />
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <Component {...pageProps} />
+                        <AnimatedDiv>
+                            <Component {...pageProps} />
+                        </AnimatedDiv>
                         <SnackbarProvider hideIconVariant />
                         <FormDrawer />
                     </LocalizationProvider>
