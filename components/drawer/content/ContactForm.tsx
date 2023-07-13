@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { Autocomplete, TextField as MuiTextField } from '@mui/material'
+import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -58,6 +60,16 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
         handleReset
     } = useForm(INITIAL_STATE, VALIDACHE, INITIAL_STATE)
 
+    const {
+        ready,
+        value: locationValue,
+        suggestions: { status, data },
+        setValue,
+        clearSuggestions
+    } = usePlacesAutocomplete({
+        debounce: 300
+    })
+
     const disableSubmit = useMemo(
         () => !REQUIRED.every(field => form[field].value),
         [form]
@@ -69,6 +81,12 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
     const onFilesChange = (files: any) => {
         handleNonFormEventChange(files, 'img')
     }
+
+    const onLocationUpdate = (event: any, newValue: string) =>
+        setValue(newValue)
+
+    const onLocationSelect = (event: any, newValue: string | null) =>
+        handleNonFormEventChange(newValue, 'locationEvent')
 
     const formatFormToBody = (cloudImg: string | null) => {
         const formElements = [`Hello ${form.firstName}`] as any
@@ -200,12 +218,26 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                             { value: 'Outdoors', label: 'Outdoors' }
                         ]}
                     />
-                    <TextField
-                        field={form.eventLocation}
-                        id="eventLocation"
-                        label="Event Location"
-                        type="text"
-                        onChange={handleChange}
+                    <Autocomplete
+                        freeSolo
+                        id="free-solo-2-demo"
+                        disableClearable
+                        onInputChange={onLocationUpdate}
+                        onChange={onLocationSelect}
+                        options={data?.map(location => location.description)}
+                        renderInput={params => (
+                            <MuiTextField
+                                {...params}
+                                value={locationValue}
+                                id="eventLocation"
+                                label="Event Location"
+                                // onChange={onLocationUpdate}
+                                InputProps={{
+                                    ...params.InputProps,
+                                    type: 'search'
+                                }}
+                            />
+                        )}
                     />
                 </FormRow>
                 <FormRow>
