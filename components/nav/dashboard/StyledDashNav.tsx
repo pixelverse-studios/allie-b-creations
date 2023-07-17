@@ -8,6 +8,24 @@ export const StyledDashNav = styled.nav`
     width: var(--dashboard-nav-width);
     height: 100%;
 
+    .dashNavAccordion {
+        border-radius: var(--border-radius);
+    }
+
+    .dashNavButton {
+        transition: var(--hover-transition);
+        &:hover {
+            border-radius: var(--border-radius);
+            color: var(--brand-color-1);
+            background-color: white;
+        }
+        &.Mui-selected {
+            border-radius: var(--border-radius);
+            background-color: var(--brand-color-1);
+            color: white;
+        }
+    }
+
     .brand {
         text-align: center;
         padding-bottom: 1rem;

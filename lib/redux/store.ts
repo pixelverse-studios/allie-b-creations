@@ -6,7 +6,7 @@ import contactLinks from './slices/contactLinks'
 import homePage from './slices/homePage'
 import testimonials from './slices/testimonials'
 import gallery from './slices/gallery'
-import contacts from './slices/contacts'
+import clientRequests from './slices/client-requests'
 import app from './slices/app'
 import drawer from './slices/drawer'
 
@@ -19,7 +19,7 @@ export const store = configureStore({
         homePage,
         testimonials,
         gallery,
-        contacts,
+        clientRequests,
         drawer,
         app
     }

@@ -35,7 +35,7 @@ const DashNav = () => {
     return (
         <StyledDashNav>
             <Logo />
-            <Accordion defaultExpanded>
+            <Accordion defaultExpanded className="dashNavAccordion">
                 <AccordionSummary
                     expandIcon={<ExpandMore />}
                     aria-controls="panel1a-content"
@@ -45,8 +45,11 @@ const DashNav = () => {
                 <AccordionDetails>
                     <List>
                         {DASHBOARD_ROUTES.map(route => (
-                            <ListItem key={uniqueId('li')}>
+                            <ListItem
+                                key={uniqueId('li')}
+                                className="dashNavItem">
                                 <ListItemButton
+                                    className="dashNavButton"
                                     key={uniqueId('lib')}
                                     selected={activePage === route.path}>
                                     <ListItemText

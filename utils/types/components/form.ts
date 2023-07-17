@@ -11,6 +11,8 @@ export interface TextFieldProps {
     type: 'text' | 'email' | 'textarea' | 'password' | 'file'
     label: string
     onChange: ChangeEventHandler
+    disabled?: boolean
+    variant?: 'outlined' | 'standard' | 'filled'
 }
 
 export interface TestimonialFormProps {
