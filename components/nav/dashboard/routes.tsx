@@ -1,5 +1,5 @@
 export const DASHBOARD_ROUTES = [
-    { label: 'Home Page', path: 'home' },
+    { label: 'Home Page', path: '' },
     { label: 'About Page', path: 'about' },
     { label: 'Services', path: 'services' },
     { label: 'Gallery', path: 'gallery' },

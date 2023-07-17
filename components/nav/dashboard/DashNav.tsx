@@ -26,7 +26,7 @@ const DashNav = () => {
     }
 
     const activePage = useMemo(
-        () => router.pathname.split('/')[2],
+        () => router.pathname.split('/')[2] ?? '',
         [router.pathname]
     )
 

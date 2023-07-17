@@ -1,3 +1,5 @@
-export default function DashboardHomePage() {
-    return <div>Dashboard Home Page placeholder</div>
+import HomePageWidget from '@/views/dashboard/home-page'
+
+export default function HomePageDashboardPage() {
+    return <HomePageWidget />
 }

@@ -23,7 +23,8 @@ export const StyledDashboard = styled.section`
             background-color: var(--brand-color-1);
             margin-top: 1rem;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
 
             .mobileSelect {
                 display: none;
@@ -31,6 +32,7 @@ export const StyledDashboard = styled.section`
 
             .headerControls {
                 display: flex;
+                gap: 0.5rem;
             }
         }
     }
