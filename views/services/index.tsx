@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { uniqueId } from 'lodash'
-import EventPlaceholder from './EventPlaceholder'
 import HeaderWithPaintStreaks from '@/components/title/headerWithPaint'
 import { StyledServicesPage } from './StyledServicesPage'
 
