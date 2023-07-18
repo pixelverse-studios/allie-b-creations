@@ -12,6 +12,7 @@ export const BaseDesktopNavStyles = css`
         grid-template-columns: auto 1fr;
         align-items: center;
         gap: 1rem;
+        padding: 0 1rem;
 
         .brand {
             img {
@@ -34,7 +35,7 @@ export const ActiveItemStyles = css`
     color: var(--accent-color-1);
 `
 export const HoverItemStyles = css`
-    background-color: var(--brand-color-3);
+    background-color: var(--brand-color-2);
     color: var(--accent-color-1);
 `
 

@@ -21,5 +21,6 @@ export const StyledTitleContainer = styled.div`
         font-family: var(--Gistesy);
         text-align: center;
         font-size: 5rem;
+        color: #555;
     }
 `
