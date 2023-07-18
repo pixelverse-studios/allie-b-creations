@@ -5,7 +5,7 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 import { enqueueSnackbar } from 'notistack'
 
 import { statuses } from '@/utils/banners'
-import { createNewContact } from '@/lib/db/cms/contacts'
+import { createNewContact } from '@/lib/db/cms/client-requests'
 import { formatDateTime } from '@/utils/format/dates'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
@@ -15,7 +15,7 @@ import { FormButtonGroup } from '@/components/form'
 import { StyledFieldSet } from './StyledFormComponents'
 import { handleCloudUpload } from '@/utils/fileConversions'
 
-const LINE_BREAK = '%0D%0A'
+export const LINE_BREAK = '%0D%0A'
 
 type ContactFormProps = {
     onCloseDrawer: Function
@@ -165,6 +165,8 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
             enqueueSnackbar('Your request has been submitted successfully!', {
                 variant: statuses.SUCCESS
             })
+            handleReset()
+            onCloseDrawer()
         } catch (error) {
             enqueueSnackbar(
                 'There was an issue with your request. Please try again or reach out to us for help.',
@@ -231,8 +233,8 @@ const ContactForm = ({ onCloseDrawer }: ContactFormProps) => {
                         label="Event Location Type"
                         onChange={handleNonFormEventChange}
                         items={[
-                            { value: 'indoors', label: 'Indoors' },
-                            { value: 'outdoors', label: 'Outdoors' }
+                            { value: 'Indoors', label: 'Indoors' },
+                            { value: 'Outdoors', label: 'Outdoors' }
                         ]}
                     />
                     <Autocomplete

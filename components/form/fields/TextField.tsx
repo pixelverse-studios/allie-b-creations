@@ -11,6 +11,7 @@ const CHARACTER_COUNT = 600
 interface TextFieldTypes extends TextFieldProps {
     rows?: number
     required?: boolean
+    hideHelperText?: boolean
 }
 const TextField = ({
     id,
@@ -19,7 +20,9 @@ const TextField = ({
     onChange,
     field,
     rows,
-    required
+    required,
+    variant = 'outlined',
+    hideHelperText = true
 }: TextFieldTypes) => {
     const isTextArea = type === 'textarea'
     return (
@@ -30,7 +33,7 @@ const TextField = ({
                 inputProps={{
                     maxLength: isTextArea ? CHARACTER_COUNT : 999999999
                 }}
-                variant="outlined"
+                variant={variant}
                 type={type}
                 id={id}
                 name={id}
@@ -42,7 +45,7 @@ const TextField = ({
                 rows={isTextArea ? rows : ''}
             />
             <FormHelperText id={id}>{field.error}</FormHelperText>
-            {isTextArea && (
+            {isTextArea && !hideHelperText && (
                 <FormHelperText id={id}>
                     Max Characters: {field.value.length}/{CHARACTER_COUNT}
                 </FormHelperText>

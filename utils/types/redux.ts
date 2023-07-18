@@ -67,17 +67,17 @@ export interface GalleryProps {
         caption: string
     }[]
 }
-export interface ContactPageProps {
+export interface ClientRequestProps {
     id: string
     firstName: string
     lastName: string
     email: string
     phone: number
     description?: string
-    eventTime: Date | null
+    eventTime: string
     eventType: string
     eventLocation: string
-    eventLocationType: 'indoors' | 'outdoors'
+    eventLocationType: 'Indoors' | 'Outdoors'
     img?: {
         src: string
         name: string
