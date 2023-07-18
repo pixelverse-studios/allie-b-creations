@@ -8,8 +8,8 @@ import { getServices } from './cms/services'
 import { setServices } from '@/lib/redux/slices/services'
 import { getTestimonials } from './cms/testimonials'
 import { setTestimonials } from '../redux/slices/testimonials'
-import { getGalleryContent } from './cms/gallery-page'
-import { setGallery } from '../redux/slices/gallery'
+// import { getGalleryContent } from './cms/gallery-page'
+// import { setGallery } from '../redux/slices/gallery'
 // import { getContacts } from './cms/contacts'
 // import { setAllContacts } from '../redux/slices/client-requests'
 import { setLoading } from '../redux/slices/app'
@@ -21,7 +21,7 @@ export const getAllCmsData = async (dispatch: Function) => {
             contactLinks,
             homePage,
             services,
-            gallery,
+            // gallery,
             testimonials
             // contacts
         ] = await Promise.all([
@@ -29,7 +29,7 @@ export const getAllCmsData = async (dispatch: Function) => {
             getContactLinks(),
             getHomePage(),
             getServices(),
-            getGalleryContent(),
+            // getGalleryContent(),
             getTestimonials()
             // getContacts()
         ])
@@ -38,7 +38,7 @@ export const getAllCmsData = async (dispatch: Function) => {
         dispatch(setHomePage(homePage))
         dispatch(setServices(services))
         dispatch(setTestimonials(testimonials))
-        dispatch(setGallery(gallery))
+        // dispatch(setGallery(gallery))
         // dispatch(setAllContacts(contacts))
         dispatch(setLoading(false))
     } catch (error) {
