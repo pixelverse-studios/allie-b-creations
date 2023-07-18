@@ -34,6 +34,10 @@ export const StyledDashboard = styled.section`
                 display: flex;
                 gap: 0.5rem;
             }
+
+            svg {
+                color: black;
+            }
         }
     }
 

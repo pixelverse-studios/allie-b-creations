@@ -69,7 +69,7 @@ const AuthWrapper = ({ children }: { children: any }) => {
     if (isOnDashboard) {
         return (
             <DashboardPage>
-                {isLoading ? <BalloonLoader /> : children}
+                {true ? <BalloonLoader className="dashLoader" /> : children}
             </DashboardPage>
         )
     }
