@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 const StyledAuthWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    height: inherit;
-    height: 100%;
+    justify-content: space-between;
+    min-height: 100%;
 
     nav {
         position: absolute;
@@ -21,8 +21,6 @@ const StyledAuthWrapper = styled.div`
     }
 
     footer {
-        position: absolute;
-        bottom: calc(var(--footer-height) * -1);
         height: var(--footer-height);
     }
 `

@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { Drawer } from '@mui/material'
 import { signInWithPopup, signOut, getAuth } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { enqueueSnackbar } from 'notistack'
@@ -10,12 +9,10 @@ import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledDesktopNav, StyledDesktopNavItems } from './StyledNav'
 import { BaseNavItems, AuthNavItems } from './NavItems'
-import Logo from '@/assets/logo.svg'
-import Hamburger from './Hamburger'
-const { statuses, messages } = bannerUtils
+import Logo from './Logo'
 
 const DesktopNav = () => {
     const auth = getAuth()
@@ -29,16 +26,11 @@ const DesktopNav = () => {
         [router.pathname]
     )
 
-    const onHomeClick = () => {
-        if (showMenu) setShowMenu(false)
-        router.push('/')
-    }
+    const onHomeClick = () => (showMenu ? setShowMenu(false) : null)
+
     const onNavItemClick = (path: string) => {
         setShowMenu(!showMenu)
         router.push(path)
-    }
-    const onBurgerClick = () => {
-        setShowMenu(!showMenu)
     }
 
     const toggleDrawer =
@@ -92,9 +84,7 @@ const DesktopNav = () => {
     return (
         <StyledDesktopNav>
             <div className="contentWrapper">
-                <div className="brand" onClick={onHomeClick}>
-                    <img src={Logo.src} alt="Logo" />
-                </div>
+                <Logo callback={onHomeClick} />
                 <StyledDesktopNavItems>
                     <BaseNavItems
                         activePage={activePage}

@@ -6,13 +6,20 @@ export interface UserProps {
 }
 export interface AboutPageProps {
     id: string
-    backgroundInfo: string[]
+    description: string
     header: string
-    profileImg: string
+    img: {
+        name: string
+        src: string
+        title: string
+        type: string
+    }
     role: string
     subHeader: string
     title: string
+    name: string
 }
+
 export interface ContactLinkProps {
     id: string
     icon: string
@@ -21,14 +28,16 @@ export interface ContactLinkProps {
 }
 export interface HomePageProps {
     id: string
-    header: string
-    heroImg: string
-    secondaryHeroImg: string
-    secondaryHeroBanner: string
+    heroBanner: string
+    img: {
+        name: string
+        src: string
+        type: string
+    }
 }
 export interface ServicesProps {
     id: string
-    description: string[]
+    description: string
     offerings: [
         {
             events: [
@@ -49,23 +58,31 @@ export interface TestimonialsProps {
     name: string
     rating: number
     review: string
+    email: string
 }
 export interface GalleryProps {
-    id: string
-    img: string
-    tag: string
+    nextUrl: string
+    images: {
+        media_url: string
+        caption: string
+    }[]
 }
-export interface ContactPageProps {
+export interface ClientRequestProps {
     id: string
     firstName: string
     lastName: string
     email: string
     phone: number
-    description: string
-    eventDate: Date | null
+    description?: string
+    eventTime: string
+    eventType: string
     eventLocation: string
-    eventType: 'indoors' | 'outdoors'
-    inspirationImg: string
+    eventLocationType: 'Indoors' | 'Outdoors'
+    img?: {
+        src: string
+        name: string
+        type: string
+    }
     responded: boolean
     createdAt: string
 }

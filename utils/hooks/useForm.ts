@@ -1,4 +1,10 @@
-import { useState, useReducer, ChangeEventHandler, FormEvent } from 'react'
+import {
+    useState,
+    useEffect,
+    useReducer,
+    ChangeEventHandler,
+    FormEvent
+} from 'react'
 import { FORM_ACTIONS } from '../constants'
 
 interface ActionState {
@@ -25,8 +31,21 @@ function reducer(state: any, action: ActionState) {
     }
 }
 
-const useForm = (initialState: any, validations: any) => {
+const useForm = (initialState: any, validations: any, store?: any) => {
     const [form, dispatch] = useReducer(reducer, initialState)
+    const [formLoading, setFormLoading] = useState<boolean>(false)
+    const [isDataImported, setIsDataImported] = useState<boolean>(false)
+    const [disableSubmit, setDisableSumit] = useState<boolean>(true)
+
+    useEffect(() => {
+        if (store != null) {
+            const formFieldStatus = Object.entries(form).map(
+                ([key, field]: [key: string, value: any]) =>
+                    store[key] === field.value
+            )
+            setDisableSumit(!formFieldStatus.some(field => !field))
+        }
+    }, [store, form])
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
         const { value, name } = event.target
@@ -45,23 +64,68 @@ const useForm = (initialState: any, validations: any) => {
         })
     }
 
-    const handleFormSubmit = (
+    const handleNonFormEventChange = (data: any, name: string) => {
+        const hasValidation = validations[name]?.message
+
+        dispatch({
+            type: UPDATE,
+            payload: {
+                name,
+                value: data,
+                error: hasValidation ? !validations[name].test(data) : ''
+            }
+        })
+    }
+
+    const handleClearField = (fieldLabel: string) =>
+        dispatch({
+            type: UPDATE,
+            payload: {
+                name: fieldLabel,
+                value: initialState[fieldLabel],
+                error: ''
+            }
+        })
+
+    const handleImport = (payload: any) => {
+        setIsDataImported(true)
+        const formattedData = {} as any
+        for (const [key, value] of Object.entries(payload)) {
+            formattedData[key] = { value, error: '' }
+        }
+        dispatch({ type: IMPORT, payload: formattedData })
+    }
+
+    const handleFormSubmit = async (
         event: FormEvent<HTMLFormElement>,
         mutation: Function
     ) => {
         event.preventDefault()
-        mutation()
+        setFormLoading(true)
+        await mutation()
+        setFormLoading(false)
     }
 
     const handleReset = () => {
         dispatch({ type: RESET, payload: initialState })
     }
 
+    const isFormValid = Object.keys(form).every(label => !form[label].error)
+
     return {
+        disableSubmit,
+        form,
+        formLoading,
         handleChange,
+        handleClearField,
         handleFormSubmit,
+        handleImport,
+        handleNonFormEventChange,
         handleReset,
-        form
+        isDataImported,
+        isFormValid,
+        setFormLoading,
+        setIsDataImported
     }
 }
 

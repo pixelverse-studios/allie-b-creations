@@ -10,12 +10,11 @@ import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
 import { getValidatedUser } from '@/lib/db/auth/users'
 import { getAllCmsData } from '@/lib/db/methods'
-import bannerUtils from '@/utils/banners'
+import { statuses, messages } from '@/utils/banners'
 import { StyledMobileNav, StyledMobileNavItems } from './StyledNav'
 import { BaseNavItems, AuthNavItems } from './NavItems'
-import Logo from '@/assets/logo.svg'
+import Logo from './Logo'
 import Hamburger from './Hamburger'
-const { statuses, messages } = bannerUtils
 
 const MobileNav = () => {
     const auth = getAuth()
@@ -29,10 +28,8 @@ const MobileNav = () => {
         [router.pathname]
     )
 
-    const onHomeClick = () => {
-        if (showMenu) setShowMenu(false)
-        router.push('/')
-    }
+    const onHomeClick = () => (showMenu ? setShowMenu(false) : null)
+
     const onNavItemClick = (path: string) => {
         setShowMenu(!showMenu)
         router.push(path)
@@ -91,9 +88,7 @@ const MobileNav = () => {
 
     return (
         <StyledMobileNav className={showMenu ? 'open' : ''}>
-            <div className="brand" onClick={onHomeClick}>
-                <img src={Logo.src} alt="Logo" />
-            </div>
+            <Logo callback={onHomeClick} />
             <Hamburger showing={showMenu} onClick={onBurgerClick} />
             <Drawer
                 anchor="right"
@@ -104,9 +99,7 @@ const MobileNav = () => {
                         className={`subMenuHeader ${
                             showMenu ? 'show' : 'hide'
                         }`}>
-                        <div className="brand" onClick={onHomeClick}>
-                            <img src={Logo.src} alt="Logo" />
-                        </div>
+                        <Logo callback={onHomeClick} />
                         <Hamburger showing={showMenu} onClick={onBurgerClick} />
                     </div>
                     <ul>

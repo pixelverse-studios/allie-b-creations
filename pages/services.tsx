@@ -1,3 +1,5 @@
+import ServicesView from '@/views/services'
+
 export default function ServicesPage() {
-    return <div>Services Page placeholder</div>
+    return <ServicesView />
 }
