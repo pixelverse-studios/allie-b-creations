@@ -1,9 +1,32 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 import { DashboardCardStyles } from '../StyledDashboard'
 import {
     rowWithIcon_HoverInLeft,
     rowWithIcon_HoverInRight
 } from '@/styles/components/rowWithIconHover'
+
+export const LinkHover = css`
+    display: inline-block;
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--brand-color-1);
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+`
 
 export const StyledServicesWidget = styled.section`
     display: flex;
@@ -17,26 +40,7 @@ export const StyledServicesWidget = styled.section`
         align-items: center;
 
         a {
-            display: inline-block;
-            position: relative;
-
-            &:after {
-                content: '';
-                position: absolute;
-                width: 100%;
-                transform: scaleX(0);
-                height: 3px;
-                bottom: 0;
-                left: 0;
-                background-color: var(--brand-color-1);
-                transform-origin: bottom right;
-                transition: transform 0.25s ease-out;
-            }
-
-            &:hover::after {
-                transform: scaleX(1);
-                transform-origin: bottom left;
-            }
+            ${LinkHover}
         }
 
         span {
