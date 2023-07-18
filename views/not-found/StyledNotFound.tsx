@@ -10,6 +10,10 @@ export const StyledNotFound = styled.section`
     text-align: center;
     padding: 1rem;
 
+    img {
+        height: 20rem;
+    }
+
     p {
         font-size: 6rem;
         font-weight: 800;
