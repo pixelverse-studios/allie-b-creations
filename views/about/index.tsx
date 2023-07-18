@@ -3,7 +3,6 @@ import { StyledAboutPage } from './StyledAboutPage'
 import HeaderWithPaintStreaks from '@/components/title/headerWithPaint'
 import QuoteSvg from './assets/QuoteSvg'
 import { AboutPageProps } from '@/utils/types/redux'
-import { SelectField } from '@/components/form'
 
 const AboutPageView = () => {
     const aboutPageData = useSelector((state: any) => state.aboutPage)

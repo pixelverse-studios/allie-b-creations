@@ -11,9 +11,6 @@ export const StyledHomePage = styled.div`
     row-gap: 1rem;
     color: black;
     padding-top: 0.5rem;
-    .carousel {
-        height: 40vh;
-    }
 `
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
@@ -22,6 +19,7 @@ export const PrimaryHero = styled.div<StyledHomePageProps>`
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
     height: 80vh;
     display: grid;
     place-items: center;
@@ -44,6 +42,7 @@ export const SecondaryHero = styled.div<StyledHomePageProps>`
     height: 60vh;
     display: flex;
     justify-content: flex-end;
+    background-size: cover;
     padding: 4rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-1);

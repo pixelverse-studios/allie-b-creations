@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledAboutPage = styled.div`
     display: flex;
     flex-direction: column;
-    row-gap: 4rem;
+    row-gap: 1rem;
     padding-top: 1rem;
 
     .image-about-content-0,
@@ -24,7 +24,7 @@ export const StyledAboutPage = styled.div`
             box-shadow: var(--box-shadow-1);
             border-radius: var(--border-radius);
             @media (max-width: 1000px) {
-                max-width: 20rem;
+                max-width: 100%;
             }
         }
 

@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { Dialog, ImageList, ImageListItem } from '@mui/material'
+import HeaderWithPaintStreaks from '@/components/title/headerWithPaint'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/redux/store'
-import { getNextImages } from '@/lib/db/cms/gallery-page'
-import { setGallery } from '@/lib/redux/slices/gallery'
-import isImgUrl from '@/utils/validations/image'
+// import { getNextImages } from '@/lib/db/cms/gallery-page'
+// import { setGallery } from '@/lib/redux/slices/gallery'
+import useBreakpoint from '@/utils/hooks/useWindowWidth'
+import { StyledGalleryPage } from './StyledGallery'
 
 const GalleryPage = () => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const [imageSrc, setImgSrc] = useState({
         url: '',
         caption: ''
@@ -16,6 +18,8 @@ const GalleryPage = () => {
     const [open, setOpen] = useState(false)
     const data = useSelector((state: RootState) => state.gallery)
     const { images } = data
+
+    const { isMobile } = useBreakpoint()
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -32,13 +36,14 @@ const GalleryPage = () => {
         handleClickOpen()
     }
 
-    const onLoadMoreImage = async () => {
-        const nextImageSet = await getNextImages(data)
-        if (nextImageSet) dispatch(setGallery(nextImageSet))
-    }
+    // const onLoadMoreImage = async () => {
+    //     const nextImageSet = await getNextImages(data)
+    //     if (nextImageSet) dispatch(setGallery(nextImageSet))
+    // }
 
     return (
-        <>
+        <StyledGalleryPage>
+            <HeaderWithPaintStreaks title="Gallery" />
             <Dialog
                 open={open}
                 keepMounted
@@ -52,8 +57,10 @@ const GalleryPage = () => {
                 />
                 {imageSrc.caption}
             </Dialog>
-
-            <ImageList cols={5} gap={8}>
+            <ImageList
+                cols={isMobile ? 2 : 3}
+                gap={isMobile ? 4 : 8}
+                variant="masonry">
                 {images?.map((image, index) => (
                     <ImageListItem key={index}>
                         <img
@@ -69,8 +76,7 @@ const GalleryPage = () => {
                     </ImageListItem>
                 ))}
             </ImageList>
-            <button onClick={() => onLoadMoreImage()}>Load More</button>
-        </>
+        </StyledGalleryPage>
     )
 }
 

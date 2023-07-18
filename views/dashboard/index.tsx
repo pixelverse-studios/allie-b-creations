@@ -15,7 +15,7 @@ import { uniqueId } from 'lodash'
 
 const DashboardPage = ({ children }: { children: any }) => {
     const dispatch = useDispatch()
-    const { img } = useSelector((state: any) => state.aboutPage)
+    const aboutPage = useSelector((state: any) => state.aboutPage)
     const router = useRouter()
     const auth = getAuth()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -54,28 +54,7 @@ const DashboardPage = ({ children }: { children: any }) => {
             <DashNav />
             <div className="dashboardContent">
                 <header>
-                    <div className="mobileSelect">
-                        <IconButton onClick={onMobileNavClick}>
-                            <MoreVert />
-                        </IconButton>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={onMobileNavClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button'
-                            }}>
-                            {DASHBOARD_ROUTES.map(route => (
-                                <MenuItem
-                                    onClick={() =>
-                                        onMobileNavItemClick(route.path)
-                                    }
-                                    key={uniqueId('mi')}>
-                                    {route.label}
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </div>
+                    <h1>Good day Allie B!</h1>
                     <div className="headerControls">
                         <IconButton
                             onClick={onHomeClick}
@@ -85,7 +64,29 @@ const DashboardPage = ({ children }: { children: any }) => {
                         <IconButton onClick={onLogout}>
                             <Logout />
                         </IconButton>
-                        <Avatar src={img} alt="profile_img" />
+                        <div className="mobileSelect">
+                            <IconButton onClick={onMobileNavClick}>
+                                <MoreVert />
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={onMobileNavClose}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button'
+                                }}>
+                                {DASHBOARD_ROUTES.map(route => (
+                                    <MenuItem
+                                        onClick={() =>
+                                            onMobileNavItemClick(route.path)
+                                        }
+                                        key={uniqueId('mi')}>
+                                        {route.label}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </div>
+                        <Avatar src={aboutPage[0].img.src} alt="profile_img" />
                     </div>
                 </header>
                 {children}
