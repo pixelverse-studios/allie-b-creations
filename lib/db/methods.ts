@@ -11,7 +11,7 @@ import { setTestimonials } from '../redux/slices/testimonials'
 import { getGalleryContent } from './cms/gallery-page'
 import { setGallery } from '../redux/slices/gallery'
 // import { getContacts } from './cms/contacts'
-import { setAllContacts } from '../redux/slices/client-requests'
+// import { setAllContacts } from '../redux/slices/client-requests'
 import { setLoading } from '../redux/slices/app'
 
 export const getAllCmsData = async (dispatch: Function) => {

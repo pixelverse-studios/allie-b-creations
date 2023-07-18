@@ -8,7 +8,6 @@ import {
     setSelectedClient
 } from '@/lib/redux/slices/client-requests'
 import { getClientRequests } from '@/lib/db/cms/client-requests'
-import { CLIENT_TABLE_COLUMNS } from './utils'
 import { LINE_BREAK } from '@/components/drawer/content/ContactForm'
 import SelectedRequest from './SelectedRequest'
 import { StyledClientRequestsWidget } from './StyledClientRequestsWidget'
