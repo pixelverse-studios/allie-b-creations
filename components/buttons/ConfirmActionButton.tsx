@@ -1,29 +1,31 @@
 import { useState } from 'react'
 import { Close } from '@mui/icons-material'
 
-import { StyledConfirmDeleteButton } from './StyledButtons'
+import { StyledConfirmActionButton } from './StyledButtons'
 
-const ConfirmDeleteButton = ({
+const ConfirmActionButton = ({
     onTriggerMutation,
-    Icon
+    Icon,
+    action = 'Delete'
 }: {
     onTriggerMutation: any
     Icon?: any
+    action?: string
 }) => {
-    const [deleteFocus, setDeleteFocus] = useState<number>(0)
+    const [actionFocus, setActionFocus] = useState<number>(0)
 
-    const onDeleteFocus = () => setDeleteFocus(1)
-    const onDeleteBlur = () => setDeleteFocus(0)
+    const onActionFocus = () => setActionFocus(1)
+    const onDeleteBlur = () => setActionFocus(0)
     const onConfirmDeleteClick = async (e: any) => {
         e?.preventDefault()
         const CONFIRMED_CLICK = 2
         const SHOW_CONFIRM = 1
-        switch (deleteFocus) {
+        switch (actionFocus) {
             case CONFIRMED_CLICK:
                 await onTriggerMutation()
                 break
             case SHOW_CONFIRM:
-                setDeleteFocus(deleteFocus + 1)
+                setActionFocus(actionFocus + 1)
                 break
             default:
                 break
@@ -31,14 +33,14 @@ const ConfirmDeleteButton = ({
     }
 
     return (
-        <StyledConfirmDeleteButton
+        <StyledConfirmActionButton
             onClick={onConfirmDeleteClick}
-            onFocus={onDeleteFocus}
+            onFocus={onActionFocus}
             onBlur={onDeleteBlur}>
-            <span>Confirm Delete</span>
+            <span>Confirm {action}</span>
             {Icon ? <Icon /> : <Close />}
-        </StyledConfirmDeleteButton>
+        </StyledConfirmActionButton>
     )
 }
 
-export default ConfirmDeleteButton
+export default ConfirmActionButton

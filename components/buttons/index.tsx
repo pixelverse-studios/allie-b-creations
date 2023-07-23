@@ -1,4 +1,4 @@
-import ConfirmDeleteButton from './ConfirmDeleteButton'
+import ConfirmActionButton from './ConfirmActionButton'
 import CircleIconButton from './CircleIconButton'
 
-export { ConfirmDeleteButton, CircleIconButton }
+export { ConfirmActionButton, CircleIconButton }

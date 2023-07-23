@@ -4,7 +4,7 @@ import { Autocomplete, Chip, TextField, Modal, IconButton } from '@mui/material'
 import { AddCircle, Check } from '@mui/icons-material'
 import { enqueueSnackbar } from 'notistack'
 
-import { ConfirmDeleteButton } from '@/components/buttons'
+import { ConfirmActionButton } from '@/components/buttons'
 import { statuses } from '@/utils/banners'
 import { FileUpload } from '@/components/form'
 import useForm from '@/utils/hooks/useForm'
@@ -145,11 +145,12 @@ const GalleryWidget = () => {
                 {form.existingImgs.value?.map((img: any, key: string) => (
                     <div className="galleryItem" key={img.name + '' + key}>
                         <div className="buttons">
-                            <ConfirmDeleteButton
+                            <ConfirmActionButton
                                 Icon={Check}
+                                action="Update"
                                 onTriggerMutation={() => onAddNewTags(img.id)}
                             />
-                            <ConfirmDeleteButton
+                            <ConfirmActionButton
                                 onTriggerMutation={() => onDeleteClick(img.id)}
                             />
                         </div>

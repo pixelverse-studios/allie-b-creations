@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledConfirmDeleteButton = styled.button`
+export const StyledConfirmActionButton = styled.button`
     position: relative;
     width: 40px;
     height: 40px;

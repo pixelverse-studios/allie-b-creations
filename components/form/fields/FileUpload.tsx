@@ -3,7 +3,7 @@ import { CloudUpload, Sync } from '@mui/icons-material'
 import { Avatar, Button } from '@mui/material'
 import { uniqueId } from 'lodash'
 
-import { ConfirmDeleteButton } from '@/components/buttons'
+import { ConfirmActionButton } from '@/components/buttons'
 import { convertFileToBase64 } from '@/utils/fileConversions'
 import { StyledFileUpload, StyledImgPreview } from './StyledFields'
 
@@ -118,7 +118,7 @@ export const FileUpload = ({
                             alt={file?.name}
                         />
                         <span>{file?.name}</span>
-                        <ConfirmDeleteButton
+                        <ConfirmActionButton
                             onTriggerMutation={() =>
                                 onFilePreviewDelete(file?.name)
                             }

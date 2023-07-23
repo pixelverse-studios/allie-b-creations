@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Delete } from '@mui/icons-material'
 
-import { ConfirmDeleteButton } from '@/components/buttons'
+import { ConfirmActionButton } from '@/components/buttons'
 import useForm from '@/utils/hooks/useForm'
 import FormValidations from '@/utils/validations/forms'
 import { TextField, FileUpload, FormButtonGroup } from '@/components/form'
@@ -113,7 +113,7 @@ const ServicesEventForm = ({
             <h3>
                 {label}
                 {handleDelete != null ? (
-                    <ConfirmDeleteButton
+                    <ConfirmActionButton
                         onTriggerMutation={handleDelete}
                         Icon={Delete}
                     />
