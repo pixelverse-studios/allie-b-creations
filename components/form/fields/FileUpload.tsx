@@ -12,6 +12,7 @@ export type FileProps = {
     preview: string
     type: string
     name: string
+    tags?: string[]
 }
 export type FilesList = FileProps[]
 
@@ -77,7 +78,7 @@ export const FileUpload = ({
     return (
         <StyledFileUpload>
             <div className="uploadBlock">
-                <h4>Upload your file{multiple ? 's' : ''}</h4>
+                <h4>{label ?? `Upload your file{multiple ? 's' : ''}`}</h4>
                 <p>as JPG, PNG, or SVG types.</p>
                 <Button
                     className={loading ? 'loading' : ''}
