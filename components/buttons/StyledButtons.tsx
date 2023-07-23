@@ -38,6 +38,7 @@ export const StyledConfirmActionButton = styled.button`
             transition: 0.3s;
         }
     }
+
     span {
         width: 150px;
         position: absolute;

@@ -94,6 +94,9 @@ const GalleryWidget = () => {
                 (item: any) => item.id === id
             )
             const refreshed = await updateGalleryItem(id, img.tags)
+            enqueueSnackbar('Your tags were updated!', {
+                variant: statuses.SUCCESS
+            })
             dispatch(setGallery(refreshed))
             setLoading(false)
         } catch (error) {
