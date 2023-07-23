@@ -2,7 +2,14 @@ import { GalleryImageType } from '@/utils/types/redux'
 // import axios from 'axios'
 // import validImageUrls from '@/utils/validations/image'
 
-import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore'
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    updateDoc
+} from 'firebase/firestore'
 import { db } from '../config'
 
 // Instagrams API currently only gives 25 images at a time
@@ -92,4 +99,14 @@ const addGalleryItems = async (newItems: GalleryImageType[]) => {
     }
 }
 
-export { getGalleryPageData, addGalleryItems }
+const deleteGalleryItem = async (id: string) => {
+    try {
+        await deleteDoc(doc(db, GALLERY, id))
+        const refreshed = await getGalleryPageData()
+        return refreshed
+    } catch (error) {
+        throw error
+    }
+}
+
+export { getGalleryPageData, addGalleryItems, deleteGalleryItem }
