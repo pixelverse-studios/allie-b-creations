@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Autocomplete, Chip, TextField, Modal, IconButton } from '@mui/material'
-import { AddCircle, AddCircleOutline } from '@mui/icons-material'
+import { AddCircle, Check } from '@mui/icons-material'
 import { enqueueSnackbar } from 'notistack'
 
 import { ConfirmDeleteButton } from '@/components/buttons'
 import { statuses } from '@/utils/banners'
 import { FileUpload } from '@/components/form'
 import useForm from '@/utils/hooks/useForm'
-import { addGalleryItems, deleteGalleryItem } from '@/lib/db/cms/gallery-page'
+import {
+    addGalleryItems,
+    deleteGalleryItem,
+    updateGalleryItem
+} from '@/lib/db/cms/gallery-page'
 import { setGallery } from '@/lib/redux/slices/gallery'
 import { FormButtonGroup } from '@/components/form'
 import FormValidations from '@/utils/validations/forms'
@@ -17,7 +21,7 @@ import { StyledGalleryWidget } from './StyledGalleryWidget'
 
 const INITIAL_STATE = {
     newImgs: { value: [] },
-    existigImgs: { value: [] }
+    existingImgs: { value: [] }
 }
 
 const VALIDACHE = {
@@ -34,6 +38,15 @@ const GalleryWidget = () => {
     )
     const [open, setOpen] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
+    const [tag, setTag] = useState<{ id: string; value: string }>({
+        id: '',
+        value: ''
+    })
+
+    useEffect(
+        () => handleNonFormEventChange(galleryItems, 'existingImgs'),
+        [galleryItems]
+    )
 
     const onModalToggle = () => setOpen(!open)
     const onAddNewImgs = async (e: any) => {
@@ -74,6 +87,30 @@ const GalleryWidget = () => {
         }
     }
 
+    const onAddNewTags = async (id: string) => {
+        setLoading(true)
+        try {
+            const img = form.existingImgs.value.find(
+                (item: any) => item.id === id
+            )
+            const refreshed = await updateGalleryItem(id, img.tags)
+            dispatch(setGallery(refreshed))
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            enqueueSnackbar('There was an issue updating your images tags.', {
+                variant: statuses.ERROR
+            })
+        }
+    }
+
+    const onTagValueChange = (img: any, value: string) => {
+        const newTags = form.existingImgs.value.map((item: any) =>
+            item.id === img.id ? { ...item, tags: value } : item
+        )
+        handleNonFormEventChange(newTags, 'existingImgs')
+    }
+
     const onDeleteClick = async (id: string) => {
         setLoading(true)
         try {
@@ -105,50 +142,55 @@ const GalleryWidget = () => {
                 </h1>
             </div>
             <div className="imgsDisplay">
-                {galleryItems?.map((img: any, key: string) => {
-                    console.log({ img })
-                    return (
-                        <div className="galleryItem" key={img.name + '' + key}>
-                            <div className="buttons">
-                                <ConfirmDeleteButton
-                                    Icon={AddCircleOutline}
-                                    onTriggerMutation={() => null}
-                                />
-                                <ConfirmDeleteButton
-                                    onTriggerMutation={() =>
-                                        onDeleteClick(img.id)
-                                    }
-                                />
-                            </div>
-                            <img src={img.src} />
-                            <div className="controls">
-                                <Autocomplete
-                                    multiple
-                                    id={`${img.name + key}`}
-                                    options={[]}
-                                    freeSolo
-                                    renderTags={(value, getTagProps) =>
-                                        value.map((option, index) => (
-                                            <Chip
-                                                variant="outlined"
-                                                label={option}
-                                                {...getTagProps({ index })}
-                                            />
-                                        ))
-                                    }
-                                    renderInput={params => (
-                                        <TextField
-                                            {...params}
-                                            variant="outlined"
-                                            label="Tags"
-                                            helperText="Hit enter to complete each tag"
-                                        />
-                                    )}
-                                />
-                            </div>
+                {form.existingImgs.value?.map((img: any, key: string) => (
+                    <div className="galleryItem" key={img.name + '' + key}>
+                        <div className="buttons">
+                            <ConfirmDeleteButton
+                                Icon={Check}
+                                onTriggerMutation={() => onAddNewTags(img.id)}
+                            />
+                            <ConfirmDeleteButton
+                                onTriggerMutation={() => onDeleteClick(img.id)}
+                            />
                         </div>
-                    )
-                })}
+                        <img src={img.src} />
+                        <div className="controls">
+                            <Autocomplete
+                                multiple
+                                id={`${img.name + key}`}
+                                options={[]}
+                                inputValue={tag.id === img.id ? tag.value : ''}
+                                onInputChange={(event, newInputValue) => {
+                                    setTag({ id: img.id, value: newInputValue })
+                                }}
+                                value={img?.tags ?? []}
+                                onChange={(event: any, newValue: any) => {
+                                    onTagValueChange(img, newValue)
+                                }}
+                                // inputValue={}
+                                freeSolo
+                                renderTags={(value, getTagProps) =>
+                                    value.map((option, index) => (
+                                        <Chip
+                                            variant="outlined"
+                                            label={option}
+                                            {...getTagProps({ index })}
+                                        />
+                                    ))
+                                }
+                                renderInput={params => (
+                                    <TextField
+                                        {...params}
+                                        variant="outlined"
+                                        label="Tags"
+                                        // onChange={e => onTagValueChange(img, e)}
+                                        helperText="Hit enter to complete each tag"
+                                    />
+                                )}
+                            />
+                        </div>
+                    </div>
+                ))}
             </div>
             <Modal
                 classes={{ root: 'galleryUploadModal' }}

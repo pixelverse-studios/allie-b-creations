@@ -81,7 +81,6 @@ const getGalleryPageData = async () => {
 
             return { id: doc.id, src, type, name, tags }
         })
-        console.log({ galleryItems })
         return galleryItems
     } catch (error) {
         throw error
@@ -109,4 +108,20 @@ const deleteGalleryItem = async (id: string) => {
     }
 }
 
-export { getGalleryPageData, addGalleryItems, deleteGalleryItem }
+const updateGalleryItem = async (id: string, tags: string[]) => {
+    try {
+        const ref = doc(db, GALLERY, id)
+        await updateDoc(ref, { tags })
+        const refreshed = await getGalleryPageData()
+        return refreshed
+    } catch (error) {
+        throw error
+    }
+}
+
+export {
+    getGalleryPageData,
+    addGalleryItems,
+    deleteGalleryItem,
+    updateGalleryItem
+}
