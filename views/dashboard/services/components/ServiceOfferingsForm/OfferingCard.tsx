@@ -24,7 +24,7 @@ import {
     editOfferingSection
 } from '@/lib/db/cms/services'
 import OfferingItem from './OfferingItem'
-import { ConfirmDeleteButton } from '@/components/buttons'
+import { ConfirmActionButton } from '@/components/buttons'
 import { StyledEventTypeCard } from '../../StyledServicesWidget'
 import { uniqueId } from 'lodash'
 import { setServices } from '@/lib/redux/slices/services'
@@ -138,7 +138,7 @@ const OfferingCard = ({ section, events }: OfferingProps) => {
                                     onClick={onEditIconClick}>
                                     <Edit />
                                 </IconButton>
-                                <ConfirmDeleteButton
+                                <ConfirmActionButton
                                     onTriggerMutation={onDeleteClick}
                                 />
                             </>

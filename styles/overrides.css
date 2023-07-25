@@ -12,3 +12,29 @@
     height: inherit;
     margin-top: inherit; */
 }
+
+.galleryUploadModal {
+    border-radius: var(--border-radius);
+    margin: 2rem;
+}
+
+/* .galleryUploadModal .galleryUploadBlock {
+    background-color: white;
+    border-radius: var(--border-radius);
+} */
+
+.galleryUploadBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 20vh;
+    max-height: 65vh;
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    overflow: auto;
+
+    border: 2px solid var(--brand-color-1);
+    background-color: white;
+}

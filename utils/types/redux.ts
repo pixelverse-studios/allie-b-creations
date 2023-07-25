@@ -67,6 +67,12 @@ export interface GalleryProps {
         caption: string
     }[]
 }
+export interface GalleryImageType {
+    src: string
+    name: string
+    type: string
+    tags: string[] | null
+}
 export interface ClientRequestProps {
     id: string
     firstName: string

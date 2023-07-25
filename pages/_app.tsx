@@ -11,6 +11,7 @@ import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 import FormDrawer from '@/components/drawer'
 import styled from '@emotion/styled'
+import Logo from '../assets/Logo-Background.svg'
 import '@/styles/globals.css'
 
 const loadScriptDetails = {
@@ -48,6 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
+                <link rel="icon" href={Logo.src} />
             </Head>
             <ReduxProvider store={store}>
                 <AuthWrapper>

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/lib/redux/store'
-import { CircleIconButton, ConfirmDeleteButton } from '@/components/buttons'
+import { CircleIconButton, ConfirmActionButton } from '@/components/buttons'
 import { Edit } from '@mui/icons-material'
 import { FormControl, InputLabel, TextField } from '@mui/material'
 import IconSelectField from './IconSelectField'
@@ -50,7 +50,7 @@ const ViewDetails = ({
                         Icon={<Edit />}
                     />
 
-                    <ConfirmDeleteButton
+                    <ConfirmActionButton
                         onTriggerMutation={onDeleteContactLink}
                     />
                 </div>

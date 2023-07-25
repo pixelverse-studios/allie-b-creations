@@ -10,7 +10,7 @@ import {
     deleteTestimonialCollection
 } from '@/lib/db/cms/testimonials'
 import { statuses, messages } from '@/utils/banners'
-import { ConfirmDeleteButton } from '@/components/buttons'
+import { ConfirmActionButton } from '@/components/buttons'
 import { StyledTestimonialCard, StyledTestimonialInput } from './StyledCards'
 
 const TestimonialCard = ({ field }: any) => {
@@ -58,7 +58,7 @@ const TestimonialCard = ({ field }: any) => {
                         data-tg-on="Hide"
                         htmlFor={id}
                     />
-                    <ConfirmDeleteButton
+                    <ConfirmActionButton
                         onTriggerMutation={onDeleteTestimonial}
                     />
                 </div>
