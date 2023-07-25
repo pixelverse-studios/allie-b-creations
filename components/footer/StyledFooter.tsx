@@ -22,13 +22,13 @@ export const StyledFooter = styled.footer`
     position: relative;
     bottom: 0;
     left: 0;
-    margin: 1rem;
-    padding: 0.5rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-content: center;
+    gap: 10px;
 
     .logo {
         width: 12rem;
@@ -74,10 +74,5 @@ export const StyledFooter = styled.footer`
             border: 2px solid #e0ebe3;
             background-size: 100% 205%;
         }
-    }
-    small {
-        position: absolute;
-        bottom: 2px;
-        left: 2px;
     }
 `

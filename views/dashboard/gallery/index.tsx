@@ -31,7 +31,7 @@ const VALIDACHE = {
 
 const GalleryWidget = () => {
     const dispatch = useDispatch()
-    const galleryItems = useSelector((state: any) => state.gallery)
+    const { images } = useSelector((state: any) => state.gallery)
     const { form, handleNonFormEventChange, handleReset } = useForm(
         INITIAL_STATE,
         VALIDACHE
@@ -43,10 +43,7 @@ const GalleryWidget = () => {
         value: ''
     })
 
-    useEffect(
-        () => handleNonFormEventChange(galleryItems, 'existingImgs'),
-        [galleryItems]
-    )
+    useEffect(() => handleNonFormEventChange(images, 'existingImgs'), [images])
 
     const onModalToggle = () => setOpen(!open)
     const onAddNewImgs = async (e: any) => {

@@ -18,7 +18,7 @@ const HomePageWidget = () => {
             <div className="header">
                 <h1>Home Page</h1>
                 <ButtonGroup
-                    variant="text"
+                    variant="outlined"
                     aria-label="text button group"
                     className="button-group">
                     <Button
