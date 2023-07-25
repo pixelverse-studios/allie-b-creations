@@ -19,7 +19,7 @@
         100vh - var(--nav-height) - var(--footer-height) - 2rem
     );
     --dashboard-nav-width: 15rem;
-    --footer-height: 10rem;
+    --footer-height: 14rem;
 
     --hover-transition: 0.25s ease-in-out;
 

@@ -12,7 +12,7 @@ const AboutWidget = () => {
         <StyledAboutWidget>
             <div className="header">
                 <ButtonGroup
-                    variant="text"
+                    variant="outlined"
                     aria-label="text button group"
                     className="button-group">
                     <Button

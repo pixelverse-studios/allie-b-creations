@@ -1,21 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GalleryProps } from '@/utils/types/redux'
+import { GalleryImageType } from '@/utils/types/redux'
 
 const initialState = {
-    nextUrl: '',
-    images: [
-        {
-            media_url: '',
-            caption: ''
-        }
-    ]
+    images: [],
+    tags: []
+} as {
+    images: GalleryImageType[]
+    tags: string[]
 }
 export const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
-        setGallery: (state, { payload }: { payload: GalleryProps }) => {
-            return (state = payload)
+        setGallery: (state, { payload }: { payload: GalleryImageType[] }) => {
+            const tags = payload
+                .map(item => item.tags)
+                .flat()
+                .filter(item => item)
+            const filteredTags = tags.filter(
+                (item, index) => tags.indexOf(item) === index
+            )
+            state.images = payload
+            state.tags = filteredTags as string[]
         }
     }
 })
