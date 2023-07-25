@@ -10,7 +10,8 @@ export const StyledHomePage = styled.div`
     flex-direction: column;
     row-gap: 1rem;
     color: black;
-    padding-top: 0.5rem;
+    /* padding-top: 0.5rem; */
+    padding: 1rem;
 `
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
@@ -65,6 +66,7 @@ export const StyledGalleryContainer = styled.div`
     row-gap: 2rem;
     color: white;
     box-shadow: var(--box-shadow-1);
+
     .header {
         font-family: 'Gistesy';
         font-size: 3rem;
@@ -77,6 +79,10 @@ export const StyledGalleryContainer = styled.div`
         font-weight: lighter;
         text-align: center;
         font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 750px) {
+        width: 12rem;
     }
 `
 
