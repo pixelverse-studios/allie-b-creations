@@ -58,29 +58,19 @@ export const AuthNavItems = ({
     onLogout,
     onDashboardClick
 }: AuthNavItemProps) => {
+    if (!loggedIn) return null
     return (
         <>
-            {loggedIn ? (
-                <>
-                    <li
-                        className={
-                            activePage === 'dashboard' ? 'active' : 'inactive'
-                        }
-                        onClick={() => onDashboardClick('/dashboard')}>
-                        <Dashboard />
-                        <span className="iconText">Dashboard</span>
-                    </li>
-                    <li onClick={onLogout}>
-                        <Logout />
-                        <span className="iconText">Log Out</span>
-                    </li>
-                </>
-            ) : (
-                <li onClick={onLogin}>
-                    <Login />
-                    <span className="iconText">Log In</span>
-                </li>
-            )}
+            <li
+                className={activePage === 'dashboard' ? 'active' : 'inactive'}
+                onClick={() => onDashboardClick('/dashboard')}>
+                <Dashboard />
+                <span className="iconText">Dashboard</span>
+            </li>
+            <li onClick={onLogout}>
+                <Logout />
+                <span className="iconText">Log Out</span>
+            </li>
         </>
     )
 }
