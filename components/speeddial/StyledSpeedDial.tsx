@@ -1,17 +1,15 @@
 import styled from '@emotion/styled'
 
 export const StyledSpeedDial = styled.div`
+    padding: 1rem;
+
     .MuiSpeedDial-fab {
-        background-color: var(--accent-color-2);
-        color: var(--accent-color-1);
+        background-color: var(--brand-color-1);
+        color: #fff;
+        transform: translatey(0px);
+
         &:hover {
-            background-color: var(--accent-color-2);
-        }
-    }
-    #SpeedDialCTA-actions {
-        button {
-            background-color: var(--accent-color-2);
-            color: var(--accent-color-1);
+            background-color: var(--brand-color-1);
         }
     }
 `
