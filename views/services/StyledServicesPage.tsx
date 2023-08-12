@@ -61,6 +61,10 @@ export const StyledServicesPage = styled.section`
                         font-size: 1.1rem;
                     }
                 }
+
+                @media screen and (max-width: 750px) {
+                    grid-template-columns: 1fr;
+                }
             }
         }
     }

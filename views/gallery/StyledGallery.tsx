@@ -8,8 +8,9 @@ export const StyledGalleryPage = styled.section`
 
     .filter {
         display: flex;
-        justify-content: center;
-        gap: 1rem;
+        gap: 0.5rem;
+        margin: auto;
+        flex-wrap: wrap;
 
         button {
             display: grid;
@@ -36,7 +37,6 @@ export const StyledGalleryPage = styled.section`
                 background-color: var(--brand-color-1);
                 background-position: 100% 100%;
                 color: var(--accent-color-2);
-                font-weight: bold;
             }
         }
     }

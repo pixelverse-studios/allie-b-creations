@@ -14,6 +14,13 @@ const GalleryPage = () => {
 
     const onFilterClick = (filter: string) => setActiveFilter(filter)
 
+    console.log({ activeFilter, images })
+
+    const galleryItems =
+        activeFilter === ''
+            ? images
+            : images?.filter(img => img.tags?.includes(activeFilter))
+
     return (
         <StyledGalleryPage>
             <HeaderWithPaintStreaks title="Gallery" />
@@ -30,26 +37,20 @@ const GalleryPage = () => {
                 </button>
             </div>
             <ImageList
-                cols={isMobile ? 2 : 3}
+                cols={isMobile ? 1 : 3}
                 gap={isMobile ? 4 : 8}
                 variant="masonry">
-                {images
-                    ?.filter(img =>
-                        activeFilter === ''
-                            ? img.tags
-                            : img.tags?.includes(activeFilter)
-                    )
-                    .map((image, index) => (
-                        <ImageListItem key={index}>
-                            <img
-                                src={image.src}
-                                srcSet={image.src}
-                                alt={image.name}
-                                loading="lazy"
-                                style={{ cursor: 'pointer', borderRadius: 10 }}
-                            />
-                        </ImageListItem>
-                    ))}
+                {galleryItems?.map((image, index) => (
+                    <ImageListItem key={index}>
+                        <img
+                            src={image.src}
+                            srcSet={image.src}
+                            alt={image.name}
+                            loading="lazy"
+                            style={{ cursor: 'pointer', borderRadius: 10 }}
+                        />
+                    </ImageListItem>
+                ))}
             </ImageList>
         </StyledGalleryPage>
     )

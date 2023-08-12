@@ -1,27 +1,7 @@
-.MuiDrawer-root {
-    /* height: calc(100vh - var(--nav-height));
-    margin-top: var(--nav-height); */
-}
-
-.MuiDrawer-root .MuiPaper-root {
-    /* top: var(--nav-height); */
-}
-
-.MuiDrawer-root .MuiBackdrop-root {
-    /* background-color: transparent;
-    height: inherit;
-    margin-top: inherit; */
-}
-
 .galleryUploadModal {
     border-radius: var(--border-radius);
     margin: 2rem;
 }
-
-/* .galleryUploadModal .galleryUploadBlock {
-    background-color: white;
-    border-radius: var(--border-radius);
-} */
 
 .galleryUploadBlock {
     display: flex;
@@ -37,4 +17,28 @@
 
     border: 2px solid var(--brand-color-1);
     background-color: white;
+}
+
+.speeddialButton,
+.MuiSpeedDialAction-staticTooltipLabel {
+    background-color: var(--brand-color-1);
+    color: white;
+}
+
+.MuiSpeedDialAction-staticTooltipLabel {
+    min-width: 8rem;
+    text-align: center;
+}
+
+.pulse {
+    animation: pulse 1s infinite ease-in-out alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }

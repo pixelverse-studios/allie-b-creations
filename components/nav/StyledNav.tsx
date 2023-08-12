@@ -107,7 +107,7 @@ export const BaseMobileNaveStyles = css`
     height: var(--nav-height);
     background-color: var(--accent-color-2);
     padding: 1rem;
-    border-bottom: 5px solid var(--brand-color-2);
+    border-bottom: 5px solid var(--brand-color-1);
 
     .brand {
         flex-grow: 1;
