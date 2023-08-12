@@ -23,7 +23,11 @@ const HomePage = () => {
             <div className="carousel">
                 <Carousel />
             </div>
-            <SecondaryHero backgroundUrl={homePageData[1]?.img.src}>
+            <SecondaryHero>
+                <img
+                    src={homePageData[1]?.img.src}
+                    alt="secondaryHomePageHeroImg"
+                />
                 <StyledGalleryContainer>
                     <h2 className="header">Gallery</h2>
                     <img src={Balloon.src} alt="balloons" className="image" />

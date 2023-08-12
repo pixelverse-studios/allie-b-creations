@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react'
 import styled from '@emotion/styled'
 
 interface StyledHomePageProps {
@@ -11,6 +10,7 @@ export const StyledHomePage = styled.div`
     row-gap: 1rem;
     color: black;
     padding-top: 0.5rem;
+    margin-bottom: 1rem;
 `
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
@@ -33,30 +33,20 @@ export const PrimaryHero = styled.div<StyledHomePageProps>`
         text-align: center;
     }
 `
-export const SecondaryHero = styled.div<StyledHomePageProps>`
-    background-image: url(${props => props.backgroundUrl});
-    background-size: 75% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 60vh;
-    display: flex;
-    justify-content: flex-end;
-    background-size: cover;
-    padding: 4rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-1);
-    .gallery-block {
-        height: 100%;
-
-        border: 3px solid yellow;
+export const SecondaryHero = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 0.25fr;
+    gap: 1rem;
+    img {
+        width: 100%;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-1);
     }
 `
 
 export const StyledGalleryContainer = styled.div`
     height: 100%;
     background-color: var(--brand-color-1);
-    width: 25%;
     border-radius: var(--border-radius);
     padding: 1rem;
     display: flex;
@@ -65,6 +55,7 @@ export const StyledGalleryContainer = styled.div`
     row-gap: 2rem;
     color: white;
     box-shadow: var(--box-shadow-1);
+
     .header {
         font-family: 'Gistesy';
         font-size: 3rem;
