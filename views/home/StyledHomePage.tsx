@@ -9,8 +9,7 @@ export const StyledHomePage = styled.div`
     flex-direction: column;
     row-gap: 1rem;
     color: black;
-    padding-top: 0.5rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
 `
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
@@ -37,10 +36,19 @@ export const SecondaryHero = styled.div`
     display: grid;
     grid-template-columns: 1fr 0.25fr;
     gap: 1rem;
-    img {
+    width: 100%;
+
+    .hero {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         border-radius: var(--border-radius);
         box-shadow: var(--box-shadow-1);
+    }
+
+    @media screen and (max-width: 1100px) {
+        display: flex;
+        flex-direction: column-reverse;
     }
 `
 

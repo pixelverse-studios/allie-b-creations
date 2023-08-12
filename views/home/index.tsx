@@ -25,6 +25,7 @@ const HomePage = () => {
             </div>
             <SecondaryHero>
                 <img
+                    className="hero"
                     src={homePageData[1]?.img.src}
                     alt="secondaryHomePageHeroImg"
                 />
