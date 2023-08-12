@@ -1,15 +1,25 @@
-import { StyledSpeedDial } from './StyledSpeedDial'
+import { useRef, useEffect, useState } from 'react'
 import {
     SpeedDial as MuiSpeedDial,
     SpeedDialIcon,
     SpeedDialAction
 } from '@mui/material'
-import { RateReview, Message } from '@mui/icons-material'
+import {
+    RateReview,
+    Message,
+    BubbleChart,
+    AutoAwesome
+} from '@mui/icons-material'
 
 import { showDrawer } from '@/lib/redux/slices/drawer'
 import { useDispatch } from 'react-redux'
 import { SpeedDialProps } from '@/utils/types/components/speed-dial'
 import { DRAWER_TYPES } from '@/utils/constants'
+import { StyledSpeedDial } from './StyledSpeedDial'
+
+const animationClass = 'pulse'
+const animateDuration = 6500
+const animateDelay = 60000
 
 const { TESTIMONIAL, CLIENT_REQUEST } = DRAWER_TYPES
 const SpeedDialOptions: SpeedDialProps[] = [
@@ -22,6 +32,21 @@ const SpeedDialOptions: SpeedDialProps[] = [
 ]
 const SpeedDial = () => {
     const dispatch = useDispatch()
+    const [animation, setAnimation] = useState(animationClass)
+
+    useEffect(() => {
+        const removeAnimation = () =>
+            setTimeout(() => {
+                setAnimation('')
+                addAnimation()
+            }, animateDuration)
+        const addAnimation = () => {
+            setTimeout(() => {
+                setAnimation(animationClass)
+            }, animateDelay)
+        }
+        removeAnimation()
+    }, [])
 
     const onDrawerToggle = (content: string, title: string) =>
         dispatch(showDrawer({ content, title }))
@@ -32,15 +57,23 @@ const SpeedDial = () => {
                 ariaLabel="SpeedDial CTA"
                 sx={{
                     position: 'fixed',
-                    bottom: 20,
-                    right: 20
+                    bottom: 30,
+                    right: 40
                 }}
-                icon={<SpeedDialIcon />}>
+                FabProps={{ className: animation }}
+                icon={
+                    <SpeedDialIcon
+                        icon={<AutoAwesome />}
+                        openIcon={<BubbleChart />}
+                    />
+                }>
                 {SpeedDialOptions.map(option => (
                     <SpeedDialAction
+                        className="speeddialButton"
                         onClick={() =>
                             onDrawerToggle(option.content, option.label)
                         }
+                        tooltipOpen
                         key={option.label}
                         icon={option.icon}
                         tooltipTitle={option.label}
