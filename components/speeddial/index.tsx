@@ -55,6 +55,7 @@ const SpeedDial = () => {
         <StyledSpeedDial>
             <MuiSpeedDial
                 ariaLabel="SpeedDial CTA"
+                open
                 sx={{
                     position: 'fixed',
                     bottom: 30,
