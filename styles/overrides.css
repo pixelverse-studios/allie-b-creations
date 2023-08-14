@@ -19,12 +19,6 @@
     background-color: white;
 }
 
-.speeddialButton,
-.MuiSpeedDialAction-staticTooltipLabel {
-    background-color: var(--brand-color-1);
-    color: white;
-}
-
 .MuiSpeedDialAction-staticTooltipLabel {
     min-width: 8rem;
     text-align: center;
@@ -40,5 +34,16 @@
     }
     to {
         transform: scale(1.1);
+    }
+}
+
+.MuiSpeedDialAction-staticTooltipLabel,
+.MuiSpeedDialAction-fab {
+    background-color: var(--brand-color-1);
+    color: white;
+
+    &:hover {
+        background-color: var(--brand-color-1);
+        color: white;
     }
 }
