@@ -25,7 +25,7 @@ export const PrimaryHero = styled.div<StyledHomePageProps>`
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-1);
     .title {
-        font-family: Gistesy;
+        font-family: var(--Gistesy);
         color: white;
         text-shadow: 0px 0px 20px var(--brand-color-1);
         font-size: 5rem;
@@ -65,7 +65,7 @@ export const StyledGalleryContainer = styled.div`
     box-shadow: var(--box-shadow-1);
 
     .header {
-        font-family: Gistesy;
+        font-family: var(--Gistesy);
         font-size: 3rem;
         text-align: center;
     }
