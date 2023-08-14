@@ -39,11 +39,11 @@
 
 .MuiSpeedDialAction-staticTooltipLabel,
 .MuiSpeedDialAction-fab {
-    background-color: var(--brand-color-1);
-    color: white;
+    background-color: var(--brand-color-1) !important;
+    color: white !important;
 
     &:hover {
-        background-color: var(--brand-color-1);
-        color: white;
+        background-color: var(--brand-color-1) !important;
+        color: white !important;
     }
 }
