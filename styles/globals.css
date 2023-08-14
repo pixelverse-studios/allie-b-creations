@@ -49,7 +49,8 @@ body {
     max-width: 100vw;
     height: 100%;
     overflow-x: hidden;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: var(--Gistesy);
+    /* font-family: 'Nunito Sans', sans-serif; */
 }
 
 #__next {
