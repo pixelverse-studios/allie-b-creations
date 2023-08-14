@@ -30,24 +30,22 @@ export const StyledServicesPage = styled.section`
             }
             .events {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
                 grid-gap: 1rem;
 
                 .event {
-                    border-radius: var(--border-radius);
-                    border: 2px solid var(--brand-color-1);
                     display: flex;
                     flex-direction: column;
+                    width: 20rem;
+                    justify-content: center;
                     align-items: center;
-                    text-align: center;
-                    gap: 1rem;
+                    gap: 0.5rem;
                     justify-content: space-around;
-                    padding: 2rem;
 
                     img {
                         height: 14rem;
                         width: 14rem;
-                        border-radius: 50%;
+                        border-radius: var(--border-radius);
                         object-fit: cover;
                     }
 
