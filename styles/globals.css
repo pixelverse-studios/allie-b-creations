@@ -68,22 +68,6 @@ ul {
     list-style: none;
 }
 
-/* Mui Global CSS */
-
-/* .MuiInputLabel-root {
-    color: var(--brand-color-1);
-}
-.MuiOutlinedInput-notchedOutline {
-    border-color: var(--brand-color-3);
-}
-
-.MuiRating-root {
-    color: var(--brand-color-3);
-}
-.MuiRating-iconEmpty {
-    color: var(--brand-color-3);
-} */
-
 .selectField label {
     background-color: white;
 }
