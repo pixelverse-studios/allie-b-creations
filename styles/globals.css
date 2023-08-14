@@ -3,10 +3,8 @@
 
 @font-face {
     font-family: 'Gistesy';
-    src: url('../assets/fonts/Gistesy.ttf') format('truetype');
     src: url('../assets/fonts/Gistesy.otf') format('opentype');
-    /* --border-radius: 12px;
-    --brand-border-1: 3px solid var(--brand-color-1); */
+    src: url('../assets/fonts/Gistesy.ttf') format('truetype');
 }
 
 :root {
@@ -31,7 +29,7 @@
 
     --hover-transition: 0.25s ease-in-out;
 
-    --Gistesy: 'Gistesy', sans-serif;
+    /* --Gistesy: 'Gistesy', sans-serif; */
     --box-shadow-1: rgba(0, 0, 0, 0.4) 0px 2px 4px,
         rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
         rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
