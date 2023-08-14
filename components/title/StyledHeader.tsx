@@ -18,7 +18,7 @@ export const StyledTitleContainer = styled.div`
     }
     .title {
         position: relative;
-        font-family: 'Gistesy';
+        font-family: Gistesy;
         text-align: center;
         font-size: 5rem;
         color: #555;
