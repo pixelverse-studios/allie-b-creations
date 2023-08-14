@@ -5,8 +5,8 @@
     font-family: 'Gistesy';
     src: url('../assets/fonts/Gistesy.ttf') format('truetype');
     src: url('../assets/fonts/Gistesy.otf') format('opentype');
-    --border-radius: 12px;
-    --brand-border-1: 3px solid var(--brand-color-1);
+    /* --border-radius: 12px;
+    --brand-border-1: 3px solid var(--brand-color-1); */
 }
 
 :root {
