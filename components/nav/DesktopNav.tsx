@@ -4,6 +4,8 @@ import { signInWithPopup, signOut, getAuth } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { enqueueSnackbar } from 'notistack'
 
+import { showDrawer } from '@/lib/redux/slices/drawer'
+import { DRAWER_TYPES } from '@/utils/constants'
 import { googleProvider } from '@/lib/db/config'
 import { setUser, removeUser } from '@/lib/redux/slices/user'
 import { setLoading } from '@/lib/redux/slices/app'
@@ -44,6 +46,14 @@ const DesktopNav = () => {
             }
             setShowMenu(open)
         }
+
+    const onContactClick = () =>
+        dispatch(
+            showDrawer({
+                content: DRAWER_TYPES.CLIENT_REQUEST,
+                title: 'Contact Me'
+            })
+        )
 
     const onLogIn = async () => {
         try {
@@ -89,6 +99,7 @@ const DesktopNav = () => {
                     <BaseNavItems
                         activePage={activePage}
                         onClick={onNavItemClick}
+                        onContactClick={onContactClick}
                     />
                     <AuthNavItems
                         activePage={activePage}

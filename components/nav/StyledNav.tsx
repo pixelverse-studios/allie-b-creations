@@ -82,6 +82,23 @@ export const StyledDesktopNavItems = styled.ul`
             border-radius: 50%;
         }
 
+        button {
+            border: 2px solid transparent;
+            background-color: var(--brand-color-1);
+            border-radius: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.3rem;
+            transition: var(--hover-transition);
+
+            &:hover {
+                background-color: transparent;
+                border-color: var(--brand-color-1);
+                color: var(--brand-color-1);
+            }
+        }
+
         &:hover {
             cursor: pointer;
 
@@ -173,6 +190,22 @@ export const StyledMobileNavItems = styled.div`
                 display: none;
                 padding: 1rem;
                 border-radius: 2rem;
+            }
+            button {
+                border: 2px solid transparent;
+                background-color: var(--brand-color-1);
+                border-radius: 2rem;
+                padding: 1rem;
+                cursor: pointer;
+                font-size: 2rem;
+                font-weight: 500;
+                transition: var(--hover-transition);
+
+                &:hover {
+                    background-color: transparent;
+                    border-color: var(--brand-color-1);
+                    color: var(--brand-color-1);
+                }
             }
 
             &:hover {

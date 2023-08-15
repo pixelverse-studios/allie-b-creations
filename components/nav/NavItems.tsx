@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react'
-import { Login, Logout, Dashboard } from '@mui/icons-material'
+import { Logout, Dashboard } from '@mui/icons-material'
 
 const ABOUT = {
     route: '/about',
@@ -19,9 +19,14 @@ const GALLERY = {
 interface BaseNaveItemProps {
     onClick: Function
     activePage: string
+    onContactClick: Function
 }
 
-export const BaseNavItems = ({ onClick, activePage }: BaseNaveItemProps) => {
+export const BaseNavItems = ({
+    onClick,
+    activePage,
+    onContactClick
+}: BaseNaveItemProps) => {
     return (
         <>
             <li
@@ -39,6 +44,9 @@ export const BaseNavItems = ({ onClick, activePage }: BaseNaveItemProps) => {
                 onClick={() => onClick(GALLERY.route)}>
                 <span>{GALLERY.label}</span>
             </li>
+            <li onClick={() => onContactClick()}>
+                <button>Contact Me</button>
+            </li>
         </>
     )
 }
@@ -54,7 +62,6 @@ interface AuthNavItemProps {
 export const AuthNavItems = ({
     loggedIn,
     activePage,
-    onLogin,
     onLogout,
     onDashboardClick
 }: AuthNavItemProps) => {
