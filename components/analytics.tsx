@@ -19,7 +19,6 @@ const GoogleAnalytics = () => {
 
     useEffect(() => {
         const handleRouteChange = (url: string) => {
-            // console.log(url)
             if (!analyticsID || router.isPreview) return
             gtag('event', 'page_view', {
                 page_path: url,
@@ -27,10 +26,10 @@ const GoogleAnalytics = () => {
             })
         }
         router.events.on('routeChangeComplete', handleRouteChange)
-        // router.events.on('hashChangeComplete', handleRouteChange)
+        router.events.on('hashChangeComplete', handleRouteChange)
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
-            // router.events.off('hashChangeComplete', handleRouteChange)
+            router.events.off('hashChangeComplete', handleRouteChange)
         }
     }, [router.events, router.isPreview])
 
