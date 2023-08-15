@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 import { Provider as ReduxProvider } from 'react-redux'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -7,6 +9,7 @@ import { SnackbarProvider } from 'notistack'
 import { useLoadScript } from '@react-google-maps/api'
 import { enqueueSnackbar } from 'notistack'
 
+import GoogleAnalytics from '@/components/analytics'
 import AuthWrapper from '@/components/auth'
 import { store } from '@/lib/redux/store'
 import FormDrawer from '@/components/drawer'
@@ -20,6 +23,7 @@ const loadScriptDetails = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+    const [pageTitle, setPageTitle] = useState('')
     const AnimatedDiv = styled.div`
         @keyframes fadeIn {
             from {
@@ -31,6 +35,12 @@ export default function App({ Component, pageProps }: AppProps) {
         }
         animation: fadeIn 1s ease-in-out;
     `
+    const { pathname } = useRouter()
+    useEffect(() => {
+        const page = pathname.split('/')[1]
+        const title = page.charAt(0).toUpperCase() + page.slice(1)
+        setPageTitle(title)
+    }, [pathname])
     const { loadError } = useLoadScript(loadScriptDetails as any)
     if (loadError) {
         enqueueSnackbar(
@@ -43,7 +53,9 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <title>Allie B Creations</title>
+                <title>
+                    Allie B Creations {pageTitle ? ` | ${pageTitle}` : ''}
+                </title>
                 <meta name="description" content="Allie B Creations" />
                 <meta
                     name="viewport"
@@ -54,6 +66,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <ReduxProvider store={store}>
                 <AuthWrapper>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <GoogleAnalytics />
                         <AnimatedDiv>
                             <Component {...pageProps} />
                         </AnimatedDiv>

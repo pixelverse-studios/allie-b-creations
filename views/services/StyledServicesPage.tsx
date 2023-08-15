@@ -36,15 +36,14 @@ export const StyledServicesPage = styled.section`
                 .event {
                     display: flex;
                     flex-direction: column;
-                    width: 20rem;
                     justify-content: center;
                     align-items: center;
                     gap: 0.5rem;
                     justify-content: space-around;
 
                     img {
-                        height: 14rem;
-                        width: 14rem;
+                        height: 15rem;
+                        width: 100%;
                         border-radius: var(--border-radius);
                         object-fit: cover;
                     }
