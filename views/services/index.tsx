@@ -6,7 +6,6 @@ const ServicesView = () => {
     const services = useSelector((state: any) => state.services)
 
     if (!services?.id) {
-        console.log('add loader!')
         return <span>loading...</span>
     }
 

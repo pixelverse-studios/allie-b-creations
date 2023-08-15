@@ -77,10 +77,6 @@ export const StyledGalleryContainer = styled.div`
         text-align: center;
         font-size: 1.2rem;
     }
-
-    @media screen and (max-width: 750px) {
-        width: 12rem;
-    }
 `
 
 export const StyledGalleryButton = styled.button`

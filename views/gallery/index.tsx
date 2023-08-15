@@ -13,13 +13,11 @@ const GalleryPage = () => {
     const [activeFilter, setActiveFilter] = useState<string>('')
 
     const onFilterClick = (filter: string) => setActiveFilter(filter)
+    const isBlankFilter = activeFilter === ''
 
-    console.log({ activeFilter, images })
-
-    const galleryItems =
-        activeFilter === ''
-            ? images
-            : images?.filter(img => img.tags?.includes(activeFilter))
+    const galleryItems = isBlankFilter
+        ? images
+        : images?.filter(img => img.tags?.includes(activeFilter))
 
     return (
         <StyledGalleryPage>
@@ -32,9 +30,11 @@ const GalleryPage = () => {
                         {tag}
                     </button>
                 ))}
-                <button onClick={() => onFilterClick('')}>
-                    <Clear />
-                </button>
+                {!isBlankFilter ? (
+                    <button onClick={() => onFilterClick('')}>
+                        <Clear />
+                    </button>
+                ) : null}
             </div>
             <ImageList
                 cols={isMobile ? 1 : 3}

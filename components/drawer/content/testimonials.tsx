@@ -65,7 +65,6 @@ const TestimonialForm = ({ onCloseDrawer }: { onCloseDrawer: Function }) => {
             })
             onCloseDrawer()
         } catch (error) {
-            console.log(error)
             enqueueSnackbar(
                 'There was an issue creating your testimonial. Please try again or reach out to us by the email in the footer.',
                 {
