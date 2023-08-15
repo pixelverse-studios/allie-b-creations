@@ -39,8 +39,10 @@ export default function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
         const page = pathname.split('/')[1]
         const title = page.charAt(0).toUpperCase() + page.slice(1)
-        setPageTitle(title)
+
+        setPageTitle(`Allie B Creations ${title ? ` | ${title}` : ''}`)
     }, [pathname])
+
     const { loadError } = useLoadScript(loadScriptDetails as any)
     if (loadError) {
         enqueueSnackbar(
@@ -53,9 +55,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <title>
-                    Allie B Creations {pageTitle ? ` | ${pageTitle}` : ''}
-                </title>
+                <title>{pageTitle}</title>
                 <meta name="description" content="Allie B Creations" />
                 <meta
                     name="viewport"
