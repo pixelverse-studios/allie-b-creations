@@ -14,8 +14,6 @@ const GalleryPage = () => {
 
     const onFilterClick = (filter: string) => setActiveFilter(filter)
 
-    console.log({ activeFilter, images })
-
     const galleryItems =
         activeFilter === ''
             ? images
