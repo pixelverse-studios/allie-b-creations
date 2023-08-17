@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledLoginPage = styled.div`
     margin-top: 2rem;
     height: var(--height-with-nav-excluded);
-    width: 100vw;
+    /* width: 100vw; */
 
     .loginBlock {
         width: 475px;
