@@ -83,8 +83,8 @@ export const StyledDesktopNavItems = styled.ul`
         }
 
         button {
-            border: 2px solid transparent;
-            background-color: var(--brand-color-1);
+            border: 2px solid var(--brand-color-1);
+            background-color: transparent;
             border-radius: 2rem;
             padding: 1rem;
             cursor: pointer;
