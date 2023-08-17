@@ -20,9 +20,9 @@ const HomePage = () => {
             <PrimaryHero backgroundUrl={homePageData[0]?.img.src}>
                 <h1 className="title">{homePageData[0]?.heroBanner}</h1>
             </PrimaryHero>
-            <div className="carousel">
-                <Carousel />
-            </div>
+            {/* <div className="carousel"> */}
+            <Carousel />
+            {/* </div> */}
             <SecondaryHero>
                 <img
                     className="hero"

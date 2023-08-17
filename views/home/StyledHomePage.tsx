@@ -63,6 +63,7 @@ export const StyledGalleryContainer = styled.div`
     row-gap: 2rem;
     color: white;
     box-shadow: var(--box-shadow-1);
+    padding: 1rem 0;
 
     .header {
         font-family: var(--Gistesy);

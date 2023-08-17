@@ -45,6 +45,8 @@ export const StyledCarousel = styled.div`
         place-items: center;
         height: 100%;
         width: 100%;
+        padding: 1.5rem 0;
+
         .quote {
             svg {
                 height: 1.5rem;
