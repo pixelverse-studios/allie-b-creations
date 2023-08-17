@@ -93,7 +93,6 @@ export const StyledDesktopNavItems = styled.ul`
             transition: var(--hover-transition);
 
             &:hover {
-                background-color: transparent;
                 border-color: var(--brand-color-1);
                 color: var(--brand-color-1);
             }
@@ -192,8 +191,8 @@ export const StyledMobileNavItems = styled.div`
                 border-radius: 2rem;
             }
             button {
-                border: 2px solid transparent;
-                background-color: var(--brand-color-1);
+                border: 2px solid var(--brand-color-1);
+                background-color: transparent;
                 border-radius: 2rem;
                 padding: 1rem;
                 cursor: pointer;
@@ -202,7 +201,6 @@ export const StyledMobileNavItems = styled.div`
                 transition: var(--hover-transition);
 
                 &:hover {
-                    background-color: transparent;
                     border-color: var(--brand-color-1);
                     color: var(--brand-color-1);
                 }
