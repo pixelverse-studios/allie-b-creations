@@ -15,6 +15,7 @@ import { store } from '@/lib/redux/store'
 import FormDrawer from '@/components/drawer'
 import styled from '@emotion/styled'
 import Logo from '../assets/Logo-Background.svg'
+import 'animate.css'
 import '@/styles/globals.css'
 
 const loadScriptDetails = {
