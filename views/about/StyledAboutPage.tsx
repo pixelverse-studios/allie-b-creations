@@ -33,6 +33,7 @@ export const StyledAboutPage = styled.div`
             flex-direction: column;
             background-color: var(--brand-color-2);
             width: 100%;
+            height: 100%;
             align-items: center;
             text-align: center;
             justify-content: space-around;

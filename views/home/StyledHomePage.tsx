@@ -10,6 +10,7 @@ export const StyledHomePage = styled.div`
     row-gap: 1rem;
     color: black;
     padding: 1rem;
+    overflow: auto;
 `
 
 export const PrimaryHero = styled.div<StyledHomePageProps>`
